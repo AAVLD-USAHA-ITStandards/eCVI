@@ -5,6 +5,8 @@
     
     <!-- Change Log
     08/30/2017: Initial draft of version 2.0 attempts to clone version 1 (labeled version 6.0?) with only minor tweaks.
+    09/01/2017: Added regular expressions to AnimalTags choices
+    09/01/2017: Added option for ID/IDREF to Attachment for BrandImage ID Type
     
     -->
     <xs:annotation>
