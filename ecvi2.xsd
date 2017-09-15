@@ -102,8 +102,8 @@
             <xs:attribute name="Age" use="optional">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
-                        <xs:pattern value="[0-9]{1,2}(d|wk|mo|a)"/>
-                        <xs:pattern value="(19|20)\d\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])"/>
+                        <xs:pattern value="\d{1,2}(d|wk|mo|a)"/>
+                        <xs:pattern value="(19|20)\d\d-(0[1-9]|1[012])-(0[1-9]|[12]\d|3[01])"/>
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
@@ -135,8 +135,8 @@
             <xs:attribute name="Age" use="optional">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
-                        <xs:pattern value="[0-9]{1,2}(d|wk|mo|a)"/>
-                        <xs:pattern value="(19|20)\d\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])"/>
+                        <xs:pattern value="\d{1,2}(d|wk|mo|a)"/>
+                        <xs:pattern value="(19|20)\d\d-(0[1-9]|1[012])-(0[1-9]|[12]\d|3[01])"/>
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
@@ -241,7 +241,7 @@
         <xs:attribute name="Number" use="required">
             <xs:simpleType>
                 <xs:restriction base="xs:string">
-                    <xs:pattern value="[0-9]{10}"/>
+                    <xs:pattern value="\d{10}"/>
                 </xs:restriction>
             </xs:simpleType>
         </xs:attribute>
@@ -352,8 +352,8 @@
             <xs:element name="ZIP" minOccurs="1" maxOccurs="1">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
-                        <xs:pattern value="[0-9]{5}"/>
-                        <xs:pattern value="[0-9]{5}-[0-9]{4}"/>
+                        <xs:pattern value="\d{5}"/>
+                        <xs:pattern value="\d{5}-\d{4}"/>
                     </xs:restriction>
                 </xs:simpleType>
             </xs:element>
