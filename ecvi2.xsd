@@ -7,6 +7,7 @@
     08/30/2017: Initial draft of version 2.0 attempts to clone version 1 (labeled version 6.0?) with only minor tweaks.
     09/01/2017: Added regular expressions to AnimalTags choices
     09/01/2017: Added option for ID/IDREF to Attachment for BrandImage ID Type
+    11/16/2017: Collapsed animal tag types into known structure and not.
     
     -->
     <xs:annotation>
@@ -402,8 +403,48 @@
         <xs:complexType>
             <xs:sequence minOccurs="1" maxOccurs="6">
                 <xs:choice>
-                    <!-- Unknown:  No restrictions -->
-                    <xs:element name="UN">
+                    <xs:element name="KnownFormatID">
+                        <xs:complexType>
+                            <xs:attribute name="Number" use="required">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                    <!-- 840 RFID:  840 followed by 12 digits -->
+                                        <xs:pattern value="(840)\d{12}"/>
+                    <!-- American ID:  USA followed by 12 digits, sometimes truncated to 8 or 9 digits,
+                         or some specific patterns of just the digits part (shows how hard validation is currently) -->
+                                        <xs:pattern value="(USA)(\d{8,9}|\d{12})"/>
+                                        <xs:pattern value="[5-9]\d{7}"/>
+                                        <xs:pattern value="[1-3]\d{8}"/>
+                                        <xs:pattern value="4[0-6]\d{7}"/>
+                                        <xs:pattern value="470\d{6}"/>
+                                        <xs:pattern value="4710\d{5}"/>
+                                        <xs:pattern value="471100000"/>
+                     <!-- Cattle Backtag: Two digits + two letters + four digits (optional additional character?) -->
+                                        <xs:pattern value="\d{2}[A-Z]{2}\d{4}.?"/>
+                     <!-- Implant RFID Chip:  Either 840 or a company prefix followed by 12 digits
+                         Excludes 999 prefix (Note, XPATH does not support (?!pattern) negative look ahead.) -->
+                                        <xs:pattern value="((840)|(9[0-8]\d)|(9\d[0-8])|(124)|(484))\d{12}"/>
+                     <!-- Non 840 RFID: Company prefix (not 999) followed by 12 digits -->
+                                        <xs:pattern value="((9[0-8]\d)|(9\d[0-8])|(124)|(484))\d{12}"/>
+                    <!-- NUES 8 Character:  Two digits + two letters + four digits (Note: matches cattle backtag pattern.) -->
+                                        <xs:pattern value="\d{2}[A-Z]{2}\d{4}"/>
+                    <!-- NUES 9 Character:  Two digits + three letters + four digits
+                               or some state's alpha codes followed by three more letters and four digits -->
+                                        <xs:pattern value="(\d{2}|MD|MN|NM|NY|US|WY)[A-Z]{3}\d{4}"/>
+                    <!-- Sheep/goat - flock ID tag: Two letters + one to 20 upper case letters or digits
+                             + a space and one to 20 more upper case letters or digits -->
+                                        <xs:pattern value="[A-Z]{2}[A-Z0-9]{1,20}[ ][A-Z0-9]{1,20}"/>
+                    <!-- Sheep/goat National PIN tag: Seven upper case letters or digts (a PIN)
+                              + a space and one to 20 more upper case letters or digits -->
+                                        <xs:pattern value="[A-Z0-9]{7}[ ][A-Z0-9]{1,20}"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:attribute>
+                            <xs:attribute name="Type" type="TagType" use="optional"></xs:attribute>
+                        </xs:complexType>
+                    </xs:element>
+                    <!-- Other Formats:  No restrictions -->
+                    <xs:element name="OtherFormatID">
                         <xs:complexType>
                             <xs:attribute name="Number" use="required">
                                 <xs:simpleType>
@@ -413,49 +454,7 @@
                                     </xs:restriction>
                                 </xs:simpleType>
                             </xs:attribute>
-                        </xs:complexType>
-                    </xs:element>
-                    <!-- 840 RFID:  840 followed by 12 digits -->
-                    <xs:element name="AIN">
-                        <xs:complexType>
-                            <xs:attribute name="Number" use="required">
-                                <xs:simpleType>
-                                    <xs:restriction base="xs:string">
-                                        <xs:pattern value="(840)\d{12}"/>
-                                    </xs:restriction>
-                                </xs:simpleType>
-                            </xs:attribute>
-                        </xs:complexType>
-                    </xs:element>
-                    <!-- American ID:  USA followed by 12 digits, sometimes truncated to 8 or 9 digits,
-                         or some specific patterns of just the digits part (shows how hard validation is currently) -->
-                    <xs:element name="AMID">
-                        <xs:complexType>
-                            <xs:attribute name="Number" use="required">
-                                <xs:simpleType>
-                                    <xs:restriction base="xs:string">
-                                        <xs:pattern value="(USA)(\d{8,9}|\d{12})"/>
-                                        <xs:pattern value="[5-9]\d{7}"/>
-                                        <xs:pattern value="[1-3]\d{8}"/>
-                                        <xs:pattern value="4[0-6]\d{7}"/>
-                                        <xs:pattern value="470\d{6}"/>
-                                        <xs:pattern value="4710\d{5}"/>
-                                        <xs:pattern value="471100000"/>
-                                    </xs:restriction>
-                                </xs:simpleType>
-                            </xs:attribute>
-                        </xs:complexType>
-                    </xs:element>
-                    <!-- Brand Description:  Again, any string-->
-                    <xs:element name="BRAND">
-                        <xs:complexType>
-                            <xs:attribute name="Number" use="required">
-                                <xs:simpleType>
-                                    <xs:restriction base="xs:string">
-                                        <xs:pattern value=".*"/>
-                                    </xs:restriction>
-                                </xs:simpleType>
-                            </xs:attribute>
+                            <xs:attribute name="Type" type="TagType" use="optional"></xs:attribute>
                         </xs:complexType>
                     </xs:element>
                     <!-- Brand Image: This should be PNG/JPEG/GIF/PDF format and
@@ -468,169 +467,36 @@
                             <xs:attribute name="BrandImageIDRef" type="xs:IDREF" use="optional"/>
                         </xs:complexType>
                     </xs:element>
-                    <!-- Cattle Backtag: Two digits + two letters + four digits (optional additional character?) -->
-                    <xs:element name="BT">
-                        <xs:complexType>
-                            <xs:attribute name="Number" use="required">
-                                <xs:simpleType>
-                                    <xs:restriction base="xs:string">
-                                        <xs:pattern value="\d{2}[A-Z]{2}\d{4}.?"/>
-                                    </xs:restriction>
-                                </xs:simpleType>
-                            </xs:attribute>
-                        </xs:complexType>
-                    </xs:element>
-                    <!-- Implant RFID Chip:  Either 840 or a company prefix followed by 12 digits
-                         Excludes 999 prefix (Note, XPATH does not support (?!pattern) negative look ahead.) -->
-                    <xs:element name="IMP">
-                        <xs:complexType>
-                            <xs:attribute name="Number" use="required">
-                                <xs:simpleType>
-                                    <xs:restriction base="xs:string">
-                                        <xs:pattern value="((840)|(9[0-8]\d)|(9\d[0-8])|(124)|(484))\d{12}"/>
-                                    </xs:restriction>
-                                </xs:simpleType>
-                            </xs:attribute>
-                        </xs:complexType>
-                    </xs:element>
-                    <!-- Management Tag: Any string -->
-                    <xs:element name="MGT">
-                        <xs:complexType>
-                            <xs:attribute name="Number" use="required">
-                                <xs:simpleType>
-                                    <xs:restriction base="xs:string">
-                                        <xs:pattern value=".*"/>
-                                    </xs:restriction>
-                                </xs:simpleType>
-                            </xs:attribute>
-                        </xs:complexType>
-                    </xs:element>
-                    <!-- Non 840 RFID: Company prefix (not 999) followed by 12 digits -->
-                    <xs:element name="N840RFID">
-                        <xs:complexType>
-                            <xs:attribute name="Number" use="required">
-                                <xs:simpleType>
-                                    <xs:restriction base="xs:string">
-                                        <xs:pattern value="((9[0-8]\d)|(9\d[0-8])|(124)|(484))\d{12}"/>
-                                    </xs:restriction>
-                                </xs:simpleType>
-                            </xs:attribute>
-                        </xs:complexType>
-                    </xs:element>
-                    <!-- NUES 8 Character:  Two digits + two letters + four digits (Note: matches cattle backtag pattern.) -->
-                    <xs:element name="NUES8">
-                        <xs:complexType>
-                            <xs:attribute name="Number" use="required">
-                                <xs:simpleType>
-                                    <xs:restriction base="xs:string">
-                                        <xs:pattern value="\d{2}[A-Z]{2}\d{4}"/>
-                                    </xs:restriction>
-                                </xs:simpleType>
-                            </xs:attribute>
-                        </xs:complexType>
-                    </xs:element>
-                    <!-- NUES 9 Character:  Two digits + three letters + four digits
-                               or some state's alpha codes followed by three more letters and four digits -->
-                    <xs:element name="NUES9">
-                        <xs:complexType>
-                            <xs:attribute name="Number" use="required">
-                                <xs:simpleType>
-                                    <xs:restriction base="xs:string">
-                                        <xs:pattern value="(\d{2}|MD|MN|NM|NY|US|WY)[A-Z]{3}\d{4}"/>
-                                    </xs:restriction>
-                                </xs:simpleType>
-                            </xs:attribute>
-                        </xs:complexType>
-                    </xs:element>
-                    <!-- Official foreign ID:  Any string -->
-                    <xs:element name="OFORID">
-                        <xs:complexType>
-                            <xs:attribute name="Number" use="required">
-                                <xs:simpleType>
-                                    <xs:restriction base="xs:string">
-                                        <xs:pattern value=".*"/>
-                                    </xs:restriction>
-                                </xs:simpleType>
-                            </xs:attribute>
-                        </xs:complexType>
-                    </xs:element>
-                    <!-- Other:  Any string  -->
-                    <xs:element name="OTH">
-                        <xs:complexType>
-                            <xs:attribute name="Number" use="required">
-                                <xs:simpleType>
-                                    <xs:restriction base="xs:string">
-                                        <xs:pattern value=".*"/>
-                                    </xs:restriction>
-                                </xs:simpleType>
-                            </xs:attribute>
-                        </xs:complexType>
-                    </xs:element>
-                    <!-- Name: Any string -->
-                    <xs:element name="name">
-                        <xs:complexType>
-                            <xs:attribute name="Number" use="required">
-                                <xs:simpleType>
-                                    <xs:restriction base="xs:string">
-                                        <xs:pattern value=".*"/>
-                                    </xs:restriction>
-                                </xs:simpleType>
-                            </xs:attribute>
-                        </xs:complexType>
-                    </xs:element>
-                    <!-- Sheep/goat - flock ID tag: Two letters + one to 20 upper case letters or digits
-                             + a space and one to 20 more upper case letters or digits -->
-                    <xs:element name="SGFLID">
-                        <xs:complexType>
-                            <xs:attribute name="Number" use="required">
-                                <xs:simpleType>
-                                    <xs:restriction base="xs:string">
-                                        <xs:pattern value="[A-Z]{2}[A-Z0-9]{1,20}[ ][A-Z0-9]{1,20}"/>
-                                    </xs:restriction>
-                                </xs:simpleType>
-                            </xs:attribute>
-                        </xs:complexType>
-                    </xs:element>
-                    <!-- Sheep/goat National PIN tag: Seven upper case letters or digts (a PIN)
-                              + a space and one to 20 more upper case letters or digits -->
-                    <xs:element name="NPIN">
-                        <xs:complexType>
-                            <xs:attribute name="Number" use="required">
-                                <xs:simpleType>
-                                    <xs:restriction base="xs:string">
-                                        <xs:pattern value="[A-Z0-9]{7}[ ][A-Z0-9]{1,20}"/>
-                                    </xs:restriction>
-                                </xs:simpleType>
-                            </xs:attribute>
-                        </xs:complexType>
-                    </xs:element>
-                    <!-- Tattoo:  Any string -->
-                    <xs:element name="TAT">
-                        <xs:complexType>
-                            <xs:attribute name="Number" use="required">
-                                <xs:simpleType>
-                                    <xs:restriction base="xs:string">
-                                        <xs:pattern value=".*"/>
-                                    </xs:restriction>
-                                </xs:simpleType>
-                            </xs:attribute>
-                        </xs:complexType>
-                    </xs:element>
-<!-- Tag Types not Included in version 1
-FPT         Feeder Pig Tag
-RSSS	    RSSS Tag
-SGFLMEAT	Sheep/goat - flock ID tag - MEAT
-SGSMEAT	    Sheep/goat - serial tag - MEAT
-SGST	    Sheep/goat - serial tag - plastic
-SGSTM	    Sheep/goat - serial tag - metal
-TATFL	    Tattoo - flock ID/PIN/LID
--->
                 </xs:choice>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
  
     <!-- BEGIN Simple Enumerated Types -->
+    <xs:simpleType name="TagType">
+        <xs:annotation>
+            <xs:documentation>This enforces the list of allowed tag types that are supported.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="UN"/>
+            <xs:enumeration value="AIN"/>
+            <xs:enumeration value="AMID"/>
+            <xs:enumeration value="BRAND"/>
+            <xs:enumeration value="BRAND-IMAGE"/>
+            <xs:enumeration value="BT"/>
+            <xs:enumeration value="IMP"/>
+            <xs:enumeration value="MGT"/>
+            <xs:enumeration value="N840RFID"/>
+            <xs:enumeration value="NUES8"/>
+            <xs:enumeration value="NUES9"/>
+            <xs:enumeration value="OFORID"/>
+            <xs:enumeration value="OTH"/>
+            <xs:enumeration value="NAME"/>
+            <xs:enumeration value="SGFLID"/>
+            <xs:enumeration value="NPIN"/>
+            <xs:enumeration value="TAT"/>
+        </xs:restriction>
+    </xs:simpleType>
     
     <xs:simpleType name="SpeciesCodeType">
         <xs:restriction base="xs:string">
