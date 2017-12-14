@@ -2,12 +2,13 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
     targetNamespace="http://www.usaha.org/xmlns/ecvi2" version="2.0"
     xmlns="http://www.usaha.org/xmlns/ecvi2">
-    
+
     <!-- Change Log
     08/30/2017: Initial draft of version 2.0 attempts to clone version 1 (labeled version 6.0?) with only minor tweaks.
     09/01/2017: Added regular expressions to AnimalTags choices
     09/01/2017: Added option for ID/IDREF to Attachment for BrandImage ID Type
-    11/16/2017: Collapsed animal tag types into known structure and not.
+    11/16/2017: Collapsed animal tag choices into known structure and not.
+    12/14/2017: Added Equine description and photos as AnimalTag choices.
     
     -->
     <xs:annotation>
@@ -15,7 +16,7 @@
             to the maintainers at https://github.com/AAVLD-USAHA-ITStandards/eCVI
         </xs:documentation>
     </xs:annotation>
-    
+
     <xs:element name="eCVI">
         <xs:complexType>
             <xs:sequence>
@@ -37,7 +38,7 @@
             <xs:attribute name="EntryPermitNumber" type="xs:string" use="optional"/>
         </xs:complexType>
     </xs:element>
-    
+
     <!-- END Document Element -->
 
     <xs:element name="Veterinarian">
@@ -129,10 +130,10 @@
     </xs:element>
 
     <xs:element name="GroupLot">
-        <xs:complexType> 
+        <xs:complexType>
             <xs:attribute name="Quantity" type="xs:float" use="required"/>
-            <xs:attribute name="Unit" type="xs:string" use="optional" default="Number" />
-             <xs:attribute name="SpeciesCode" type="SpeciesCodeType" use="optional"/>
+            <xs:attribute name="Unit" type="xs:string" use="optional" default="Number"/>
+            <xs:attribute name="SpeciesCode" type="SpeciesCodeType" use="optional"/>
             <xs:attribute name="Age" use="optional">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
@@ -157,16 +158,16 @@
                 </xs:simpleType>
             </xs:attribute>
             <xs:attribute name="Description" type="xs:string" use="required"/>
-          </xs:complexType>
+        </xs:complexType>
     </xs:element>
-    
+
     <xs:element name="Attachment">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="Payload" type="xs:base64Binary" minOccurs="1" maxOccurs="1"/>
             </xs:sequence>
             <xs:attribute name="DocType" use="required">
-                 <xs:simpleType>
+                <xs:simpleType>
                     <xs:restriction base="xs:string">
                         <xs:enumeration value="Scanned Paper CVI"/>
                         <xs:enumeration value="Scanned Test Chart"/>
@@ -176,13 +177,7 @@
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
-            <xs:attribute name="MimeType" use="optional">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:pattern value=".{1,127}/.{1,127}"/>
-                    </xs:restriction>
-                </xs:simpleType>
-             </xs:attribute>
+            <xs:attribute name="MimeType" type="MimeType" use="optional"/>
             <xs:attribute name="Filename" use="required">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
@@ -199,9 +194,9 @@
             </xs:attribute>
             <xs:attribute name="BrandImageID" type="xs:ID" use="optional"/>
         </xs:complexType>
-         
+
     </xs:element>
-    
+
     <!-- END Top Level Elements -->
 
     <!-- BEGIN Complex Reused Types -->
@@ -224,13 +219,13 @@
             <xs:element name="Person" type="PersonType" minOccurs="1" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
-    
+
     <xs:simpleType name="PremIdType">
         <xs:restriction base="xs:string">
             <xs:pattern value="[A-Z0-9]{6,8}"/>
         </xs:restriction>
     </xs:simpleType>
-    
+
     <xs:complexType name="PersonType">
         <xs:sequence>
             <xs:element name="Name" type="xs:string" minOccurs="1" maxOccurs="1"/>
@@ -267,7 +262,8 @@
                         <xs:sequence>
                             <xs:element name="LabName" type="xs:string" minOccurs="1" maxOccurs="1"/>
                             <xs:element name="PremId" type="PremIdType" minOccurs="0" maxOccurs="1"/>
-                            <xs:element name="Address" type="AddressType" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="Address" type="AddressType" minOccurs="0"
+                                maxOccurs="1"/>
                         </xs:sequence>
                         <xs:attribute name="AccessionDate" type="xs:date" use="required"/>
                         <xs:attribute name="AccessionNumber" type="xs:string" use="required"/>
@@ -277,7 +273,8 @@
                     <xs:complexType>
                         <xs:sequence>
                             <xs:element name="PremId" type="PremIdType" minOccurs="0" maxOccurs="1"/>
-                            <xs:element name="Address" type="AddressType" minOccurs="0" maxOccurs="1"/>
+                            <xs:element name="Address" type="AddressType" minOccurs="0"
+                                maxOccurs="1"/>
                         </xs:sequence>
                         <xs:attribute name="AccessionDate" type="xs:date" use="required"/>
                     </xs:complexType>
@@ -379,7 +376,8 @@
             <xs:element name="Result" minOccurs="1" maxOccurs="unbounded">
                 <xs:complexType>
                     <xs:choice>
-                        <xs:element name="ResultInteger" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="ResultInteger" type="xs:integer" minOccurs="0"
+                            maxOccurs="1"/>
                         <xs:element name="ResultString" type="xs:string" minOccurs="0" maxOccurs="1"/>
                         <xs:element name="ResultFloat" type="xs:float" minOccurs="0" maxOccurs="1"/>
                     </xs:choice>
@@ -394,10 +392,11 @@
                 </xs:complexType>
             </xs:element>
         </xs:sequence>
-        <xs:attribute name="idref" type="xs:IDREF" use="required"/> <!-- Points to ID in Accession element -->
+        <xs:attribute name="idref" type="xs:IDREF" use="required"/>
+        <!-- Points to ID in Accession element -->
         <xs:attribute name="TestCode" type="xs:string" use="required"/>
     </xs:complexType>
-    
+
     <!-- This is a jumble of type of ID with the type of device holding the ID.  "Tags" is a misnomer. -->
     <xs:element name="AnimalTags">
         <xs:complexType>
@@ -408,9 +407,9 @@
                             <xs:attribute name="Number" use="required">
                                 <xs:simpleType>
                                     <xs:restriction base="xs:string">
-                    <!-- 840 RFID:  840 followed by 12 digits -->
+                                        <!-- 840 RFID:  840 followed by 12 digits -->
                                         <xs:pattern value="(840)\d{12}"/>
-                    <!-- American ID:  USA followed by 12 digits, sometimes truncated to 8 or 9 digits,
+                                        <!-- American ID:  USA followed by 12 digits, sometimes truncated to 8 or 9 digits,
                          or some specific patterns of just the digits part (shows how hard validation is currently) -->
                                         <xs:pattern value="(USA)(\d{8,9}|\d{12})"/>
                                         <xs:pattern value="[5-9]\d{7}"/>
@@ -419,28 +418,30 @@
                                         <xs:pattern value="470\d{6}"/>
                                         <xs:pattern value="4710\d{5}"/>
                                         <xs:pattern value="471100000"/>
-                     <!-- Cattle Backtag: Two digits + two letters + four digits (optional additional character?) -->
+                                        <!-- Cattle Backtag: Two digits + two letters + four digits (optional additional character?) -->
                                         <xs:pattern value="\d{2}[A-Z]{2}\d{4}.?"/>
-                     <!-- Implant RFID Chip:  Either 840 or a company prefix followed by 12 digits
+                                        <!-- Implant RFID Chip:  Either 840 or a company prefix followed by 12 digits
                          Excludes 999 prefix (Note, XPATH does not support (?!pattern) negative look ahead.) -->
-                                        <xs:pattern value="((840)|(9[0-8]\d)|(9\d[0-8])|(124)|(484))\d{12}"/>
-                     <!-- Non 840 RFID: Company prefix (not 999) followed by 12 digits -->
-                                        <xs:pattern value="((9[0-8]\d)|(9\d[0-8])|(124)|(484))\d{12}"/>
-                    <!-- NUES 8 Character:  Two digits + two letters + four digits (Note: matches cattle backtag pattern.) -->
+                                        <xs:pattern
+                                            value="((840)|(9[0-8]\d)|(9\d[0-8])|(124)|(484))\d{12}"/>
+                                        <!-- Non 840 RFID: Company prefix (not 999) followed by 12 digits -->
+                                        <xs:pattern
+                                            value="((9[0-8]\d)|(9\d[0-8])|(124)|(484))\d{12}"/>
+                                        <!-- NUES 8 Character:  Two digits + two letters + four digits (Note: matches cattle backtag pattern.) -->
                                         <xs:pattern value="\d{2}[A-Z]{2}\d{4}"/>
-                    <!-- NUES 9 Character:  Two digits + three letters + four digits
+                                        <!-- NUES 9 Character:  Two digits + three letters + four digits
                                or some state's alpha codes followed by three more letters and four digits -->
                                         <xs:pattern value="(\d{2}|MD|MN|NM|NY|US|WY)[A-Z]{3}\d{4}"/>
-                    <!-- Sheep/goat - flock ID tag: Two letters + one to 20 upper case letters or digits
+                                        <!-- Sheep/goat - flock ID tag: Two letters + one to 20 upper case letters or digits
                              + a space and one to 20 more upper case letters or digits -->
                                         <xs:pattern value="[A-Z]{2}[A-Z0-9]{1,20}[ ][A-Z0-9]{1,20}"/>
-                    <!-- Sheep/goat National PIN tag: Seven upper case letters or digts (a PIN)
+                                        <!-- Sheep/goat National PIN tag: Seven upper case letters or digts (a PIN)
                               + a space and one to 20 more upper case letters or digits -->
                                         <xs:pattern value="[A-Z0-9]{7}[ ][A-Z0-9]{1,20}"/>
                                     </xs:restriction>
                                 </xs:simpleType>
                             </xs:attribute>
-                            <xs:attribute name="Type" type="TagType" use="optional"></xs:attribute>
+                            <xs:attribute name="Type" type="TagType" use="optional"/>
                         </xs:complexType>
                     </xs:element>
                     <!-- Other Formats:  No restrictions -->
@@ -454,7 +455,7 @@
                                     </xs:restriction>
                                 </xs:simpleType>
                             </xs:attribute>
-                            <xs:attribute name="Type" type="TagType" use="optional"></xs:attribute>
+                            <xs:attribute name="Type" type="TagType" use="optional"/>
                         </xs:complexType>
                     </xs:element>
                     <!-- Brand Image: This should be PNG/JPEG/GIF/PDF format and
@@ -465,17 +466,41 @@
                         <xs:complexType>
                             <xs:attribute name="BrandImage" type="xs:base64Binary" use="optional"/>
                             <xs:attribute name="BrandImageIDRef" type="xs:IDREF" use="optional"/>
+                            <xs:attribute name="MimeType" type="MimeType" use="optional"/>
+                        </xs:complexType>
+                    </xs:element>
+                    <!-- Equine registered name is only legal identification with description -->
+                    <xs:element name="EquineDescription">
+                        <xs:complexType>
+                            <xs:attribute name="Name" type="xs:string" use="optional"/>
+                            <xs:attribute name="Description" type="xs:string" use="required"/>
+                        </xs:complexType>
+                    </xs:element>
+                    <!-- Photos are also official. -->
+                    <xs:element name="EquinePhotographs">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <!-- Should we try to impose image type, etc.? -->
+                                <xs:element name="Photograph" minOccurs="1" maxOccurs="3">
+                                    <xs:complexType>
+                                        <xs:attribute name="Image" type="xs:base64Binary" use="required"/>
+                                        <xs:attribute name="View" type="PhotoView" use="optional"/>
+                                        <xs:attribute name="MimeType" type="MimeType" use="optional"/>
+                                    </xs:complexType>
+                                </xs:element>
+                            </xs:sequence>
                         </xs:complexType>
                     </xs:element>
                 </xs:choice>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
- 
+
     <!-- BEGIN Simple Enumerated Types -->
     <xs:simpleType name="TagType">
         <xs:annotation>
-            <xs:documentation>This enforces the list of allowed tag types that are supported.</xs:documentation>
+            <xs:documentation>This enforces the list of allowed tag types that are
+                supported.</xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:string">
             <xs:enumeration value="UN"/>
@@ -497,45 +522,117 @@
             <xs:enumeration value="TAT"/>
         </xs:restriction>
     </xs:simpleType>
-    
+
     <xs:simpleType name="SpeciesCodeType">
         <xs:restriction base="xs:string">
-            <xs:enumeration value="AQU"> <!-- Aquaculture--> </xs:enumeration>
-            <xs:enumeration value="AVI"> <!-- Avian--> </xs:enumeration>
-            <xs:enumeration value="BEF"> <!-- Beef--> </xs:enumeration>
-            <xs:enumeration value="BIS"> <!-- Bison--> </xs:enumeration>
-            <xs:enumeration value="BOV"> <!-- Bovine (Bison and Cattle)--> </xs:enumeration>
-            <xs:enumeration value="CAM"> <!-- Camelid (Alpacas, Llamas, etc.)--> </xs:enumeration>
-            <xs:enumeration value="CAN"> <!-- Canine--> </xs:enumeration>
-            <xs:enumeration value="CAP"> <!-- Caprine (Goats)--> </xs:enumeration>
-            <xs:enumeration value="CER"> <!-- Cervids--> </xs:enumeration>
-            <xs:enumeration value="CHI"> <!-- Chickens--> </xs:enumeration>
-            <xs:enumeration value="CLM"> <!-- Clams--> </xs:enumeration>
-            <xs:enumeration value="CRA"> <!-- Crawfish--> </xs:enumeration>
-            <xs:enumeration value="CTF"> <!-- Catfish--> </xs:enumeration>
-            <xs:enumeration value="DAI"> <!-- Dairy--> </xs:enumeration>
-            <xs:enumeration value="DEE"> <!-- Deer--> </xs:enumeration>
-            <xs:enumeration value="DUC"> <!-- Ducks--> </xs:enumeration>
-            <xs:enumeration value="ELK"> <!-- Elk--> </xs:enumeration>
-            <xs:enumeration value="EQU"> <!-- Equine (Horses, Mules, Donkeys, Burros)--> </xs:enumeration>
-            <xs:enumeration value="FEL"> <!-- Feline--> </xs:enumeration>
-            <xs:enumeration value="GEE"> <!-- Geese--> </xs:enumeration>
-            <xs:enumeration value="GUI"> <!-- Guineas--> </xs:enumeration>
-            <xs:enumeration value="MSL"> <!-- Mussels--> </xs:enumeration>
-            <xs:enumeration value="OTH"> <!-- Other--> </xs:enumeration>
-            <xs:enumeration value="OVI"> <!-- Ovine (Sheep)--> </xs:enumeration>
-            <xs:enumeration value="OYS"> <!-- Oysters--> </xs:enumeration>
-            <xs:enumeration value="PGN"> <!-- Pigeon--> </xs:enumeration>
-            <xs:enumeration value="POR"> <!-- Porcine (Swine)--> </xs:enumeration>
-            <xs:enumeration value="QUA"> <!-- Quail--> </xs:enumeration>
-            <xs:enumeration value="RTT"> <!-- Ratites (Emus, Ostriches, etc.)--> </xs:enumeration>
-            <xs:enumeration value="SAL"> <!-- Salmon--> </xs:enumeration>
-            <xs:enumeration value="SBA"> <!-- Striped Bass--> </xs:enumeration>
-            <xs:enumeration value="SHR"> <!-- Shrimp--> </xs:enumeration>
-            <xs:enumeration value="SLP"> <!-- Scallops--> </xs:enumeration>
-            <xs:enumeration value="TIL"> <!-- Tilapia--> </xs:enumeration>
-            <xs:enumeration value="TRO"> <!-- Trout--> </xs:enumeration>
-            <xs:enumeration value="TUR"> <!-- Turkeys--> </xs:enumeration>
+            <xs:enumeration value="AQU">
+                <!-- Aquaculture-->
+            </xs:enumeration>
+            <xs:enumeration value="AVI">
+                <!-- Avian-->
+            </xs:enumeration>
+            <xs:enumeration value="BEF">
+                <!-- Beef-->
+            </xs:enumeration>
+            <xs:enumeration value="BIS">
+                <!-- Bison-->
+            </xs:enumeration>
+            <xs:enumeration value="BOV">
+                <!-- Bovine (Bison and Cattle)-->
+            </xs:enumeration>
+            <xs:enumeration value="CAM">
+                <!-- Camelid (Alpacas, Llamas, etc.)-->
+            </xs:enumeration>
+            <xs:enumeration value="CAN">
+                <!-- Canine-->
+            </xs:enumeration>
+            <xs:enumeration value="CAP">
+                <!-- Caprine (Goats)-->
+            </xs:enumeration>
+            <xs:enumeration value="CER">
+                <!-- Cervids-->
+            </xs:enumeration>
+            <xs:enumeration value="CHI">
+                <!-- Chickens-->
+            </xs:enumeration>
+            <xs:enumeration value="CLM">
+                <!-- Clams-->
+            </xs:enumeration>
+            <xs:enumeration value="CRA">
+                <!-- Crawfish-->
+            </xs:enumeration>
+            <xs:enumeration value="CTF">
+                <!-- Catfish-->
+            </xs:enumeration>
+            <xs:enumeration value="DAI">
+                <!-- Dairy-->
+            </xs:enumeration>
+            <xs:enumeration value="DEE">
+                <!-- Deer-->
+            </xs:enumeration>
+            <xs:enumeration value="DUC">
+                <!-- Ducks-->
+            </xs:enumeration>
+            <xs:enumeration value="ELK">
+                <!-- Elk-->
+            </xs:enumeration>
+            <xs:enumeration value="EQU">
+                <!-- Equine (Horses, Mules, Donkeys, Burros)-->
+            </xs:enumeration>
+            <xs:enumeration value="FEL">
+                <!-- Feline-->
+            </xs:enumeration>
+            <xs:enumeration value="GEE">
+                <!-- Geese-->
+            </xs:enumeration>
+            <xs:enumeration value="GUI">
+                <!-- Guineas-->
+            </xs:enumeration>
+            <xs:enumeration value="MSL">
+                <!-- Mussels-->
+            </xs:enumeration>
+            <xs:enumeration value="OTH">
+                <!-- Other-->
+            </xs:enumeration>
+            <xs:enumeration value="OVI">
+                <!-- Ovine (Sheep)-->
+            </xs:enumeration>
+            <xs:enumeration value="OYS">
+                <!-- Oysters-->
+            </xs:enumeration>
+            <xs:enumeration value="PGN">
+                <!-- Pigeon-->
+            </xs:enumeration>
+            <xs:enumeration value="POR">
+                <!-- Porcine (Swine)-->
+            </xs:enumeration>
+            <xs:enumeration value="QUA">
+                <!-- Quail-->
+            </xs:enumeration>
+            <xs:enumeration value="RTT">
+                <!-- Ratites (Emus, Ostriches, etc.)-->
+            </xs:enumeration>
+            <xs:enumeration value="SAL">
+                <!-- Salmon-->
+            </xs:enumeration>
+            <xs:enumeration value="SBA">
+                <!-- Striped Bass-->
+            </xs:enumeration>
+            <xs:enumeration value="SHR">
+                <!-- Shrimp-->
+            </xs:enumeration>
+            <xs:enumeration value="SLP">
+                <!-- Scallops-->
+            </xs:enumeration>
+            <xs:enumeration value="TIL">
+                <!-- Tilapia-->
+            </xs:enumeration>
+            <xs:enumeration value="TRO">
+                <!-- Trout-->
+            </xs:enumeration>
+            <xs:enumeration value="TUR">
+                <!-- Turkeys-->
+            </xs:enumeration>
         </xs:restriction>
     </xs:simpleType>
 
@@ -550,8 +647,8 @@
             <xs:enumeration value="Other"/>
         </xs:restriction>
     </xs:simpleType>
-    
-   
+
+
     <xs:simpleType name="StateCodeType">
         <xs:restriction base="xs:string">
             <xs:enumeration value="AA"/>
@@ -618,4 +715,20 @@
             <xs:enumeration value="WY"/>
         </xs:restriction>
     </xs:simpleType>
+
+    <xs:simpleType name="PhotoView">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Left"/>
+            <xs:enumeration value="Front"/>
+            <xs:enumeration value="Right"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="MimeType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value=".{1,127}/.{1,127}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+
 </xs:schema>
