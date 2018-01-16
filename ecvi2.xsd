@@ -9,6 +9,9 @@
     09/01/2017: Added option for ID/IDREF to Attachment for BrandImage ID Type
     11/16/2017: Collapsed animal tag choices into known structure and not.
     12/14/2017: Added Equine description and photos as AnimalTag choices.
+    01/16/2018: Removed string length restrictions not part of regular expressions.
+    01/16/2018: Spelled out latitude and longitude in geo point.
+    01/16/2018: Rearranged TagType to put Type as first attribute.
     
     -->
     <xs:annotation>
@@ -118,13 +121,7 @@
                 </xs:simpleType>
             </xs:attribute>
             <xs:attribute name="Sex" type="SexType" use="optional"/>
-            <xs:attribute name="SexDetail" use="optional">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:maxLength value="100"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:attribute>
+            <xs:attribute name="SexDetail" type="xs:string" use="optional"/>
             <xs:attribute name="InspectionDate" type="xs:date" use="required"/>
         </xs:complexType>
     </xs:element>
@@ -150,13 +147,7 @@
                 </xs:simpleType>
             </xs:attribute>
             <xs:attribute name="Sex" type="SexType" use="optional"/>
-            <xs:attribute name="SexDetail" use="optional">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:maxLength value="100"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:attribute>
+            <xs:attribute name="SexDetail" type="xs:string" use="optional"/>
             <xs:attribute name="Description" type="xs:string" use="required"/>
         </xs:complexType>
     </xs:element>
@@ -178,20 +169,8 @@
                 </xs:simpleType>
             </xs:attribute>
             <xs:attribute name="MimeType" type="MimeType" use="optional"/>
-            <xs:attribute name="Filename" use="required">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:maxLength value="250"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:attribute>
-            <xs:attribute name="Comment" use="optional">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:maxLength value="250"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:attribute>
+            <xs:attribute name="Filename" type="xs:string" use="required"/>
+            <xs:attribute name="Comment" type="xs:string" use="optional"/>
             <xs:attribute name="BrandImageID" type="xs:ID" use="optional"/>
         </xs:complexType>
 
@@ -317,35 +296,10 @@
 
     <xs:complexType name="AddressType">
         <xs:sequence>
-            <xs:element name="Line1" minOccurs="1" maxOccurs="1">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:maxLength value="200"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
-            <xs:element name="Line2" minOccurs="0" maxOccurs="1">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:maxLength value="200"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
-            <xs:element name="Town" minOccurs="1" maxOccurs="1">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:maxLength value="200"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
-            <xs:element name="County" minOccurs="0" maxOccurs="1">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:minLength value="3"/>
-                        <xs:maxLength value="40"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
+            <xs:element name="Line1" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="Line2" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Town" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="County" type="xs:string" minOccurs="0" maxOccurs="1"/>
             <xs:element name="State" type="StateCodeType" minOccurs="1" maxOccurs="1"/>
             <xs:element name="ZIP" minOccurs="1" maxOccurs="1">
                 <xs:simpleType>
@@ -364,8 +318,8 @@
             </xs:element>
             <xs:element name="GeoPoint" minOccurs="0" maxOccurs="1">
                 <xs:complexType>
-                    <xs:attribute name="lat" type="xs:decimal" use="required"/>
-                    <xs:attribute name="lng" type="xs:decimal" use="required"/>
+                    <xs:attribute name="latitude" type="xs:decimal" use="required"/>
+                    <xs:attribute name="longitude" type="xs:decimal" use="required"/>
                 </xs:complexType>
             </xs:element>
         </xs:sequence>
@@ -404,6 +358,7 @@
                 <xs:choice>
                     <xs:element name="KnownFormatID">
                         <xs:complexType>
+                            <xs:attribute name="Type" type="TagType" use="optional"/>
                             <xs:attribute name="Number" use="required">
                                 <xs:simpleType>
                                     <xs:restriction base="xs:string">
@@ -441,12 +396,12 @@
                                     </xs:restriction>
                                 </xs:simpleType>
                             </xs:attribute>
-                            <xs:attribute name="Type" type="TagType" use="optional"/>
                         </xs:complexType>
                     </xs:element>
                     <!-- Other Formats:  No restrictions -->
                     <xs:element name="OtherFormatID">
                         <xs:complexType>
+                            <xs:attribute name="Type" type="TagType" use="optional"/>
                             <xs:attribute name="Number" use="required">
                                 <xs:simpleType>
                                     <xs:restriction base="xs:string">
@@ -455,7 +410,6 @@
                                     </xs:restriction>
                                 </xs:simpleType>
                             </xs:attribute>
-                            <xs:attribute name="Type" type="TagType" use="optional"/>
                         </xs:complexType>
                     </xs:element>
                     <!-- Brand Image: This should be PNG/JPEG/GIF/PDF format and
