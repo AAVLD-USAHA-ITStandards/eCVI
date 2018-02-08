@@ -102,6 +102,10 @@
     <xs:element name="Animal">
         <xs:complexType>
             <xs:sequence>
+                <xs:choice>
+                    <xs:element name="SpeciesCode" type="SpeciesCodeType"/>
+                    <xs:element name="SpeciesOther" type="SpeciesOtherType"/>
+                </xs:choice>
                 <xs:element ref="AnimalTags" minOccurs="1" maxOccurs="1"/>
                 <xs:element name="Test" type="TestType" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
@@ -113,7 +117,6 @@
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
-            <xs:attribute name="SpeciesCode" type="SpeciesCodeType" use="required"/>
             <xs:attribute name="Breed" use="optional">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
@@ -129,9 +132,12 @@
 
     <xs:element name="GroupLot">
         <xs:complexType>
+            <xs:choice>
+                <xs:element name="SpeciesCode" type="SpeciesCodeType"/>
+                <xs:element name="SpeciesOther" type="SpeciesOtherType"/>
+            </xs:choice>
             <xs:attribute name="Quantity" type="xs:float" use="required"/>
             <xs:attribute name="Unit" type="xs:string" use="optional" default="Number"/>
-            <xs:attribute name="SpeciesCode" type="SpeciesCodeType" use="optional"/>
             <xs:attribute name="Age" use="optional">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
@@ -431,7 +437,7 @@
                                 <!-- Should we try to impose image type, etc.? -->
                                 <xs:element name="Photograph" minOccurs="1" maxOccurs="3">
                                     <xs:complexType>
-                                        <xs:attribute name="ImageRef" type="xs:IDREF" use="required"/>
+                                     <xs:attribute name="ImageRef" type="xs:IDREF" use="required"/>
                                         <xs:attribute name="View" type="PhotoView" use="optional"/>
                                     </xs:complexType>
                                 </xs:element>
@@ -481,7 +487,17 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="SpeciesCodeType">
+    <xs:complexType name="SpeciesCodeType">
+             <xs:attribute name="Code" type="SpeciesCodes" use="required"/>
+            <xs:attribute name="Text" type="xs:string" use="optional"/>
+    </xs:complexType>
+
+    <xs:complexType name="SpeciesOtherType">
+            <xs:attribute name="Code" fixed="OTH" use="optional"/>
+            <xs:attribute name="Text" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <xs:simpleType name="SpeciesCodes">
         <xs:restriction base="xs:string">
             <xs:enumeration value="AQU"/> <!-- Aquaculture-->
             <xs:enumeration value="AVI"/> <!-- Avian-->
