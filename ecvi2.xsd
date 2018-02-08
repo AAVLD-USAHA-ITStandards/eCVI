@@ -483,114 +483,41 @@
 
     <xs:simpleType name="SpeciesCodeType">
         <xs:restriction base="xs:string">
-            <xs:enumeration value="AQU">
-                <!-- Aquaculture-->
-            </xs:enumeration>
-            <xs:enumeration value="AVI">
-                <!-- Avian-->
-            </xs:enumeration>
-            <xs:enumeration value="BEF">
-                <!-- Beef-->
-            </xs:enumeration>
-            <xs:enumeration value="BIS">
-                <!-- Bison-->
-            </xs:enumeration>
-            <xs:enumeration value="BOV">
-                <!-- Bovine (Bison and Cattle)-->
-            </xs:enumeration>
-            <xs:enumeration value="CAM">
-                <!-- Camelid (Alpacas, Llamas, etc.)-->
-            </xs:enumeration>
-            <xs:enumeration value="CAN">
-                <!-- Canine-->
-            </xs:enumeration>
-            <xs:enumeration value="CAP">
-                <!-- Caprine (Goats)-->
-            </xs:enumeration>
-            <xs:enumeration value="CER">
-                <!-- Cervids-->
-            </xs:enumeration>
-            <xs:enumeration value="CHI">
-                <!-- Chickens-->
-            </xs:enumeration>
-            <xs:enumeration value="CLM">
-                <!-- Clams-->
-            </xs:enumeration>
-            <xs:enumeration value="CRA">
-                <!-- Crawfish-->
-            </xs:enumeration>
-            <xs:enumeration value="CTF">
-                <!-- Catfish-->
-            </xs:enumeration>
-            <xs:enumeration value="DAI">
-                <!-- Dairy-->
-            </xs:enumeration>
-            <xs:enumeration value="DEE">
-                <!-- Deer-->
-            </xs:enumeration>
-            <xs:enumeration value="DUC">
-                <!-- Ducks-->
-            </xs:enumeration>
-            <xs:enumeration value="ELK">
-                <!-- Elk-->
-            </xs:enumeration>
-            <xs:enumeration value="EQU">
-                <!-- Equine (Horses, Mules, Donkeys, Burros)-->
-            </xs:enumeration>
-            <xs:enumeration value="FEL">
-                <!-- Feline-->
-            </xs:enumeration>
-            <xs:enumeration value="GEE">
-                <!-- Geese-->
-            </xs:enumeration>
-            <xs:enumeration value="GUI">
-                <!-- Guineas-->
-            </xs:enumeration>
-            <xs:enumeration value="MSL">
-                <!-- Mussels-->
-            </xs:enumeration>
-            <xs:enumeration value="OTH">
-                <!-- Other-->
-            </xs:enumeration>
-            <xs:enumeration value="OVI">
-                <!-- Ovine (Sheep)-->
-            </xs:enumeration>
-            <xs:enumeration value="OYS">
-                <!-- Oysters-->
-            </xs:enumeration>
-            <xs:enumeration value="PGN">
-                <!-- Pigeon-->
-            </xs:enumeration>
-            <xs:enumeration value="POR">
-                <!-- Porcine (Swine)-->
-            </xs:enumeration>
-            <xs:enumeration value="QUA">
-                <!-- Quail-->
-            </xs:enumeration>
-            <xs:enumeration value="RTT">
-                <!-- Ratites (Emus, Ostriches, etc.)-->
-            </xs:enumeration>
-            <xs:enumeration value="SAL">
-                <!-- Salmon-->
-            </xs:enumeration>
-            <xs:enumeration value="SBA">
-                <!-- Striped Bass-->
-            </xs:enumeration>
-            <xs:enumeration value="SHR">
-                <!-- Shrimp-->
-            </xs:enumeration>
-            <xs:enumeration value="SLP">
-                <!-- Scallops-->
-            </xs:enumeration>
-            <xs:enumeration value="TIL">
-                <!-- Tilapia-->
-            </xs:enumeration>
-            <xs:enumeration value="TRO">
-                <!-- Trout-->
-            </xs:enumeration>
-            <xs:enumeration value="TUR">
-                <!-- Turkeys-->
-            </xs:enumeration>
+            <xs:enumeration value="AQU"/> <!-- Aquaculture-->
+            <xs:enumeration value="AVI"/> <!-- Avian-->
+            <xs:enumeration value="BEF"/> <!-- Beef-->
+            <xs:enumeration value="BIS"/> <!-- Bison-->
+            <xs:enumeration value="BOV"/> <!-- Bovine (Bison and Cattle)-->
+            <xs:enumeration value="CAM"/> <!-- Camelid (Alpacas, Llamas, etc.)-->
+            <xs:enumeration value="CAN"/> <!-- Canine-->
+            <xs:enumeration value="CAP"/> <!-- Caprine (Goats)-->
+            <xs:enumeration value="CER"/> <!-- Cervids-->
+            <xs:enumeration value="CHI"/> <!-- Chickens-->
+            <xs:enumeration value="CLM"/> <!-- Clams-->
+            <xs:enumeration value="CRA"/> <!-- Crawfish-->
+            <xs:enumeration value="CTF"/> <!-- Catfish-->
+            <xs:enumeration value="DAI"/> <!-- Dairy-->
+            <xs:enumeration value="DEE"/> <!-- Deer-->
+            <xs:enumeration value="DUC"/> <!-- Ducks-->
+            <xs:enumeration value="ELK"/> <!-- Elk-->
+            <xs:enumeration value="EQU"/> <!-- Equine (Horses, Mules, Donkeys, Burros)-->
+            <xs:enumeration value="FEL"/> <!-- Feline-->
+            <xs:enumeration value="GEE"/> <!-- Geese-->
+            <xs:enumeration value="GUI"/> <!-- Guineas-->
+            <xs:enumeration value="MSL"/> <!-- Mussels-->
+            <xs:enumeration value="OVI"/> <!-- Ovine (Sheep)-->
+            <xs:enumeration value="OYS"/> <!-- Oysters-->
+            <xs:enumeration value="PGN"/> <!-- Pigeon-->
+            <xs:enumeration value="POR"/> <!-- Porcine (Swine)-->
+            <xs:enumeration value="QUA"/> <!-- Quail-->
+            <xs:enumeration value="RTT"/> <!-- Ratites (Emus, Ostriches, etc.)-->
+            <xs:enumeration value="SAL"/> <!-- Salmon-->
+            <xs:enumeration value="SBA"/> <!-- Striped Bass-->
+            <xs:enumeration value="SHR"/> <!-- Shrimp-->
+            <xs:enumeration value="SLP"/> <!-- Scallops-->
+            <xs:enumeration value="TIL"/> <!-- Tilapia-->
+            <xs:enumeration value="TRO"/> <!-- Trout-->
+            <xs:enumeration value="TUR"/> <!-- Turkeys-->
         </xs:restriction>
     </xs:simpleType>
 
