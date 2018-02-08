@@ -12,6 +12,8 @@
     01/16/2018: Removed string length restrictions not part of regular expressions.
     01/16/2018: Spelled out latitude and longitude in geo point.
     01/16/2018: Rearranged TagType to put Type as first attribute.
+    02/08/2018: Restructured Species to SpeciesCode vs. SpeciesOther.
+    02/08/2018: Restructured All Binary data into ID/IDREF to eliminate duplication
     
     -->
     <xs:annotation>
