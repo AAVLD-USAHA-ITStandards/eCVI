@@ -33,6 +33,7 @@
                 <xs:element ref="Animal" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="GroupLot" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="Attachment" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="Binary" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
             <xs:attribute name="CviNumber" type="xs:string" use="required"/>
             <xs:attribute name="IssueDate" type="xs:date" use="required"/>
@@ -154,9 +155,7 @@
 
     <xs:element name="Attachment">
         <xs:complexType>
-            <xs:sequence>
-                <xs:element name="Payload" type="xs:base64Binary" minOccurs="1" maxOccurs="1"/>
-            </xs:sequence>
+            <xs:attribute name="IDREF" type="xs:IDREF" use="required"/>
             <xs:attribute name="DocType" use="required">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
@@ -168,10 +167,8 @@
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
-            <xs:attribute name="MimeType" type="MimeType" use="optional"/>
             <xs:attribute name="Filename" type="xs:string" use="required"/>
             <xs:attribute name="Comment" type="xs:string" use="optional"/>
-            <xs:attribute name="BrandImageID" type="xs:ID" use="optional"/>
         </xs:complexType>
 
     </xs:element>
@@ -350,7 +347,6 @@
         <!-- Points to ID in Accession element -->
         <xs:attribute name="TestCode" type="xs:string" use="required"/>
     </xs:complexType>
-
     <!-- This is a jumble of type of ID with the type of device holding the ID.  "Tags" is a misnomer. -->
     <xs:element name="AnimalTags">
         <xs:complexType>
@@ -418,10 +414,8 @@
                                       Or provide IDREF to ID on an attachment-->
                     <xs:element name="BRAND-IMAGE">
                         <xs:complexType>
-                            <xs:attribute name="BrandImage" type="xs:base64Binary" use="optional"/>
-                            <xs:attribute name="BrandImageIDRef" type="xs:IDREF" use="optional"/>
-                            <xs:attribute name="MimeType" type="MimeType" use="optional"/>
-                        </xs:complexType>
+                            <xs:attribute name="BrandImageRef" type="xs:IDREF" use="optional"/>
+                         </xs:complexType>
                     </xs:element>
                     <!-- Equine registered name is only legal identification with description -->
                     <xs:element name="EquineDescription">
@@ -437,9 +431,8 @@
                                 <!-- Should we try to impose image type, etc.? -->
                                 <xs:element name="Photograph" minOccurs="1" maxOccurs="3">
                                     <xs:complexType>
-                                        <xs:attribute name="Image" type="xs:base64Binary" use="required"/>
+                                        <xs:attribute name="ImageRef" type="xs:IDREF" use="required"/>
                                         <xs:attribute name="View" type="PhotoView" use="optional"/>
-                                        <xs:attribute name="MimeType" type="MimeType" use="optional"/>
                                     </xs:complexType>
                                 </xs:element>
                             </xs:sequence>
@@ -449,7 +442,18 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-
+    
+    <xs:element name="Binary">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Payload" type="xs:base64Binary" minOccurs="1" maxOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute name="ID" type="xs:ID"/>
+            <xs:attribute name="MimeType" type="MimeType" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    
+    
     <!-- BEGIN Simple Enumerated Types -->
     <xs:simpleType name="TagType">
         <xs:annotation>
