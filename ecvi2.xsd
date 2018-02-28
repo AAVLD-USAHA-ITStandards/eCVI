@@ -3,19 +3,21 @@
     targetNamespace="http://www.usaha.org/xmlns/ecvi2" version="2.0"
     xmlns="http://www.usaha.org/xmlns/ecvi2">
 
-    <!-- Change Log
-    08/30/2017: Initial draft of version 2.0 attempts to clone version 1 (labeled version 6.0?) with only minor tweaks.
-    09/01/2017: Added regular expressions to AnimalTags choices
-    09/01/2017: Added option for ID/IDREF to Attachment for BrandImage ID Type
-    11/16/2017: Collapsed animal tag choices into known structure and not.
-    12/14/2017: Added Equine description and photos as AnimalTag choices.
-    01/16/2018: Removed string length restrictions not part of regular expressions.
-    01/16/2018: Spelled out latitude and longitude in geo point.
-    01/16/2018: Rearranged TagType to put Type as first attribute.
-    02/08/2018: Restructured Species to SpeciesCode vs. SpeciesOther.
-    02/08/2018: Restructured All Binary data into ID/IDREF to eliminate duplication
+    <xs:annotation><xs:documentation> Change Log
+        08/30/2017: Initial draft of version 2.0 attempts to clone version 1 (labeled version 6.0?) with only minor tweaks.
+        09/01/2017: Added regular expressions to AnimalTags choices
+        09/01/2017: Added option for ID/IDREF to Attachment for BrandImage ID Type
+        11/16/2017: Collapsed animal tag choices into known structure and not.
+        12/14/2017: Added Equine description and photos as AnimalTag choices.
+        01/16/2018: Removed string length restrictions not part of regular expressions.
+        01/16/2018: Spelled out latitude and longitude in geo point.
+        01/16/2018: Rearranged TagType to put Type as first attribute.
+        02/08/2018: Restructured Species to SpeciesCode vs. SpeciesOther.
+        02/08/2018: Restructured All Binary data into ID/IDREF to eliminate duplication
+        02/28/2018: Converted comments to annotation elements except where simply labeling code sections, etc.  Works with an XSLT to generate skeleton documentation.
+                   
     
-    -->
+    </xs:documentation></xs:annotation>
     <xs:annotation>
         <xs:documentation>Copyright © 2017 AAVLD/USAHA it is free for use. Submit suggested changes
             to the maintainers at https://github.com/AAVLD-USAHA-ITStandards/eCVI
@@ -44,8 +46,7 @@
             <xs:attribute name="EntryPermitNumber" type="xs:string" use="optional"/>
         </xs:complexType>
     </xs:element>
-
-    <!-- END Document Element -->
+   <!-- END Document Element -->
 
     <xs:element name="Veterinarian">
         <xs:complexType>
@@ -180,8 +181,7 @@
         </xs:complexType>
 
     </xs:element>
-
-    <!-- END Top Level Elements -->
+    <!-- END Top Level Elements --> 
 
     <!-- BEGIN Complex Reused Types -->
     <xs:complexType name="PremType">
@@ -351,12 +351,13 @@
                 </xs:complexType>
             </xs:element>
         </xs:sequence>
-        <xs:attribute name="idref" type="xs:IDREF" use="required"/>
-        <!-- Points to ID in Accession element -->
+        <xs:attribute name="idref" type="xs:IDREF" use="required">
+            <xs:annotation><xs:documentation> Points to ID in Accession element </xs:documentation></xs:annotation>
+        </xs:attribute>
         <xs:attribute name="TestCode" type="xs:string" use="required"/>
     </xs:complexType>
-    <!-- This is a jumble of type of ID with the type of device holding the ID.  "Tags" is a misnomer. -->
     <xs:element name="AnimalTags">
+        <xs:annotation><xs:documentation> This is a jumble of type of ID with the type of device holding the ID. "Tags" is a misnomer. </xs:documentation></xs:annotation>
         <xs:complexType>
             <xs:sequence minOccurs="1" maxOccurs="6">
                 <xs:choice>
@@ -364,46 +365,58 @@
                         <xs:complexType>
                             <xs:attribute name="Type" type="TagType" use="optional"/>
                             <xs:attribute name="Number" use="required">
+                                <xs:annotation><xs:documentation>KnownFormatID patterns provide some ID validation.</xs:documentation></xs:annotation>
                                 <xs:simpleType>
                                     <xs:restriction base="xs:string">
-                                        <!-- 840 RFID:  840 followed by 12 digits -->
-                                        <xs:pattern value="(840)\d{12}"/>
-                                        <!-- American ID:  USA followed by 12 digits, sometimes truncated to 8 or 9 digits,
-                         or some specific patterns of just the digits part (shows how hard validation is currently) -->
-                                        <xs:pattern value="(USA)(\d{8,9}|\d{12})"/>
+                                        <xs:pattern value="(840)\d{12}">
+                                        <xs:annotation>
+                                            <xs:documentation xml:lang="en">840 RFID:  840 followed by 12 digits</xs:documentation>
+                                        </xs:annotation>
+                                        </xs:pattern>
+                                         <xs:pattern value="(USA)(\d{8,9}|\d{12})">
+                                             <xs:annotation><xs:documentation> American ID:  USA followed by 12 digits, sometimes truncated to 8 or 9 digits,
+                         or some specific patterns of just the digits part (shows how hard validation is currently) </xs:documentation></xs:annotation>
+                                        </xs:pattern>
                                         <xs:pattern value="[5-9]\d{7}"/>
                                         <xs:pattern value="[1-3]\d{8}"/>
                                         <xs:pattern value="4[0-6]\d{7}"/>
                                         <xs:pattern value="470\d{6}"/>
                                         <xs:pattern value="4710\d{5}"/>
                                         <xs:pattern value="471100000"/>
-                                        <!-- Cattle Backtag: Two digits + two letters + four digits (optional additional character?) -->
-                                        <xs:pattern value="\d{2}[A-Z]{2}\d{4}.?"/>
-                                        <!-- Implant RFID Chip:  Either 840 or a company prefix followed by 12 digits
-                         Excludes 999 prefix (Note, XPATH does not support (?!pattern) negative look ahead.) -->
-                                        <xs:pattern
-                                            value="((840)|(9[0-8]\d)|(9\d[0-8])|(124)|(484))\d{12}"/>
-                                        <!-- Non 840 RFID: Company prefix (not 999) followed by 12 digits -->
-                                        <xs:pattern
-                                            value="((9[0-8]\d)|(9\d[0-8])|(124)|(484))\d{12}"/>
-                                        <!-- NUES 8 Character:  Two digits + two letters + four digits (Note: matches cattle backtag pattern.) -->
-                                        <xs:pattern value="\d{2}[A-Z]{2}\d{4}"/>
-                                        <!-- NUES 9 Character:  Two digits + three letters + four digits
-                               or some state's alpha codes followed by three more letters and four digits -->
-                                        <xs:pattern value="(\d{2}|MD|MN|NM|NY|US|WY)[A-Z]{3}\d{4}"/>
-                                        <!-- Sheep/goat - flock ID tag: Two letters + one to 20 upper case letters or digits
-                             + a space and one to 20 more upper case letters or digits -->
-                                        <xs:pattern value="[A-Z]{2}[A-Z0-9]{1,20}[ ][A-Z0-9]{1,20}"/>
-                                        <!-- Sheep/goat National PIN tag: Seven upper case letters or digts (a PIN)
-                              + a space and one to 20 more upper case letters or digits -->
-                                        <xs:pattern value="[A-Z0-9]{7}[ ][A-Z0-9]{1,20}"/>
+                                        <xs:pattern value="\d{2}[A-Z]{2}\d{4}.?">
+                                            <xs:annotation><xs:documentation> Cattle Backtag: Two digits + two letters + four digits (optional additional character?) </xs:documentation></xs:annotation>
+                                         </xs:pattern>
+                                         <xs:pattern
+                                            value="((840)|(9[0-8]\d)|(9\d[0-8])|(124)|(484))\d{12}">
+                                             <xs:annotation><xs:documentation> Implant RFID Chip:  Either 840 or a company prefix followed by 12 digits
+                                                 Excludes 999 prefix (Note, XPATH does not support (?!pattern) negative look ahead.) </xs:documentation></xs:annotation>
+                                         </xs:pattern>
+                                         <xs:pattern
+                                            value="((9[0-8]\d)|(9\d[0-8])|(124)|(484))\d{12}">
+                                             <xs:annotation><xs:documentation> Non 840 RFID: Company prefix (not 999) followed by 12 digits </xs:documentation></xs:annotation>
+                                         </xs:pattern>
+                                         <xs:pattern value="\d{2}[A-Z]{2}\d{4}">
+                                             <xs:annotation><xs:documentation> NUES 8 Character:  Two digits + two letters + four digits (Note: matches cattle backtag pattern.) </xs:documentation></xs:annotation>
+                                         </xs:pattern>
+                                        <xs:pattern value="(\d{2}|MD|MN|NM|NY|US|WY)[A-Z]{3}\d{4}">
+                                            <xs:annotation><xs:documentation> NUES 9 Character:  Two digits + three letters + four digits
+                                                or some state's alpha codes followed by three more letters and four digits </xs:documentation></xs:annotation>
+                                        </xs:pattern>
+                                        <xs:pattern value="[A-Z]{2}[A-Z0-9]{1,20}[ ][A-Z0-9]{1,20}">
+                                            <xs:annotation><xs:documentation> Sheep/goat - flock ID tag: Two letters + one to 20 upper case letters or digits
+                                                + a space and one to 20 more upper case letters or digits </xs:documentation></xs:annotation>
+                                        </xs:pattern>
+                                        <xs:pattern value="[A-Z0-9]{7}[ ][A-Z0-9]{1,20}">
+                                        <xs:annotation><xs:documentation> Sheep/goat National PIN tag: Seven upper case letters or digts (a PIN)
+                              + a space and one to 20 more upper case letters or digits </xs:documentation></xs:annotation>
+                                        </xs:pattern>
                                     </xs:restriction>
                                 </xs:simpleType>
                             </xs:attribute>
                         </xs:complexType>
                     </xs:element>
-                    <!-- Other Formats:  No restrictions -->
                     <xs:element name="OtherFormatID">
+                        <xs:annotation><xs:documentation> Other Formats:  No restrictions </xs:documentation></xs:annotation>
                         <xs:complexType>
                             <xs:attribute name="Type" type="TagType" use="optional"/>
                             <xs:attribute name="Number" use="required">
@@ -416,28 +429,26 @@
                             </xs:attribute>
                         </xs:complexType>
                     </xs:element>
-                    <!-- Brand Image: This should be PNG/JPEG/GIF/PDF format and
-                                        must be provided if the TagType is
-                                        BRAND-IMAGE,
-                                      Or provide IDREF to ID on an attachment-->
                     <xs:element name="BRAND-IMAGE">
+                        <xs:annotation><xs:documentation> This should be PNG/JPEG/GIF/PDF format.  The format 
+                        is specified in the Binary mime type.</xs:documentation></xs:annotation>
                         <xs:complexType>
                             <xs:attribute name="BrandImageRef" type="xs:IDREF" use="optional"/>
                          </xs:complexType>
                     </xs:element>
-                    <!-- Equine registered name is only legal identification with description -->
                     <xs:element name="EquineDescription">
+                         <xs:annotation><xs:documentation> Equine registered name is only legal identification with description </xs:documentation></xs:annotation>
                         <xs:complexType>
                             <xs:attribute name="Name" type="xs:string" use="optional"/>
                             <xs:attribute name="Description" type="xs:string" use="required"/>
                         </xs:complexType>
                     </xs:element>
-                    <!-- Photos are also official. -->
                     <xs:element name="EquinePhotographs">
+                        <xs:annotation><xs:documentation> Photos are also official. </xs:documentation></xs:annotation>
                         <xs:complexType>
                             <xs:sequence>
-                                <!-- Should we try to impose image type, etc.? -->
                                 <xs:element name="Photograph" minOccurs="1" maxOccurs="3">
+                                    <xs:annotation><xs:documentation> Should we try to impose image type, etc.? </xs:documentation></xs:annotation>
                                     <xs:complexType>
                                      <xs:attribute name="ImageRef" type="xs:IDREF" use="required"/>
                                         <xs:attribute name="View" type="PhotoView" use="optional"/>
@@ -465,27 +476,24 @@
     <!-- BEGIN Simple Enumerated Types -->
     <xs:simpleType name="TagType">
         <xs:annotation>
-            <xs:documentation>This enforces the list of allowed tag types that are
-                supported.</xs:documentation>
+            <xs:documentation>This lists the allowed tag types that are supported.  The enumerated patterns
+            try to enforce this.</xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:string">
-            <xs:enumeration value="UN"/>
-            <xs:enumeration value="AIN"/>
-            <xs:enumeration value="AMID"/>
-            <xs:enumeration value="BRAND"/>
-            <xs:enumeration value="BRAND-IMAGE"/>
-            <xs:enumeration value="BT"/>
-            <xs:enumeration value="IMP"/>
-            <xs:enumeration value="MGT"/>
-            <xs:enumeration value="N840RFID"/>
-            <xs:enumeration value="NUES8"/>
-            <xs:enumeration value="NUES9"/>
-            <xs:enumeration value="OFORID"/>
-            <xs:enumeration value="OTH"/>
-            <xs:enumeration value="NAME"/>
-            <xs:enumeration value="SGFLID"/>
-            <xs:enumeration value="NPIN"/>
-            <xs:enumeration value="TAT"/>
+            <xs:enumeration value="AIN"><xs:annotation><xs:documentation>840 official animal ID</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="AMID"><xs:annotation><xs:documentation>American ID</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="BRAND"><xs:annotation><xs:documentation>Brand description</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="BT"><xs:annotation><xs:documentation>Backtag</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="IMP"><xs:annotation><xs:documentation></xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="MGT"><xs:annotation><xs:documentation>Management tag</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="N840RFID"><xs:annotation><xs:documentation>Non 840 RFID tag</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="NUES8"><xs:annotation><xs:documentation>Eight digit national uniform eartag system</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="NUES9"><xs:annotation><xs:documentation>Nine digit national uniform eartag system</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="OFORID"><xs:annotation><xs:documentation>What is this?</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="NAME"><xs:annotation><xs:documentation>Name?</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="SGFLID"><xs:annotation><xs:documentation>Scrapie group flock ID</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="NPIN"><xs:annotation><xs:documentation>Swine PIN Tag</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="TAT"><xs:annotation><xs:documentation>Tattoo</xs:documentation></xs:annotation></xs:enumeration>
         </xs:restriction>
     </xs:simpleType>
 
@@ -501,41 +509,41 @@
 
     <xs:simpleType name="SpeciesCodes">
         <xs:restriction base="xs:string">
-            <xs:enumeration value="AQU"/> <!-- Aquaculture-->
-            <xs:enumeration value="AVI"/> <!-- Avian-->
-            <xs:enumeration value="BEF"/> <!-- Beef-->
-            <xs:enumeration value="BIS"/> <!-- Bison-->
-            <xs:enumeration value="BOV"/> <!-- Bovine (Bison and Cattle)-->
-            <xs:enumeration value="CAM"/> <!-- Camelid (Alpacas, Llamas, etc.)-->
-            <xs:enumeration value="CAN"/> <!-- Canine-->
-            <xs:enumeration value="CAP"/> <!-- Caprine (Goats)-->
-            <xs:enumeration value="CER"/> <!-- Cervids-->
-            <xs:enumeration value="CHI"/> <!-- Chickens-->
-            <xs:enumeration value="CLM"/> <!-- Clams-->
-            <xs:enumeration value="CRA"/> <!-- Crawfish-->
-            <xs:enumeration value="CTF"/> <!-- Catfish-->
-            <xs:enumeration value="DAI"/> <!-- Dairy-->
-            <xs:enumeration value="DEE"/> <!-- Deer-->
-            <xs:enumeration value="DUC"/> <!-- Ducks-->
-            <xs:enumeration value="ELK"/> <!-- Elk-->
-            <xs:enumeration value="EQU"/> <!-- Equine (Horses, Mules, Donkeys, Burros)-->
-            <xs:enumeration value="FEL"/> <!-- Feline-->
-            <xs:enumeration value="GEE"/> <!-- Geese-->
-            <xs:enumeration value="GUI"/> <!-- Guineas-->
-            <xs:enumeration value="MSL"/> <!-- Mussels-->
-            <xs:enumeration value="OVI"/> <!-- Ovine (Sheep)-->
-            <xs:enumeration value="OYS"/> <!-- Oysters-->
-            <xs:enumeration value="PGN"/> <!-- Pigeon-->
-            <xs:enumeration value="POR"/> <!-- Porcine (Swine)-->
-            <xs:enumeration value="QUA"/> <!-- Quail-->
-            <xs:enumeration value="RTT"/> <!-- Ratites (Emus, Ostriches, etc.)-->
-            <xs:enumeration value="SAL"/> <!-- Salmon-->
-            <xs:enumeration value="SBA"/> <!-- Striped Bass-->
-            <xs:enumeration value="SHR"/> <!-- Shrimp-->
-            <xs:enumeration value="SLP"/> <!-- Scallops-->
-            <xs:enumeration value="TIL"/> <!-- Tilapia-->
-            <xs:enumeration value="TRO"/> <!-- Trout-->
-            <xs:enumeration value="TUR"/> <!-- Turkeys-->
+            <xs:enumeration value="AQU"><xs:annotation><xs:documentation> Aquaculture</xs:documentation></xs:annotation></xs:enumeration> 
+            <xs:enumeration value="AVI"> <xs:annotation><xs:documentation> Avian</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="BEF"> <xs:annotation><xs:documentation> Beef</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="BIS"> <xs:annotation><xs:documentation> Bison</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="BOV"> <xs:annotation><xs:documentation> Bovine (Bison and Cattle)</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="CAM"> <xs:annotation><xs:documentation> Camelid (Alpacas, Llamas, etc.)</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="CAN"> <xs:annotation><xs:documentation> Canine</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="CAP"> <xs:annotation><xs:documentation> Caprine (Goats)</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="CER"> <xs:annotation><xs:documentation> Cervids</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="CHI"> <xs:annotation><xs:documentation> Chickens</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="CLM"> <xs:annotation><xs:documentation> Clams</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="CRA"> <xs:annotation><xs:documentation> Crawfish</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="CTF"> <xs:annotation><xs:documentation> Catfish</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="DAI"> <xs:annotation><xs:documentation> Dairy</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="DEE"> <xs:annotation><xs:documentation> Deer</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="DUC"> <xs:annotation><xs:documentation> Ducks</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="ELK"> <xs:annotation><xs:documentation> Elk</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="EQU"> <xs:annotation><xs:documentation> Equine (Horses, Mules, Donkeys, Burros)</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="FEL"> <xs:annotation><xs:documentation> Feline</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="GEE"> <xs:annotation><xs:documentation> Geese</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="GUI"> <xs:annotation><xs:documentation> Guineas</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="MSL"> <xs:annotation><xs:documentation> Mussels</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="OVI"> <xs:annotation><xs:documentation> Ovine (Sheep)</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="OYS"> <xs:annotation><xs:documentation> Oysters</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="PGN"> <xs:annotation><xs:documentation> Pigeon</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="POR"> <xs:annotation><xs:documentation> Porcine (Swine)</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="QUA"> <xs:annotation><xs:documentation> Quail</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="RTT"> <xs:annotation><xs:documentation> Ratites (Emus, Ostriches, etc.)</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="SAL"> <xs:annotation><xs:documentation> Salmon</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="SBA"> <xs:annotation><xs:documentation> Striped Bass</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="SHR"> <xs:annotation><xs:documentation> Shrimp</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="SLP"> <xs:annotation><xs:documentation> Scallops</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="TIL"> <xs:annotation><xs:documentation> Tilapia</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="TRO"> <xs:annotation><xs:documentation> Trout</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="TUR"> <xs:annotation><xs:documentation> Turkeys</xs:documentation></xs:annotation></xs:enumeration>
         </xs:restriction>
     </xs:simpleType>
 
