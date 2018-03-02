@@ -48,6 +48,9 @@
     </xs:element>
    <!-- END Document Element -->
 
+    <xs:annotation><xs:documentation>
+        A single Veterinarian element is required.  The Veterinarian element includes elements for name (see Person) and Address and optional attributes for License State, License Number, and National Accreditation Number.
+    </xs:documentation></xs:annotation>
     <xs:element name="Veterinarian">
         <xs:complexType>
             <xs:sequence>
@@ -60,6 +63,9 @@
         </xs:complexType>
     </xs:element>
 
+    <xs:annotation><xs:documentation>
+        See Appendix A for list of values of Movement Purposes (or better yet, generate a table/list here based on the enumeration values).
+    </xs:documentation></xs:annotation>
     <xs:element name="MovementPurposes">
         <xs:complexType>
             <xs:sequence>
@@ -210,6 +216,9 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:annotation><xs:documentation>
+        Person is defined as a Name string and an optional Phone Number (see Phone).
+    </xs:documentation></xs:annotation>
     <xs:complexType name="PersonType">
         <xs:sequence>
             <xs:element name="Name" type="xs:string" minOccurs="1" maxOccurs="1"/>
@@ -217,6 +226,9 @@
         </xs:sequence>
     </xs:complexType>
 
+    <xs:annotation><xs:documentation>
+        The Phone Number specifies type (list enumeration values?) and a ten-digit number, and can include a comment.
+    </xs:documentation></xs:annotation>
     <xs:complexType name="PhoneType">
         <xs:attribute name="Number" use="required">
             <xs:simpleType>
