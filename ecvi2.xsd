@@ -15,7 +15,7 @@
         02/08/2018: Restructured Species to SpeciesCode vs. SpeciesOther.
         02/08/2018: Restructured All Binary data into ID/IDREF to eliminate duplication
         02/28/2018: Converted comments to annotation elements except where simply labeling code sections, etc.  Works with an XSLT to generate skeleton documentation.
-        03/06/2018: Additional annotations added.  Ongoing.           
+        03/06-08/2018: Additional annotations added.  Ongoing.           
     
     </xs:documentation></xs:annotation>
     <xs:annotation>
@@ -148,6 +148,10 @@
             <xs:attribute name="Quantity" type="xs:float" use="required"/>
             <xs:attribute name="Unit" type="xs:string" use="optional" default="Number"/>
             <xs:attribute name="Age" use="optional">
+                <xs:annotation><xs:documentation>
+                    Age can be expressed as either a number of days, weeks, months or years (d, wk, mo, a)
+                    or as a date of birth YYYY-MM-DD.
+                </xs:documentation></xs:annotation>
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
                         <xs:pattern value="\d{1,2}(d|wk|mo|a)"/>
@@ -156,6 +160,12 @@
                 </xs:simpleType>
             </xs:attribute>
             <xs:attribute name="Breed" use="optional">
+                <xs:annotation><xs:documentation>
+                    The breed field is intended to include a cattle breed code from the National Association of Animal Breeders
+                    Uniform Breed Codes or other species breed codes from the ICVI Data Concepts paper from USDA.
+                    https://www.naab-css.org/uniform-breed-codes
+                    https://www.aphis.usda.gov/animal_health/vs_ocio/downloads/date_standards/icvi_data_concepts.pdf
+                </xs:documentation></xs:annotation>
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
                         <xs:pattern value="[A-Z]{2,3}"/>
@@ -169,6 +179,11 @@
     </xs:element>
 
     <xs:element name="Attachment">
+        <xs:annotation><xs:documentation>
+            Attachments can be used for text or binary additional information not specifically 
+            carried in one of the other Binary elements.  Assumed to be from a file so 
+            Filename is required along with a reference to the Binary content.
+        </xs:documentation></xs:annotation>
         <xs:complexType>
             <xs:attribute name="IDREF" type="xs:IDREF" use="required"/>
             <xs:attribute name="DocType" use="required">
@@ -191,17 +206,25 @@
 
     <!-- BEGIN Complex Reused Types -->
     <xs:complexType name="PremType">
+        <xs:annotation><xs:documentation>
+            PremType is used for origin and destination that must be actual physical locations.
+        </xs:documentation></xs:annotation>      
         <xs:sequence>
             <xs:element name="PremId" type="PremIdType" minOccurs="0" maxOccurs="1"/>
             <xs:element name="PremName" type="xs:string" minOccurs="0" maxOccurs="1"/>
             <xs:element name="Address" type="AddressType" minOccurs="1" maxOccurs="1"/>
             <xs:element name="ProgramStatus" type="ProgramStatusType" minOccurs="0"
                 maxOccurs="unbounded"/>
+            <!-- Why does PremType include required Person? -->
             <xs:element name="Person" type="PersonType" minOccurs="1" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
 
     <xs:complexType name="ContactType">
+        <xs:annotation><xs:documentation>
+            ContactType is used for consignor and consignee that may be actual physical locations but may be
+            other postal addresses.
+        </xs:documentation></xs:annotation>
         <xs:sequence>
             <xs:element name="PremId" type="PremIdType" minOccurs="0" maxOccurs="1"/>
             <xs:element name="PremName" type="xs:string" minOccurs="0" maxOccurs="1"/>
@@ -211,6 +234,12 @@
     </xs:complexType>
 
     <xs:simpleType name="PremIdType">
+        <xs:annotation><xs:documentation>
+            PremIdType does minimal validation of true premises identifiers including both PINs (7 characters
+            and LIDs (8 characters).  Only nationally registered LIDs are appropriate.
+            Implementing applications are highly encouraged to validate against the appropriate 
+            checksum logic.
+        </xs:documentation></xs:annotation>
         <xs:restriction base="xs:string">
             <xs:pattern value="[A-Z0-9]{6,8}"/>
         </xs:restriction>
@@ -251,6 +280,9 @@
     </xs:complexType>
 
     <xs:complexType name="AccessionType">
+        <xs:annotation><xs:documentation>
+            Accessions are listed for the CVI as a whole and referenced by each test.
+        </xs:documentation></xs:annotation>
         <xs:sequence>
             <xs:choice>
                 <xs:element name="Laboratory" minOccurs="1" maxOccurs="1">
@@ -343,6 +375,12 @@
     </xs:complexType>
 
     <xs:complexType name="TestType">
+        <xs:annotation><xs:documentation>
+            Individual test results are included with each animal and reference via ID/IDREF
+            an accession.  For herd testing this allows one accession with many tests.  For 
+            tests such as Equine Coggins tests that are one per accession it results in 
+            slight extra overhead.
+        </xs:documentation></xs:annotation>
         <xs:sequence>
             <xs:element name="Result" minOccurs="1" maxOccurs="unbounded">
                 <xs:complexType>
