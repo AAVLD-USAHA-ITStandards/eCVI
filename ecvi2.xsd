@@ -65,7 +65,7 @@
 
     <xs:element name="MovementPurposes">
         <xs:annotation><xs:documentation>
-        Movement Purpose is a bit of a misnomer.  It includes mostly animal purpose at destination 
+        At least one Movement Purpose is required, but there is no limit on additional Movement Purposes. Movement Purpose is a bit of a misnomer.  It includes mostly animal purpose at destination 
         with a little bit of true reason for movement or reason for certificate.
         </xs:documentation></xs:annotation>
         <xs:complexType>
@@ -212,7 +212,12 @@
     <!-- BEGIN Complex Reused Types -->
     <xs:complexType name="PremType">
         <xs:annotation><xs:documentation>
-            PremType is used for origin and destination that must be actual physical locations.
+            PremType is used for origin and destination, and must be actual physical (animal?) locations. 
+            PremId (see PremIdType) is optional only if unavailable.
+            PremName is an optional string.
+            Address is required (see AddressType).
+            ProgramStatus (see ProgramStatusType) is optional, but there is no limit on additional ProgramStatuses.
+            Person (see PersonType) is required (why?), and there is no limit on additional Persons.
         </xs:documentation></xs:annotation>      
         <xs:sequence>
             <xs:element name="PremId" type="PremIdType" minOccurs="0" maxOccurs="1"/>
@@ -227,8 +232,12 @@
 
     <xs:complexType name="ContactType">
         <xs:annotation><xs:documentation>
-            ContactType is used for consignor and consignee that may be actual physical locations but may be
+            ContactType is used for consignor and consignee that may be actual physical locations or
             other postal addresses.
+            PremID (see PremIdType) is optional only if unavailable.
+            PremName is an optional string.
+            Address (see AddressType) is optional.
+            Person (see PersonType) is required, and there is no limit on additional Persons.
         </xs:documentation></xs:annotation>
         <xs:sequence>
             <xs:element name="PremId" type="PremIdType" minOccurs="0" maxOccurs="1"/>
