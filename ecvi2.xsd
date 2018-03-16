@@ -64,9 +64,10 @@
     </xs:element>
 
     <xs:element name="MovementPurposes">
-    <xs:annotation><xs:documentation>
-        See Appendix A for list of values of Movement Purposes (or better yet, generate a table/list here based on the enumeration values).
-    </xs:documentation></xs:annotation>
+        <xs:annotation><xs:documentation>
+        Movement Purpose is a bit of a misnomer.  It includes mostly animal purpose at destination 
+        with a little bit of true reason for movement or reason for certificate.
+        </xs:documentation></xs:annotation>
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="MovementPurpose" minOccurs="0" maxOccurs="unbounded">
@@ -119,6 +120,8 @@
                 <xs:element name="Test" type="TestType" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
             <xs:attribute name="Age" use="optional">
+                <xs:annotation><xs:documentation>Age may be specified as either a number of days, weeks, months or years plus
+                    the standard code for units (d|wk|mo|a); or as a specific date of birth dd-mm-yyyy.</xs:documentation></xs:annotation>
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
                         <xs:pattern value="\d{1,2}(d|wk|mo|a)"/>
@@ -127,6 +130,8 @@
                 </xs:simpleType>
             </xs:attribute>
             <xs:attribute name="Breed" use="optional">
+                <xs:annotation><xs:documentation>Breed codes are two or three character codes.
+                    The list is not specified in the standard but most are available at: http://????.</xs:documentation></xs:annotation>
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
                         <xs:pattern value="[A-Z]{2,3}"/>
@@ -556,9 +561,13 @@
     </xs:complexType>
 
     <xs:complexType name="SpeciesOtherType">
-        <xs:annotation><xs:documentation>For animals without an official species code, the code is 
-            always OTH and text used to define the actual taxonomy is required.</xs:documentation></xs:annotation>
-            <xs:attribute name="Code" fixed="OTH" use="optional"/>
+        <xs:annotation><xs:documentation> The species coded in the standard include only those commonly needed
+            for regulatory action related to the movement.  Many other official species codes can be found
+            at http://???? Because not all systems may understand these other codes, human readable Text is 
+            required in addition to the code.
+            For animals without an official species code, the code may be omitted the default value is  
+            OTH and text used to define the actual taxonomy is required.</xs:documentation></xs:annotation>
+            <xs:attribute name="Code" default="OTH" use="optional"/>
             <xs:attribute name="Text" type="xs:string" use="required"/>
     </xs:complexType>
 
