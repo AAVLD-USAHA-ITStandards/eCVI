@@ -17,7 +17,7 @@
         02/28/2018: Converted comments to annotation elements except where simply labeling code sections, etc.  Works with an XSLT to generate skeleton documentation.
         03/06-08/2018: Additional annotations added.  Ongoing.           
     
-    </xs:documentation></xs:annotation>
+       </xs:documentation></xs:annotation>
     <xs:annotation>
         <xs:documentation>Copyright © 2017 AAVLD/USAHA it is free for use. Submit suggested changes
             to the maintainers at https://github.com/AAVLD-USAHA-ITStandards/eCVI
@@ -25,6 +25,25 @@
     </xs:annotation>
 
     <xs:element name="eCVI">
+        <xs:annotation><xs:documentation>
+        The eCVI contains the following high-level elements (defined separately):
+        Exactly one Veterinarian (see Veterinarian) is required.
+        Exactly one MovementPurposes is required (see MovementPurposes, which may actually identify zero or more purposes).
+        Exactly one Origin (see PremType) is required.
+        Exactly one Destination (see PremType) is required.
+        Exactly one Consignor (see ContactType) is optional only if unavailable.
+        Excatly one Consignee (see ContactType) is optional only if unavailable.
+        Exactly one Accessions is optional only if unavailable (see Accessions, which may actually identify zero or more AccessionTypes).
+        One or more Animals (see Animal) are optional only if unavailable.
+        One or more GroupLots (see GroupLot) are optional.
+        One or more Attachments (see Attachment) are optional.
+        One or more Binaries (see Binary) are optional.
+        CviNumber is a required string.
+        IssueDate is a required date.
+        ExpirationDate is a required date.
+        ShipmentDate is an optional date.
+        EntryPermitNumber is an optional string.
+        </xs:documentation></xs:annotation>
         <xs:complexType>
             <xs:sequence>
                 <xs:element ref="Veterinarian" minOccurs="1" maxOccurs="1"/>
@@ -50,7 +69,12 @@
 
     <xs:element name="Veterinarian">
     <xs:annotation><xs:documentation>
-        A single Veterinarian element is required.  The Veterinarian element includes elements for name (see Person) and Address and optional attributes for License State, License Number, and National Accreditation Number.
+        Within the Veterinarian element:
+        Name (see Person) is required.
+        Address (see AddressType) is optional only if unavailable.
+        License State is an optional string, and must be a (two upper case letter?) US state reflecting the state where the license was issued
+        License Number is an optional string.
+        National Accreditation Number is an optional string.
     </xs:documentation></xs:annotation>
         <xs:complexType>
             <xs:sequence>
@@ -65,7 +89,7 @@
 
     <xs:element name="MovementPurposes">
         <xs:annotation><xs:documentation>
-        At least one Movement Purpose is required, but there is no limit on additional Movement Purposes. Movement Purpose is a bit of a misnomer.  It includes mostly animal purpose at destination 
+        Movement Purpose is optional, and there is no limit on additional Movement Purposes. Movement Purpose is a bit of a misnomer.  It includes mostly animal purpose at destination 
         with a little bit of true reason for movement or reason for certificate.
         </xs:documentation></xs:annotation>
         <xs:complexType>
@@ -110,6 +134,19 @@
     </xs:element>
 
     <xs:element name="Animal">
+    <xs:annotation><xs:documentation>
+        Animal species may be designated by code (see SpeciesCodeType) or other (see SpeciesOther Type).
+        A single animal tag (see AnimalTags) is required.
+        Test (see TestType) is optional, and there is no limit on additional Tests.
+        Age is optional and may be specified as either:
+        a number of days, weeks, months or years plus the standard code for units (d|wk|mo|a) (example: 3wk), age definitions adhere to 
+UCUM - http://unitsofmeasure.org/ucum.html),
+        or as a specific date of birth as a four-digit year, two-digit month, and two-digit date, separated by dashes (example: 2001-05-31).
+        Breed is optional and specified by two or three uppercase letters. The list is not specified in the standard but most are available at: https://www.naab-css.org/uniform-breed-codes, and https://www.aphis.usda.gov/animal_health/vs_ocio/downloads/date_standards/icvi_data_concepts.pdf.
+        Sex (see SexType) is optional.
+        SexDetail is an optional string.
+        InspectionDate is a required date, and is the date the animals were inspected by the vet. If the inspection took place over multiple days, use the first date.
+    </xs:documentation></xs:annotation>
         <xs:complexType>
             <xs:sequence>
                 <xs:choice>
@@ -120,8 +157,6 @@
                 <xs:element name="Test" type="TestType" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
             <xs:attribute name="Age" use="optional">
-                <xs:annotation><xs:documentation>Age may be specified as either a number of days, weeks, months or years plus
-                    the standard code for units (d|wk|mo|a); or as a specific date of birth dd-mm-yyyy.</xs:documentation></xs:annotation>
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
                         <xs:pattern value="\d{1,2}(d|wk|mo|a)"/>
@@ -130,8 +165,6 @@
                 </xs:simpleType>
             </xs:attribute>
             <xs:attribute name="Breed" use="optional">
-                <xs:annotation><xs:documentation>Breed codes are two or three character codes.
-                    The list is not specified in the standard but most are available at: http://????.</xs:documentation></xs:annotation>
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
                         <xs:pattern value="[A-Z]{2,3}"/>
@@ -145,6 +178,19 @@
     </xs:element>
 
     <xs:element name="GroupLot">
+        <xs:annotation><xs:documentation>
+        Species may be designated by code (see SpeciesCodeType) or other (see SpeciesOtherType).
+        Quantity is a required number (decimals acceptable).
+        Unit by default is "Number", as in a count. A different unit can be specified as an optional string (guidelines on standardized units?).
+        Age is optional and may be specified as either:
+        a number of days, weeks, months or years plus the standard code for units (d|wk|mo|a) (example: 3wk), age definitions adhere to 
+UCUM - http://unitsofmeasure.org/ucum.html),
+        or as a specific date of birth as a four-digit year, two-digit month, and two-digit date, separated by dashes (example: 2001-05-31). 
+        Breed is optional and specified by two or three uppercase letters. The list is not specified in the standard but most are available at: https://www.naab-css.org/uniform-breed-codes, and https://www.aphis.usda.gov/animal_health/vs_ocio/downloads/date_standards/icvi_data_concepts.pdf.
+        Sex (see SexType) is optional.
+        SexDetail is an optional string.
+        Description is required (provide more specifics on what should go in here since it is required).
+        </xs:documentation></xs:annotation>
         <xs:complexType>
             <xs:choice>
                 <xs:element name="SpeciesCode" type="SpeciesCodeType"/>
@@ -153,10 +199,6 @@
             <xs:attribute name="Quantity" type="xs:float" use="required"/>
             <xs:attribute name="Unit" type="xs:string" use="optional" default="Number"/>
             <xs:attribute name="Age" use="optional">
-                <xs:annotation><xs:documentation>
-                    Age can be expressed as either a number of days, weeks, months or years (d, wk, mo, a)
-                    or as a date of birth YYYY-MM-DD.
-                </xs:documentation></xs:annotation>
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
                         <xs:pattern value="\d{1,2}(d|wk|mo|a)"/>
@@ -165,12 +207,6 @@
                 </xs:simpleType>
             </xs:attribute>
             <xs:attribute name="Breed" use="optional">
-                <xs:annotation><xs:documentation>
-                    The breed field is intended to include a cattle breed code from the National Association of Animal Breeders
-                    Uniform Breed Codes or other species breed codes from the ICVI Data Concepts paper from USDA.
-                    https://www.naab-css.org/uniform-breed-codes
-                    https://www.aphis.usda.gov/animal_health/vs_ocio/downloads/date_standards/icvi_data_concepts.pdf
-                </xs:documentation></xs:annotation>
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
                         <xs:pattern value="[A-Z]{2,3}"/>
@@ -185,9 +221,13 @@
 
     <xs:element name="Attachment">
         <xs:annotation><xs:documentation>
-            Attachments can be used for text or binary additional information not specifically 
+           Attachments can be used for text or binary additional information not specifically 
             carried in one of the other Binary elements.  Assumed to be from a file so 
-            Filename is required along with a reference to the Binary content.
+            Filename is required along with a reference to the Binary content.  Be aware that recieving applications may ignore unknown or unexpected attachments. 
+            IDREF (unfamiliar with specifications here, help!)
+            DocType is a required string (put enumeration values in table somehow?).
+            Filename is a required string.
+            Comment is an optional string.
         </xs:documentation></xs:annotation>
         <xs:complexType>
             <xs:attribute name="IDREF" type="xs:IDREF" use="required"/>
@@ -295,7 +335,21 @@
 
     <xs:complexType name="AccessionType">
         <xs:annotation><xs:documentation>
-            Accessions are listed for the CVI as a whole and referenced by each test.
+            Accessions are listed for the CVI as a whole and referenced by each test. An accession is defined as...
+            A single Laboratory or Field element may be specified, indicating where tests for this accession were performed.
+            InfieldTest is an optional bool (true/false value) indicating if a test was performed in the field. (Is this redundant with the Field element?)
+            ID (see ID) is required, and is the reference number that associates an animal’s test details derived from this accession (not clear, reword if possible), not the lab accession number.
+            For Laboratory accessions:
+            Laboratory is a required, containing the following:
+            LabName is a required string.
+            PremId (see PremIdType) is optional only if unavailable.
+            Address (see AddressType) is optional only if unavailable and should contain the lab (physical? contact?) address. 
+            AccessionDate is a required date.
+            AccessionNumber is a required string.
+            For Field accessions:
+            PremId (see PremIdType) is optional only if unavailable.
+            Address (see AddressType) is optional only if unavailable and should contain the (physical? contact?) address of the test location.
+            AccessionDate is a required date.
         </xs:documentation></xs:annotation>
         <xs:sequence>
             <xs:choice>
@@ -540,10 +594,9 @@
     
     <!-- BEGIN Simple Enumerated Types -->
     <xs:simpleType name="TagType">
-        <xs:annotation>
-            <xs:documentation>This lists the allowed tag types that are supported.  The enumerated patterns
-            try to enforce this.</xs:documentation>
-        </xs:annotation>
+        <xs:annotation><xs:documentation>
+            This lists the allowed tag types that are supported.  The enumerated patterns try to enforce this.
+        </xs:documentation></xs:annotation>
         <xs:restriction base="xs:string">
             <xs:enumeration value="AIN"><xs:annotation><xs:documentation>840 official animal ID</xs:documentation></xs:annotation></xs:enumeration>
             <xs:enumeration value="AMID"><xs:annotation><xs:documentation>American ID</xs:documentation></xs:annotation></xs:enumeration>
@@ -563,8 +616,9 @@
     </xs:simpleType>
 
     <xs:complexType name="SpeciesCodeType">
-        <xs:annotation><xs:documentation>For animals with official species codes, the code is required
-            with optional text to add detail if necessary.</xs:documentation></xs:annotation>
+        <xs:annotation><xs:documentation>
+            For animals with official species codes, the code is required with optional text to add detail if necessary.
+        </xs:documentation></xs:annotation>
              <xs:attribute name="Code" type="SpeciesCodes" use="required"/>
             <xs:attribute name="Text" type="xs:string" use="optional"/>
     </xs:complexType>
