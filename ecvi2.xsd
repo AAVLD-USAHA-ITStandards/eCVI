@@ -3,21 +3,20 @@
     targetNamespace="http://www.usaha.org/xmlns/ecvi2" version="2.0"
     xmlns="http://www.usaha.org/xmlns/ecvi2">
 
-    <xs:annotation><xs:documentation> Change Log
-        08/30/2017: Initial draft of version 2.0 attempts to clone version 1 (labeled version 6.0?) with only minor tweaks.
-        09/01/2017: Added regular expressions to AnimalTags choices
-        09/01/2017: Added option for ID/IDREF to Attachment for BrandImage ID Type
-        11/16/2017: Collapsed animal tag choices into known structure and not.
-        12/14/2017: Added Equine description and photos as AnimalTag choices.
-        01/16/2018: Removed string length restrictions not part of regular expressions.
-        01/16/2018: Spelled out latitude and longitude in geo point.
-        01/16/2018: Rearranged TagType to put Type as first attribute.
-        02/08/2018: Restructured Species to SpeciesCode vs. SpeciesOther.
-        02/08/2018: Restructured All Binary data into ID/IDREF to eliminate duplication
-        02/28/2018: Converted comments to annotation elements except where simply labeling code sections, etc.  Works with an XSLT to generate skeleton documentation.
-        03/06-08/2018: Additional annotations added.  Ongoing.           
-    
-       </xs:documentation></xs:annotation>
+    <xs:annotation>
+        <xs:documentation> Change Log 08/30/2017: Initial draft of version 2.0 attempts to clone
+            version 1 (labeled version 6.0?) with only minor tweaks. 09/01/2017: Added regular
+            expressions to AnimalTags choices 09/01/2017: Added option for ID/IDREF to Attachment
+            for BrandImage ID Type 11/16/2017: Collapsed animal tag choices into known structure and
+            not. 12/14/2017: Added Equine description and photos as AnimalTag choices. 01/16/2018:
+            Removed string length restrictions not part of regular expressions. 01/16/2018: Spelled
+            out latitude and longitude in geo point. 01/16/2018: Rearranged TagType to put Type as
+            first attribute. 02/08/2018: Restructured Species to SpeciesCode vs. SpeciesOther.
+            02/08/2018: Restructured All Binary data into ID/IDREF to eliminate duplication
+            02/28/2018: Converted comments to annotation elements except where simply labeling code
+            sections, etc. Works with an XSLT to generate skeleton documentation. 03/06-08/2018:
+            Additional annotations added. Ongoing. </xs:documentation>
+    </xs:annotation>
     <xs:annotation>
         <xs:documentation>Copyright © 2017 AAVLD/USAHA it is free for use. Submit suggested changes
             to the maintainers at https://github.com/AAVLD-USAHA-ITStandards/eCVI
@@ -25,25 +24,21 @@
     </xs:annotation>
 
     <xs:element name="eCVI">
-        <xs:annotation><xs:documentation>
-        The eCVI contains the following high-level elements (defined separately):
-        Exactly one Veterinarian (see Veterinarian) is required.
-        Exactly one MovementPurposes is required (see MovementPurposes, which may actually identify zero or more purposes).
-        Exactly one Origin (see PremType) is required.
-        Exactly one Destination (see PremType) is required.
-        Exactly one Consignor (see ContactType) is optional only if unavailable.
-        Excatly one Consignee (see ContactType) is optional only if unavailable.
-        Exactly one Accessions is optional only if unavailable (see Accessions, which may actually identify zero or more AccessionTypes).
-        One or more Animals (see Animal) are optional only if unavailable.
-        One or more GroupLots (see GroupLot) are optional.
-        One or more Attachments (see Attachment) are optional.
-        One or more Binaries (see Binary) are optional.
-        CviNumber is a required string.
-        IssueDate is a required date.
-        ExpirationDate is a required date.
-        ShipmentDate is an optional date.
-        EntryPermitNumber is an optional string.
-        </xs:documentation></xs:annotation>
+        <xs:annotation>
+            <xs:documentation> The eCVI contains the following high-level elements (defined
+                separately): Exactly one Veterinarian (see Veterinarian) is required. Exactly one
+                MovementPurposes is required (see MovementPurposes, which may actually identify zero
+                or more purposes). Exactly one Origin (see PremType) is required. Exactly one
+                Destination (see PremType) is required. Exactly one Consignor (see ContactType) is
+                optional only if unavailable. Excatly one Consignee (see ContactType) is optional
+                only if unavailable. Exactly one Accessions is optional only if unavailable (see
+                Accessions, which may actually identify zero or more AccessionTypes). One or more
+                Animals (see Animal) are optional only if unavailable. One or more GroupLots (see
+                GroupLot) are optional. One or more Attachments (see Attachment) are optional. One
+                or more Binaries (see Binary) are optional. CviNumber is a required string.
+                IssueDate is a required date. ExpirationDate is a required date. ShipmentDate is an
+                optional date. EntryPermitNumber is an optional string. </xs:documentation>
+        </xs:annotation>
         <xs:complexType>
             <xs:sequence>
                 <xs:element ref="Veterinarian" minOccurs="1" maxOccurs="1"/>
@@ -65,21 +60,21 @@
             <xs:attribute name="EntryPermitNumber" type="xs:string" use="optional"/>
         </xs:complexType>
     </xs:element>
-   <!-- END Document Element -->
+    <!-- END Document Element -->
 
+    <!-- BEGIN Top Level Elements -->
     <xs:element name="Veterinarian">
-    <xs:annotation><xs:documentation>
-        Within the Veterinarian element:
-        Name (see Person) is required.
-        Address (see AddressType) is optional only if unavailable.
-        License State is an optional string, and must be a (two upper case letter?) US state reflecting the state where the license was issued
-        License Number is an optional string.
-        National Accreditation Number is an optional string.
-    </xs:documentation></xs:annotation>
+        <xs:annotation>
+            <xs:documentation> Within the Veterinarian element: Name (see Person) is required.
+                Address (see AddressType) is optional only if unavailable. License State is an
+                optional string, and must be a (two upper case letter?) US state reflecting the
+                state where the license was issued License Number is an optional string. National
+                Accreditation Number is an optional string. </xs:documentation>
+        </xs:annotation>
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="Person" type="PersonType" minOccurs="1" maxOccurs="1"/>
-                <xs:element name="Address" type="AddressType" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="Person" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="Address" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
             <xs:attribute name="LicenseState" type="xs:string" use="optional"/>
             <xs:attribute name="LicenseNumber" type="xs:string" use="optional"/>
@@ -88,10 +83,12 @@
     </xs:element>
 
     <xs:element name="MovementPurposes">
-        <xs:annotation><xs:documentation>
-        Movement Purpose is optional, and there is no limit on additional Movement Purposes. Movement Purpose is a bit of a misnomer.  It includes mostly animal purpose at destination 
-        with a little bit of true reason for movement or reason for certificate.
-        </xs:documentation></xs:annotation>
+        <xs:annotation>
+            <xs:documentation> Movement Purpose is optional, and there is no limit on additional
+                Movement Purposes. Movement Purpose is a bit of a misnomer. It includes mostly
+                animal purpose at destination with a little bit of true reason for movement or
+                reason for certificate. </xs:documentation>
+        </xs:annotation>
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="MovementPurpose" minOccurs="0" maxOccurs="unbounded">
@@ -127,50 +124,39 @@
     <xs:element name="Accessions">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="Accession" type="AccessionType" minOccurs="0"
-                    maxOccurs="unbounded"/>
+                <xs:element ref="Accession" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
 
     <xs:element name="Animal">
-    <xs:annotation><xs:documentation>
-        Animal species may be designated by code (see SpeciesCodeType) or other (see SpeciesOther Type).
-        A single animal tag (see AnimalTags) is required.
-        Test (see TestType) is optional, and there is no limit on additional Tests.
-        Age is optional and may be specified as either:
-        a number of days, weeks, months or years plus the standard code for units (d|wk|mo|a) (example: 3wk), age definitions adhere to 
-UCUM - http://unitsofmeasure.org/ucum.html),
-        or as a specific date of birth as a four-digit year, two-digit month, and two-digit date, separated by dashes (example: 2001-05-31).
-        Breed is optional and specified by two or three uppercase letters. The list is not specified in the standard but most are available at: https://www.naab-css.org/uniform-breed-codes, and https://www.aphis.usda.gov/animal_health/vs_ocio/downloads/date_standards/icvi_data_concepts.pdf.
-        Sex (see SexType) is optional.
-        SexDetail is an optional string.
-        InspectionDate is a required date, and is the date the animals were inspected by the vet. If the inspection took place over multiple days, use the first date.
-    </xs:documentation></xs:annotation>
+        <xs:annotation>
+            <xs:documentation> Animal species may be designated by code (see SpeciesCodeType) or
+                other (see SpeciesOther Type). A single animal tag (see AnimalTags) is required.
+                Test (see TestType) is optional, and there is no limit on additional Tests. Age is
+                optional and may be specified as either: a number of days, weeks, months or years
+                plus the standard code for units (d|wk|mo|a) (example: 3wk), age definitions adhere
+                to UCUM - http://unitsofmeasure.org/ucum.html), or as a specific date of birth as a
+                four-digit year, two-digit month, and two-digit date, separated by dashes (example:
+                2001-05-31). Breed is optional and specified by two or three uppercase letters. The
+                list is not specified in the standard but most are available at:
+                https://www.naab-css.org/uniform-breed-codes, and
+                https://www.aphis.usda.gov/animal_health/vs_ocio/downloads/date_standards/icvi_data_concepts.pdf.
+                Sex (see SexType) is optional. SexDetail is an optional string. InspectionDate is a
+                required date, and is the date the animals were inspected by the vet. If the
+                inspection took place over multiple days, use the first date. </xs:documentation>
+        </xs:annotation>
         <xs:complexType>
             <xs:sequence>
                 <xs:choice>
-                    <xs:element name="SpeciesCode" type="SpeciesCodeType"/>
-                    <xs:element name="SpeciesOther" type="SpeciesOtherType"/>
+                    <xs:element ref="SpeciesCode"/>
+                    <xs:element ref="SpeciesOther"/>
                 </xs:choice>
                 <xs:element ref="AnimalTags" minOccurs="1" maxOccurs="1"/>
-                <xs:element name="Test" type="TestType" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="Test" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
-            <xs:attribute name="Age" use="optional">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:pattern value="\d{1,2}(d|wk|mo|a)"/>
-                        <xs:pattern value="(19|20)\d\d-(0[1-9]|1[012])-(0[1-9]|[12]\d|3[01])"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:attribute>
-            <xs:attribute name="Breed" use="optional">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:pattern value="[A-Z]{2,3}"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:attribute>
+            <xs:attribute name="Age" type="AgeType" use="optional"/>
+            <xs:attribute name="Breed" type="BreedType" use="optional"/>
             <xs:attribute name="Sex" type="SexType" use="optional"/>
             <xs:attribute name="SexDetail" type="xs:string" use="optional"/>
             <xs:attribute name="InspectionDate" type="xs:date" use="required"/>
@@ -178,41 +164,32 @@ UCUM - http://unitsofmeasure.org/ucum.html),
     </xs:element>
 
     <xs:element name="GroupLot">
-        <xs:annotation><xs:documentation>
-        Species may be designated by code (see SpeciesCodeType) or other (see SpeciesOtherType).
-        Quantity is a required number (decimals acceptable).
-        Unit by default is "Number", as in a count. A different unit can be specified as an optional string (guidelines on standardized units?).
-        Age is optional and may be specified as either:
-        a number of days, weeks, months or years plus the standard code for units (d|wk|mo|a) (example: 3wk), age definitions adhere to 
-UCUM - http://unitsofmeasure.org/ucum.html),
-        or as a specific date of birth as a four-digit year, two-digit month, and two-digit date, separated by dashes (example: 2001-05-31). 
-        Breed is optional and specified by two or three uppercase letters. The list is not specified in the standard but most are available at: https://www.naab-css.org/uniform-breed-codes, and https://www.aphis.usda.gov/animal_health/vs_ocio/downloads/date_standards/icvi_data_concepts.pdf.
-        Sex (see SexType) is optional.
-        SexDetail is an optional string.
-        Description is required (provide more specifics on what should go in here since it is required).
-        </xs:documentation></xs:annotation>
+        <xs:annotation>
+            <xs:documentation> Species may be designated by code (see SpeciesCodeType) or other (see
+                SpeciesOtherType). Quantity is a required number (decimals acceptable). Unit by
+                default is "Number", as in a count. A different unit can be specified as an optional
+                string (guidelines on standardized units?). Age is optional and may be specified as
+                either: a number of days, weeks, months or years plus the standard code for units
+                (d|wk|mo|a) (example: 3wk), age definitions adhere to UCUM -
+                http://unitsofmeasure.org/ucum.html), or as a specific date of birth as a four-digit
+                year, two-digit month, and two-digit date, separated by dashes (example:
+                2001-05-31). Breed is optional and specified by two or three uppercase letters. The
+                list is not specified in the standard but most are available at:
+                https://www.naab-css.org/uniform-breed-codes, and
+                https://www.aphis.usda.gov/animal_health/vs_ocio/downloads/date_standards/icvi_data_concepts.pdf.
+                Sex (see SexType) is optional. SexDetail is an optional string. Description is
+                required (provide more specifics on what should go in here since it is required).
+            </xs:documentation>
+        </xs:annotation>
         <xs:complexType>
             <xs:choice>
-                <xs:element name="SpeciesCode" type="SpeciesCodeType"/>
-                <xs:element name="SpeciesOther" type="SpeciesOtherType"/>
+                <xs:element name="SpeciesCode"/>
+                <xs:element name="SpeciesOther"/>
             </xs:choice>
             <xs:attribute name="Quantity" type="xs:float" use="required"/>
             <xs:attribute name="Unit" type="xs:string" use="optional" default="Number"/>
-            <xs:attribute name="Age" use="optional">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:pattern value="\d{1,2}(d|wk|mo|a)"/>
-                        <xs:pattern value="(19|20)\d\d-(0[1-9]|1[012])-(0[1-9]|[12]\d|3[01])"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:attribute>
-            <xs:attribute name="Breed" use="optional">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:pattern value="[A-Z]{2,3}"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:attribute>
+            <xs:attribute name="Age" type="AgeType" use="optional"/>
+            <xs:attribute name="Breed" type="BreedType" use="optional"/>
             <xs:attribute name="Sex" type="SexType" use="optional"/>
             <xs:attribute name="SexDetail" type="xs:string" use="optional"/>
             <xs:attribute name="Description" type="xs:string" use="required"/>
@@ -220,15 +197,15 @@ UCUM - http://unitsofmeasure.org/ucum.html),
     </xs:element>
 
     <xs:element name="Attachment">
-        <xs:annotation><xs:documentation>
-           Attachments can be used for text or binary additional information not specifically 
-            carried in one of the other Binary elements.  Assumed to be from a file so 
-            Filename is required along with a reference to the Binary content.  Be aware that recieving applications may ignore unknown or unexpected attachments. 
-            IDREF (unfamiliar with specifications here, help!)
-            DocType is a required string (put enumeration values in table somehow?).
-            Filename is a required string.
-            Comment is an optional string.
-        </xs:documentation></xs:annotation>
+        <xs:annotation>
+            <xs:documentation> Attachments can be used for text or binary additional information not
+                specifically carried in one of the other Binary elements. Assumed to be from a file
+                so Filename is required along with a reference to the Binary content. Be aware that
+                recieving applications may ignore unknown or unexpected attachments. IDREF
+                (unfamiliar with specifications here, help!) DocType is a required string (put
+                enumeration values in table somehow?). Filename is a required string. Comment is an
+                optional string. </xs:documentation>
+        </xs:annotation>
         <xs:complexType>
             <xs:attribute name="IDREF" type="xs:IDREF" use="required"/>
             <xs:attribute name="DocType" use="required">
@@ -245,255 +222,284 @@ UCUM - http://unitsofmeasure.org/ucum.html),
             <xs:attribute name="Filename" type="xs:string" use="required"/>
             <xs:attribute name="Comment" type="xs:string" use="optional"/>
         </xs:complexType>
-
     </xs:element>
-    <!-- END Top Level Elements --> 
 
-    <!-- BEGIN Complex Reused Types -->
-    <xs:complexType name="PremType">
-        <xs:annotation><xs:documentation>
-            PremType is used for origin and destination, and must be actual physical (animal?) locations. 
-            PremId (see PremIdType) is optional only if unavailable.
-            PremName is an optional string.
-            Address is required (see AddressType).
-            ProgramStatus (see ProgramStatusType) is optional, but there is no limit on additional ProgramStatuses.
-            Person (see PersonType) is required (why?), and there is no limit on additional Persons.
-        </xs:documentation></xs:annotation>      
-        <xs:sequence>
-            <xs:element name="PremId" type="PremIdType" minOccurs="0" maxOccurs="1"/>
-            <xs:element name="PremName" type="xs:string" minOccurs="0" maxOccurs="1"/>
-            <xs:element name="Address" type="AddressType" minOccurs="1" maxOccurs="1"/>
-            <xs:element name="ProgramStatus" type="ProgramStatusType" minOccurs="0"
-                maxOccurs="unbounded"/>
-            <!-- Why does PremType include required Person? -->
-            <xs:element name="Person" type="PersonType" minOccurs="1" maxOccurs="unbounded"/>
-        </xs:sequence>
-    </xs:complexType>
+    <xs:element name="Binary">
+        <xs:annotation>
+            <xs:documentation>All binary content is included as Binary and referenced in specific
+                elements by ID/IDREF.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Payload" type="xs:base64Binary" minOccurs="1" maxOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute name="ID" type="xs:ID"/>
+            <xs:attribute name="MimeType" type="MimeType" use="optional"/>
+        </xs:complexType>
+    </xs:element>
 
-    <xs:complexType name="ContactType">
-        <xs:annotation><xs:documentation>
-            ContactType is used for consignor and consignee that may be actual physical locations or
-            other postal addresses.
-            PremID (see PremIdType) is optional only if unavailable.
-            PremName is an optional string.
-            Address (see AddressType) is optional.
-            Person (see PersonType) is required, and there is no limit on additional Persons.
-        </xs:documentation></xs:annotation>
-        <xs:sequence>
-            <xs:element name="PremId" type="PremIdType" minOccurs="0" maxOccurs="1"/>
-            <xs:element name="PremName" type="xs:string" minOccurs="0" maxOccurs="1"/>
-            <xs:element name="Address" type="AddressType" minOccurs="0" maxOccurs="1"/>
-            <xs:element name="Person" type="PersonType" minOccurs="1" maxOccurs="unbounded"/>
-        </xs:sequence>
-    </xs:complexType>
+    <!-- END Top Level Elements -->
 
-    <xs:simpleType name="PremIdType">
-        <xs:annotation><xs:documentation>
-            PremIdType does minimal validation of true premises identifiers including both PINs (7 characters
-            and LIDs (8 characters).  Only nationally registered LIDs are appropriate.
-            Implementing applications are highly encouraged to validate against the appropriate 
-            checksum logic.
-        </xs:documentation></xs:annotation>
-        <xs:restriction base="xs:string">
-            <xs:pattern value="[A-Z0-9]{6,8}"/>
-        </xs:restriction>
-    </xs:simpleType>
 
-    <xs:complexType name="PersonType">
-    <xs:annotation><xs:documentation>
-        Person is defined as a Name string and an optional Phone Number (see Phone).
-    </xs:documentation></xs:annotation>
-        <xs:sequence>
-            <xs:element name="Name" type="xs:string" minOccurs="1" maxOccurs="1"/>
-            <xs:element name="Phone" type="PhoneType" minOccurs="0" maxOccurs="unbounded"/>
-        </xs:sequence>
-    </xs:complexType>
+    <!-- BEGIN Second Level Element Definitions -->
+    <xs:element name="Person">
+        <xs:annotation>
+            <xs:documentation> Person is defined as a Name string and an optional Phone Number (see
+                Phone). </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Name" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="Phone" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
 
-    <xs:complexType name="PhoneType">
-    <xs:annotation><xs:documentation>
-        The Phone Number specifies type (list enumeration values?) and a ten-digit number, and can include a comment.
-    </xs:documentation></xs:annotation>
-        <xs:attribute name="Number" use="required">
-            <xs:simpleType>
-                <xs:restriction base="xs:string">
-                    <xs:pattern value="\d{10}"/>
-                </xs:restriction>
-            </xs:simpleType>
-        </xs:attribute>
-        <xs:attribute name="Comment" type="xs:string" use="optional"/>
-        <xs:attribute name="Type" use="required">
-            <xs:simpleType>
-                <xs:restriction base="xs:string">
-                    <xs:enumeration value="Unknown"/>
-                    <xs:enumeration value="Landline"/>
-                    <xs:enumeration value="Cellphone"/>
-                    <xs:enumeration value="Fax"/>
-                </xs:restriction>
-            </xs:simpleType>
-        </xs:attribute>
-    </xs:complexType>
-
-    <xs:complexType name="AccessionType">
-        <xs:annotation><xs:documentation>
-            Accessions are listed for the CVI as a whole and referenced by each test. An accession is defined as...
-            A single Laboratory or Field element may be specified, indicating where tests for this accession were performed.
-            InfieldTest is an optional bool (true/false value) indicating if a test was performed in the field. (Is this redundant with the Field element?)
-            ID (see ID) is required, and is the reference number that associates an animal’s test details derived from this accession (not clear, reword if possible), not the lab accession number.
-            For Laboratory accessions:
-            Laboratory is a required, containing the following:
-            LabName is a required string.
-            PremId (see PremIdType) is optional only if unavailable.
-            Address (see AddressType) is optional only if unavailable and should contain the lab (physical? contact?) address. 
-            AccessionDate is a required date.
-            AccessionNumber is a required string.
-            For Field accessions:
-            PremId (see PremIdType) is optional only if unavailable.
-            Address (see AddressType) is optional only if unavailable and should contain the (physical? contact?) address of the test location.
-            AccessionDate is a required date.
-        </xs:documentation></xs:annotation>
-        <xs:sequence>
-            <xs:choice>
-                <xs:element name="Laboratory" minOccurs="1" maxOccurs="1">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="LabName" type="xs:string" minOccurs="1" maxOccurs="1"/>
-                            <xs:element name="PremId" type="PremIdType" minOccurs="0" maxOccurs="1"/>
-                            <xs:element name="Address" type="AddressType" minOccurs="0"
-                                maxOccurs="1"/>
-                        </xs:sequence>
-                        <xs:attribute name="AccessionDate" type="xs:date" use="required"/>
-                        <xs:attribute name="AccessionNumber" type="xs:string" use="required"/>
-                    </xs:complexType>
-                </xs:element>
-                <xs:element name="Field" minOccurs="1" maxOccurs="1">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="PremId" type="PremIdType" minOccurs="0" maxOccurs="1"/>
-                            <xs:element name="Address" type="AddressType" minOccurs="0"
-                                maxOccurs="1"/>
-                        </xs:sequence>
-                        <xs:attribute name="AccessionDate" type="xs:date" use="required"/>
-                    </xs:complexType>
-                </xs:element>
-            </xs:choice>
-        </xs:sequence>
-        <xs:attribute name="InfieldTest" type="xs:boolean" use="optional" default="false"/>
-        <xs:attribute name="id" type="xs:ID" use="required"/>
-    </xs:complexType>
-
-    <xs:complexType name="ProgramStatusType">
-        <xs:attribute name="Name" use="required">
-            <xs:simpleType>
-                <xs:restriction base="xs:string">
-                    <xs:enumeration value="Bovine Tuberculosis"/>
-                    <xs:enumeration value="Brucellosis (state)"/>
-                    <xs:enumeration value="Brucellosis (herd)"/>
-                    <xs:enumeration value="Johne’s (herd)"/>
-                    <xs:enumeration value="NPIP (herd)"/>
-                    <xs:enumeration value="Scrapie (herd)"/>
-                    <xs:enumeration value="PRV (herd)"/>
-                    <xs:enumeration value="PRV (area)"/>
-                    <xs:enumeration value="Trichomoniasis (herd)"/>
-                    <xs:enumeration value="EIA (herd)"/>
-                </xs:restriction>
-            </xs:simpleType>
-        </xs:attribute>
-        <xs:attribute name="Value" use="required">
-            <xs:simpleType>
-                <xs:restriction base="xs:string">
-                    <xs:enumeration value="Free"/>
-                    <xs:enumeration value="Modified Accredited"/>
-                    <xs:enumeration value="Modified Advanced Accredited"/>
-                    <xs:enumeration value="Other"/>
-                </xs:restriction>
-            </xs:simpleType>
-        </xs:attribute>
-        <xs:attribute name="ValueOther" type="xs:string" use="optional"/>
-    </xs:complexType>
-
-    <xs:complexType name="AddressType">
-        <xs:sequence>
-            <xs:element name="Line1" type="xs:string" minOccurs="1" maxOccurs="1"/>
-            <xs:element name="Line2" type="xs:string" minOccurs="0" maxOccurs="1"/>
-            <xs:element name="Town" type="xs:string" minOccurs="1" maxOccurs="1"/>
-            <xs:element name="County" type="xs:string" minOccurs="0" maxOccurs="1"/>
-            <xs:element name="State" type="StateCodeType" minOccurs="1" maxOccurs="1"/>
-            <xs:element name="ZIP" minOccurs="1" maxOccurs="1">
+    <xs:element name="Phone">
+        <xs:annotation>
+            <xs:documentation> The Phone Number specifies type (list enumeration values?) and a
+                ten-digit number, and can include a comment. </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:attribute name="Number" use="required">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
-                        <xs:pattern value="\d{5}"/>
-                        <xs:pattern value="\d{5}-\d{4}"/>
+                        <xs:pattern value="\d{10}"/>
                     </xs:restriction>
                 </xs:simpleType>
-            </xs:element>
-            <xs:element name="Country" minOccurs="0" maxOccurs="1">
+            </xs:attribute>
+            <xs:attribute name="Comment" type="xs:string" use="optional"/>
+            <xs:attribute name="Type" use="required">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
-                        <xs:enumeration value="USA"/>
+                        <xs:enumeration value="Unknown"/>
+                        <xs:enumeration value="Landline"/>
+                        <xs:enumeration value="Cellphone"/>
+                        <xs:enumeration value="Fax"/>
                     </xs:restriction>
                 </xs:simpleType>
-            </xs:element>
-            <xs:element name="GeoPoint" minOccurs="0" maxOccurs="1">
-                <xs:complexType>
-                    <xs:attribute name="latitude" type="xs:decimal" use="required"/>
-                    <xs:attribute name="longitude" type="xs:decimal" use="required"/>
-                </xs:complexType>
-            </xs:element>
-        </xs:sequence>
-    </xs:complexType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
 
-    <xs:complexType name="TestType">
-        <xs:annotation><xs:documentation>
-            Individual test results are included with each animal and reference via ID/IDREF
-            an accession.  For herd testing this allows one accession with many tests.  For 
-            tests such as Equine Coggins tests that are one per accession it results in 
-            slight extra overhead.
-        </xs:documentation></xs:annotation>
-        <xs:sequence>
-            <xs:element name="Result" minOccurs="1" maxOccurs="unbounded">
-                <xs:complexType>
-                    <xs:choice>
-                        <xs:element name="ResultInteger" type="xs:integer" minOccurs="0"
-                            maxOccurs="1"/>
-                        <xs:element name="ResultString" type="xs:string" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="ResultFloat" type="xs:float" minOccurs="0" maxOccurs="1"/>
-                    </xs:choice>
-                    <xs:attribute name="ResultName" use="required">
-                        <xs:simpleType>
-                            <xs:restriction base="xs:string">
-                                <xs:enumeration value="RESULT"/>
-                                <xs:enumeration value="COMMENT"/>
-                            </xs:restriction>
-                        </xs:simpleType>
-                    </xs:attribute>
-                </xs:complexType>
-            </xs:element>
-        </xs:sequence>
-        <xs:attribute name="idref" type="xs:IDREF" use="required">
-            <xs:annotation><xs:documentation> Points to ID in Accession element </xs:documentation></xs:annotation>
-        </xs:attribute>
-        <xs:attribute name="TestCode" type="xs:string" use="required"/>
-    </xs:complexType>
+    <xs:element name="Accession">
+        <xs:annotation>
+            <xs:documentation> Accessions are listed for the CVI as a whole and referenced by each
+                test. An accession is defined as... A single Laboratory or Field element may be
+                specified, indicating where tests for this accession were performed. InfieldTest is
+                an optional bool (true/false value) indicating if a test was performed in the field.
+                (Is this redundant with the Field element?) ID (see ID) is required, and is the
+                reference number that associates an animal’s test details derived from this
+                accession (not clear, reword if possible), not the lab accession number. For
+                Laboratory accessions: Laboratory is a required, containing the following: LabName
+                is a required string. PremId (see PremIdType) is optional only if unavailable.
+                Address (see AddressType) is optional only if unavailable and should contain the lab
+                (physical? contact?) address. AccessionDate is a required date. AccessionNumber is a
+                required string. For Field accessions: PremId (see PremIdType) is optional only if
+                unavailable. Address (see AddressType) is optional only if unavailable and should
+                contain the (physical? contact?) address of the test location. AccessionDate is a
+                required date. </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:choice>
+                    <xs:element name="Laboratory" minOccurs="1" maxOccurs="1">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="LabName" type="xs:string" minOccurs="1"
+                                    maxOccurs="1"/>
+                                <xs:element name="PremId" type="PremIdType" minOccurs="0"
+                                    maxOccurs="1"/>
+                                <xs:element ref="Address" minOccurs="0" maxOccurs="1"/>
+                            </xs:sequence>
+                            <xs:attribute name="AccessionDate" type="xs:date" use="required"/>
+                            <xs:attribute name="AccessionNumber" type="xs:string" use="required"/>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="Field" minOccurs="1" maxOccurs="1">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="PremId" type="PremIdType" minOccurs="0"
+                                    maxOccurs="1"/>
+                                <xs:element ref="Address" minOccurs="0" maxOccurs="1"/>
+                            </xs:sequence>
+                            <xs:attribute name="AccessionDate" type="xs:date" use="required"/>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:choice>
+            </xs:sequence>
+            <xs:attribute name="InfieldTest" type="xs:boolean" use="optional" default="false"/>
+            <xs:attribute name="id" type="xs:ID" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ProgramStatus">
+        <xs:complexType>
+            <xs:attribute name="Name" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="Bovine Tuberculosis"/>
+                        <xs:enumeration value="Brucellosis (state)"/>
+                        <xs:enumeration value="Brucellosis (herd)"/>
+                        <xs:enumeration value="Johne’s (herd)"/>
+                        <xs:enumeration value="NPIP (herd)"/>
+                        <xs:enumeration value="Scrapie (herd)"/>
+                        <xs:enumeration value="PRV (herd)"/>
+                        <xs:enumeration value="PRV (area)"/>
+                        <xs:enumeration value="Trichomoniasis (herd)"/>
+                        <xs:enumeration value="EIA (herd)"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="Value" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="Free"/>
+                        <xs:enumeration value="Modified Accredited"/>
+                        <xs:enumeration value="Modified Advanced Accredited"/>
+                        <xs:enumeration value="Other"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="ValueOther" type="xs:string" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="Address">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Line1" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="Line2" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="Town" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="County" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="State" type="StateCodeType" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="ZIP" minOccurs="1" maxOccurs="1">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:pattern value="\d{5}"/>
+                            <xs:pattern value="\d{5}-\d{4}"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="Country" minOccurs="0" maxOccurs="1">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="USA"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="GeoPoint" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:attribute name="latitude" type="xs:decimal" use="required"/>
+                        <xs:attribute name="longitude" type="xs:decimal" use="required"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="Test">
+        <xs:annotation>
+            <xs:documentation> Individual test results are included with each animal and reference
+                via ID/IDREF an accession. For herd testing this allows one accession with many
+                tests. For tests such as Equine Coggins tests that are one per accession it results
+                in slight extra overhead. </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Result" minOccurs="1" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:choice>
+                            <xs:element name="ResultInteger" type="xs:integer" minOccurs="0"
+                                maxOccurs="1"/>
+                            <xs:element name="ResultString" type="xs:string" minOccurs="0"
+                                maxOccurs="1"/>
+                            <xs:element name="ResultFloat" type="xs:float" minOccurs="0"
+                                maxOccurs="1"/>
+                        </xs:choice>
+                        <xs:attribute name="ResultName" use="required">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:enumeration value="RESULT"/>
+                                    <xs:enumeration value="COMMENT"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:attribute>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="idref" type="xs:IDREF" use="required">
+                <xs:annotation>
+                    <xs:documentation> Points to ID in Accession element </xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="TestCode" type="xs:string" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="SpeciesCode">
+        <xs:annotation>
+            <xs:documentation> For animals with official species codes, the code is required with
+                optional text to add detail if necessary. </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:attribute name="Code" type="SpeciesCodes" use="required"/>
+            <xs:attribute name="Text" type="xs:string" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="SpeciesOther">
+        <xs:annotation>
+            <xs:documentation> The species coded in the standard include only those commonly needed
+                for regulatory action related to the movement. Many other official species codes can
+                be found at http://???? Because not all systems may understand these other codes,
+                human readable Text is required in addition to the code. For animals without an
+                official species code, the code may be omitted the default value is OTH and text
+                used to define the actual taxonomy is required.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:attribute name="Code" default="OTH" use="optional"/>
+            <xs:attribute name="Text" type="xs:string" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
     <xs:element name="AnimalTags">
-        <xs:annotation><xs:documentation> This is a jumble of type of ID with the type of device holding the ID. "Tags" is a misnomer. </xs:documentation></xs:annotation>
+        <xs:annotation>
+            <xs:documentation> This is a jumble of type of ID with the type of device holding the
+                ID. "Tags" is a misnomer. An ID may be either Known Format matching one of the list
+                of regular expressions for common official animal IDs, or some other type, either
+                non-offial or one that this schema missed. This field also supports brand
+                descriptions, brand images, and equine description or photographs. These can appear
+                in any order up to six IDs per animal </xs:documentation>
+        </xs:annotation>
         <xs:complexType>
             <xs:sequence minOccurs="1" maxOccurs="6">
+                <!-- Why the limit of six? -->
                 <xs:choice>
                     <xs:element name="KnownFormatID">
                         <xs:complexType>
                             <xs:attribute name="Type" type="TagType" use="optional"/>
                             <xs:attribute name="Number" use="required">
-                                <xs:annotation><xs:documentation>KnownFormatID patterns provide some ID validation.</xs:documentation></xs:annotation>
+                                <xs:annotation>
+                                    <xs:documentation>KnownFormatID patterns provide some ID
+                                        validation.</xs:documentation>
+                                </xs:annotation>
                                 <xs:simpleType>
                                     <xs:restriction base="xs:string">
                                         <xs:pattern value="(840)\d{12}">
-                                        <xs:annotation>
-                                            <xs:documentation xml:lang="en">840 RFID:  840 followed by 12 digits</xs:documentation>
-                                        </xs:annotation>
+                                            <xs:annotation>
+                                                <xs:documentation xml:lang="en">840 RFID: 840
+                                                  followed by 12 digits</xs:documentation>
+                                            </xs:annotation>
                                         </xs:pattern>
-                                         <xs:pattern value="(USA)(\d{8,9}|\d{12})">
-                                             <xs:annotation><xs:documentation> American ID:  USA followed by 12 digits, sometimes truncated to 8 or 9 digits,
-                         or some specific patterns of just the digits part (shows how hard validation is currently) </xs:documentation></xs:annotation>
+                                        <xs:pattern value="(USA)(\d{8,9}|\d{12})">
+                                            <xs:annotation>
+                                                <xs:documentation> American ID: USA followed by 12
+                                                  digits, sometimes truncated to 8 or 9 digits, or
+                                                  some specific patterns of just the digits part
+                                                  (shows how hard validation is currently)
+                                                </xs:documentation>
+                                            </xs:annotation>
                                         </xs:pattern>
                                         <xs:pattern value="[5-9]\d{7}"/>
                                         <xs:pattern value="[1-3]\d{8}"/>
@@ -502,31 +508,59 @@ UCUM - http://unitsofmeasure.org/ucum.html),
                                         <xs:pattern value="4710\d{5}"/>
                                         <xs:pattern value="471100000"/>
                                         <xs:pattern value="\d{2}[A-Z]{2}\d{4}.?">
-                                            <xs:annotation><xs:documentation> Cattle Backtag: Two digits + two letters + four digits (optional additional character?) </xs:documentation></xs:annotation>
-                                         </xs:pattern>
-                                         <xs:pattern
+                                            <xs:annotation>
+                                                <xs:documentation> Cattle Backtag: Two digits + two
+                                                  letters + four digits (optional additional
+                                                  character?) </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:pattern>
+                                        <xs:pattern
                                             value="((840)|(9[0-8]\d)|(9\d[0-8])|(124)|(484))\d{12}">
-                                             <xs:annotation><xs:documentation> Implant RFID Chip:  Either 840 or a company prefix followed by 12 digits
-                                                 Excludes 999 prefix (Note, XPATH does not support (?!pattern) negative look ahead.) </xs:documentation></xs:annotation>
-                                         </xs:pattern>
-                                         <xs:pattern
+                                            <xs:annotation>
+                                                <xs:documentation> Implant RFID Chip: Either 840 or
+                                                  a company prefix followed by 12 digits Excludes
+                                                  999 prefix (Note, XPATH does not support
+                                                  (?!pattern) negative look ahead.)
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:pattern>
+                                        <xs:pattern
                                             value="((9[0-8]\d)|(9\d[0-8])|(124)|(484))\d{12}">
-                                             <xs:annotation><xs:documentation> Non 840 RFID: Company prefix (not 999) followed by 12 digits </xs:documentation></xs:annotation>
-                                         </xs:pattern>
-                                         <xs:pattern value="\d{2}[A-Z]{2}\d{4}">
-                                             <xs:annotation><xs:documentation> NUES 8 Character:  Two digits + two letters + four digits (Note: matches cattle backtag pattern.) </xs:documentation></xs:annotation>
-                                         </xs:pattern>
+                                            <xs:annotation>
+                                                <xs:documentation> Non 840 RFID: Company prefix (not
+                                                  999) followed by 12 digits </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:pattern>
+                                        <xs:pattern value="\d{2}[A-Z]{2}\d{4}">
+                                            <xs:annotation>
+                                                <xs:documentation> NUES 8 Character: Two digits +
+                                                  two letters + four digits (Note: matches cattle
+                                                  backtag pattern.) </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:pattern>
                                         <xs:pattern value="(\d{2}|MD|MN|NM|NY|US|WY)[A-Z]{3}\d{4}">
-                                            <xs:annotation><xs:documentation> NUES 9 Character:  Two digits + three letters + four digits
-                                                or some state's alpha codes followed by three more letters and four digits </xs:documentation></xs:annotation>
+                                            <xs:annotation>
+                                                <xs:documentation> NUES 9 Character: Two digits +
+                                                  three letters + four digits or some state's alpha
+                                                  codes followed by three more letters and four
+                                                  digits </xs:documentation>
+                                            </xs:annotation>
                                         </xs:pattern>
                                         <xs:pattern value="[A-Z]{2}[A-Z0-9]{1,20}[ ][A-Z0-9]{1,20}">
-                                            <xs:annotation><xs:documentation> Sheep/goat - flock ID tag: Two letters + one to 20 upper case letters or digits
-                                                + a space and one to 20 more upper case letters or digits </xs:documentation></xs:annotation>
+                                            <xs:annotation>
+                                                <xs:documentation> Sheep/goat - flock ID tag: Two
+                                                  letters + one to 20 upper case letters or digits +
+                                                  a space and one to 20 more upper case letters or
+                                                  digits </xs:documentation>
+                                            </xs:annotation>
                                         </xs:pattern>
                                         <xs:pattern value="[A-Z0-9]{7}[ ][A-Z0-9]{1,20}">
-                                        <xs:annotation><xs:documentation> Sheep/goat National PIN tag: Seven upper case letters or digts (a PIN)
-                              + a space and one to 20 more upper case letters or digits </xs:documentation></xs:annotation>
+                                            <xs:annotation>
+                                                <xs:documentation> Sheep/goat National PIN tag:
+                                                  Seven upper case letters or digts (a PIN) + a
+                                                  space and one to 20 more upper case letters or
+                                                  digits </xs:documentation>
+                                            </xs:annotation>
                                         </xs:pattern>
                                     </xs:restriction>
                                 </xs:simpleType>
@@ -534,7 +568,9 @@ UCUM - http://unitsofmeasure.org/ucum.html),
                         </xs:complexType>
                     </xs:element>
                     <xs:element name="OtherFormatID">
-                        <xs:annotation><xs:documentation> Other Formats:  No restrictions </xs:documentation></xs:annotation>
+                        <xs:annotation>
+                            <xs:documentation> Other Formats: No restrictions </xs:documentation>
+                        </xs:annotation>
                         <xs:complexType>
                             <xs:attribute name="Type" type="TagType" use="optional"/>
                             <xs:attribute name="Number" use="required">
@@ -548,27 +584,37 @@ UCUM - http://unitsofmeasure.org/ucum.html),
                         </xs:complexType>
                     </xs:element>
                     <xs:element name="BRAND-IMAGE">
-                        <xs:annotation><xs:documentation> This should be PNG/JPEG/GIF/PDF format.  The format 
-                        is specified in the Binary mime type.</xs:documentation></xs:annotation>
+                        <xs:annotation>
+                            <xs:documentation> This should be PNG/JPEG/GIF/PDF format. The format is
+                                specified in the Binary mime type.</xs:documentation>
+                        </xs:annotation>
                         <xs:complexType>
                             <xs:attribute name="BrandImageRef" type="xs:IDREF" use="optional"/>
-                         </xs:complexType>
+                        </xs:complexType>
                     </xs:element>
                     <xs:element name="EquineDescription">
-                         <xs:annotation><xs:documentation> Equine registered name is only legal identification with description </xs:documentation></xs:annotation>
+                        <xs:annotation>
+                            <xs:documentation> Equine registered name is only legal identification
+                                with description </xs:documentation>
+                        </xs:annotation>
                         <xs:complexType>
                             <xs:attribute name="Name" type="xs:string" use="optional"/>
                             <xs:attribute name="Description" type="xs:string" use="required"/>
                         </xs:complexType>
                     </xs:element>
                     <xs:element name="EquinePhotographs">
-                        <xs:annotation><xs:documentation> Photos are also official. </xs:documentation></xs:annotation>
+                        <xs:annotation>
+                            <xs:documentation> Photos are also official. </xs:documentation>
+                        </xs:annotation>
                         <xs:complexType>
                             <xs:sequence>
                                 <xs:element name="Photograph" minOccurs="1" maxOccurs="3">
-                                    <xs:annotation><xs:documentation> Should we try to impose image type, etc.? </xs:documentation></xs:annotation>
+                                    <xs:annotation>
+                                        <xs:documentation> Should we try to impose image type, etc.?
+                                        </xs:documentation>
+                                    </xs:annotation>
                                     <xs:complexType>
-                                     <xs:attribute name="ImageRef" type="xs:IDREF" use="required"/>
+                                        <xs:attribute name="ImageRef" type="xs:IDREF" use="required"/>
                                         <xs:attribute name="View" type="PhotoView" use="optional"/>
                                     </xs:complexType>
                                 </xs:element>
@@ -579,98 +625,329 @@ UCUM - http://unitsofmeasure.org/ucum.html),
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-    
-    <xs:element name="Binary">
-        <xs:annotation><xs:documentation>All binary content is included as Binary and referenced in specific elements by ID/IDREF.</xs:documentation></xs:annotation>
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="Payload" type="xs:base64Binary" minOccurs="1" maxOccurs="1"/>
-            </xs:sequence>
-            <xs:attribute name="ID" type="xs:ID"/>
-            <xs:attribute name="MimeType" type="MimeType" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-    
-    
-    <!-- BEGIN Simple Enumerated Types -->
-    <xs:simpleType name="TagType">
-        <xs:annotation><xs:documentation>
-            This lists the allowed tag types that are supported.  The enumerated patterns try to enforce this.
-        </xs:documentation></xs:annotation>
+    <!-- END Second Level element definitions -->
+
+
+    <!-- BEGIN Complex Reused Types -->
+    <xs:complexType name="PremType">
+        <xs:annotation>
+            <xs:documentation> PremType is used for origin and destination, and must be actual
+                physical (animal?) locations. PremId (see PremIdType) is optional only if
+                unavailable. PremName is an optional string. Address is required (see AddressType).
+                ProgramStatus (see ProgramStatusType) is optional, but there is no limit on
+                additional ProgramStatuses. Person (see PersonType) is required (why?), and there is
+                no limit on additional Persons. </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="PremId" type="PremIdType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="PremName" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element ref="Address" minOccurs="1" maxOccurs="1"/>
+            <xs:element ref="ProgramStatus" minOccurs="0" maxOccurs="unbounded"/>
+            <!-- Why does PremType include required Person? -->
+            <xs:element ref="Person" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ContactType">
+        <xs:annotation>
+            <xs:documentation> ContactType is used for consignor and consignee that may be actual
+                physical locations or other postal addresses. PremID (see PremIdType) is optional
+                only if unavailable. PremName is an optional string. Address (see AddressType) is
+                optional. Person (see PersonType) is required, and there is no limit on additional
+                Persons. </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="PremId" type="PremIdType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="PremName" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element ref="Address" minOccurs="0" maxOccurs="1"/>
+            <xs:element ref="Person" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- END Complex Reused Types -->
+
+    <!-- BEGIN Simple Enumerated or Patterned Types -->
+    <xs:simpleType name="PremIdType">
+        <xs:annotation>
+            <xs:documentation> PremIdType does minimal validation of true premises identifiers
+                including both PINs (7 characters and LIDs (8 characters). Only nationally
+                registered LIDs are appropriate. Implementing applications are highly encouraged to
+                validate against the appropriate checksum logic. </xs:documentation>
+        </xs:annotation>
         <xs:restriction base="xs:string">
-            <xs:enumeration value="AIN"><xs:annotation><xs:documentation>840 official animal ID</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="AMID"><xs:annotation><xs:documentation>American ID</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="BRAND"><xs:annotation><xs:documentation>Brand description</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="BT"><xs:annotation><xs:documentation>Backtag</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="IMP"><xs:annotation><xs:documentation></xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="MGT"><xs:annotation><xs:documentation>Management tag</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="N840RFID"><xs:annotation><xs:documentation>Non 840 RFID tag</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="NUES8"><xs:annotation><xs:documentation>Eight digit national uniform eartag system</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="NUES9"><xs:annotation><xs:documentation>Nine digit national uniform eartag system</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="OFORID"><xs:annotation><xs:documentation>What is this?</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="NAME"><xs:annotation><xs:documentation>Name?</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="SGFLID"><xs:annotation><xs:documentation>Scrapie group flock ID</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="NPIN"><xs:annotation><xs:documentation>Swine PIN Tag</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="TAT"><xs:annotation><xs:documentation>Tattoo</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:pattern value="[A-Z0-9]{6,8}"/>
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:complexType name="SpeciesCodeType">
-        <xs:annotation><xs:documentation>
-            For animals with official species codes, the code is required with optional text to add detail if necessary.
-        </xs:documentation></xs:annotation>
-             <xs:attribute name="Code" type="SpeciesCodes" use="required"/>
-            <xs:attribute name="Text" type="xs:string" use="optional"/>
-    </xs:complexType>
+    <xs:simpleType name="AgeType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d{1,2}(d|wk|mo|a)"/>
+            <xs:pattern value="(19|20)\d\d-(0[1-9]|1[012])-(0[1-9]|[12]\d|3[01])"/>
+        </xs:restriction>
+    </xs:simpleType>
 
-    <xs:complexType name="SpeciesOtherType">
-        <xs:annotation><xs:documentation> The species coded in the standard include only those commonly needed
-            for regulatory action related to the movement.  Many other official species codes can be found
-            at http://???? Because not all systems may understand these other codes, human readable Text is 
-            required in addition to the code.
-            For animals without an official species code, the code may be omitted the default value is  
-            OTH and text used to define the actual taxonomy is required.</xs:documentation></xs:annotation>
-            <xs:attribute name="Code" default="OTH" use="optional"/>
-            <xs:attribute name="Text" type="xs:string" use="required"/>
-    </xs:complexType>
+    <xs:simpleType name="BreedType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Z]{2,3}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="TagType">
+        <xs:annotation>
+            <xs:documentation> This lists the allowed tag types that are supported. The enumerated
+                patterns try to enforce this. </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="AIN">
+                <xs:annotation>
+                    <xs:documentation>840 official animal ID</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="AMID">
+                <xs:annotation>
+                    <xs:documentation>American ID</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="BRAND">
+                <xs:annotation>
+                    <xs:documentation>Brand description</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="BT">
+                <xs:annotation>
+                    <xs:documentation>Backtag</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="IMP">
+                <xs:annotation>
+                    <xs:documentation/>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="MGT">
+                <xs:annotation>
+                    <xs:documentation>Management tag</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="N840RFID">
+                <xs:annotation>
+                    <xs:documentation>Non 840 RFID tag</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="NUES8">
+                <xs:annotation>
+                    <xs:documentation>Eight digit national uniform eartag system</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="NUES9">
+                <xs:annotation>
+                    <xs:documentation>Nine digit national uniform eartag system</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="OFORID">
+                <xs:annotation>
+                    <xs:documentation>What is this?</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="NAME">
+                <xs:annotation>
+                    <xs:documentation>Name?</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="SGFLID">
+                <xs:annotation>
+                    <xs:documentation>Scrapie group flock ID</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="NPIN">
+                <xs:annotation>
+                    <xs:documentation>Swine PIN Tag</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="TAT">
+                <xs:annotation>
+                    <xs:documentation>Tattoo</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
 
     <xs:simpleType name="SpeciesCodes">
         <xs:restriction base="xs:string">
-            <xs:enumeration value="AQU"><xs:annotation><xs:documentation> Aquaculture</xs:documentation></xs:annotation></xs:enumeration> 
-            <xs:enumeration value="AVI"> <xs:annotation><xs:documentation> Avian</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="BEF"> <xs:annotation><xs:documentation> Beef</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="BIS"> <xs:annotation><xs:documentation> Bison</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="BOV"> <xs:annotation><xs:documentation> Bovine (Bison and Cattle)</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="CAM"> <xs:annotation><xs:documentation> Camelid (Alpacas, Llamas, etc.)</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="CAN"> <xs:annotation><xs:documentation> Canine</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="CAP"> <xs:annotation><xs:documentation> Caprine (Goats)</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="CER"> <xs:annotation><xs:documentation> Cervids</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="CHI"> <xs:annotation><xs:documentation> Chickens</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="CLM"> <xs:annotation><xs:documentation> Clams</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="CRA"> <xs:annotation><xs:documentation> Crawfish</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="CTF"> <xs:annotation><xs:documentation> Catfish</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="DAI"> <xs:annotation><xs:documentation> Dairy</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="DEE"> <xs:annotation><xs:documentation> Deer</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="DUC"> <xs:annotation><xs:documentation> Ducks</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="ELK"> <xs:annotation><xs:documentation> Elk</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="EQU"> <xs:annotation><xs:documentation> Equine (Horses, Mules, Donkeys, Burros)</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="FEL"> <xs:annotation><xs:documentation> Feline</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="GEE"> <xs:annotation><xs:documentation> Geese</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="GUI"> <xs:annotation><xs:documentation> Guineas</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="MSL"> <xs:annotation><xs:documentation> Mussels</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="OVI"> <xs:annotation><xs:documentation> Ovine (Sheep)</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="OYS"> <xs:annotation><xs:documentation> Oysters</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="PGN"> <xs:annotation><xs:documentation> Pigeon</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="POR"> <xs:annotation><xs:documentation> Porcine (Swine)</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="QUA"> <xs:annotation><xs:documentation> Quail</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="RTT"> <xs:annotation><xs:documentation> Ratites (Emus, Ostriches, etc.)</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="SAL"> <xs:annotation><xs:documentation> Salmon</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="SBA"> <xs:annotation><xs:documentation> Striped Bass</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="SHR"> <xs:annotation><xs:documentation> Shrimp</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="SLP"> <xs:annotation><xs:documentation> Scallops</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="TIL"> <xs:annotation><xs:documentation> Tilapia</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="TRO"> <xs:annotation><xs:documentation> Trout</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="TUR"> <xs:annotation><xs:documentation> Turkeys</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="AQU">
+                <xs:annotation>
+                    <xs:documentation> Aquaculture</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="AVI">
+                <xs:annotation>
+                    <xs:documentation> Avian</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="BEF">
+                <xs:annotation>
+                    <xs:documentation> Beef</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="BIS">
+                <xs:annotation>
+                    <xs:documentation> Bison</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="BOV">
+                <xs:annotation>
+                    <xs:documentation> Bovine (Bison and Cattle)</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="CAM">
+                <xs:annotation>
+                    <xs:documentation> Camelid (Alpacas, Llamas, etc.)</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="CAN">
+                <xs:annotation>
+                    <xs:documentation> Canine</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="CAP">
+                <xs:annotation>
+                    <xs:documentation> Caprine (Goats)</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="CER">
+                <xs:annotation>
+                    <xs:documentation> Cervids</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="CHI">
+                <xs:annotation>
+                    <xs:documentation> Chickens</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="CLM">
+                <xs:annotation>
+                    <xs:documentation> Clams</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="CRA">
+                <xs:annotation>
+                    <xs:documentation> Crawfish</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="CTF">
+                <xs:annotation>
+                    <xs:documentation> Catfish</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="DAI">
+                <xs:annotation>
+                    <xs:documentation> Dairy</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="DEE">
+                <xs:annotation>
+                    <xs:documentation> Deer</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="DUC">
+                <xs:annotation>
+                    <xs:documentation> Ducks</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="ELK">
+                <xs:annotation>
+                    <xs:documentation> Elk</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="EQU">
+                <xs:annotation>
+                    <xs:documentation> Equine (Horses, Mules, Donkeys, Burros)</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="FEL">
+                <xs:annotation>
+                    <xs:documentation> Feline</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="GEE">
+                <xs:annotation>
+                    <xs:documentation> Geese</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="GUI">
+                <xs:annotation>
+                    <xs:documentation> Guineas</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="MSL">
+                <xs:annotation>
+                    <xs:documentation> Mussels</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="OVI">
+                <xs:annotation>
+                    <xs:documentation> Ovine (Sheep)</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="OYS">
+                <xs:annotation>
+                    <xs:documentation> Oysters</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="PGN">
+                <xs:annotation>
+                    <xs:documentation> Pigeon</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="POR">
+                <xs:annotation>
+                    <xs:documentation> Porcine (Swine)</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="QUA">
+                <xs:annotation>
+                    <xs:documentation> Quail</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="RTT">
+                <xs:annotation>
+                    <xs:documentation> Ratites (Emus, Ostriches, etc.)</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="SAL">
+                <xs:annotation>
+                    <xs:documentation> Salmon</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="SBA">
+                <xs:annotation>
+                    <xs:documentation> Striped Bass</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="SHR">
+                <xs:annotation>
+                    <xs:documentation> Shrimp</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="SLP">
+                <xs:annotation>
+                    <xs:documentation> Scallops</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="TIL">
+                <xs:annotation>
+                    <xs:documentation> Tilapia</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="TRO">
+                <xs:annotation>
+                    <xs:documentation> Trout</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="TUR">
+                <xs:annotation>
+                    <xs:documentation> Turkeys</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
         </xs:restriction>
     </xs:simpleType>
 
@@ -687,70 +964,322 @@ UCUM - http://unitsofmeasure.org/ucum.html),
     </xs:simpleType>
 
     <xs:simpleType name="StateCodeType">
-        <xs:annotation><xs:documentation>State Code includes territories, APO addresses, etc.  Does NOT include Canadian provinces or Mexican states.</xs:documentation></xs:annotation>
+        <xs:annotation>
+            <xs:documentation>State Code includes territories, APO addresses, etc. Does NOT include
+                Canadian provinces or Mexican states.</xs:documentation>
+        </xs:annotation>
         <xs:restriction base="xs:string">
-            <xs:enumeration value="AA"><xs:annotation><xs:documentation>Military postal system in the Americas</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="AE"><xs:annotation><xs:documentation>Military postal system in Europe Africa and Canada</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="AK"><xs:annotation><xs:documentation>Alaska</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="AL"><xs:annotation><xs:documentation>Alabama</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="AP"><xs:annotation><xs:documentation>Military postal system in the Pacific</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="AR"><xs:annotation><xs:documentation>Arkansas</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="AS"><xs:annotation><xs:documentation>American Samoa</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="AZ"><xs:annotation><xs:documentation>Arizona</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="CA"><xs:annotation><xs:documentation>California</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="CO"><xs:annotation><xs:documentation>Colorado</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="CT"><xs:annotation><xs:documentation>Connecticut</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="DC"><xs:annotation><xs:documentation>Washington District of Columbia</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="DE"><xs:annotation><xs:documentation>Delaware</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="FL"><xs:annotation><xs:documentation>Florida</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="FM"><xs:annotation><xs:documentation>Federated States of Micronesia</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="GA"><xs:annotation><xs:documentation>Georgia</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="GU"><xs:annotation><xs:documentation>Guam</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="HI"><xs:annotation><xs:documentation>Hawaii</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="IA"><xs:annotation><xs:documentation>Iowa</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="ID"><xs:annotation><xs:documentation>Idaho</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="IL"><xs:annotation><xs:documentation>Illinois</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="IN"><xs:annotation><xs:documentation>Indiana</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="KS"><xs:annotation><xs:documentation>Kansas</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="KY"><xs:annotation><xs:documentation>Kentucky</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="LA"><xs:annotation><xs:documentation>Louisiana</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="MA"><xs:annotation><xs:documentation>Massachusetts</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="MD"><xs:annotation><xs:documentation>Maryland</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="ME"><xs:annotation><xs:documentation>Maine</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="MH"><xs:annotation><xs:documentation>Marshall Islands</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="MI"><xs:annotation><xs:documentation>Michigan</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="MN"><xs:annotation><xs:documentation>Minnesota</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="MO"><xs:annotation><xs:documentation>Missouri</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="MP"><xs:annotation><xs:documentation>Northern Mariana Islands</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="MS"><xs:annotation><xs:documentation>Mississippi</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="MT"><xs:annotation><xs:documentation>Montana</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="NC"><xs:annotation><xs:documentation>North Carolina</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="ND"><xs:annotation><xs:documentation>North Dakota</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="NE"><xs:annotation><xs:documentation>Nebraska</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="NH"><xs:annotation><xs:documentation>New Hampshire</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="NJ"><xs:annotation><xs:documentation>New Jersey</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="NM"><xs:annotation><xs:documentation>New Mexico</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="NV"><xs:annotation><xs:documentation>Nevada</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="NY"><xs:annotation><xs:documentation>New York</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="OH"><xs:annotation><xs:documentation>Ohio</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="OK"><xs:annotation><xs:documentation>Oklahoma</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="OR"><xs:annotation><xs:documentation>Oregon</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="PA"><xs:annotation><xs:documentation>Pennsylvania</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="PR"><xs:annotation><xs:documentation>Puerto Rico</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="PW"><xs:annotation><xs:documentation>Palau</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="RI"><xs:annotation><xs:documentation>Rhode Island</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="SC"><xs:annotation><xs:documentation>South Carolina</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="SD"><xs:annotation><xs:documentation>South Dakota</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="TN"><xs:annotation><xs:documentation>Tennessee</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="TX"><xs:annotation><xs:documentation>Texas</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="UT"><xs:annotation><xs:documentation>Utah</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="VA"><xs:annotation><xs:documentation>Virginia</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="VI"><xs:annotation><xs:documentation>U.S. Virgin Islands</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="VT"><xs:annotation><xs:documentation>Vermont</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="WA"><xs:annotation><xs:documentation>Washington</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="WI"><xs:annotation><xs:documentation>Wisconsin</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="WV"><xs:annotation><xs:documentation>West Virginia</xs:documentation></xs:annotation></xs:enumeration>
-            <xs:enumeration value="WY"><xs:annotation><xs:documentation>Wyoming</xs:documentation></xs:annotation></xs:enumeration>
+            <xs:enumeration value="AA">
+                <xs:annotation>
+                    <xs:documentation>Military postal system in the Americas</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="AE">
+                <xs:annotation>
+                    <xs:documentation>Military postal system in Europe Africa and
+                        Canada</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="AK">
+                <xs:annotation>
+                    <xs:documentation>Alaska</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="AL">
+                <xs:annotation>
+                    <xs:documentation>Alabama</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="AP">
+                <xs:annotation>
+                    <xs:documentation>Military postal system in the Pacific</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="AR">
+                <xs:annotation>
+                    <xs:documentation>Arkansas</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="AS">
+                <xs:annotation>
+                    <xs:documentation>American Samoa</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="AZ">
+                <xs:annotation>
+                    <xs:documentation>Arizona</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="CA">
+                <xs:annotation>
+                    <xs:documentation>California</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="CO">
+                <xs:annotation>
+                    <xs:documentation>Colorado</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="CT">
+                <xs:annotation>
+                    <xs:documentation>Connecticut</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="DC">
+                <xs:annotation>
+                    <xs:documentation>Washington District of Columbia</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="DE">
+                <xs:annotation>
+                    <xs:documentation>Delaware</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="FL">
+                <xs:annotation>
+                    <xs:documentation>Florida</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="FM">
+                <xs:annotation>
+                    <xs:documentation>Federated States of Micronesia</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="GA">
+                <xs:annotation>
+                    <xs:documentation>Georgia</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="GU">
+                <xs:annotation>
+                    <xs:documentation>Guam</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="HI">
+                <xs:annotation>
+                    <xs:documentation>Hawaii</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="IA">
+                <xs:annotation>
+                    <xs:documentation>Iowa</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="ID">
+                <xs:annotation>
+                    <xs:documentation>Idaho</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="IL">
+                <xs:annotation>
+                    <xs:documentation>Illinois</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="IN">
+                <xs:annotation>
+                    <xs:documentation>Indiana</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="KS">
+                <xs:annotation>
+                    <xs:documentation>Kansas</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="KY">
+                <xs:annotation>
+                    <xs:documentation>Kentucky</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="LA">
+                <xs:annotation>
+                    <xs:documentation>Louisiana</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="MA">
+                <xs:annotation>
+                    <xs:documentation>Massachusetts</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="MD">
+                <xs:annotation>
+                    <xs:documentation>Maryland</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="ME">
+                <xs:annotation>
+                    <xs:documentation>Maine</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="MH">
+                <xs:annotation>
+                    <xs:documentation>Marshall Islands</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="MI">
+                <xs:annotation>
+                    <xs:documentation>Michigan</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="MN">
+                <xs:annotation>
+                    <xs:documentation>Minnesota</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="MO">
+                <xs:annotation>
+                    <xs:documentation>Missouri</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="MP">
+                <xs:annotation>
+                    <xs:documentation>Northern Mariana Islands</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="MS">
+                <xs:annotation>
+                    <xs:documentation>Mississippi</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="MT">
+                <xs:annotation>
+                    <xs:documentation>Montana</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="NC">
+                <xs:annotation>
+                    <xs:documentation>North Carolina</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="ND">
+                <xs:annotation>
+                    <xs:documentation>North Dakota</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="NE">
+                <xs:annotation>
+                    <xs:documentation>Nebraska</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="NH">
+                <xs:annotation>
+                    <xs:documentation>New Hampshire</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="NJ">
+                <xs:annotation>
+                    <xs:documentation>New Jersey</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="NM">
+                <xs:annotation>
+                    <xs:documentation>New Mexico</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="NV">
+                <xs:annotation>
+                    <xs:documentation>Nevada</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="NY">
+                <xs:annotation>
+                    <xs:documentation>New York</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="OH">
+                <xs:annotation>
+                    <xs:documentation>Ohio</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="OK">
+                <xs:annotation>
+                    <xs:documentation>Oklahoma</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="OR">
+                <xs:annotation>
+                    <xs:documentation>Oregon</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="PA">
+                <xs:annotation>
+                    <xs:documentation>Pennsylvania</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="PR">
+                <xs:annotation>
+                    <xs:documentation>Puerto Rico</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="PW">
+                <xs:annotation>
+                    <xs:documentation>Palau</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="RI">
+                <xs:annotation>
+                    <xs:documentation>Rhode Island</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="SC">
+                <xs:annotation>
+                    <xs:documentation>South Carolina</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="SD">
+                <xs:annotation>
+                    <xs:documentation>South Dakota</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="TN">
+                <xs:annotation>
+                    <xs:documentation>Tennessee</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="TX">
+                <xs:annotation>
+                    <xs:documentation>Texas</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="UT">
+                <xs:annotation>
+                    <xs:documentation>Utah</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="VA">
+                <xs:annotation>
+                    <xs:documentation>Virginia</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="VI">
+                <xs:annotation>
+                    <xs:documentation>U.S. Virgin Islands</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="VT">
+                <xs:annotation>
+                    <xs:documentation>Vermont</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="WA">
+                <xs:annotation>
+                    <xs:documentation>Washington</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="WI">
+                <xs:annotation>
+                    <xs:documentation>Wisconsin</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="WV">
+                <xs:annotation>
+                    <xs:documentation>West Virginia</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="WY">
+                <xs:annotation>
+                    <xs:documentation>Wyoming</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
         </xs:restriction>
     </xs:simpleType>
 
@@ -763,13 +1292,15 @@ UCUM - http://unitsofmeasure.org/ucum.html),
     </xs:simpleType>
 
     <xs:simpleType name="MimeType">
-        <xs:annotation><xs:documentation>For complete information see: https://www.iana.org/assignments/media-types/media-types.xhtml.
-            For common examples see: https://en.wikipedia.org/wiki/Media_type
-        </xs:documentation></xs:annotation>
+        <xs:annotation>
+            <xs:documentation>For complete information see:
+                https://www.iana.org/assignments/media-types/media-types.xhtml. For common examples
+                see: https://en.wikipedia.org/wiki/Media_type </xs:documentation>
+        </xs:annotation>
         <xs:restriction base="xs:string">
             <xs:pattern value=".{1,127}/.{1,127}"/>
         </xs:restriction>
     </xs:simpleType>
-
+    <!-- END Simple Enumerated or Pattered Types -->
 
 </xs:schema>

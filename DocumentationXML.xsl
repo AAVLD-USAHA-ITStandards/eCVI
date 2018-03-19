@@ -12,18 +12,23 @@
     
     <xsl:template match="//xs:documentation">
         <xsl:element name="Item">
-                    <xsl:variable name="parent" select="name(../..)"/>
+            <xsl:variable name="parent" select="name(../..)"/>
             <xsl:choose>
-                    <xsl:when test="contains($parent,'xs:element')">
-                        <xsl:element name="Element">
-                            <xsl:value-of select="../../@name"/>
-                        </xsl:element>
-                    </xsl:when>
-                    <xsl:when test="contains($parent,'xs:simpleType') or contains($parent,'xs:complexType')">
-                        <xsl:element name="Type">
-                            <xsl:value-of select="../../@name"/>
-                        </xsl:element>
-                    </xsl:when>
+                <xsl:when test="contains($parent,'xs:element')">
+                    <xsl:element name="Element">
+                        <xsl:value-of select="../../@name"/>
+                    </xsl:element>
+                </xsl:when>
+                <xsl:when test="contains($parent,'xs:simpleType') or contains($parent,'xs:complexType')">
+                    <xsl:element name="Type">
+                        <xsl:value-of select="../../@name"/>
+                    </xsl:element>
+                </xsl:when>
+                <xsl:when test="contains($parent,'xs:simpleType') or contains($parent,'xs:complexType')">
+                    <xsl:element name="Type">
+                        <xsl:value-of select="../../@name"/>
+                    </xsl:element>
+                </xsl:when>
                 <xsl:when test="contains($parent,'xs:element')">
                     <xsl:element name="Element">
                         <xsl:value-of select="../../@name"/>
