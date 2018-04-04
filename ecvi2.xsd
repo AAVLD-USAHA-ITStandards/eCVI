@@ -203,7 +203,7 @@
                 <xs:element ref="Test" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
             <xs:attribute name="Age" type="AgeType" use="optional"/>
-            <xs:attribute name="Breed" type="BreedType" use="optional"/>
+            <xs:attribute name="Breed" type="xs:string" use="optional"/>
             <xs:attribute name="Sex" type="SexType" use="optional"/>
             <xs:attribute name="SexDetail" type="xs:string" use="optional"/>
             <xs:attribute name="InspectionDate" type="xs:date" use="required"/>
@@ -796,12 +796,6 @@
         <xs:restriction base="xs:string">
             <xs:pattern value="\d{1,2}(d|wk|mo|a)"/>
             <xs:pattern value="(19|20)\d\d-(0[1-9]|1[012])-(0[1-9]|[12]\d|3[01])"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="BreedType">
-        <xs:restriction base="xs:string">
-            <xs:pattern value="[A-Z]{2,3}"/>
         </xs:restriction>
     </xs:simpleType>
 
