@@ -47,11 +47,14 @@
                 <xs:element ref="Destination" minOccurs="1" maxOccurs="1"/>
                 <xs:element ref="Consignor" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="Consignee" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="Carrier" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="TransportMode" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="Accessions" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="Animal" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="GroupLot" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="Attachment" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="Binary" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="MiscAttribute" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
             <xs:attribute name="CviNumber" type="xs:string" use="required"/>
             <xs:attribute name="IssueDate" type="xs:date" use="required"/>
@@ -139,7 +142,26 @@
                 animal(s) after to movement.  Only required if different from Destination.</xs:documentation>
         </xs:annotation>
     </xs:element>
-
+    <xs:element name="Carrier" type="ContactType">
+        <xs:annotation>
+            <xs:documentation>The contact information for the person or business responsible for  
+                moving the animals from origin to destination.  </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="TransportMode">
+        <xs:annotation>
+            <xs:documentation>If important for certification of ability to travel the mode, air, car, truck or boat (ship).  </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:enumeration value="air"/>
+                <xs:enumeration value="car"/>
+                <xs:enumeration value="truck"/>
+                <xs:enumeration value="boat"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    
     <!-- Do these list wrappers add value? -->
     <xs:element name="Accessions">
         <xs:annotation>
@@ -280,6 +302,18 @@
             <xs:attribute name="MimeType" type="MimeType" use="optional"/>
         </xs:complexType>
     </xs:element>
+    
+    <xs:element name="MiscAttribute">
+        <xs:annotation>
+            <xs:documentation>Any additional information needed by specific implementations can
+            be provided as name/value pairs represented as strings.  These data must not be essential
+            to proper understanding of the structured content of the standard data but only extend it.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:attribute name="Name" type="xs:string" use="required"/>
+            <xs:attribute name="Value" type="xs:string" use="required"/>
+        </xs:complexType>
+    </xs:element>
     <!-- END Top Level Elements -->
 
 
@@ -293,6 +327,7 @@
             <xs:sequence>
                 <xs:element name="Name" type="xs:string" minOccurs="1" maxOccurs="1"/>
                 <xs:element ref="Phone" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="Email" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -323,7 +358,13 @@
             </xs:attribute>
         </xs:complexType>
     </xs:element>
-
+    
+    <xs:element name="Email">
+        <xs:complexType>
+            <xs:attribute name="Address" type="EmailType" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    
     <xs:element name="Accession">
         <xs:annotation>
             <xs:documentation> Accessions are listed for the CVI as a whole and referenced by each
@@ -707,8 +748,7 @@
             <xs:element name="PremName" type="xs:string" minOccurs="0" maxOccurs="1"/>
             <xs:element ref="Address" minOccurs="1" maxOccurs="1"/>
             <xs:element ref="ProgramStatus" minOccurs="0" maxOccurs="unbounded"/>
-            <!-- Why does PremType include required Person? -->
-            <xs:element ref="Person" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element ref="Person" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
 
@@ -730,6 +770,16 @@
     <!-- END Complex Reused Types -->
 
     <!-- BEGIN Simple Enumerated or Patterned Types -->
+    <xs:simpleType name="EmailType">
+        <xs:annotation>
+            <xs:documentation>Optional email address following simplified standard email address pattern.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    
     <xs:simpleType name="PremIdType">
         <xs:annotation>
             <xs:documentation> PremIdType does minimal validation of true premises identifiers
