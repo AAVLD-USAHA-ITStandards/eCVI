@@ -52,6 +52,7 @@
                 <xs:element ref="Accessions" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="Animal" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="GroupLot" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="Statements" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="Attachment" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="Binary" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="MiscAttribute" minOccurs="0" maxOccurs="unbounded"/>
@@ -236,11 +237,19 @@
             <xs:attribute name="Quantity" type="xs:float" use="required"/>
             <xs:attribute name="Unit" type="xs:string" use="optional" default="Number"/>
             <xs:attribute name="Age" type="AgeType" use="optional"/>
-            <xs:attribute name="Breed" type="BreedType" use="optional"/>
+            <xs:attribute name="Breed" type="xs:string" use="optional"/>
             <xs:attribute name="Sex" type="SexType" use="optional"/>
             <xs:attribute name="SexDetail" type="xs:string" use="optional"/>
             <xs:attribute name="Description" type="xs:string" use="required"/>
         </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="Statements" type="xs:string">
+        <xs:annotation>
+            <xs:documentation> Additional statements that may be required by various
+                jurisdictions may be included here.  These statements must not take the place
+                of or modify the structured content found elsewhere in the standard.</xs:documentation>
+        </xs:annotation>
     </xs:element>
 
     <xs:element name="Attachment">
