@@ -4,18 +4,27 @@
     xmlns="http://www.usaha.org/xmlns/ecvi2">
 
     <xs:annotation>
-        <xs:documentation> Change Log 08/30/2017: Initial draft of version 2.0 attempts to clone
-            version 1 (labeled version 6.0?) with only minor tweaks. 09/01/2017: Added regular
-            expressions to AnimalTags choices 09/01/2017: Added option for ID/IDREF to Attachment
-            for BrandImage ID Type 11/16/2017: Collapsed animal tag choices into known structure and
-            not. 12/14/2017: Added Equine description and photos as AnimalTag choices. 01/16/2018:
-            Removed string length restrictions not part of regular expressions. 01/16/2018: Spelled
-            out latitude and longitude in geo point. 01/16/2018: Rearranged TagType to put Type as
-            first attribute. 02/08/2018: Restructured Species to SpeciesCode vs. SpeciesOther.
+        <xs:documentation> Change Log 
+            08/30/2017: Initial draft of version 2.0 attempts to clone
+            version 1 (labeled version 6.0?) with only minor tweaks. 
+            09/01/2017: Added regular expressions to AnimalTags choices 
+            09/01/2017: Added option for ID/IDREF to Attachment
+            for BrandImage ID Type 
+            11/16/2017: Collapsed animal tag choices into known structure and not. 
+            12/14/2017: Added Equine description and photos as AnimalTag choices. 
+            01/16/2018: Removed string length restrictions not part of regular expressions. 
+            01/16/2018: Spelled out latitude and longitude in geo point. 
+            01/16/2018: Rearranged TagType to put Type as first attribute. 
+            02/08/2018: Restructured Species to SpeciesCode vs. SpeciesOther.
             02/08/2018: Restructured All Binary data into ID/IDREF to eliminate duplication
             02/28/2018: Converted comments to annotation elements except where simply labeling code
-            sections, etc. Works with an XSLT to generate skeleton documentation. 03/06-08/2018:
-            Additional annotations added. Ongoing. </xs:documentation>
+            sections, etc. Works with an XSLT to generate skeleton documentation. 
+            03/06-08/2018: Additional annotations added. Ongoing. 
+            04/04/2018: Added Carrier and Transport mode optional elements.  Added email 
+            in addition to Phone on person.  Added miscellaneous attributes element.  Changed
+            Breed element to basic string.
+            04/25/2018: Fixed apostrophe character in Johne's Disease enumeration value.
+        </xs:documentation>
     </xs:annotation>
     <xs:annotation>
         <xs:documentation>Copyright © 2017 AAVLD/USAHA it is free for use. Submit suggested changes
@@ -441,7 +450,7 @@
                             <xs:documentation>Brucellosis program state status</xs:documentation></xs:annotation></xs:enumeration>
                         <xs:enumeration value="Brucellosis (herd)"><xs:annotation>
                             <xs:documentation>Brucellosis program herd status</xs:documentation></xs:annotation></xs:enumeration>
-                        <xs:enumeration value="Johne’s (herd)"><xs:annotation>
+                        <xs:enumeration value="Johne's (herd)"><xs:annotation>
                             <xs:documentation>Johne's disease program herd status</xs:documentation></xs:annotation></xs:enumeration>
                         <xs:enumeration value="NPIP (herd)"><xs:annotation>
                             <xs:documentation>NPIP program flock status.  (Which program?  NPIP has several._</xs:documentation></xs:annotation></xs:enumeration>
