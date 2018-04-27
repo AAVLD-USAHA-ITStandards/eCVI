@@ -706,13 +706,13 @@
                             </xs:attribute>
                         </xs:complexType>
                     </xs:element>
-                    <xs:element name="BRAND-IMAGE">
+                    <xs:element name="BrandImage">
                         <xs:annotation>
                             <xs:documentation> This should be PNG/JPEG/GIF/PDF format. The format is
                                 specified in the Binary mime type.</xs:documentation>
                         </xs:annotation>
                         <xs:complexType>
-                            <xs:attribute name="BrandImageRef" type="xs:IDREF" use="optional"/>
+                            <xs:attribute name="BrandImageRef" type="xs:IDREF" use="required"/>
                         </xs:complexType>
                     </xs:element>
                     <xs:element name="EquineDescription">
