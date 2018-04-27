@@ -63,8 +63,8 @@
                 <xs:element ref="GroupLot" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="Statements" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="Attachment" minOccurs="0" maxOccurs="unbounded"/>
-                <xs:element ref="Binary" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="MiscAttribute" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="Binary" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
             <xs:attribute name="CviNumber" type="xs:string" use="required"/>
             <xs:attribute name="IssueDate" type="xs:date" use="required"/>

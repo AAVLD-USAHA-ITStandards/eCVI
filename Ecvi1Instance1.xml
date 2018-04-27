@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eCVI xmlns="http://www.usaha.org/xmlns/ecvi"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.usaha.org/xmlns/ecvi file:/E:/Documents/eCVIVersion1andOld/usaha_committee/ecvi.xsd" CviNumber="CviNumber1" IssueDate="2006-05-04" ExpirationDate="2006-05-04" ShipmentDate="2006-05-04"
+     EntryPermitNumber="EntryPermitNumber1">
+    <Veterinarian LicenseIssueState="AA" LicenseNumber="LicenseNumber1" NationalAccreditationNumber="NationalAccreditationNumber1">
+        <Person>
+            <Name>Name0</Name>
+            <Phone Type="Unknown" Number="8035551212" Comment="Comment1"/>
+            <Phone Type="Fax" Number="9195551212" Comment="Comment3"/>
+        </Person>
+        <Address>
+            <Line1>Line10</Line1>
+            <Line2>Line20</Line2>
+            <Town>Town0</Town>
+            <County>County0</County>
+            <State>AA</State>
+            <ZIP>00000</ZIP>
+            <Country>USA</Country>
+            <GeoPoint lat="35.12345" lng="-90.4321"/>
+        </Address>
+    </Veterinarian>
+    <MovementPurposes>
+        <MovementPurpose>show</MovementPurpose>
+        <MovementPurpose>breeding</MovementPurpose>
+    </MovementPurposes>
+    <Origin>
+        <PremId>000000</PremId>
+        <PremName>PremName0</PremName>
+        <Address>
+            <Line1>Line11</Line1>
+            <Line2>Line21</Line2>
+            <Town>Town1</Town>
+            <County>County1</County>
+            <State>AA</State>
+            <ZIP>00000</ZIP>
+            <Country>USA</Country>
+            <GeoPoint lat="34.98765" lng="-34.2345"/>
+        </Address>
+        <ProgramStatus Name="Bovine Tuberculosis" Value="Free" ValueOther="ValueOther1"/>
+        <ProgramStatus Name="Bovine Tuberculosis" Value="Free" ValueOther="ValueOther3"/>
+        <Person>
+            <Name>Name1</Name>
+            <Phone Type="Landline" Number="8039876543" Comment="Comment5"/>
+            <Phone Type="Cellphone" Number="2129871234" Comment="Comment7"/>
+        </Person>
+        <Person>
+            <Name>Name2</Name>
+            <Phone Type="Unknown" Number="8432345678" Comment="Comment9"/>
+            <Phone Type="Unknown" Number="8649870987" Comment="Comment11"/>
+        </Person>
+    </Origin>
+    <Destination>
+        <PremId>000000</PremId>
+        <PremName>PremName1</PremName>
+        <Address>
+            <Line1>Line12</Line1>
+            <Line2>Line22</Line2>
+            <Town>Town2</Town>
+            <County>County2</County>
+            <State>AA</State>
+            <ZIP>00000</ZIP>
+            <Country>USA</Country>
+            <GeoPoint lat="0" lng="0"/>
+        </Address>
+        <ProgramStatus Name="Bovine Tuberculosis" Value="Free" ValueOther="ValueOther5"/>
+        <ProgramStatus Name="Bovine Tuberculosis" Value="Free" ValueOther="ValueOther7"/>
+        <Person>
+            <Name>Name3</Name>
+            <Phone Type="Unknown" Number="8432345676" Comment="Comment13"/>
+            <Phone Type="Unknown" Number="8649870988" Comment="Comment15"/>
+        </Person>
+        <Person>
+            <Name>Name4</Name>
+            <Phone Type="Unknown" Number="8432345677" Comment="Comment17"/>
+            <Phone Type="Unknown" Number="8649870989" Comment="Comment19"/>
+        </Person>
+    </Destination>
+    <Consignor>
+        <PremId>000000</PremId>
+        <PremName>PremName2</PremName>
+        <Address>
+            <Line1>Line13</Line1>
+            <Line2>Line23</Line2>
+            <Town>Town3</Town>
+            <County>County3</County>
+            <State>AA</State>
+            <ZIP>00000</ZIP>
+            <Country>USA</Country>
+            <GeoPoint lat="0" lng="0"/>
+        </Address>
+        <Person>
+            <Name>Name5</Name>
+            <Phone Type="Unknown" Number="8432345674" Comment="Comment21"/>
+            <Phone Type="Unknown" Number="8649870969" Comment="Comment23"/>
+        </Person>
+        <Person>
+            <Name>Name6</Name>
+            <Phone Type="Unknown" Number="8432345675" Comment="Comment25"/>
+            <Phone Type="Unknown" Number="8649870979" Comment="Comment27"/>
+        </Person>
+    </Consignor>
+    <Consignee>
+        <PremId>000000</PremId>
+        <PremName>PremName3</PremName>
+        <Address>
+            <Line1>Line14</Line1>
+            <Line2>Line24</Line2>
+            <Town>Town4</Town>
+            <County>County4</County>
+            <State>AA</State>
+            <ZIP>00000</ZIP>
+            <Country>USA</Country>
+            <GeoPoint lat="0" lng="0"/>
+        </Address>
+        <Person>
+            <Name>Name7</Name>
+            <Phone Type="Unknown" Number="8432345674" Comment="Comment29"/>
+            <Phone Type="Unknown" Number="8649870971" Comment="Comment31"/>
+        </Person>
+        <Person>
+            <Name>Name8</Name>
+            <Phone Type="Unknown" Number="8432345673" Comment="Comment33"/>
+            <Phone Type="Unknown" Number="8649870972" Comment="Comment35"/>
+        </Person>
+    </Consignee>
+    <Accessions>
+        <Accession id="ID001" InfieldTest="false">
+            <Laboratory AccessionDate="2006-05-04" AccessionNumber="AccessionNumber1">
+                <LabName>LabName0</LabName>
+                <PremId>000000</PremId>
+                <Address>
+                    <Line1>Line15</Line1>
+                    <Line2>Line25</Line2>
+                    <Town>Town5</Town>
+                    <County>County5</County>
+                    <State>AA</State>
+                    <ZIP>00000</ZIP>
+                    <Country>USA</Country>
+                    <GeoPoint lat="0" lng="0"/>
+                </Address>
+            </Laboratory>
+        </Accession>
+        <Accession id="ID003" InfieldTest="false">
+            <Laboratory AccessionDate="2006-05-04" AccessionNumber="AccessionNumber3">
+                <LabName>LabName1</LabName>
+                <PremId>000000</PremId>
+                <Address>
+                    <Line1>Line16</Line1>
+                    <Line2>Line26</Line2>
+                    <Town>Town6</Town>
+                    <County>County6</County>
+                    <State>AA</State>
+                    <ZIP>00000</ZIP>
+                    <Country>USA</Country>
+                    <GeoPoint lat="0" lng="0"/>
+                </Address>
+            </Laboratory>
+        </Accession>
+    </Accessions>
+    <Animal Age="3a" SpeciesCode="BOV" Breed="AN" Sex="Female" SexDetail="SexDetail1" InspectionDate="2006-05-04">
+        <AnimalTag Type="AIN" Number="840003789112345"/>
+        <AnimalTag Type="UN" Number="Y_39"/>
+        <AnimalTag Type="BRAND-IMAGE" Number="LazyJ" BrandImage="ZGVmYXVsdA=="/>
+        <Test idref="ID001" TestCode="TestCode1">
+            <Result ResultName="RESULT">
+                <ResultString>ResultString0</ResultString>
+            </Result>
+            <Result ResultName="RESULT">
+                <ResultInteger>0</ResultInteger>
+            </Result>
+        </Test>
+        <Test idref="ID001" TestCode="TestCode3">
+            <Result ResultName="RESULT">
+                <ResultString>ResultString1</ResultString>
+            </Result>
+            <Result ResultName="RESULT">
+                <ResultInteger>0</ResultInteger>
+            </Result>
+        </Test>
+    </Animal>
+    <Animal Age="3mo" SpeciesCode="BOV" Breed="BLK" Sex="Female" SexDetail="SexDetail3" InspectionDate="2006-05-04">
+        <AnimalTag Type="UN" Number="Y_40"/>
+        <Test idref="ID003" TestCode="TestCode5">
+            <Result ResultName="RESULT">
+                <ResultFloat>0</ResultFloat>
+            </Result>
+            <Result ResultName="RESULT">
+                <ResultInteger>0</ResultInteger>
+            </Result>
+        </Test>
+        <Test idref="ID003" TestCode="TestCode7">
+            <Result ResultName="RESULT">
+                <ResultInteger>0</ResultInteger>
+            </Result>
+            <Result ResultName="RESULT">
+                <ResultFloat>0</ResultFloat>
+            </Result>
+        </Test>
+    </Animal>
+    <GroupLot Quantity="20" Unit="Number" SpeciesCode="CAP" Age="6wk" Breed="BFL" Sex="Female" SexDetail="SexDetail5"
+        Description="Load of 20 kids"/>
+    <GroupLot Quantity="3" Unit="Number" SpeciesCode="OTH" Age="2a" Breed="AA" Sex="Female" SexDetail="SexDetail7"
+        Description="Three weird animals"/>
+    <Attachment DocType="Scanned Paper CVI" MimeType="a/a" Filename="Filename1" Comment="Comment37">
+        <Payload>ZGVmYXVsdA==</Payload>
+    </Attachment>
+    <Attachment DocType="PDF Test Chart" MimeType="a/a" Filename="Filename3" Comment="Comment39">
+        <Payload>ZGVmYXVsdA==</Payload>
+    </Attachment>
+</eCVI>
