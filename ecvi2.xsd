@@ -551,7 +551,7 @@
                     </xs:complexType>
                 </xs:element>
             </xs:sequence>
-            <xs:attribute name="idref" type="xs:IDREF" use="required">
+            <xs:attribute name="IDREF" type="xs:IDREF" use="required">
                 <xs:annotation>
                     <xs:documentation> Points to ID in Accession element </xs:documentation>
                 </xs:annotation>
@@ -712,7 +712,7 @@
                                 specified in the Binary mime type.</xs:documentation>
                         </xs:annotation>
                         <xs:complexType>
-                            <xs:attribute name="BrandImageRef" type="xs:IDREF" use="required"/>
+                            <xs:attribute name="IDREF" type="xs:IDREF" use="required"/>
                             <xs:attribute name="Description" type="xs:string" use="optional"/>
                         </xs:complexType>
                     </xs:element>
