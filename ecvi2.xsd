@@ -459,10 +459,6 @@
                             <xs:documentation>NPIP program flock status.  (Which program?  NPIP has several._</xs:documentation></xs:annotation></xs:enumeration>
                         <xs:enumeration value="Scrapie (herd)"><xs:annotation>
                             <xs:documentation>Scrapie program flock status.</xs:documentation></xs:annotation></xs:enumeration>
-                        <xs:enumeration value="PRV (herd)"><xs:annotation>
-                            <xs:documentation>Pseudorabies program herd status.</xs:documentation></xs:annotation></xs:enumeration>
-                        <xs:enumeration value="PRV (area)"><xs:annotation>
-                            <xs:documentation>Pseudorabies program state or area status.</xs:documentation></xs:annotation></xs:enumeration>
                         <xs:enumeration value="Trichomoniasis (herd)"><xs:annotation>
                             <xs:documentation>Trichomoniasis program herd status</xs:documentation></xs:annotation></xs:enumeration>
                         <xs:enumeration value="EIA (herd)"><xs:annotation>
@@ -479,6 +475,8 @@
                             <xs:documentation>Modified accredited status in TB program.</xs:documentation></xs:annotation></xs:enumeration>
                         <xs:enumeration value="Modified Advanced Accredited"><xs:annotation>
                             <xs:documentation>Modified accredited status in TB program</xs:documentation></xs:annotation></xs:enumeration>
+                        <xs:enumeration value="Designated Surveillance Area"><xs:annotation>
+                            <xs:documentation>Area surrounding known wildlife reservoir</xs:documentation></xs:annotation></xs:enumeration>
                         <xs:enumeration value="Other"><xs:annotation>
                             <xs:documentation>All other statuses for other programs.</xs:documentation></xs:annotation></xs:enumeration>
                     </xs:restriction>
