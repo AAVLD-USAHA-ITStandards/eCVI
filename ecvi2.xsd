@@ -24,6 +24,8 @@
             in addition to Phone on person.  Added miscellaneous attributes element.  Changed
             Breed element to basic string.
             04/25/2018: Fixed apostrophe character in Johne's Disease enumeration value.
+            05/20/2018: Added CVINumberIssuedBy as optional attribute
+ 
         </xs:documentation>
     </xs:annotation>
     <xs:annotation>
@@ -67,6 +69,7 @@
                 <xs:element ref="Binary" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
             <xs:attribute name="CviNumber" type="xs:string" use="required"/>
+            <xs:attribute name="CviNumberIssuedBy" type="xs:string" use="optional"/>
             <xs:attribute name="IssueDate" type="xs:date" use="required"/>
             <xs:attribute name="ExpirationDate" type="xs:date" use="required"/>
             <xs:attribute name="ShipmentDate" type="xs:date" use="optional"/>
