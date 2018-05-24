@@ -243,8 +243,8 @@
         </xs:annotation>
         <xs:complexType>
             <xs:choice>
-                <xs:element name="SpeciesCode"/>
-                <xs:element name="SpeciesOther"/>
+                <xs:element ref="SpeciesCode"/>
+                <xs:element ref="SpeciesOther"/>
             </xs:choice>
             <xs:attribute name="Quantity" type="xs:float" use="required"/>
             <xs:attribute name="Unit" type="xs:string" use="optional" default="Number"/>
