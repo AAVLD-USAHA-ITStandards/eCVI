@@ -4,29 +4,22 @@
     xmlns="http://www.usaha.org/xmlns/ecvi2">
 
     <xs:annotation>
-        <xs:documentation> Change Log 
-            08/30/2017: Initial draft of version 2.0 attempts to clone
-            version 1 (labeled version 6.0?) with only minor tweaks. 
-            09/01/2017: Added regular expressions to AnimalTags choices 
-            09/01/2017: Added option for ID/IDREF to Attachment
-            for BrandImage ID Type 
-            11/16/2017: Collapsed animal tag choices into known structure and not. 
-            12/14/2017: Added Equine description and photos as AnimalTag choices. 
-            01/16/2018: Removed string length restrictions not part of regular expressions. 
-            01/16/2018: Spelled out latitude and longitude in geo point. 
-            01/16/2018: Rearranged TagType to put Type as first attribute. 
-            02/08/2018: Restructured Species to SpeciesCode vs. SpeciesOther.
+        <xs:documentation> Change Log 08/30/2017: Initial draft of version 2.0 attempts to clone
+            version 1 (labeled version 6.0?) with only minor tweaks. 09/01/2017: Added regular
+            expressions to AnimalTags choices 09/01/2017: Added option for ID/IDREF to Attachment
+            for BrandImage ID Type 11/16/2017: Collapsed animal tag choices into known structure and
+            not. 12/14/2017: Added Equine description and photos as AnimalTag choices. 01/16/2018:
+            Removed string length restrictions not part of regular expressions. 01/16/2018: Spelled
+            out latitude and longitude in geo point. 01/16/2018: Rearranged TagType to put Type as
+            first attribute. 02/08/2018: Restructured Species to SpeciesCode vs. SpeciesOther.
             02/08/2018: Restructured All Binary data into ID/IDREF to eliminate duplication
             02/28/2018: Converted comments to annotation elements except where simply labeling code
-            sections, etc. Works with an XSLT to generate skeleton documentation. 
-            03/06-08/2018: Additional annotations added. Ongoing. 
-            04/04/2018: Added Carrier and Transport mode optional elements.  Added email 
-            in addition to Phone on person.  Added miscellaneous attributes element.  Changed
-            Breed element to basic string.
-            04/25/2018: Fixed apostrophe character in Johne's Disease enumeration value.
-            05/20/2018: Added CVINumberIssuedBy as optional attribute
- 
-        </xs:documentation>
+            sections, etc. Works with an XSLT to generate skeleton documentation. 03/06-08/2018:
+            Additional annotations added. Ongoing. 04/04/2018: Added Carrier and Transport mode
+            optional elements. Added email in addition to Phone on person. Added miscellaneous
+            attributes element. Changed Breed element to basic string. 04/25/2018: Fixed apostrophe
+            character in Johne's Disease enumeration value. 05/20/2018: Added CVINumberIssuedBy as
+            optional attribute </xs:documentation>
     </xs:annotation>
     <xs:annotation>
         <xs:documentation>Copyright © 2017 AAVLD/USAHA it is free for use. Submit suggested changes
@@ -133,37 +126,40 @@
          via Element list in some editors -->
     <xs:element name="Origin" type="PremType">
         <xs:annotation>
-             <xs:documentation>The physical location of the animal(s) prior to movement is required. 
+            <xs:documentation>The physical location of the animal(s) prior to movement is required.
                 Must be a physical (911) address.</xs:documentation>
         </xs:annotation>
     </xs:element>
     <xs:element name="Destination" type="PremType">
         <xs:annotation>
-            <xs:documentation>The intended physical location of the animal(s) after movement is required. 
-                Must be a physical (911) address.</xs:documentation>
+            <xs:documentation>The intended physical location of the animal(s) after movement is
+                required. Must be a physical (911) address.</xs:documentation>
         </xs:annotation>
     </xs:element>
     <xs:element name="Consignor" type="ContactType">
         <xs:annotation>
-            <xs:documentation>The contact information for the person or business responsible for the 
-                animal(s) prior to movement.  Only required if different from Origin.</xs:documentation>
+            <xs:documentation>The contact information for the person or business responsible for the
+                animal(s) prior to movement. Only required if different from
+                Origin.</xs:documentation>
         </xs:annotation>
     </xs:element>
     <xs:element name="Consignee" type="ContactType">
         <xs:annotation>
-            <xs:documentation>The contact information for the person or business responsible for the 
-                animal(s) after to movement.  Only required if different from Destination.</xs:documentation>
+            <xs:documentation>The contact information for the person or business responsible for the
+                animal(s) after to movement. Only required if different from
+                Destination.</xs:documentation>
         </xs:annotation>
     </xs:element>
     <xs:element name="Carrier" type="ContactType">
         <xs:annotation>
-            <xs:documentation>The contact information for the person or business responsible for  
-                moving the animals from origin to destination.  </xs:documentation>
+            <xs:documentation>The contact information for the person or business responsible for
+                moving the animals from origin to destination. </xs:documentation>
         </xs:annotation>
     </xs:element>
     <xs:element name="TransportMode">
         <xs:annotation>
-            <xs:documentation>If important for certification of ability to travel the mode, air, car, rail, truck or boat (ship).  </xs:documentation>
+            <xs:documentation>If important for certification of ability to travel the mode, air,
+                car, rail, truck or boat (ship). </xs:documentation>
         </xs:annotation>
         <xs:simpleType>
             <xs:restriction base="xs:string">
@@ -176,13 +172,14 @@
             </xs:restriction>
         </xs:simpleType>
     </xs:element>
-    
+
     <!-- Do these list wrappers add value? -->
     <xs:element name="Accessions">
         <xs:annotation>
             <xs:documentation>Because many herd movements have testing performed in one accession,
                 the accession(s) is(are) listed here and referenced by each test rather than \
-                duplicating all the accession information for each test on each animal.</xs:documentation>
+                duplicating all the accession information for each test on each
+                animal.</xs:documentation>
         </xs:annotation>
         <xs:complexType>
             <xs:sequence>
@@ -201,9 +198,9 @@
                 to UCUM - http://unitsofmeasure.org/ucum.html), or as a specific date of birth as a
                 four-digit year, two-digit month, and two-digit date, separated by dashes (example:
                 2001-05-31). Breed is optional and specified by a two or three uppercase letter code
-                or by a string description such as "black".
-                The code list is not specified in the standard but most are available at:
-                https://www.naab-css.org/uniform-breed-codes, and
+                or by a string description such as "black". The code list is not specified in the
+                standard but most are available at: https://www.naab-css.org/uniform-breed-codes,
+                and
                 https://www.aphis.usda.gov/animal_health/vs_ocio/downloads/date_standards/icvi_data_concepts.pdf.
                 Sex (see SexType) is optional. SexDetail is an optional string. InspectionDate is a
                 required date, and is the date the animals were inspected by the vet. If the
@@ -217,6 +214,7 @@
                 </xs:choice>
                 <xs:element ref="AnimalTags" minOccurs="1" maxOccurs="1"/>
                 <xs:element ref="Test" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="Vaccination" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
             <xs:attribute name="Age" type="AgeType" use="optional"/>
             <xs:attribute name="Breed" type="xs:string" use="optional"/>
@@ -245,10 +243,14 @@
             </xs:documentation>
         </xs:annotation>
         <xs:complexType>
-            <xs:choice>
-                <xs:element ref="SpeciesCode"/>
-                <xs:element ref="SpeciesOther"/>
-            </xs:choice>
+            <xs:sequence>
+                <xs:choice>
+                    <xs:element ref="SpeciesCode"/>
+                    <xs:element ref="SpeciesOther"/>
+                </xs:choice>
+                <xs:element ref="Test" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="Vaccination" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
             <xs:attribute name="Quantity" type="xs:float" use="required"/>
             <xs:attribute name="Unit" type="xs:string" use="optional" default="Number"/>
             <xs:attribute name="Age" type="AgeType" use="optional"/>
@@ -258,12 +260,12 @@
             <xs:attribute name="Description" type="xs:string" use="required"/>
         </xs:complexType>
     </xs:element>
-    
+
     <xs:element name="Statements" type="xs:string">
         <xs:annotation>
-            <xs:documentation> Additional statements that may be required by various
-                jurisdictions may be included here.  These statements must not take the place
-                of or modify the structured content found elsewhere in the standard.</xs:documentation>
+            <xs:documentation> Additional statements that may be required by various jurisdictions
+                may be included here. These statements must not take the place of or modify the
+                structured content found elsewhere in the standard.</xs:documentation>
         </xs:annotation>
     </xs:element>
 
@@ -272,39 +274,51 @@
             <xs:documentation> Attachments can be used for text or binary additional information not
                 specifically carried in one of the other Binary elements. Assumed to be from a file
                 so Filename is required along with a reference to the Binary content. Be aware that
-                receiving applications may ignore unknown or unexpected attachments. The actual binary
-                content of the attachment is carried in the Binary element as are any other Binary 
-                fields.  DocType is a required string. (put enumeration values in table somehow?
-                Is this list adequate?). Filename is a required string. (Why require a file name?
-                many may never have actually resided in a named file.)  Comment is an
-                optional string. (For what purpose?)</xs:documentation>
+                receiving applications may ignore unknown or unexpected attachments. The actual
+                binary content of the attachment is carried in the Binary element as are any other
+                Binary fields. DocType is a required string. (put enumeration values in table
+                somehow? Is this list adequate?). Filename is a required string. (Why require a file
+                name? many may never have actually resided in a named file.) Comment is an optional
+                string. (For what purpose?)</xs:documentation>
         </xs:annotation>
         <xs:complexType>
             <xs:attribute name="AttachmentRef" type="xs:IDREF" use="required"/>
             <xs:attribute name="DocType" use="required">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
-                        <xs:enumeration value="Scanned Paper CVI"><xs:annotation>
-                            <xs:documentation>For sending an image of original paper CVI along with the extracted
-                                data.  These may be image PDF or other image format.
-                            </xs:documentation></xs:annotation>
+                        <xs:enumeration value="Scanned Paper CVI">
+                            <xs:annotation>
+                                <xs:documentation>For sending an image of original paper CVI along
+                                    with the extracted data. These may be image PDF or other image
+                                    format. </xs:documentation>
+                            </xs:annotation>
                         </xs:enumeration>
-                        <xs:enumeration value="Scanned Test Chart"><xs:annotation>
-                            <xs:documentation>For sending scanned test charts along with electronic CVI or
-                                extracted data.  These may be image PDF or other image format.
-                            </xs:documentation></xs:annotation>
+                        <xs:enumeration value="Scanned Test Chart">
+                            <xs:annotation>
+                                <xs:documentation>For sending scanned test charts along with
+                                    electronic CVI or extracted data. These may be image PDF or
+                                    other image format. </xs:documentation>
+                            </xs:annotation>
                         </xs:enumeration>
-                        <xs:enumeration value="PDF CVI"><xs:annotation>
-                            <xs:documentation>For sending data form PDF CVI along with extracted data.  These
-                                would be Adobe PDF forms, or XFA forms.
-                            </xs:documentation></xs:annotation>
+                        <xs:enumeration value="PDF CVI">
+                            <xs:annotation>
+                                <xs:documentation>For sending data form PDF CVI along with extracted
+                                    data. These would be Adobe PDF forms, or XFA forms.
+                                </xs:documentation>
+                            </xs:annotation>
                         </xs:enumeration>
-                        <xs:enumeration value="PDF Test Chart"><xs:annotation>
-                            <xs:documentation>For sending data form PDF Test Chart along with electronic CVI 
-                                or extracted data.  These would be Adobe PDF forms, or XFA forms.
-                            </xs:documentation></xs:annotation>
+                        <xs:enumeration value="PDF Test Chart">
+                            <xs:annotation>
+                                <xs:documentation>For sending data form PDF Test Chart along with
+                                    electronic CVI or extracted data. These would be Adobe PDF
+                                    forms, or XFA forms. </xs:documentation>
+                            </xs:annotation>
                         </xs:enumeration>
-                        <xs:enumeration value="Other"><xs:annotation><xs:documentation>All other uses.</xs:documentation></xs:annotation></xs:enumeration>
+                        <xs:enumeration value="Other">
+                            <xs:annotation>
+                                <xs:documentation>All other uses.</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
@@ -326,12 +340,13 @@
             <xs:attribute name="MimeType" type="MimeType" use="optional"/>
         </xs:complexType>
     </xs:element>
-    
+
     <xs:element name="MiscAttribute">
         <xs:annotation>
-            <xs:documentation>Any additional information needed by specific implementations can
-            be provided as name/value pairs represented as strings.  These data must not be essential
-            to proper understanding of the structured content of the standard data but only extend it.</xs:documentation>
+            <xs:documentation>Any additional information needed by specific implementations can be
+                provided as name/value pairs represented as strings. These data must not be
+                essential to proper understanding of the structured content of the standard data but
+                only extend it.</xs:documentation>
         </xs:annotation>
         <xs:complexType>
             <xs:attribute name="Name" type="xs:string" use="required"/>
@@ -373,22 +388,38 @@
             <xs:attribute name="Type" use="required">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
-                        <xs:enumeration value="Unknown"><xs:annotation><xs:documentation>Probably the most common.</xs:documentation></xs:annotation></xs:enumeration>
-                        <xs:enumeration value="Landline"><xs:annotation><xs:documentation>If known to be fixed location.</xs:documentation></xs:annotation></xs:enumeration>
-                        <xs:enumeration value="Cellphone"><xs:annotation><xs:documentation>If known to be a mobile phone.</xs:documentation></xs:annotation></xs:enumeration>
-                        <xs:enumeration value="Fax"><xs:annotation><xs:documentation>Fax line.</xs:documentation></xs:annotation></xs:enumeration>
+                        <xs:enumeration value="Unknown">
+                            <xs:annotation>
+                                <xs:documentation>Probably the most common.</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                        <xs:enumeration value="Landline">
+                            <xs:annotation>
+                                <xs:documentation>If known to be fixed location.</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                        <xs:enumeration value="Cellphone">
+                            <xs:annotation>
+                                <xs:documentation>If known to be a mobile phone.</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                        <xs:enumeration value="Fax">
+                            <xs:annotation>
+                                <xs:documentation>Fax line.</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
         </xs:complexType>
     </xs:element>
-    
+
     <xs:element name="Email">
         <xs:complexType>
             <xs:attribute name="Address" type="EmailType" use="required"/>
         </xs:complexType>
     </xs:element>
-    
+
     <xs:element name="Accession">
         <xs:annotation>
             <xs:documentation> Accessions are listed for the CVI as a whole and referenced by each
@@ -442,52 +473,102 @@
 
     <xs:element name="ProgramStatus">
         <xs:annotation>
-            <xs:documentation>Program status consists of the name of the program and a value representing the 
-                herd or state (area) status claimed.  The enumerated lists need to be examined.
-            </xs:documentation>
+            <xs:documentation>Program status consists of the name of the program and a value
+                representing the herd or state (area) status claimed. The enumerated lists need to
+                be examined. </xs:documentation>
         </xs:annotation>
         <xs:complexType>
             <xs:attribute name="Name" use="required">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
-                        <xs:enumeration value="Bovine Tuberculosis"><xs:annotation>
-                            <xs:documentation>Bovine TB program status</xs:documentation></xs:annotation></xs:enumeration>
-                        <xs:enumeration value="Brucellosis (state)"><xs:annotation>
-                            <xs:documentation>Brucellosis program state status</xs:documentation></xs:annotation></xs:enumeration>
-                        <xs:enumeration value="Brucellosis (herd)"><xs:annotation>
-                            <xs:documentation>Brucellosis program herd status</xs:documentation></xs:annotation></xs:enumeration>
-                        <xs:enumeration value="Johne's (herd)"><xs:annotation>
-                            <xs:documentation>Johne's disease program herd status</xs:documentation></xs:annotation></xs:enumeration>
-                        <xs:enumeration value="NPIP (herd)"><xs:annotation>
-                            <xs:documentation>NPIP program flock status.  (Which program?  NPIP has several._</xs:documentation></xs:annotation></xs:enumeration>
-                        <xs:enumeration value="Scrapie (herd)"><xs:annotation>
-                            <xs:documentation>Scrapie program flock status.</xs:documentation></xs:annotation></xs:enumeration>
-                        <xs:enumeration value="Trichomoniasis (herd)"><xs:annotation>
-                            <xs:documentation>Trichomoniasis program herd status</xs:documentation></xs:annotation></xs:enumeration>
-                        <xs:enumeration value="EIA (herd)"><xs:annotation>
-                            <xs:documentation>EIA herd status?</xs:documentation></xs:annotation></xs:enumeration>
+                        <xs:enumeration value="Bovine Tuberculosis">
+                            <xs:annotation>
+                                <xs:documentation>Bovine TB program status</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                        <xs:enumeration value="Brucellosis (state)">
+                            <xs:annotation>
+                                <xs:documentation>Brucellosis program state
+                                    status</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                        <xs:enumeration value="Brucellosis (herd)">
+                            <xs:annotation>
+                                <xs:documentation>Brucellosis program herd status</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                        <xs:enumeration value="Johne's (herd)">
+                            <xs:annotation>
+                                <xs:documentation>Johne's disease program herd
+                                    status</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                        <xs:enumeration value="NPIP (herd)">
+                            <xs:annotation>
+                                <xs:documentation>NPIP program flock status. (Which program? NPIP
+                                    has several._</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                        <xs:enumeration value="Scrapie (herd)">
+                            <xs:annotation>
+                                <xs:documentation>Scrapie program flock status.</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                        <xs:enumeration value="Trichomoniasis (herd)">
+                            <xs:annotation>
+                                <xs:documentation>Trichomoniasis program herd
+                                    status</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                        <xs:enumeration value="EIA (herd)">
+                            <xs:annotation>
+                                <xs:documentation>EIA herd status?</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
             <xs:attribute name="Value" use="required">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
-                        <xs:enumeration value="Free"><xs:annotation>
-                            <xs:documentation>Free status for the named disease program.</xs:documentation></xs:annotation></xs:enumeration>
-                        <xs:enumeration value="Modified Accredited"><xs:annotation>
-                            <xs:documentation>Modified accredited status in TB program.</xs:documentation></xs:annotation></xs:enumeration>
-                        <xs:enumeration value="Modified Advanced Accredited"><xs:annotation>
-                            <xs:documentation>Modified accredited status in TB program</xs:documentation></xs:annotation></xs:enumeration>
-                        <xs:enumeration value="Designated Surveillance Area"><xs:annotation>
-                            <xs:documentation>Area surrounding known wildlife reservoir</xs:documentation></xs:annotation></xs:enumeration>
-                        <xs:enumeration value="Other"><xs:annotation>
-                            <xs:documentation>All other statuses for other programs.</xs:documentation></xs:annotation></xs:enumeration>
+                        <xs:enumeration value="Free">
+                            <xs:annotation>
+                                <xs:documentation>Free status for the named disease
+                                    program.</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                        <xs:enumeration value="Modified Accredited">
+                            <xs:annotation>
+                                <xs:documentation>Modified accredited status in TB
+                                    program.</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                        <xs:enumeration value="Modified Advanced Accredited">
+                            <xs:annotation>
+                                <xs:documentation>Modified accredited status in TB
+                                    program</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                        <xs:enumeration value="Designated Surveillance Area">
+                            <xs:annotation>
+                                <xs:documentation>Area surrounding known wildlife
+                                    reservoir</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                        <xs:enumeration value="Other">
+                            <xs:annotation>
+                                <xs:documentation>All other statuses for other
+                                    programs.</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
             <xs:attribute name="ValueOther" type="xs:string" use="optional">
-                <xs:annotation><xs:documentation>For other status types the value such as Brucellosis stage, NPIP clean, 
-                    may opionally be included in this attribute.</xs:documentation></xs:annotation>
+                <xs:annotation>
+                    <xs:documentation>For other status types the value such as Brucellosis stage,
+                        NPIP clean, may opionally be included in this attribute.</xs:documentation>
+                </xs:annotation>
             </xs:attribute>
         </xs:complexType>
     </xs:element>
@@ -573,6 +654,19 @@
             <xs:attribute name="Code" type="SpeciesCodes" use="required"/>
             <xs:attribute name="Text" type="xs:string" use="optional"/>
         </xs:complexType>
+    </xs:element>
+
+    <xs:element name="Vaccination">
+        <xs:annotation>
+            <xs:documentation>Vaccination information for animal or group. For now the type of
+                vaccine is left as a simple string. Ideally will become a coded value from a
+                standard set. The date is optional but highly suggested. </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:attribute name="Type" type="xs:string" use="required"/>
+            <xs:attribute name="Date" type="xs:date" use="optional"/>
+        </xs:complexType>
+
     </xs:element>
 
     <xs:element name="SpeciesOther">
@@ -795,14 +889,15 @@
     <!-- BEGIN Simple Enumerated or Patterned Types -->
     <xs:simpleType name="EmailType">
         <xs:annotation>
-            <xs:documentation>Optional email address following simplified standard email address pattern.</xs:documentation>
+            <xs:documentation>Optional email address following simplified standard email address
+                pattern.</xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:string">
             <xs:pattern value="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"/>
         </xs:restriction>
     </xs:simpleType>
-    
-    
+
+
     <xs:simpleType name="PremIdType">
         <xs:annotation>
             <xs:documentation> PremIdType does minimal validation of true premises identifiers
