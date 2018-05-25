@@ -163,14 +163,16 @@
     </xs:element>
     <xs:element name="TransportMode">
         <xs:annotation>
-            <xs:documentation>If important for certification of ability to travel the mode, air, car, truck or boat (ship).  </xs:documentation>
+            <xs:documentation>If important for certification of ability to travel the mode, air, car, rail, truck or boat (ship).  </xs:documentation>
         </xs:annotation>
         <xs:simpleType>
             <xs:restriction base="xs:string">
                 <xs:enumeration value="air"/>
-                <xs:enumeration value="car"/>
-                <xs:enumeration value="truck"/>
                 <xs:enumeration value="boat"/>
+                <xs:enumeration value="car"/>
+                <xs:enumeration value="rail"/>
+                <xs:enumeration value="truck"/>
+                <xs:enumeration value="other"/>
             </xs:restriction>
         </xs:simpleType>
     </xs:element>
@@ -198,8 +200,9 @@
                 plus the standard code for units (d|wk|mo|a) (example: 3wk), age definitions adhere
                 to UCUM - http://unitsofmeasure.org/ucum.html), or as a specific date of birth as a
                 four-digit year, two-digit month, and two-digit date, separated by dashes (example:
-                2001-05-31). Breed is optional and specified by two or three uppercase letters. The
-                list is not specified in the standard but most are available at:
+                2001-05-31). Breed is optional and specified by a two or three uppercase letter code
+                or by a string description such as "black".
+                The code list is not specified in the standard but most are available at:
                 https://www.naab-css.org/uniform-breed-codes, and
                 https://www.aphis.usda.gov/animal_health/vs_ocio/downloads/date_standards/icvi_data_concepts.pdf.
                 Sex (see SexType) is optional. SexDetail is an optional string. InspectionDate is a
