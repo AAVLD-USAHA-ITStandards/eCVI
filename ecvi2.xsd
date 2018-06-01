@@ -84,7 +84,7 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element ref="Person" minOccurs="1" maxOccurs="1"/>
-                <xs:element ref="Address" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="AddressBlock" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
             <xs:attribute name="LicenseState" type="xs:string" use="optional"/>
             <xs:attribute name="LicenseNumber" type="xs:string" use="optional"/>
@@ -470,7 +470,7 @@
                                     maxOccurs="1"/>
                                 <xs:element name="PremId" type="PremIdType" minOccurs="0"
                                     maxOccurs="1"/>
-                                <xs:element ref="Address" minOccurs="0" maxOccurs="1"/>
+                                <xs:element ref="AddressBlock" minOccurs="0" maxOccurs="1"/>
                             </xs:sequence>
                             <xs:attribute name="AccessionDate" type="xs:date" use="required"/>
                             <xs:attribute name="AccessionNumber" type="xs:string" use="required"/>
@@ -481,7 +481,7 @@
                             <xs:sequence>
                                 <xs:element name="PremId" type="PremIdType" minOccurs="0"
                                     maxOccurs="1"/>
-                                <xs:element ref="Address" minOccurs="0" maxOccurs="1"/>
+                                <xs:element ref="AddressBlock" minOccurs="0" maxOccurs="1"/>
                             </xs:sequence>
                             <xs:attribute name="AccessionDate" type="xs:date" use="required"/>
                         </xs:complexType>
