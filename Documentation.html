@@ -1,0 +1,1484 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <Title>eCVI version 2 Standard Contents</Title>
+   </head>
+   <body>
+      <h1>eCVI version 2 Standard Contents</h1>
+      
+      
+      
+      
+      
+      
+      
+      
+      <h2>Element: eCVI</h2> The eCVI contains the following high-level elements (defined
+      separately): Exactly one Veterinarian (see Veterinarian) is required. Exactly one
+      MovementPurposes is required (see MovementPurposes, which may actually identify zero
+      or more purposes). Exactly one Origin (see PremType) is required. Exactly one
+      Destination (see PremType) is required. Exactly one Consignor (see ContactType) is
+      optional only if unavailable. Excatly one Consignee (see ContactType) is optional
+      only if unavailable. Exactly one Accessions is optional only if unavailable (see
+      Accessions, which may actually identify zero or more AccessionTypes). One or more
+      Animals (see Animal) are optional only if unavailable. One or more GroupLots (see
+      GroupLot) are optional. One or more Attachments (see Attachment) are optional. One
+      or more Binaries (see Binary) are optional. CviNumber is a required string.
+      IssueDate is a required date. ExpirationDate is a required date. ShipmentDate is an
+      optional date. EntryPermitNumber is an optional string. 
+      <h3>Attributes</h3>
+      <ul>
+         <li><b>CviNumber</b> Required
+         </li>
+         <li><b>CviNumberIssuedBy</b> Optional
+         </li>
+         <li><b>IssueDate</b> Required
+         </li>
+         <li><b>ExpirationDate</b> Required
+         </li>
+         <li><b>ShipmentDate</b> Optional
+         </li>
+         <li><b>EntryPermitNumber</b> Optional
+         </li>
+      </ul>
+      <h3>Child Elements</h3>
+      <ul>
+         <li><b>Veterinarian</b> Required
+         </li>
+         <li><b>MovementPurposes</b> Required
+         </li>
+         <li><b>Origin</b> Required
+         </li>
+         <li><b>Destination</b> Required
+         </li>
+         <li><b>Consignor</b> Optional
+         </li>
+         <li><b>Consignee</b> Optional
+         </li>
+         <li><b>Carrier</b> Optional
+         </li>
+         <li><b>TransportMode</b> Optional
+         </li>
+         <li><b>Accessions</b> Optional
+         </li>
+         <li><b>Animal</b> Optional
+         </li>
+         <li><b>GroupLot</b> Optional
+         </li>
+         <li><b>Statements</b> Optional
+         </li>
+         <li><b>Attachment</b> Optional
+         </li>
+         <li><b>MiscAttribute</b> Optional
+         </li>
+         <li><b>Binary</b> Optional
+         </li>
+      </ul>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <h2>Element: Veterinarian</h2> Within the Veterinarian element: Name (see Person) is required.
+      Address (see AddressType) is optional only if unavailable. License State is an
+      optional string, and must be a (two upper case letter?) US state reflecting the
+      state where the license was issued License Number is an optional string. National
+      Accreditation Number is an optional string. 
+      <h3>Attributes</h3>
+      <ul>
+         <li><b>LicenseState</b> Optional
+         </li>
+         <li><b>LicenseNumber</b> Optional
+         </li>
+         <li><b>NationalAccreditationNumber</b> Optional
+         </li>
+      </ul>
+      <h3>Child Elements</h3>
+      <ul>
+         <li><b>Person</b> Required
+         </li>
+         <li><b>AddressBlock</b> Optional
+         </li>
+      </ul>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <h2>Element: MovementPurposes</h2> Movement Purpose is optional, and there is no limit on additional
+      Movement Purposes. Movement Purpose is a bit of a misnomer. It includes mostly
+      animal purpose at destination with a little bit of true reason for movement or
+      reason for certificate. 
+      <h3>Child Elements</h3>
+      <ul>
+         <li><b>MovementPurpose</b> Optional
+         </li>
+      </ul>
+      
+      
+      
+      
+      <br><b>show: </b>
+      
+      
+      <br><b>race: </b>
+      
+      
+      <br><b>rodeo: </b>
+      
+      
+      <br><b>sale: </b>
+      
+      
+      <br><b>pet: </b>
+      
+      
+      <br><b>breeding: </b>
+      
+      
+      <br><b>feeding: </b>
+      
+      
+      <br><b>grazing: </b>
+      
+      
+      <br><b>training: </b>
+      
+      
+      <br><b>slaughter: </b>
+      
+      
+      <br><b>medicalTreatment: </b>
+      
+      
+      <br><b>other: </b>
+      
+      
+      
+      <h2>Element: Origin</h2>The physical location of the animal(s) prior to movement is required.
+      Must be a physical (911) address.
+      
+      
+      
+      
+      <h2>Element: Destination</h2>The intended physical location of the animal(s) after movement is
+      required. Must be a physical (911) address.
+      
+      
+      
+      
+      <h2>Element: Consignor</h2>The contact information for the person or business responsible for the
+      animal(s) prior to movement. Only required if different from
+      Origin.
+      
+      
+      
+      
+      <h2>Element: Consignee</h2>The contact information for the person or business responsible for the
+      animal(s) after to movement. Only required if different from
+      Destination.
+      
+      
+      
+      
+      <h2>Element: Carrier</h2>The contact information for the person or business responsible for
+      moving the animals from origin to destination. 
+      
+      
+      
+      
+      <h2>Element: TransportMode</h2>If important for certification of ability to travel the mode, air,
+      car, rail, truck or boat (ship). 
+      
+      
+      
+      <br><b>air: </b>
+      
+      
+      <br><b>boat: </b>
+      
+      
+      <br><b>car: </b>
+      
+      
+      <br><b>rail: </b>
+      
+      
+      <br><b>truck: </b>
+      
+      
+      <br><b>land: </b>
+      
+      
+      <br><b>other: </b>
+      
+      
+      
+      <h2>Element: Accessions</h2>Because many herd movements have testing performed in one accession,
+      the accession(s) is(are) listed here and referenced by each test rather than \
+      duplicating all the accession information for each test on each
+      animal.
+      <h3>Child Elements</h3>
+      <ul>
+         <li><b>Accession</b> Optional
+         </li>
+      </ul>
+      
+      
+      
+      
+      
+      <h2>Element: Animal</h2> Animal species may be designated by code (see SpeciesCodeType) or
+      other (see SpeciesOther Type). A single animal tag (see AnimalTags) is required.
+      Test (see TestType) is optional, and there is no limit on additional Tests. Age is
+      optional and may be specified as either: a number of days, weeks, months or years
+      plus the standard code for units (d|wk|mo|a) (example: 3wk), age definitions adhere
+      to UCUM - http://unitsofmeasure.org/ucum.html), or as a specific date of birth as
+      a
+      four-digit year, two-digit month, and two-digit date, separated by dashes (example:
+      2001-05-31). Breed is optional and specified by a two or three uppercase letter code
+      or by a string description such as "black". The code list is not specified in the
+      standard but most are available at: https://www.naab-css.org/uniform-breed-codes,
+      and
+      https://www.aphis.usda.gov/animal_health/vs_ocio/downloads/date_standards/icvi_data_concepts.pdf.
+      Sex (see SexType) is optional. SexDetail is an optional string. InspectionDate is
+      a
+      required date, and is the date the animals were inspected by the vet. If the
+      inspection took place over multiple days, use the first date. 
+      <h3>Attributes</h3>
+      <ul>
+         <li><b>Age</b> Optional
+         </li>
+         <li><b>Breed</b> Optional
+         </li>
+         <li><b>Sex</b> Optional
+         </li>
+         <li><b>SexDetail</b> Optional
+         </li>
+         <li><b>InspectionDate</b> Required
+         </li>
+      </ul>
+      <h3>Child Elements</h3>
+      <ul>
+         <li><b>AnimalTags</b> Required
+         </li>
+         <li><b>Test</b> Optional
+         </li>
+         <li><b>Vaccination</b> Optional
+         </li>
+      </ul>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <h2>Element: GroupLot</h2> Species may be designated by code (see SpeciesCodeType) or other (see
+      SpeciesOtherType). Quantity is a required number (decimals acceptable). Unit by
+      default is "Number", as in a count. A different unit can be specified as an optional
+      string (guidelines on standardized units?). Age is optional and may be specified as
+      either: a number of days, weeks, months or years plus the standard code for units
+      (d|wk|mo|a) (example: 3wk), age definitions adhere to UCUM -
+      http://unitsofmeasure.org/ucum.html), or as a specific date of birth as a four-digit
+      year, two-digit month, and two-digit date, separated by dashes (example:
+      2001-05-31). Breed is optional and specified by two or three uppercase letters. The
+      list is not specified in the standard but most are available at:
+      https://www.naab-css.org/uniform-breed-codes, and
+      https://www.aphis.usda.gov/animal_health/vs_ocio/downloads/date_standards/icvi_data_concepts.pdf.
+      Sex (see SexType) is optional. SexDetail is an optional string. Description is
+      required (provide more specifics on what should go in here since it is required).
+      
+      <h3>Attributes</h3>
+      <ul>
+         <li><b>Quantity</b> Required
+         </li>
+         <li><b>Unit</b> Optional
+         </li>
+         <li><b>Age</b> Optional
+         </li>
+         <li><b>Breed</b> Optional
+         </li>
+         <li><b>Sex</b> Optional
+         </li>
+         <li><b>SexDetail</b> Optional
+         </li>
+         <li><b>Description</b> Required
+         </li>
+      </ul>
+      <h3>Child Elements</h3>
+      <ul>
+         <li><b>Test</b> Optional
+         </li>
+         <li><b>Vaccination</b> Optional
+         </li>
+      </ul>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <h2>Element: Statements</h2> Additional statements that may be required by various jurisdictions
+      may be included here. These statements must not take the place of or modify the
+      structured content found elsewhere in the standard.
+      
+      
+      
+      
+      <h2>Element: Attachment</h2> Attachments can be used for text or binary additional information not
+      specifically carried in one of the other Binary elements. Assumed to be from a file
+      so Filename is required along with a reference to the Binary content. Be aware that
+      receiving applications may ignore unknown or unexpected attachments. The actual
+      binary content of the attachment is carried in the Binary element as are any other
+      Binary fields. DocType is a required string. (put enumeration values in table
+      somehow? Is this list adequate?). Filename is a required string. (Why require a file
+      name? many may never have actually resided in a named file.) Comment is an optional
+      string. (For what purpose?)
+      <h3>Attributes</h3>
+      <ul>
+         <li><b>AttachmentRef</b> Required
+         </li>
+         <li><b>DocType</b> Required
+         </li>
+         <li><b>Filename</b> Required
+         </li>
+         <li><b>Comment</b> Optional
+         </li>
+      </ul>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <br><b>Scanned Paper CVI: </b>For sending an image of original paper CVI along
+      with the extracted data. These may be image PDF or other image
+      format. 
+      
+      
+      
+      <br><b>Scanned Test Chart: </b>For sending scanned test charts along with
+      electronic CVI or extracted data. These may be image PDF or
+      other image format. 
+      
+      
+      
+      <br><b>PDF CVI: </b>For sending data form PDF CVI along with extracted
+      data. These would be Adobe PDF forms, or XFA forms.
+      
+      
+      
+      
+      <br><b>PDF Test Chart: </b>For sending data form PDF Test Chart along with
+      electronic CVI or extracted data. These would be Adobe PDF
+      forms, or XFA forms. 
+      
+      
+      
+      <br><b>Other: </b>All other uses.
+      
+      
+      
+      
+      <h2>Element: Binary</h2>All binary content is included as Binary and referenced in specific
+      elements by ID/IDREF.
+      <h3>Attributes</h3>
+      <ul>
+         <li><b>ID</b> Optional
+         </li>
+         <li><b>MimeType</b> Optional
+         </li>
+      </ul>
+      <h3>Child Elements</h3>
+      <ul>
+         <li><b>Payload</b> Required
+         </li>
+      </ul>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <h2>Element: MiscAttribute</h2>Any additional information needed by specific implementations can be
+      provided as name/value pairs represented as strings. These data must not be
+      essential to proper understanding of the structured content of the standard data but
+      only extend it.
+      <h3>Attributes</h3>
+      <ul>
+         <li><b>Name</b> Required
+         </li>
+         <li><b>Value</b> Required
+         </li>
+      </ul>
+      
+      
+      
+      
+      
+      
+      
+      
+      <h2>Element: Person</h2> Person is defined as a Name string and an optional Phone Number (see
+      Phone). 
+      <h3>Child Elements</h3>
+      <ul>
+         <li><b>Phone</b> Optional
+         </li>
+         <li><b>Email</b> Optional
+         </li>
+      </ul>
+      
+      
+      
+      
+      
+      <h2>Element: NameParts</h2> NameType defines a structured name for a business or person.
+      BusinessName, FirstName, Middle Name, LastName, OtherName are all optional for
+      applications to use one or more (zero would validate, but why?) 
+      <h3>Child Elements</h3>
+      <ul>
+         <li><b>BusinessName</b> Optional
+         </li>
+         <li><b>FirstName</b> Optional
+         </li>
+         <li><b>MiddleName</b> Optional
+         </li>
+         <li><b>LastName</b> Optional
+         </li>
+         <li><b>OtherName</b> Optional
+         </li>
+      </ul>
+      
+      
+      
+      
+      
+      <h2>Element: Phone</h2> The Phone Number specifies type (list enumeration values?) and a
+      ten-digit number, and can include a comment. 
+      <h3>Attributes</h3>
+      <ul>
+         <li><b>Number</b> Required
+         </li>
+         <li><b>Comment</b> Optional
+         </li>
+         <li><b>Type</b> Required
+         </li>
+      </ul>
+      
+      
+      
+      
+      
+      
+      
+      
+      <br><b>Unknown: </b>Probably the most common.
+      
+      
+      
+      <br><b>Landline: </b>If known to be fixed location.
+      
+      
+      
+      <br><b>Cellphone: </b>If known to be a mobile phone.
+      
+      
+      
+      <br><b>Fax: </b>Fax line.
+      
+      
+      
+      
+      <h2>Element: Accession</h2> Accessions are listed for the CVI as a whole and referenced by each
+      test. An accession is defined as... A single Laboratory or Field element may be
+      specified, indicating where tests for this accession were performed. InfieldTest is
+      an optional bool (true/false value) indicating if a test was performed in the field.
+      (Is this redundant with the Field element?) ID (see ID) is required, and is the
+      reference number that associates an animal’s test details derived from this
+      accession (not clear, reword if possible), not the lab accession number. For
+      Laboratory accessions: Laboratory is a required, containing the following: LabName
+      is a required string. PremId (see PremIdType) is optional only if unavailable.
+      Address (see AddressType) is optional only if unavailable and should contain the lab
+      (physical? contact?) address. AccessionDate is a required date. AccessionNumber is
+      a
+      required string. For Field accessions: PremId (see PremIdType) is optional only if
+      unavailable. Address (see AddressType) is optional only if unavailable and should
+      contain the (physical? contact?) address of the test location. AccessionDate is a
+      required date. 
+      <h3>Attributes</h3>
+      <ul>
+         <li><b>InfieldTest</b> Optional
+         </li>
+         <li><b>id</b> Required
+         </li>
+      </ul>
+      
+      
+      
+      
+      
+      
+      
+      
+      <h2>Element: ProgramStatus</h2>Program status consists of the name of the program and a value
+      representing the herd or state (area) status claimed. The enumerated lists need to
+      be examined. 
+      <h3>Attributes</h3>
+      <ul>
+         <li><b>Name</b> Required
+         </li>
+         <li><b>Value</b> Required
+         </li>
+         <li><b>ValueOther</b> Optional
+         </li>
+      </ul>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <h3>Attribute: ProgramStatus:Name</h3>The name of the status
+      
+      
+      
+      <br><b>Bovine Tuberculosis: </b>Bovine TB program status
+      
+      
+      
+      <br><b>Brucellosis (state): </b>Brucellosis program state
+      status
+      
+      
+      
+      <br><b>Brucellosis (herd): </b>Brucellosis program herd status
+      
+      
+      
+      <br><b>Johne's (herd): </b>Johne's disease program herd
+      status
+      
+      
+      
+      <br><b>NPIP (herd): </b>NPIP program flock status. (Which program? NPIP
+      has several._
+      
+      
+      
+      <br><b>Scrapie (herd): </b>Scrapie program flock status.
+      
+      
+      
+      <br><b>Trichomoniasis (herd): </b>Trichomoniasis program herd
+      status
+      
+      
+      
+      <br><b>EIA (herd): </b>EIA herd status?
+      
+      
+      
+      
+      <h3>Attribute: ProgramStatus:Value</h3>Only the most common status values are listed.  Others use "other".
+      
+      
+      
+      <br><b>Free: </b>Free status for the named disease
+      program.
+      
+      
+      
+      <br><b>Modified Accredited: </b>Modified accredited status in TB
+      program.
+      
+      
+      
+      <br><b>Modified Advanced Accredited: </b>Modified accredited status in TB
+      program
+      
+      
+      
+      <br><b>Designated Surveillance Area: </b>Area surrounding known wildlife
+      reservoir
+      
+      
+      
+      <br><b>Other: </b>All other statuses for other
+      programs.
+      
+      
+      
+      
+      <h3>Attribute: ProgramStatus:ValueOther</h3>For other status types the value such as Brucellosis stage,
+      NPIP clean, may opionally be included in this attribute.
+      
+      
+      
+      
+      <h2>Element: Address</h2>Origin and destination require a structured address. Because of
+      variation in policy between jurisdictions this schema leaves each element optional.
+      However for a CVI to be valid in any jurisdiction, this element must contain enough
+      information for autorities to uniquely identify the location. 
+      <h3>Child Elements</h3>
+      <ul>
+         <li><b>Line1</b> Optional
+         </li>
+         <li><b>Line2</b> Optional
+         </li>
+         <li><b>Town</b> Optional
+         </li>
+         <li><b>County</b> Optional
+         </li>
+         <li><b>State</b> Optional
+         </li>
+         <li><b>ZIP</b> Optional
+         </li>
+         <li><b>Country</b> Optional
+         </li>
+         <li><b>coordinates</b> Optional
+         </li>
+      </ul>
+      
+      
+      
+      
+      
+      <h2>Element: Country</h2>Country is restricted to USA by project scope.
+      Derivative schemas may expand this list.
+      
+      
+      
+      
+      <br><b>USA: </b>
+      
+      
+      
+      <h2>Element: coordinates</h2>Longitude, Latitude, and Altitude (optional) formatted as
+      KML &lt;coordinates&gt; element Longitude (decimal degrees), Latitude
+      (decimal degrees) ,Altitude (meters) Example "-122.08220,37.42229,0"
+      
+      
+      
+      
+      
+      <h2>Element: AddressBlock</h2>Contacts such as "consignor, if different", "consignee, if different",
+      veterinarian, and carrier may have simple block of text containing more or less
+      structured address. 
+      
+      
+      
+      
+      <h2>Element: Test</h2> Individual test results are included with each animal and reference
+      via ID/IDREF an accession. For herd testing this allows one accession with many
+      tests. For tests such as Equine Coggins tests that are one per accession it results
+      in slight extra overhead. 
+      <h3>Attributes</h3>
+      <ul>
+         <li><b>AccessionRef</b> Required
+         </li>
+         <li><b>TestCode</b> Required
+         </li>
+      </ul>
+      <h3>Child Elements</h3>
+      <ul>
+         <li><b>Result</b> Required
+         </li>
+      </ul>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <h2>Element: Result</h2>Result may be integer, float or string
+      <h3>Attributes</h3>
+      <ul>
+         <li><b>ResultName</b> Required
+         </li>
+      </ul>
+      
+      
+      
+      
+      
+      
+      
+      <h3>Attribute: Result:ResultName</h3>Results may either be result or comment
+      
+      
+      
+      <br><b>RESULT: </b>
+      
+      
+      <br><b>COMMENT: </b>
+      
+      
+      
+      <h3>Attribute: Test:AccessionRef</h3> Points to ID in Accession element 
+      
+      
+      
+      
+      <h2>Element: SpeciesCode</h2> For animals with official species codes, the code is required with
+      optional text to add detail if necessary. 
+      <h3>Attributes</h3>
+      <ul>
+         <li><b>Code</b> Required
+         </li>
+         <li><b>Text</b> Optional
+         </li>
+      </ul>
+      
+      
+      
+      
+      
+      
+      
+      
+      <h2>Element: SpeciesOther</h2> The species coded in the standard include only those commonly needed
+      for regulatory action related to the movement. Many other official species codes can
+      be found at http://???? Because not all systems may understand these other codes,
+      human readable Text is required in addition to the code. For animals without an
+      official species code, the code may be omitted the default value is OTH and text
+      used to define the actual taxonomy is required.
+      <h3>Attributes</h3>
+      <ul>
+         <li><b>Code</b> Optional
+         </li>
+         <li><b>Text</b> Required
+         </li>
+      </ul>
+      
+      
+      
+      
+      
+      
+      
+      
+      <h2>Element: Vaccination</h2>Vaccination information for animal or group. For now the type of
+      vaccine is left as a simple string. Ideally will become a coded value from a
+      standard set. The date is optional but highly suggested. 
+      <h3>Attributes</h3>
+      <ul>
+         <li><b>Type</b> Required
+         </li>
+         <li><b>Date</b> Optional
+         </li>
+      </ul>
+      
+      
+      
+      
+      
+      
+      
+      
+      <h2>Element: AnimalTags</h2> This is a jumble of type of ID with the type of device holding the
+      ID. "Tags" is a misnomer. An ID may be either Known Format matching one of the list
+      of regular expressions for common official animal IDs, or some other type, either
+      non-offial or one that this schema missed. This field also supports brand
+      descriptions, brand images, and equine description or photographs. These can appear
+      in any order up to six IDs per animal 
+      <h3>Attributes</h3>
+      <ul></ul>
+      
+      
+      
+      
+      
+      <h3>Attribute: KnownFormatID:Number</h3>KnownFormatID patterns provide some ID
+      validation.
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <h2>Element: OtherFormatID</h2> Other Formats: No restrictions 
+      <h3>Attributes</h3>
+      <ul>
+         <li><b>Type</b> Optional
+         </li>
+         <li><b>Number</b> Required
+         </li>
+      </ul>
+      
+      
+      
+      
+      
+      
+      
+      
+      <h2>Element: BrandImage</h2> This should be PNG/JPEG/GIF/PDF format. The format is
+      specified in the Binary mime type.
+      <h3>Attributes</h3>
+      <ul>
+         <li><b>BrandImageRef</b> Required
+         </li>
+         <li><b>Description</b> Optional
+         </li>
+      </ul>
+      
+      
+      
+      
+      
+      
+      
+      
+      <h2>Element: EquineDescription</h2> Equine registered name is only legal identification
+      with description 
+      <h3>Attributes</h3>
+      <ul>
+         <li><b>Name</b> Optional
+         </li>
+         <li><b>Description</b> Required
+         </li>
+      </ul>
+      
+      
+      
+      
+      
+      
+      
+      
+      <h2>Element: EquinePhotographs</h2> Photos are also official. 
+      <h3>Attributes</h3>
+      <ul></ul>
+      <h3>Child Elements</h3>
+      <ul>
+         <li><b>Photograph</b> Required
+         </li>
+      </ul>
+      
+      
+      
+      
+      
+      
+      <h2>Element: Photograph</h2> Should we try to impose image type, etc.?
+      
+      <h3>Attributes</h3>
+      <ul>
+         <li><b>ImageRef</b> Required
+         </li>
+         <li><b>View</b> Optional
+         </li>
+      </ul>
+      
+      
+      
+      
+      
+      
+      
+      
+      <h2>Type: PremType</h2> PremType is used for origin and destination, and must be actual
+      physical (animal?) locations. PremId (see PremIdType) is optional only if
+      unavailable. PremName is an optional string. Address is required (see AddressType).
+      ProgramStatus (see ProgramStatusType) is optional, but there is no limit on
+      additional ProgramStatuses. Person (see PersonType) is required (why?), and there
+      is
+      no limit on additional Persons. 
+      
+      
+      
+      
+      <h2>Type: ContactType</h2> ContactType is used for consignor and consignee that may be actual
+      physical locations or other postal addresses. PremID (see PremIdType) is optional
+      only if unavailable. PremName is an optional string. Address (see AddressType) is
+      optional. Person (see PersonType) is required, and there is no limit on additional
+      Persons. 
+      
+      
+      
+      
+      <h2>Type: EmailType</h2>Optional email address following simplified standard email address
+      pattern.
+      
+      
+      
+      
+      <h2>Type: PremIdType</h2> PremIdType does minimal validation of true premises identifiers
+      including both PINs (7 characters and LIDs (8 characters). Only nationally
+      registered LIDs are appropriate. Implementing applications are highly encouraged to
+      validate against the appropriate checksum logic. 
+      
+      
+      
+      
+      <h2>Type: AgeType</h2> Age can be expressed as days , weeks, months, years, or as date of birth. 
+      
+      
+      
+      
+      <h2>Type: TagType</h2> This lists the allowed tag types that are supported. The enumerated
+      patterns try to enforce this. 
+      
+      
+      
+      <br><b>AIN: </b>840 official animal ID
+      
+      
+      
+      <br><b>AMID: </b>American ID
+      
+      
+      
+      <br><b>BRAND: </b>Brand description
+      
+      
+      
+      <br><b>BT: </b>Backtag
+      
+      
+      
+      <br><b>IMP: </b>
+      
+      
+      
+      <br><b>MGT: </b>Management tag
+      
+      
+      
+      <br><b>N840RFID: </b>Non 840 RFID tag
+      
+      
+      
+      <br><b>NUES8: </b>Eight digit national uniform eartag system
+      
+      
+      
+      <br><b>NUES9: </b>Nine digit national uniform eartag system
+      
+      
+      
+      <br><b>OFORID: </b>What is this?
+      
+      
+      
+      <br><b>NAME: </b>Name?
+      
+      
+      
+      <br><b>SGFLID: </b>Scrapie group flock ID
+      
+      
+      
+      <br><b>NPIN: </b>Swine PIN Tag
+      
+      
+      
+      <br><b>TAT: </b>Tattoo
+      
+      
+      
+      
+      <h2>Type: SpeciesCodes</h2> A subset of USDA species codes to support the most common eCVI usages. All
+      other species can be sent as SpeciesOther which is not enumerated.
+      
+      
+      
+      <br><b>AQU: </b> Aquaculture
+      
+      
+      
+      <br><b>AVI: </b> Avian
+      
+      
+      
+      <br><b>BEF: </b> Beef
+      
+      
+      
+      <br><b>BIS: </b> Bison
+      
+      
+      
+      <br><b>BOV: </b> Bovine (Bison and Cattle)
+      
+      
+      
+      <br><b>CAM: </b> Camelid (Alpacas, Llamas, etc.)
+      
+      
+      
+      <br><b>CAN: </b> Canine
+      
+      
+      
+      <br><b>CAP: </b> Caprine (Goats)
+      
+      
+      
+      <br><b>CER: </b> Cervids
+      
+      
+      
+      <br><b>CHI: </b> Chickens
+      
+      
+      
+      <br><b>CLM: </b> Clams
+      
+      
+      
+      <br><b>CRA: </b> Crawfish
+      
+      
+      
+      <br><b>CTF: </b> Catfish
+      
+      
+      
+      <br><b>DAI: </b> Dairy
+      
+      
+      
+      <br><b>DEE: </b> Deer
+      
+      
+      
+      <br><b>DUC: </b> Ducks
+      
+      
+      
+      <br><b>ELK: </b> Elk
+      
+      
+      
+      <br><b>EQU: </b> Equine (Horses, Mules, Donkeys, Burros)
+      
+      
+      
+      <br><b>FEL: </b> Feline
+      
+      
+      
+      <br><b>GEE: </b> Geese
+      
+      
+      
+      <br><b>GUI: </b> Guineas
+      
+      
+      
+      <br><b>MSL: </b> Mussels
+      
+      
+      
+      <br><b>OVI: </b> Ovine (Sheep)
+      
+      
+      
+      <br><b>OYS: </b> Oysters
+      
+      
+      
+      <br><b>PGN: </b> Pigeon
+      
+      
+      
+      <br><b>POR: </b> Porcine (Swine)
+      
+      
+      
+      <br><b>QUA: </b> Quail
+      
+      
+      
+      <br><b>RTT: </b> Ratites (Emus, Ostriches, etc.)
+      
+      
+      
+      <br><b>SAL: </b> Salmon
+      
+      
+      
+      <br><b>SBA: </b> Striped Bass
+      
+      
+      
+      <br><b>SHR: </b> Shrimp
+      
+      
+      
+      <br><b>SLP: </b> Scallops
+      
+      
+      
+      <br><b>TIL: </b> Tilapia
+      
+      
+      
+      <br><b>TRO: </b> Trout
+      
+      
+      
+      <br><b>TUR: </b> Turkeys
+      
+      
+      
+      <br><b>Female: </b>
+      
+      
+      <br><b>Male: </b>
+      
+      
+      <br><b>Gender Unknown: </b>
+      
+      
+      <br><b>Spayed Female: </b>
+      
+      
+      <br><b>Neutered Male: </b>
+      
+      
+      <br><b>True Hermaphrodite: </b>
+      
+      
+      <br><b>Other: </b>
+      
+      
+      
+      <h2>Type: StateCodeType</h2>State Code includes territories, APO addresses, etc. Does NOT include
+      Canadian provinces or Mexican states.
+      
+      
+      
+      <br><b>AA: </b>Military postal system in the Americas
+      
+      
+      
+      <br><b>AE: </b>Military postal system in Europe Africa and
+      Canada
+      
+      
+      
+      <br><b>AK: </b>Alaska
+      
+      
+      
+      <br><b>AL: </b>Alabama
+      
+      
+      
+      <br><b>AP: </b>Military postal system in the Pacific
+      
+      
+      
+      <br><b>AR: </b>Arkansas
+      
+      
+      
+      <br><b>AS: </b>American Samoa
+      
+      
+      
+      <br><b>AZ: </b>Arizona
+      
+      
+      
+      <br><b>CA: </b>California
+      
+      
+      
+      <br><b>CO: </b>Colorado
+      
+      
+      
+      <br><b>CT: </b>Connecticut
+      
+      
+      
+      <br><b>DC: </b>Washington District of Columbia
+      
+      
+      
+      <br><b>DE: </b>Delaware
+      
+      
+      
+      <br><b>FL: </b>Florida
+      
+      
+      
+      <br><b>FM: </b>Federated States of Micronesia
+      
+      
+      
+      <br><b>GA: </b>Georgia
+      
+      
+      
+      <br><b>GU: </b>Guam
+      
+      
+      
+      <br><b>HI: </b>Hawaii
+      
+      
+      
+      <br><b>IA: </b>Iowa
+      
+      
+      
+      <br><b>ID: </b>Idaho
+      
+      
+      
+      <br><b>IL: </b>Illinois
+      
+      
+      
+      <br><b>IN: </b>Indiana
+      
+      
+      
+      <br><b>KS: </b>Kansas
+      
+      
+      
+      <br><b>KY: </b>Kentucky
+      
+      
+      
+      <br><b>LA: </b>Louisiana
+      
+      
+      
+      <br><b>MA: </b>Massachusetts
+      
+      
+      
+      <br><b>MD: </b>Maryland
+      
+      
+      
+      <br><b>ME: </b>Maine
+      
+      
+      
+      <br><b>MH: </b>Marshall Islands
+      
+      
+      
+      <br><b>MI: </b>Michigan
+      
+      
+      
+      <br><b>MN: </b>Minnesota
+      
+      
+      
+      <br><b>MO: </b>Missouri
+      
+      
+      
+      <br><b>MP: </b>Northern Mariana Islands
+      
+      
+      
+      <br><b>MS: </b>Mississippi
+      
+      
+      
+      <br><b>MT: </b>Montana
+      
+      
+      
+      <br><b>NC: </b>North Carolina
+      
+      
+      
+      <br><b>ND: </b>North Dakota
+      
+      
+      
+      <br><b>NE: </b>Nebraska
+      
+      
+      
+      <br><b>NH: </b>New Hampshire
+      
+      
+      
+      <br><b>NJ: </b>New Jersey
+      
+      
+      
+      <br><b>NM: </b>New Mexico
+      
+      
+      
+      <br><b>NV: </b>Nevada
+      
+      
+      
+      <br><b>NY: </b>New York
+      
+      
+      
+      <br><b>OH: </b>Ohio
+      
+      
+      
+      <br><b>OK: </b>Oklahoma
+      
+      
+      
+      <br><b>OR: </b>Oregon
+      
+      
+      
+      <br><b>PA: </b>Pennsylvania
+      
+      
+      
+      <br><b>PR: </b>Puerto Rico
+      
+      
+      
+      <br><b>PW: </b>Palau
+      
+      
+      
+      <br><b>RI: </b>Rhode Island
+      
+      
+      
+      <br><b>SC: </b>South Carolina
+      
+      
+      
+      <br><b>SD: </b>South Dakota
+      
+      
+      
+      <br><b>TN: </b>Tennessee
+      
+      
+      
+      <br><b>TX: </b>Texas
+      
+      
+      
+      <br><b>UT: </b>Utah
+      
+      
+      
+      <br><b>VA: </b>Virginia
+      
+      
+      
+      <br><b>VI: </b>U.S. Virgin Islands
+      
+      
+      
+      <br><b>VT: </b>Vermont
+      
+      
+      
+      <br><b>WA: </b>Washington
+      
+      
+      
+      <br><b>WI: </b>Wisconsin
+      
+      
+      
+      <br><b>WV: </b>West Virginia
+      
+      
+      
+      <br><b>WY: </b>Wyoming
+      
+      
+      
+      <br><b>Left: </b>
+      
+      
+      <br><b>Front: </b>
+      
+      
+      <br><b>Right: </b>
+      
+      
+      
+      <h2>Type: MimeType</h2>For complete information see:
+      https://www.iana.org/assignments/media-types/media-types.xhtml. For common examples
+      see: https://en.wikipedia.org/wiki/Media_type 
+      
+      
+      
+   </body>
+</html>
