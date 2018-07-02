@@ -1256,14 +1256,30 @@
     </xs:simpleType>
 
     <xs:simpleType name="SexType">
+        <xs:annotation>
+            <xs:documentation>Sex type only becomes complicated for groups and minor species.</xs:documentation>
+        </xs:annotation>
         <xs:restriction base="xs:string">
             <xs:enumeration value="Female"/>
             <xs:enumeration value="Male"/>
-            <xs:enumeration value="Gender Unknown"/>
             <xs:enumeration value="Spayed Female"/>
             <xs:enumeration value="Neutered Male"/>
             <xs:enumeration value="True Hermaphrodite"/>
-            <xs:enumeration value="Other"/>
+            <xs:enumeration value="Mixed Group">
+                <xs:annotation>
+                    <xs:documentation>Only applicable to Group.</xs:documentation>
+                </xs:annotation>                
+            </xs:enumeration>
+            <xs:enumeration value="Gender Unknown">
+                <xs:annotation>
+                    <xs:documentation>Only applies to minor species in unusual cases.</xs:documentation>
+                </xs:annotation>                
+            </xs:enumeration>
+            <xs:enumeration value="Other">
+                <xs:annotation>
+                    <xs:documentation>Only applies to minor species in unusual cases.</xs:documentation>
+                </xs:annotation>                
+            </xs:enumeration>
         </xs:restriction>
     </xs:simpleType>
 

@@ -19,9 +19,9 @@
                     </xsl:element>
                 </xsl:when>
                 <xsl:when
-                    test="contains($parent, 'xs:simpleType') or contains($parent, 'xs:complexType')">
+                    test="contains(name(..), 'xs:simpleType') or contains(name(..), 'xs:complexType')">
                     <xsl:element name="Type">
-                        <xsl:value-of select="../../@name"/>
+                        <xsl:value-of select="../@name"/>
                     </xsl:element>
                 </xsl:when>
                 <xsl:when
