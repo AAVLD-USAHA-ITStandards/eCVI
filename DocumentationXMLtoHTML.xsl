@@ -54,6 +54,31 @@
     <xsl:template match="Type">
         <h2>Type: <xsl:value-of select="."/></h2>
         <xsl:value-of select="../Description"/>
+        <xsl:if test="../Attributes">
+            <h3>Attributes</h3>
+            <ul>
+                <xsl:for-each select="../Attributes/Attribute">
+                    <li>
+                        <b><xsl:value-of select="./@name"/></b>
+                        <xsl:text> </xsl:text>
+                        <xsl:value-of select="./@required"/>
+                    </li>
+                </xsl:for-each>
+            </ul>
+        </xsl:if>
+        <xsl:if test="../ChildElements">
+            <h3>Child Elements</h3>
+            <ul>
+                <xsl:for-each select="../ChildElements/Child">
+                    <li>
+                        <b><xsl:value-of select="./@name"/></b>
+                        <xsl:text> </xsl:text>
+                        <xsl:value-of select="./@required"/>
+                        <xsl:if test="./@repeats='Repeats'"> Repeats</xsl:if>
+                    </li>
+                </xsl:for-each>
+            </ul>
+        </xsl:if>
     </xsl:template>
     
     <xsl:template match="Description">

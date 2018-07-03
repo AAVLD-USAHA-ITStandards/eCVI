@@ -123,10 +123,7 @@
       animal purpose at destination with a little bit of true reason for movement or
       reason for certificate. 
       <h3>Child Elements</h3>
-      <ul>
-         <li><b>MovementPurpose</b> Optional
-         </li>
-      </ul>
+      <ul></ul>
       
       
       
@@ -293,8 +290,12 @@
       
       
       <h2>Element: GroupLot</h2> Species may be designated by code (see SpeciesCodeType) or other (see
-      SpeciesOtherType). Quantity is a required number (decimals acceptable). Unit by
-      default is "Number", as in a count. A different unit can be specified as an optional
+      SpeciesOtherType). A single GroupLotID is allowed as a single string, not further
+      
+      defined in order to be species neutral.  Quantity is a required number (decimals acceptable).
+      
+      Unit by default is "Number", as in a count. A different unit can be specified as an
+      optional
       string (guidelines on standardized units?). Age is optional and may be specified as
       either: a number of days, weeks, months or years plus the standard code for units
       (d|wk|mo|a) (example: 3wk), age definitions adhere to UCUM -
@@ -420,10 +421,7 @@
          </li>
       </ul>
       <h3>Child Elements</h3>
-      <ul>
-         <li><b>Payload</b> Required
-         </li>
-      </ul>
+      <ul></ul>
       
       
       
@@ -470,18 +468,7 @@
       BusinessName, FirstName, Middle Name, LastName, OtherName are all optional for
       applications to use one or more (zero would validate, but why?) 
       <h3>Child Elements</h3>
-      <ul>
-         <li><b>BusinessName</b> Optional
-         </li>
-         <li><b>FirstName</b> Optional
-         </li>
-         <li><b>MiddleName</b> Optional
-         </li>
-         <li><b>LastName</b> Optional
-         </li>
-         <li><b>OtherName</b> Optional
-         </li>
-      </ul>
+      <ul></ul>
       
       
       
@@ -657,24 +644,7 @@
       However for a CVI to be valid in any jurisdiction, this element must contain enough
       information for autorities to uniquely identify the location. 
       <h3>Child Elements</h3>
-      <ul>
-         <li><b>Line1</b> Optional
-         </li>
-         <li><b>Line2</b> Optional
-         </li>
-         <li><b>Town</b> Optional
-         </li>
-         <li><b>County</b> Optional
-         </li>
-         <li><b>State</b> Optional
-         </li>
-         <li><b>ZIP</b> Optional
-         </li>
-         <li><b>Country</b> Optional
-         </li>
-         <li><b>coordinates</b> Optional
-         </li>
-      </ul>
+      <ul></ul>
       
       
       
@@ -717,10 +687,7 @@
          </li>
       </ul>
       <h3>Child Elements</h3>
-      <ul>
-         <li><b>Result</b> Required
-         </li>
-      </ul>
+      <ul></ul>
       
       
       
@@ -915,10 +882,7 @@
       <h3>Attributes</h3>
       <ul></ul>
       <h3>Child Elements</h3>
-      <ul>
-         <li><b>Photograph</b> Required
-         </li>
-      </ul>
+      <ul></ul>
       
       
       
@@ -949,6 +913,20 @@
       additional ProgramStatuses. Person (see PersonType) is required (why?), and there
       is
       no limit on additional Persons. 
+      <h3>Child Elements</h3>
+      <ul>
+         <li><b>PremId</b> Optional
+         </li>
+         <li><b>PremName</b> Optional
+         </li>
+         <li><b>Address</b> Required
+         </li>
+         <li><b>ProgramStatus</b> Optional
+         </li>
+         <li><b>Person</b> Optional
+         </li>
+      </ul>
+      
       
       
       
@@ -958,6 +936,18 @@
       only if unavailable. PremName is an optional string. Address (see AddressType) is
       optional. Person (see PersonType) is required, and there is no limit on additional
       Persons. 
+      <h3>Child Elements</h3>
+      <ul>
+         <li><b>PremId</b> Optional
+         </li>
+         <li><b>PremName</b> Optional
+         </li>
+         <li><b>AddressBlock</b> Optional
+         </li>
+         <li><b>Person</b> Required
+         </li>
+      </ul>
+      
       
       
       

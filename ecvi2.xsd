@@ -235,8 +235,9 @@
     <xs:element name="GroupLot">
         <xs:annotation>
             <xs:documentation> Species may be designated by code (see SpeciesCodeType) or other (see
-                SpeciesOtherType). Quantity is a required number (decimals acceptable). Unit by
-                default is "Number", as in a count. A different unit can be specified as an optional
+                SpeciesOtherType). A single GroupLotID is allowed as a single string, not further 
+                defined in order to be species neutral.  Quantity is a required number (decimals acceptable). 
+                Unit by default is "Number", as in a count. A different unit can be specified as an optional
                 string (guidelines on standardized units?). Age is optional and may be specified as
                 either: a number of days, weeks, months or years plus the standard code for units
                 (d|wk|mo|a) (example: 3wk), age definitions adhere to UCUM -
@@ -256,6 +257,7 @@
                     <xs:element ref="SpeciesCode"/>
                     <xs:element ref="SpeciesOther"/>
                 </xs:choice>
+                <xs:element name="GroupLotID" type="xs:string" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="Test" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="Vaccination" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
