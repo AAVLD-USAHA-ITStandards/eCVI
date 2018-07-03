@@ -1274,12 +1274,12 @@
             </xs:enumeration>
             <xs:enumeration value="Gender Unknown">
                 <xs:annotation>
-                    <xs:documentation>Only applies to minor species in unusual cases.</xs:documentation>
+                    <xs:documentation>Only applies to minor species in unusual cases such as non sexually dimorphic birds.</xs:documentation>
                 </xs:annotation>                
             </xs:enumeration>
             <xs:enumeration value="Other">
                 <xs:annotation>
-                    <xs:documentation>Only applies to minor species in unusual cases.</xs:documentation>
+                    <xs:documentation>Only applies to minor species in unusual cases.  Supply explanation in SexDetail</xs:documentation>
                 </xs:annotation>                
             </xs:enumeration>
         </xs:restriction>
@@ -1606,6 +1606,9 @@
     </xs:simpleType>
 
     <xs:simpleType name="PhotoView">
+        <xs:annotation>
+            <xs:documentation>Should be obvious but photos are labeled by three views.</xs:documentation>
+        </xs:annotation>
         <xs:restriction base="xs:string">
             <xs:enumeration value="Left"/>
             <xs:enumeration value="Front"/>

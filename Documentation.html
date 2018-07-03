@@ -1,10 +1,10 @@
 <html>
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-      <Title>eCVI version 2 Standard Contents</Title>
+      <Title>eCVI Version 2 Standard Contents</Title>
    </head>
    <body>
-      <h1>eCVI version 2 Standard Contents</h1>
+      <h1>eCVI Version 2 Standard Contents</h1>
       
       
       
@@ -61,17 +61,17 @@
          </li>
          <li><b>Accessions</b> Optional
          </li>
-         <li><b>Animal</b> Optional
+         <li><b>Animal</b> Optional, Repeats
          </li>
-         <li><b>GroupLot</b> Optional
+         <li><b>GroupLot</b> Optional, Repeats
          </li>
          <li><b>Statements</b> Optional
          </li>
-         <li><b>Attachment</b> Optional
+         <li><b>Attachment</b> Optional, Repeats
          </li>
-         <li><b>MiscAttribute</b> Optional
+         <li><b>MiscAttribute</b> Optional, Repeats
          </li>
-         <li><b>Binary</b> Optional
+         <li><b>Binary</b> Optional, Repeats
          </li>
       </ul>
       
@@ -123,7 +123,10 @@
       animal purpose at destination with a little bit of true reason for movement or
       reason for certificate. 
       <h3>Child Elements</h3>
-      <ul></ul>
+      <ul>
+         <li><b>MovementPurpose</b> Optional, Repeats
+         </li>
+      </ul>
       
       
       
@@ -230,7 +233,7 @@
       animal.
       <h3>Child Elements</h3>
       <ul>
-         <li><b>Accession</b> Optional
+         <li><b>Accession</b> Optional, Repeats
          </li>
       </ul>
       
@@ -272,9 +275,9 @@
       <ul>
          <li><b>AnimalTags</b> Required
          </li>
-         <li><b>Test</b> Optional
+         <li><b>Test</b> Optional, Repeats
          </li>
-         <li><b>Vaccination</b> Optional
+         <li><b>Vaccination</b> Optional, Repeats
          </li>
       </ul>
       
@@ -327,9 +330,11 @@
       </ul>
       <h3>Child Elements</h3>
       <ul>
-         <li><b>Test</b> Optional
+         <li><b>GroupLotID</b> Optional
          </li>
-         <li><b>Vaccination</b> Optional
+         <li><b>Test</b> Optional, Repeats
+         </li>
+         <li><b>Vaccination</b> Optional, Repeats
          </li>
       </ul>
       
@@ -421,7 +426,10 @@
          </li>
       </ul>
       <h3>Child Elements</h3>
-      <ul></ul>
+      <ul>
+         <li><b>Payload</b> Required
+         </li>
+      </ul>
       
       
       
@@ -454,9 +462,9 @@
       Phone). 
       <h3>Child Elements</h3>
       <ul>
-         <li><b>Phone</b> Optional
+         <li><b>Phone</b> Optional, Repeats
          </li>
-         <li><b>Email</b> Optional
+         <li><b>Email</b> Optional, Repeats
          </li>
       </ul>
       
@@ -468,7 +476,18 @@
       BusinessName, FirstName, Middle Name, LastName, OtherName are all optional for
       applications to use one or more (zero would validate, but why?) 
       <h3>Child Elements</h3>
-      <ul></ul>
+      <ul>
+         <li><b>BusinessName</b> Optional
+         </li>
+         <li><b>FirstName</b> Optional
+         </li>
+         <li><b>MiddleName</b> Optional
+         </li>
+         <li><b>LastName</b> Optional
+         </li>
+         <li><b>OtherName</b> Optional
+         </li>
+      </ul>
       
       
       
@@ -644,7 +663,24 @@
       However for a CVI to be valid in any jurisdiction, this element must contain enough
       information for autorities to uniquely identify the location. 
       <h3>Child Elements</h3>
-      <ul></ul>
+      <ul>
+         <li><b>Line1</b> Optional
+         </li>
+         <li><b>Line2</b> Optional
+         </li>
+         <li><b>Town</b> Optional
+         </li>
+         <li><b>County</b> Optional
+         </li>
+         <li><b>State</b> Optional
+         </li>
+         <li><b>ZIP</b> Optional
+         </li>
+         <li><b>Country</b> Optional
+         </li>
+         <li><b>coordinates</b> Optional
+         </li>
+      </ul>
       
       
       
@@ -687,7 +723,10 @@
          </li>
       </ul>
       <h3>Child Elements</h3>
-      <ul></ul>
+      <ul>
+         <li><b>Result</b> Required, Repeats
+         </li>
+      </ul>
       
       
       
@@ -882,7 +921,10 @@
       <h3>Attributes</h3>
       <ul></ul>
       <h3>Child Elements</h3>
-      <ul></ul>
+      <ul>
+         <li><b>Photograph</b> Required, Repeats
+         </li>
+      </ul>
       
       
       
@@ -921,9 +963,9 @@
          </li>
          <li><b>Address</b> Required
          </li>
-         <li><b>ProgramStatus</b> Optional
+         <li><b>ProgramStatus</b> Optional, Repeats
          </li>
-         <li><b>Person</b> Optional
+         <li><b>Person</b> Optional, Repeats
          </li>
       </ul>
       
@@ -944,7 +986,7 @@
          </li>
          <li><b>AddressBlock</b> Optional
          </li>
-         <li><b>Person</b> Required
+         <li><b>Person</b> Required, Repeats
          </li>
       </ul>
       
@@ -1202,11 +1244,11 @@
       
       
       
-      <br><b>Gender Unknown: </b>Only applies to minor species in unusual cases.
+      <br><b>Gender Unknown: </b>Only applies to minor species in unusual cases such as non sexually dimorphic birds.
       
       
       
-      <br><b>Other: </b>Only applies to minor species in unusual cases.
+      <br><b>Other: </b>Only applies to minor species in unusual cases.  Supply explanation in SexDetail
       
       
       
@@ -1462,6 +1504,11 @@
       
       
       <br><b>WY: </b>Wyoming
+      
+      
+      
+      
+      <h2>Type: PhotoView</h2>Should be obvious but photos are labeled by three views.
       
       
       

@@ -46,11 +46,11 @@
                 <xsl:value-of select="."/>
             </xsl:element>
             <xsl:if
-                test="../../xs:complexType/xs:sequence/xs:element[@ref] | ../../xs:complexType/xs:sequence/xs:element[@name]">
+                test="../../xs:complexType/xs:sequence/xs:element[@ref] or ../../xs:complexType/xs:sequence/xs:element[@name]">
                 <xsl:if test="contains($parent, 'xs:element')">
                     <xsl:element name="ChildElements">
                         <xsl:for-each
-                            select="../../xs:complexType/xs:sequence/xs:element[@ref] | ../xs:complexType/xs:sequence/xs:element[@name]">
+                            select="../../xs:complexType/xs:sequence/xs:element[@ref] | ../../xs:complexType/xs:sequence/xs:element[@name]">
                             <xsl:element name="Child">
                                 <xsl:attribute name="name">
                                     <xsl:value-of select="@ref"/>

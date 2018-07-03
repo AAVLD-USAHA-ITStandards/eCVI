@@ -5,8 +5,8 @@
     version="2.0">
     <xsl:output  method="html"/> 
     <xsl:template match="/">
-        <html><head><Title>eCVI version 2 Standard Contents</Title></head><body>
-            <h1>eCVI version 2 Standard Contents</h1>
+        <html><head><Title>eCVI Version 2 Standard Contents</Title></head><body>
+            <h1>eCVI Version 2 Standard Contents</h1>
             <xsl:apply-templates select="ecvi2Documentation"/>
         </body></html>
     </xsl:template>
@@ -34,7 +34,7 @@
                         <b><xsl:value-of select="./@name"/></b>
                         <xsl:text> </xsl:text>
                         <xsl:value-of select="./@required"/>
-                        <xsl:if test="./@repeats='Repeats'"> Repeats</xsl:if>
+                        <xsl:if test="./@repeat='Repeats'">, Repeats</xsl:if>
                     </li>
                 </xsl:for-each>
             </ul>
@@ -74,7 +74,7 @@
                         <b><xsl:value-of select="./@name"/></b>
                         <xsl:text> </xsl:text>
                         <xsl:value-of select="./@required"/>
-                        <xsl:if test="./@repeats='Repeats'"> Repeats</xsl:if>
+                        <xsl:if test="./@repeat='Repeats'">, Repeats</xsl:if>
                     </li>
                 </xsl:for-each>
             </ul>
