@@ -217,8 +217,8 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:choice>
-                    <xs:element ref="SpeciesCode"/>
-                    <xs:element ref="SpeciesOther"/>
+                    <xs:element ref="SpeciesCode" minOccurs="1" maxOccurs="1"/>
+                    <xs:element ref="SpeciesOther" minOccurs="1" maxOccurs="1"/>
                 </xs:choice>
                 <xs:element ref="AnimalTags" minOccurs="1" maxOccurs="1"/>
                 <xs:element ref="Test" minOccurs="0" maxOccurs="unbounded"/>
