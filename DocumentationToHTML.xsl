@@ -27,6 +27,7 @@
                                 <xsl:otherwise>: Optional</xsl:otherwise>
                             </xsl:choose>
                         </li>
+                        <xsl:apply-templates select="./xs:annotation/xs:documentation"/>
                     </xsl:for-each>
                 </ul>
                 <h2>Child Elements</h2>
@@ -38,8 +39,8 @@
                                 <xsl:value-of select="@name"/>
                             </b>
                             <xsl:choose>
-                                <xsl:when test="@minOccurs = '1'">: Required</xsl:when>
-                                <xsl:otherwise>: Optional</xsl:otherwise>
+                                <xsl:when test="@minOccurs = '0'">: Optional</xsl:when>
+                                <xsl:otherwise>: Required</xsl:otherwise>
                             </xsl:choose>
                             <xsl:if test="@maxOccurs &gt; '1'">, may repeat</xsl:if>
                         </li>
@@ -49,11 +50,25 @@
                     <xsl:choose>
                         <xsl:when test="./@ref">
                             <xsl:variable name="elementRef" select="./@ref"/>
-                            <xsl:apply-templates select="//xs:element[@name = $elementRef]"/>
+                            <xsl:choose>
+                                <xsl:when test="not(preceding::xs:element[@name=$elementRef])">
+                                     <xsl:apply-templates select="//xs:element[@name = $elementRef]"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <b>See: </b> <i><xsl:value-of select="$elementRef"/></i><br/>
+                                </xsl:otherwise>
+                            </xsl:choose>
                         </xsl:when>
                         <xsl:when test="./@type">
                             <xsl:variable name="elementType" select="./@type"/>
-                            <xsl:apply-templates select="//xs:complexType[@name = $elementType]"/>
+                            <xsl:choose>
+                                <xsl:when test="not(preceding::xs:complexType[@name=$elementType])">
+                                    <xsl:apply-templates select="//xs:complexType[@name = $elementType]"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <b>See: </b> <i><xsl:value-of select="$elementType"/></i><br/>
+                                </xsl:otherwise>
+                            </xsl:choose>
                         </xsl:when>
                     </xsl:choose>
                 </xsl:for-each>
@@ -71,7 +86,7 @@
         </h3>
         <xsl:apply-templates select="./xs:annotation/xs:documentation"/>
         <xsl:if test="./@type and not(starts-with(./@type, 'xs:'))">
-            <ul><li>See <xsl:value-of select="./@type"/></li></ul>
+            <ul><li>See: <i> <xsl:value-of select="./@type"/></i></li></ul>
         </xsl:if>
         <xsl:if test="./xs:complexType/xs:attribute">
             <h4><i>Attributes</i></h4>
@@ -93,6 +108,9 @@
                 </xsl:for-each>
             </ul>
         </xsl:if>
+        <xsl:if test="./xs:simpleType">
+            <xsl:apply-templates select="./xs:simpleType"/>
+        </xsl:if>
         <xsl:if
             test="
                 ./xs:complexType/xs:sequence/xs:element[@name] or
@@ -110,8 +128,8 @@
                                     <xsl:value-of select="@name"/>
                                 </b>
                                 <xsl:choose>
-                                    <xsl:when test="@minOccurs = '1'">: Required</xsl:when>
-                                    <xsl:otherwise>: Optional</xsl:otherwise>
+                                    <xsl:when test="@minOccurs = '0'">: Optional</xsl:when>
+                                    <xsl:otherwise>: Required</xsl:otherwise>
                                 </xsl:choose>
                                 <xsl:if test="@maxOccurs &gt; '1'">, may repeat</xsl:if>
                                 <xsl:variable name="varType" select="./@type"/>
@@ -124,8 +142,8 @@
                                             <b><xsl:value-of select="@ref"/>
                                                 <xsl:value-of select="@name"/></b>
                                             <xsl:choose>
-                                                <xsl:when test="@minOccurs = '1'">: Required</xsl:when>
-                                                <xsl:otherwise>: Optional</xsl:otherwise>
+                                                <xsl:when test="@minOccurs = '0'">: Optional</xsl:when>
+                                                <xsl:otherwise>: Required</xsl:otherwise>
                                             </xsl:choose>
                                             <xsl:if test="@maxOccurs &gt; '1'">, may repeat</xsl:if>
                                         </li>
@@ -141,7 +159,25 @@
                 <xsl:choose>
                     <xsl:when test="./@ref">
                         <xsl:variable name="elementRef" select="./@ref"/>
-                        <xsl:apply-templates select="//xs:element[@name = $elementRef]"/>
+                        <xsl:choose>
+                            <xsl:when test="not(preceding::xs:element[@name=$elementRef])">
+                                <xsl:apply-templates select="//xs:element[@name = $elementRef]"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <b>See: </b> <i><xsl:value-of select="$elementRef"/></i><br/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:when>
+                    <xsl:when test="./@type">
+                        <xsl:variable name="elementType" select="./@type"/>
+                        <xsl:choose>
+                            <xsl:when test="not(preceding::xs:complexType[@name=$elementType])">
+                                <xsl:apply-templates select="//xs:complexType[@name = $elementType]"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <b>See: </b> <i><xsl:value-of select="$elementType"/></i><br/>
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </xsl:when>
                 </xsl:choose>
             </xsl:for-each>
@@ -166,6 +202,7 @@
                             <xsl:when test="@use = 'required'">: Required</xsl:when>
                             <xsl:otherwise>: Optional</xsl:otherwise>
                         </xsl:choose>
+                        <xsl:apply-templates select="./xs:annotation/xs:documentation"/>
                         <xsl:variable name="varType" select="./@type"/>
                         <xsl:apply-templates select="//xs:simpleType[@name=$varType]"></xsl:apply-templates>
                         <xsl:apply-templates select="./xs:simpleType"/>
@@ -190,8 +227,8 @@
                                     <xsl:value-of select="@name"/>
                                 </b>
                                 <xsl:choose>
-                                    <xsl:when test="@minOccurs = '1'">: Required</xsl:when>
-                                    <xsl:otherwise>: Optional</xsl:otherwise>
+                                    <xsl:when test="@minOccurs = '0'">: Optional</xsl:when>
+                                    <xsl:otherwise>: Required</xsl:otherwise>
                                 </xsl:choose>
                                 <xsl:if test="@maxOccurs &gt; '1'">, may repeat</xsl:if>
                                 <xsl:variable name="varType" select="./@type"/>
@@ -204,8 +241,8 @@
                                         <b><xsl:value-of select="@ref"/>
                                             <xsl:value-of select="@name"/></b>
                                         <xsl:choose>
-                                            <xsl:when test="@minOccurs = '1'">: Required</xsl:when>
-                                            <xsl:otherwise>: Optional</xsl:otherwise>
+                                            <xsl:when test="@minOccurs = '0'">: Optional</xsl:when>
+                                            <xsl:otherwise>: Required</xsl:otherwise>
                                         </xsl:choose>
                                         <xsl:if test="@maxOccurs &gt; '1'">, may repeat</xsl:if>
                                     </li>
@@ -218,18 +255,32 @@
             </ul>
             <xsl:for-each
                 select="./xs:sequence/xs:element | ./xs:sequence/xs:choice/xs:element">
-                <xsl:choose>
-                    <xsl:when test="./@ref">
-                        <xsl:variable name="elementRef" select="./@ref"/>
-                        <xsl:apply-templates select="//xs:element[@name = $elementRef]"/>
-                    </xsl:when>
-                    <xsl:when test="./@ref">
-                        <xsl:variable name="elementType" select="./@type"/>
-                        <xsl:apply-templates select="//xs:complexType[@name = $elementType]"/>
-                    </xsl:when>
-                </xsl:choose>
+                     <xsl:choose>
+                        <xsl:when test="./@ref">
+                            <xsl:variable name="elementRef" select="./@ref"/>
+                            <xsl:choose>
+                                <xsl:when test="not(preceding::xs:element[@name=$elementRef])">
+                                     <xsl:apply-templates select="//xs:element[@name = $elementRef]"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <b>See: </b> <i><xsl:value-of select="$elementRef"/></i><br/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:when>
+                        <xsl:when test="./@type">
+                            <xsl:variable name="elementType" select="./@type"/>
+                            <xsl:choose>
+                                <xsl:when test="not(preceding::xs:complexType[@name=$elementType])">
+                                    <xsl:apply-templates select="//xs:complexType[@name = $elementType]"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <b>See: </b> <i><xsl:value-of select="$elementType"/></i><br/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:when>
+                    </xsl:choose>
             </xsl:for-each>
-        </xsl:if>
+         </xsl:if>
     </xsl:template>
     
     
