@@ -14,6 +14,8 @@
             <body>
                 <h1>eCVI Version 2 Standard Contents</h1>
                 <xsl:apply-templates select="../xs:annotation/xs:documentation"/>
+                <h1>eCVI Document Element</h1>
+                <xsl:apply-templates select="./xs:annotation/xs:documentation"/>
                 <h2>Attributes</h2>
                 <ul>
                     <xsl:for-each select="./xs:complexType/xs:attribute">

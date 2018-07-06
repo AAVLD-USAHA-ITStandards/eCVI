@@ -26,6 +26,8 @@
             05/29/2018: Converted GeoPoint from attributes for Latitude and Longitude to single coordinates element in KML format.
             06/06/2018: Simplified Name and Address Block for contacts.
             06/25/2018: Clean up documentation.
+            07/06/2018: Yet another version of AnimalTags defining just the most common.
+            07/06/2018: Minor edits based on committee input.  Further documentation clean up.
         </xs:documentation>
     </xs:annotation>
     <xs:annotation>
@@ -36,19 +38,15 @@
 
     <xs:element name="eCVI">
         <xs:annotation>
-            <xs:documentation> The eCVI contains the following high-level elements (defined
-                separately): Exactly one Veterinarian (see Veterinarian) is required. Exactly one
-                MovementPurposes is required (see MovementPurposes, which may actually identify zero
-                or more purposes). Exactly one Origin (see PremType) is required. Exactly one
-                Destination (see PremType) is required. Exactly one Consignor (see ContactType) is
-                optional only if unavailable. Excatly one Consignee (see ContactType) is optional
-                only if unavailable. Exactly one Accessions is optional only if unavailable (see
-                Accessions, which may actually identify zero or more AccessionTypes). One or more
-                Animals (see Animal) are optional only if unavailable. One or more GroupLots (see
-                GroupLot) are optional. One or more Attachments (see Attachment) are optional. One
-                or more Binaries (see Binary) are optional. CviNumber is a required string.
-                IssueDate is a required date. ExpirationDate is a required date. ShipmentDate is an
-                optional date. EntryPermitNumber is an optional string. </xs:documentation>
+            <xs:documentation> The eCVI xml document contains an extract of data from an interstate
+                certificate of veterinary inspection (normally electronic) used to communicate the 
+                information to another computer system.  It does not constitute the legal document; 
+                that remains the job of the originating application.  This schema tries to capture 
+                those data elements and the level of detail needed for regulatory decision support,
+                disease traceability, and business interoperability.  A large majority of use-cases
+                can be met using the fully-structured (close standard) data.  Inevitably, edge cases--even 
+                very important ones--have had to be left to open standard features such as "other"
+                choices and free-text entry elements.</xs:documentation>
         </xs:annotation>
         <xs:complexType>
             <xs:sequence>
@@ -81,18 +79,16 @@
     <!-- BEGIN Top Level Elements -->
     <xs:element name="Veterinarian">
         <xs:annotation>
-            <xs:documentation> Within the Veterinarian element: Name (see Person) is required.
-                Address (see AddressType) is optional only if unavailable. License State is an
-                optional string, and must be a (two upper case letter?) US state reflecting the
-                state where the license was issued License Number is an optional string. National
-                Accreditation Number is an optional string. </xs:documentation>
+            <xs:documentation> Veterinarian is a required element for iCVIs.  When available
+                 deterministic identifier such as license number and state or national 
+                 accreditation number should be provided. </xs:documentation>
         </xs:annotation>
         <xs:complexType>
             <xs:sequence>
                 <xs:element ref="Person" minOccurs="1" maxOccurs="1"/>
                 <xs:element ref="AddressBlock" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
-            <xs:attribute name="LicenseState" type="xs:string" use="optional"/>
+            <xs:attribute name="LicenseState" type="xs:string" use="optional" />
             <xs:attribute name="LicenseNumber" type="xs:string" use="optional"/>
             <xs:attribute name="NationalAccreditationNumber" type="xs:string" use="optional"/>
         </xs:complexType>
@@ -100,31 +96,41 @@
 
     <xs:element name="MovementPurposes">
         <xs:annotation>
-            <xs:documentation> Movement Purpose is optional, and there is no limit on additional
-                Movement Purposes. Movement Purpose is a bit of a misnomer. It includes mostly
-                animal purpose at destination with a little bit of true reason for movement or
-                reason for certificate. </xs:documentation>
+            <xs:documentation> Movement Purposes is required, however, it may be an empty list.
+                This is a challenging element to populate because there are some many factors
+                that become important in regulatory decision making.  This list encompasses 
+                many different aspects of the animal's use, reason for movement, etc.  As with
+                many elements, the goal has been to enumerate those most often used in regulatory
+                and other decision making but leave "Other" available.  If "Other" is selected
+                a reason should be supplied as text in the "OtherReason" element.</xs:documentation>
         </xs:annotation>
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="MovementPurpose" minOccurs="0" maxOccurs="unbounded">
                     <xs:simpleType>
                         <xs:restriction base="xs:string">
-                            <xs:enumeration value="show"/>
-                            <xs:enumeration value="race"/>
-                            <xs:enumeration value="rodeo"/>
-                            <xs:enumeration value="sale"/>
-                            <xs:enumeration value="pet"/>
-                            <xs:enumeration value="breeding"/>
-                            <xs:enumeration value="feeding"/>
-                            <xs:enumeration value="grazing"/>
-                            <xs:enumeration value="training"/>
-                            <xs:enumeration value="slaughter"/>
-                            <xs:enumeration value="medicalTreatment"/>
-                            <xs:enumeration value="other"/>
+                            <xs:enumeration value="Racing"/>
+                            <xs:enumeration value="Sale"/>
+                            <xs:enumeration value="Grazing"/>
+                            <xs:enumeration value="Training"/>
+                            <xs:enumeration value="Slaughter"/>
+                            <xs:enumeration value="Medical Treatment:"/>
+                            <xs:enumeration value="Exhibition/Show/Rodeo"/>
+                            <xs:enumeration value="Breeding"/>
+                            <xs:enumeration value="Competition"/>
+                            <xs:enumeration value="Feeding to condition"/>
+                            <xs:enumeration value="Feeding to slaughter"/>
+                            <xs:enumeration value="Laying Hens"/>
+                            <xs:enumeration value="Hunting for harvest"/>
+                            <xs:enumeration value="Companion Animal"/>
+                            <xs:enumeration value="Personal Travel/Transit"/>
+                            <xs:enumeration value="Owner relocating"/>
+                            <xs:enumeration value="Evacuation from Natural Disaster"/>
+                            <xs:enumeration value="Other"/>
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:element>
+                <xs:element name="OtherReason" type="xs:string" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -185,9 +191,8 @@
     <xs:element name="Accessions">
         <xs:annotation>
             <xs:documentation>Because many herd movements have testing performed in one accession,
-                the accession(s) is(are) listed here and referenced by each test rather than \
-                duplicating all the accession information for each test on each
-                animal.</xs:documentation>
+                the accession(s) is(are) listed here and referenced by each test rather than
+                duplicating all the accession information for each test on each animal.</xs:documentation>
         </xs:annotation>
         <xs:complexType>
             <xs:sequence>
@@ -198,11 +203,16 @@
 
     <xs:element name="Animal">
         <xs:annotation>
-            <xs:documentation> Animal species may be designated by code (see SpeciesCodeType) or
-                other (see SpeciesOther Type). A single animal tag (see AnimalTags) is required.
+            <xs:documentation> The Animal element is used for all individually identifiable animals
+                in a shipment even when those may have been entered in an electronic source document
+                using shorthand tools such as identifier ranges.  
+                
+                Animal species may be designated by code (see SpeciesCode) or
+                other (see SpeciesOther). At least one animal tag (see AnimalTags) is required.
                 Test (see TestType) is optional, and there is no limit on additional Tests. Age is
-                optional and may be specified as either: a number of days, weeks, months or years
-                plus the standard code for units (d|wk|mo|a) (example: 3wk), age definitions adhere
+                optional (although often required by regulatory policy) and may be specified as 
+                either: a number of days, weeks, months or years plus the standard code for 
+                units (d|wk|mo|a) (example: 3wk), age definitions adhere
                 to UCUM - http://unitsofmeasure.org/ucum.html), or as a specific date of birth as a
                 four-digit year, two-digit month, and two-digit date, separated by dashes (example:
                 2001-05-31). Breed is optional and specified by a two or three uppercase letter code
@@ -210,7 +220,9 @@
                 standard but most are available at: https://www.naab-css.org/uniform-breed-codes,
                 and
                 https://www.aphis.usda.gov/animal_health/vs_ocio/downloads/date_standards/icvi_data_concepts.pdf.
-                Sex (see SexType) is optional. SexDetail is an optional string. InspectionDate is a
+                Sex (see SexType) reflects the most common variations needed for regulatory.  If
+                other configurations are needed they are provided as a string in SexDetail.  "Mixed"
+                is not an allowable value for a single Animal (provided for use with Group).  InspectionDate is a
                 required date, and is the date the animals were inspected by the vet. If the
                 inspection took place over multiple days, use the first date. </xs:documentation>
         </xs:annotation>
@@ -234,21 +246,38 @@
 
     <xs:element name="GroupLot">
         <xs:annotation>
-            <xs:documentation> Species may be designated by code (see SpeciesCodeType) or other (see
+            <xs:documentation> GroupLot is used for any grouping of similar animals that do not 
+                require individual identification.  Rules for what constitute legal groups are defined
+                in the federal ADT rule and various other legal sources.  In general groups contain
+                only animals of the same species and general age.  All attributes apply to all 
+                members of the group.  If significant variation exists, multiple GroupLot elements
+                may be needed.  
+                
+                Description is the phrase recorded on the iCVI that defines the group and justifies 
+                the absence of individual animal IDs.  Because this phrase is not easily computer
+                interpretable, various structured elements are included that may overlap the contents
+                of the description.
+                
+                Species may be designated by code (see SpeciesCodeType) or other (see
                 SpeciesOtherType). A single GroupLotID is allowed as a single string, not further 
-                defined in order to be species neutral.  Quantity is a required number (decimals acceptable). 
+                defined in order to be species neutral.  Quantity is a optional number. 
                 Unit by default is "Number", as in a count. A different unit can be specified as an optional
-                string (guidelines on standardized units?). Age is optional and may be specified as
+                string (guidelines on standardized units?). Edge cases might require number to be a total 
+                weight of things like fish or shellfish.  In those cases "number" may be a decimal.
+                Age is optional and may be specified as
                 either: a number of days, weeks, months or years plus the standard code for units
                 (d|wk|mo|a) (example: 3wk), age definitions adhere to UCUM -
                 http://unitsofmeasure.org/ucum.html), or as a specific date of birth as a four-digit
                 year, two-digit month, and two-digit date, separated by dashes (example:
-                2001-05-31). Breed is optional and specified by two or three uppercase letters. The
+                2001-05-31). It is understood that groups consist of individuals varying in age so that the
+                Age element here represents a rough mid-point.  In practice, Age is often omitted
+                and included in the Description such as "Feeder steers under 18 months."
+                
+                Breed is optional and specified by two or three uppercase letters. The
                 list is not specified in the standard but most are available at:
                 https://www.naab-css.org/uniform-breed-codes, and
                 https://www.aphis.usda.gov/animal_health/vs_ocio/downloads/date_standards/icvi_data_concepts.pdf.
-                Sex (see SexType) is optional. SexDetail is an optional string. Description is
-                required (provide more specifics on what should go in here since it is required).
+                Sex (see SexType) is optional. SexDetail is an optional string. .
             </xs:documentation>
         </xs:annotation>
         <xs:complexType>
@@ -261,7 +290,7 @@
                 <xs:element ref="Test" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="Vaccination" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
-            <xs:attribute name="Quantity" type="xs:float" use="required"/>
+            <xs:attribute name="Quantity" type="xs:float" use="optional"/>
             <xs:attribute name="Unit" type="xs:string" use="optional" default="Number"/>
             <xs:attribute name="Age" type="AgeType" use="optional"/>
             <xs:attribute name="Breed" type="xs:string" use="optional"/>
@@ -370,7 +399,8 @@
     <xs:element name="Person">
         <xs:annotation>
             <xs:documentation> Person is defined as a Name string and an optional Phone Number (see
-                Phone). </xs:documentation>
+                Phone).  Because of a lack of industry consensus on hanling names, Name can be 
+                provided as either a single string (Name) or individual name components (NameParts).</xs:documentation>
         </xs:annotation>
         <xs:complexType>
             <xs:sequence>
@@ -386,9 +416,11 @@
     
     <xs:element name="NameParts">
         <xs:annotation>
-            <xs:documentation> NameType defines a structured name for a business or person.
+            <xs:documentation> NameParts defines a structured name for a business or person.
                 BusinessName, FirstName, Middle Name, LastName, OtherName are all optional for
-                applications to use one or more (zero would validate, but why?) </xs:documentation>
+                applications to use one or more (NameParts with on individual components would 
+                validate, the schema language to force "one or more of one or more of these parts"  
+                would be more complex than necessary.) </xs:documentation>
         </xs:annotation>
         <xs:complexType>
             <xs:sequence>
@@ -457,8 +489,8 @@
                 specified, indicating where tests for this accession were performed. InfieldTest is
                 an optional bool (true/false value) indicating if a test was performed in the field.
                 (Is this redundant with the Field element?) ID (see ID) is required, and is the
-                reference number that associates an animal’s test details derived from this
-                accession (not clear, reword if possible), not the lab accession number. For
+                reference number that associates an animal’s individual tests performed as part of this
+                accession.  ID is not the lab accession number. That is a distinct element. For
                 Laboratory accessions: Laboratory is a required, containing the following: LabName
                 is a required string. PremId (see PremIdType) is optional only if unavailable.
                 Address (see AddressType) is optional only if unavailable and should contain the lab
@@ -474,10 +506,8 @@
                     <xs:element name="Laboratory" minOccurs="1" maxOccurs="1">
                         <xs:complexType>
                             <xs:sequence>
-                                <xs:element name="LabName" type="xs:string" minOccurs="1"
-                                    maxOccurs="1"/>
-                                <xs:element name="PremId" type="PremIdType" minOccurs="0"
-                                    maxOccurs="1"/>
+                                <xs:element name="LabName" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                                <xs:element name="PremId" type="PremIdType" minOccurs="0" maxOccurs="1"/>
                                 <xs:element ref="AddressBlock" minOccurs="0" maxOccurs="1"/>
                             </xs:sequence>
                             <xs:attribute name="AccessionDate" type="xs:date" use="required"/>
@@ -487,8 +517,7 @@
                     <xs:element name="Field" minOccurs="1" maxOccurs="1">
                         <xs:complexType>
                             <xs:sequence>
-                                <xs:element name="PremId" type="PremIdType" minOccurs="0"
-                                    maxOccurs="1"/>
+                                <xs:element name="PremId" type="PremIdType" minOccurs="0" maxOccurs="1"/>
                                 <xs:element ref="AddressBlock" minOccurs="0" maxOccurs="1"/>
                             </xs:sequence>
                             <xs:attribute name="AccessionDate" type="xs:date" use="required"/>
@@ -760,9 +789,10 @@
     <xs:element name="AnimalTags">
         <xs:annotation>
             <xs:documentation> This is a jumble of type of ID with the type of device holding the
-                ID. "Tags" is a misnomer. An ID may be either Known Format matching one of the list
-                of regular expressions for common official animal IDs, or some other type, either
-                non-offial or one that this schema missed. This field also supports brand
+                ID. "Tags" is a misnomer. An ID may be either one of the most common known formats 
+                (840, 900 series manufacturer tags, NUES9 or NUES8) matching one of the list
+                of regular expressions for common official animal IDs, or some other official type, either
+                or a non-official managment tag.  This field also supports brand
                 descriptions, brand images, and equine description or photographs. These can appear
                 in any order up to six IDs per animal </xs:documentation>
         </xs:annotation>
@@ -770,10 +800,14 @@
             <xs:sequence minOccurs="1" maxOccurs="6">
                 <!-- Why the limit of six? -->
                 <xs:choice>
-                    <xs:element ref="KnownFormatID"/>
-                    <xs:element ref="OtherFormatID"/>
+                    <xs:element ref="AIN"/>
+                    <xs:element ref="MfrRFID"/>
+                    <xs:element ref="NUES9"/>
+                    <xs:element ref="NUES8"/>
+                    <xs:element ref="OtherOfficialID"/>
+                    <xs:element ref="ManagementID"/>
                     <xs:element ref="BrandImage"/>
-                     <xs:element ref="EquineDescription"/>
+                    <xs:element ref="EquineDescription"/>
                     <xs:element ref="EquinePhotographs"/>
                 </xs:choice>
             </xs:sequence>
@@ -782,30 +816,58 @@
     <!-- END Second Level element definitions -->
 
     <!-- Start Third Level for TagID -->
-        <xs:element name="KnownFormatID">
-            <xs:annotation>
-                <xs:documentation>KnownFormatID the complicated regular expression patterns provide some ID validation against known patterns.</xs:documentation>
-            </xs:annotation>
-            <xs:complexType>
-                <xs:attribute name="Type" type="TagType" use="optional"/>
-                <xs:attribute name="Number" type="KnownNumberType" use="required"/>
-            </xs:complexType>
-        </xs:element>
-    
-        <xs:element name="OtherFormatID">
+    <xs:element name="AIN">
+        <xs:annotation>
+            <xs:documentation>KnownFormatID the complicated regular expression patterns provide some ID validation against known patterns.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:attribute name="Type" type="TagType" fixed="AIN" use="optional"/>
+            <xs:attribute name="Number" type="AINType" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="MfrRFID">
+        <xs:annotation>
+            <xs:documentation>KnownFormatID the complicated regular expression patterns provide some ID validation against known patterns.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:attribute name="Type" type="TagType" fixed="MFRRFID" use="optional"/>
+            <xs:attribute name="Number" type="MfrRFIDType" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="NUES9">
+        <xs:annotation>
+            <xs:documentation>KnownFormatID the complicated regular expression patterns provide some ID validation against known patterns.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:attribute name="Type" type="TagType" fixed="NUES9" use="optional"/>
+            <xs:attribute name="Number" type="NUES9Type" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="NUES8">
+        <xs:annotation>
+            <xs:documentation>KnownFormatID the complicated regular expression patterns provide some ID validation against known patterns.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:attribute name="Type" type="TagType" fixed="NUES8" use="optional"/>
+            <xs:attribute name="Number" type="NUES8Type" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="OtherOfficialID">
             <xs:annotation>
                 <xs:documentation> Other Formats: No restrictions </xs:documentation>
             </xs:annotation>
             <xs:complexType>
                 <xs:attribute name="Type" type="TagType" use="optional"/>
-                <xs:attribute name="Number" use="required">
-                    <xs:simpleType>
-                        <xs:restriction base="xs:string">
-                            <!-- This could just use xs:string but left for consistency -->
-                            <xs:pattern value=".*"/>
-                        </xs:restriction>
-                    </xs:simpleType>
-                </xs:attribute>
+                <xs:attribute name="Number" type="xs:string" use="required"/>
+            </xs:complexType>
+        </xs:element>
+        <xs:element name="ManagementID">
+            <xs:annotation>
+                <xs:documentation> Other Formats: No restrictions </xs:documentation>
+                </xs:annotation>
+            <xs:complexType>
+                <xs:attribute name="Type" type="TagType" use="optional"/>
+                <xs:attribute name="Number" type="xs:string" use="required"/>
             </xs:complexType>
         </xs:element>
         <xs:element name="BrandImage">
@@ -873,14 +935,11 @@
     <xs:complexType name="ContactType">
         <xs:annotation>
             <xs:documentation> ContactType is used for consignor and consignee that may be actual
-                physical locations or other postal addresses. PremID (see PremIdType) is optional
-                only if unavailable. PremName is an optional string. Address (see AddressType) is
-                optional. Person (see PersonType) is required, and there is no limit on additional
-                Persons. </xs:documentation>
+                physical locations or other postal addresses.  The AddressBlock form of address
+                is used for maximum flexibility because the actual location of contacts in less
+                important than is the best available means of contact.</xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element name="PremId" type="PremIdType" minOccurs="0" maxOccurs="1"/>
-            <xs:element name="PremName" type="xs:string" minOccurs="0" maxOccurs="1"/>
             <xs:element ref="AddressBlock" minOccurs="0" maxOccurs="1"/>
             <xs:element ref="Person" minOccurs="1" maxOccurs="unbounded"/>
         </xs:sequence>
@@ -956,7 +1015,7 @@
                     <xs:documentation>Management tag</xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
-            <xs:enumeration value="N840RFID">
+            <xs:enumeration value="MFRRFID">
                 <xs:annotation>
                     <xs:documentation>Non 840 RFID tag</xs:documentation>
                 </xs:annotation>
@@ -999,91 +1058,66 @@
         </xs:restriction>
     </xs:simpleType>
     
-        <xs:simpleType name="KnownNumberType">
+    <xs:simpleType name="AINType">
         <xs:annotation>
-            <xs:documentation>Regular expressions for various known tag type patterns.</xs:documentation>
+            <xs:documentation>840 AIN (usually RFID) tag.</xs:documentation>
         </xs:annotation>
-            <xs:restriction base="xs:string">
-                <xs:pattern value="(840)\d{12}">
-                    <xs:annotation>
-                        <xs:documentation xml:lang="en">840 RFID: 840
-                            followed by 12 digits</xs:documentation>
-                    </xs:annotation>
-                </xs:pattern>
-                <xs:pattern value="(USA)(\d{8,9}|\d{12})">
-                    <xs:annotation>
-                        <xs:documentation> American ID: USA followed by 12
-                            digits, sometimes truncated to 8 or 9 digits, or
-                            some specific patterns of just the digits part
-                            (shows how hard validation is currently)
-                        </xs:documentation>
-                    </xs:annotation>
-                </xs:pattern>
-                <xs:pattern value="[5-9]\d{7}"/>
-                <xs:pattern value="[1-3]\d{8}"/>
-                <xs:pattern value="4[0-6]\d{7}"/>
-                <xs:pattern value="470\d{6}"/>
-                <xs:pattern value="4710\d{5}"/>
-                <xs:pattern value="471100000"/>
-                <xs:pattern value="\d{2}[A-Z]{2}\d{4}.?">
-                    <xs:annotation>
-                        <xs:documentation> Cattle Backtag: Two digits + two
-                            letters + four digits (optional additional
-                            character?) </xs:documentation>
-                    </xs:annotation>
-                </xs:pattern>
-                <xs:pattern
-                    value="((840)|(9[0-8]\d)|(9\d[0-8])|(124)|(484))\d{12}">
-                    <xs:annotation>
-                        <xs:documentation> Implant RFID Chip: Either 840 or
-                            a company prefix followed by 12 digits Excludes
-                            999 prefix (Note, XPATH does not support
-                            (?!pattern) negative look ahead.)
-                        </xs:documentation>
-                    </xs:annotation>
-                </xs:pattern>
-                <xs:pattern
-                    value="((9[0-8]\d)|(9\d[0-8])|(124)|(484))\d{12}">
-                    <xs:annotation>
-                        <xs:documentation> Non 840 RFID: Company prefix (not
-                            999) followed by 12 digits </xs:documentation>
-                    </xs:annotation>
-                </xs:pattern>
-                <xs:pattern value="\d{2}[A-Z]{2}\d{4}">
-                    <xs:annotation>
-                        <xs:documentation> NUES 8 Character: Two digits +
-                            two letters + four digits (Note: matches cattle
-                            backtag pattern.) </xs:documentation>
-                    </xs:annotation>
-                </xs:pattern>
-                <xs:pattern value="(\d{2}|MD|MN|NM|NY|US|WY)[A-Z]{3}\d{4}">
-                    <xs:annotation>
-                        <xs:documentation> NUES 9 Character: Two digits +
-                            three letters + four digits or some state's alpha
-                            codes followed by three more letters and four
-                            digits </xs:documentation>
-                    </xs:annotation>
-                </xs:pattern>
-                <xs:pattern value="[A-Z]{2}[A-Z0-9]{1,20}[ ][A-Z0-9]{1,20}">
-                    <xs:annotation>
-                        <xs:documentation> Sheep/goat - flock ID tag: Two
-                            letters + one to 20 upper case letters or digits +
-                            a space and one to 20 more upper case letters or
-                            digits </xs:documentation>
-                    </xs:annotation>
-                </xs:pattern>
-                <xs:pattern value="[A-Z0-9]{7}[ ][A-Z0-9]{1,20}">
-                    <xs:annotation>
-                        <xs:documentation> Sheep/goat National PIN tag:
-                            Seven upper case letters or digts (a PIN) + a
-                            space and one to 20 more upper case letters or
-                            digits </xs:documentation>
-                    </xs:annotation>
-                </xs:pattern>
-            </xs:restriction>
-        </xs:simpleType>
-        
-
+        <xs:restriction base="xs:string">
+            <xs:pattern value="(840)\d{12}">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">840 RFID: 840
+                        followed by 12 digits</xs:documentation>
+                </xs:annotation>
+            </xs:pattern>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="MfrRFIDType">
+        <xs:annotation>
+            <xs:documentation>900 Series manufacturer tags (always RFID?).</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern
+                value="((9[0-8]\d)|(9\d[0-8])|(124)|(484))\d{12}">
+                <xs:annotation>
+                    <xs:documentation> Non 840 RFID: Company prefix (not
+                        999) followed by 12 digits </xs:documentation>
+                </xs:annotation>
+            </xs:pattern>
+        </xs:restriction>
+    </xs:simpleType>
+   
+     <xs:simpleType name="NUES9Type">
+        <xs:annotation>
+            <xs:documentation>9 Character NUES (brite) tags.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="(\d{2}|MD|MN|NM|NY|US|WY)[A-Z]{3}\d{4}">
+                <xs:annotation>
+                    <xs:documentation> NUES 9 Character: Two digits +
+                        three letters + four digits or some state's alpha
+                        codes followed by three more letters and four
+                        digits </xs:documentation>
+                </xs:annotation>
+            </xs:pattern>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="NUES8Type">
+        <xs:annotation>
+            <xs:documentation>8 Character NUES (brite) tags.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d{2}[A-Z]{2}\d{4}">
+                <xs:annotation>
+                    <xs:documentation> NUES 8 Character: Two digits +
+                        two letters + four digits (Note: matches cattle
+                        backtag pattern.) </xs:documentation>
+                </xs:annotation>
+            </xs:pattern>
+        </xs:restriction>
+    </xs:simpleType>
+    
     <xs:simpleType name="SpeciesCodes">
         <xs:annotation>
             <xs:documentation> A subset of USDA species codes to support the most common eCVI usages. All
