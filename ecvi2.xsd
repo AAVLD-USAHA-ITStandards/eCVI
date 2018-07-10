@@ -503,141 +503,110 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:choice>
-                    <xs:element name="Laboratory" minOccurs="1" maxOccurs="1">
-                        <xs:complexType>
-                            <xs:sequence>
-                                <xs:element name="LabName" type="xs:string" minOccurs="1" maxOccurs="1"/>
-                                <xs:element name="PremId" type="PremIdType" minOccurs="0" maxOccurs="1"/>
-                                <xs:element ref="AddressBlock" minOccurs="0" maxOccurs="1"/>
-                            </xs:sequence>
-                            <xs:attribute name="AccessionDate" type="xs:date" use="required"/>
-                            <xs:attribute name="AccessionNumber" type="xs:string" use="required"/>
-                        </xs:complexType>
-                    </xs:element>
-                    <xs:element name="Field" minOccurs="1" maxOccurs="1">
-                        <xs:complexType>
-                            <xs:sequence>
-                                <xs:element name="PremId" type="PremIdType" minOccurs="0" maxOccurs="1"/>
-                                <xs:element ref="AddressBlock" minOccurs="0" maxOccurs="1"/>
-                            </xs:sequence>
-                            <xs:attribute name="AccessionDate" type="xs:date" use="required"/>
-                        </xs:complexType>
-                    </xs:element>
+                    <xs:element ref="Laboratory" minOccurs="1" maxOccurs="1"/>
+                    <xs:element ref="Field" minOccurs="1" maxOccurs="1"/>
                 </xs:choice>
             </xs:sequence>
             <xs:attribute name="InfieldTest" type="xs:boolean" use="optional" default="false"/>
             <xs:attribute name="id" type="xs:ID" use="required"/>
         </xs:complexType>
     </xs:element>
+    
+    <xs:element name="Laboratory">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="LabName" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="PremId" type="PremIdType" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="AddressBlock" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute name="AccessionDate" type="xs:date" use="required"/>
+            <xs:attribute name="AccessionNumber" type="xs:string" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="Field">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="PremId" type="PremIdType" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="AddressBlock" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute name="AccessionDate" type="xs:date" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    
 
-    <xs:element name="ProgramStatus">
+    <xs:element name="StateZoneOrAreaStatus">
         <xs:annotation>
-            <xs:documentation>Program status consists of the name of the program and a value
-                representing the herd or state (area) status claimed. The enumerated lists need to
-                be examined. </xs:documentation>
+            <xs:documentation>Statuses are explicitly enumerated for bovine Brucellosis and TB, and 
+               left as simple name/value for others.  </xs:documentation>
         </xs:annotation>
         <xs:complexType>
-            <xs:attribute name="Name" use="required">
-                <xs:annotation>
-                    <xs:documentation>The name of the status</xs:documentation>
-                </xs:annotation>
+            <xs:choice>
+                <xs:element ref="BrucellosisStateOrAreaStatus" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="TuberculosisStateOrZoneStatus" minOccurs="1" maxOccurs="1"/>
+            </xs:choice>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="BrucellosisStateOrAreaStatus">
+        <xs:annotation>
+            <xs:documentation>Bovine Brucellosis status.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:attribute name="status">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
-                        <xs:enumeration value="Bovine Tuberculosis">
-                            <xs:annotation>
-                                <xs:documentation>Bovine TB program status</xs:documentation>
-                            </xs:annotation>
-                        </xs:enumeration>
-                        <xs:enumeration value="Brucellosis (state)">
-                            <xs:annotation>
-                                <xs:documentation>Brucellosis program state
-                                    status</xs:documentation>
-                            </xs:annotation>
-                        </xs:enumeration>
-                        <xs:enumeration value="Brucellosis (herd)">
-                            <xs:annotation>
-                                <xs:documentation>Brucellosis program herd status</xs:documentation>
-                            </xs:annotation>
-                        </xs:enumeration>
-                        <xs:enumeration value="Johne's (herd)">
-                            <xs:annotation>
-                                <xs:documentation>Johne's disease program herd
-                                    status</xs:documentation>
-                            </xs:annotation>
-                        </xs:enumeration>
-                        <xs:enumeration value="NPIP (herd)">
-                            <xs:annotation>
-                                <xs:documentation>NPIP program flock status. (Which program? NPIP
-                                    has several._</xs:documentation>
-                            </xs:annotation>
-                        </xs:enumeration>
-                        <xs:enumeration value="Scrapie (herd)">
-                            <xs:annotation>
-                                <xs:documentation>Scrapie program flock status.</xs:documentation>
-                            </xs:annotation>
-                        </xs:enumeration>
-                        <xs:enumeration value="Trichomoniasis (herd)">
-                            <xs:annotation>
-                                <xs:documentation>Trichomoniasis program herd
-                                    status</xs:documentation>
-                            </xs:annotation>
-                        </xs:enumeration>
-                        <xs:enumeration value="EIA (herd)">
-                            <xs:annotation>
-                                <xs:documentation>EIA herd status?</xs:documentation>
-                            </xs:annotation>
-                        </xs:enumeration>
+                        <xs:enumeration value="Free"/>
+                        <xs:enumeration value="Class A"/>
+                        <xs:enumeration value="Class B"/>
+                        <xs:enumeration value="Class C"/>
+                        <xs:enumeration value="GYA, DSA (Class A)"/>
                     </xs:restriction>
-                </xs:simpleType>
+                </xs:simpleType>                
             </xs:attribute>
-            <xs:attribute name="Value" use="required">
-                <xs:annotation>
-                    <xs:documentation>Only the most common status values are listed.  Others use "other".</xs:documentation>
-                </xs:annotation>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="TuberculosisStateOrZoneStatus">
+        <xs:annotation>
+            <xs:documentation>Bovine TB status.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:attribute name="status">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
-                        <xs:enumeration value="Free">
-                            <xs:annotation>
-                                <xs:documentation>Free status for the named disease
-                                    program.</xs:documentation>
-                            </xs:annotation>
-                        </xs:enumeration>
-                        <xs:enumeration value="Modified Accredited">
-                            <xs:annotation>
-                                <xs:documentation>Modified accredited status in TB
-                                    program.</xs:documentation>
-                            </xs:annotation>
-                        </xs:enumeration>
-                        <xs:enumeration value="Modified Advanced Accredited">
-                            <xs:annotation>
-                                <xs:documentation>Modified accredited status in TB
-                                    program</xs:documentation>
-                            </xs:annotation>
-                        </xs:enumeration>
-                        <xs:enumeration value="Designated Surveillance Area">
-                            <xs:annotation>
-                                <xs:documentation>Area surrounding known wildlife
-                                    reservoir</xs:documentation>
-                            </xs:annotation>
-                        </xs:enumeration>
-                        <xs:enumeration value="Other">
-                            <xs:annotation>
-                                <xs:documentation>All other statuses for other
-                                    programs.</xs:documentation>
-                            </xs:annotation>
-                        </xs:enumeration>
+                        <xs:enumeration value="Free"/>
+                        <xs:enumeration value="Modified Accredited Advanced State or Zone (MAA)"/>
+                        <xs:enumeration value="Modified Accredited State or Zone (MA)"/>
+                        <xs:enumeration value="Non Accredited State or Zone (NA)"/>
                     </xs:restriction>
-                </xs:simpleType>
+                </xs:simpleType>                
             </xs:attribute>
-            <xs:attribute name="ValueOther" type="xs:string" use="optional">
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="HerdOrFlockStatus">
+        <xs:annotation>
+            <xs:documentation>Herd or flock status vary enough that enumerating all the
+                variations was impractical.  These statuses are represented as a name, value
+                pair with an optional herd or flock ID</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:attribute name="Disease" type="xs:string" use="required">
                 <xs:annotation>
                     <xs:documentation>For other status types the value such as Brucellosis stage,
                         NPIP clean, may opionally be included in this attribute.</xs:documentation>
                 </xs:annotation>
             </xs:attribute>
+            <xs:attribute name="HerdFlockID" type="xs:string" use="optional">
+                <xs:annotation>
+                    <xs:documentation>If the status is identified via  herd or flock ID,
+                        include that here.</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
         </xs:complexType>
     </xs:element>
-
+    
     <xs:element name="Address">
         <xs:annotation>
             <xs:documentation>Origin and destination require a structured address. Because of
@@ -672,19 +641,15 @@
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:element>
-                <xs:element name="coordinates" minOccurs="0" maxOccurs="1">
+                <xs:element name="GeoPoint" minOccurs="0" maxOccurs="1">
                     <xs:annotation>
-                        <xs:documentation>Longitude, Latitude, and Altitude (optional) formatted as
-                            KML &lt;coordinates&gt; element Longitude (decimal degrees), Latitude
-                            (decimal degrees) ,Altitude (meters) Example "-122.08220,37.42229,0"
+                        <xs:documentation>Simple Latitude and Longitude in decimal degrees
                         </xs:documentation>
                     </xs:annotation>
-                    <xs:simpleType>
-                        <xs:restriction base="xs:string">
-                            <xs:pattern value="\-?[0-9]{1,3}.[0-9]+,\-?[0-9]{1,3}.[0-9]+(,[0-9]+)?"
-                            />
-                        </xs:restriction>
-                    </xs:simpleType>
+                    <xs:complexType>
+                        <xs:attribute name="Latitude" type="xs:float" use="required"/>
+                        <xs:attribute name="Longitude" type="xs:float" use="required"/>
+                    </xs:complexType>
                 </xs:element>
             </xs:sequence>
         </xs:complexType>
@@ -818,37 +783,35 @@
     <!-- Start Third Level for TagID -->
     <xs:element name="AIN">
         <xs:annotation>
-            <xs:documentation>KnownFormatID the complicated regular expression patterns provide some ID validation against known patterns.</xs:documentation>
+            <xs:documentation>840 (usually RFIF) tags or chips.</xs:documentation>
         </xs:annotation>
         <xs:complexType>
-            <xs:attribute name="Type" type="TagType" fixed="AIN" use="optional"/>
             <xs:attribute name="Number" type="AINType" use="required"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="MfrRFID">
         <xs:annotation>
-            <xs:documentation>KnownFormatID the complicated regular expression patterns provide some ID validation against known patterns.</xs:documentation>
+            <xs:documentation>900 series but not "900" RFID tags or chips.</xs:documentation>
         </xs:annotation>
         <xs:complexType>
-            <xs:attribute name="Type" type="TagType" fixed="MFRRFID" use="optional"/>
             <xs:attribute name="Number" type="MfrRFIDType" use="required"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="NUES9">
         <xs:annotation>
-            <xs:documentation>KnownFormatID the complicated regular expression patterns provide some ID validation against known patterns.</xs:documentation>
+            <xs:documentation>NUES9 tags most commonly on metal "brite" tags.</xs:documentation>
         </xs:annotation>
         <xs:complexType>
-            <xs:attribute name="Type" type="TagType" fixed="NUES9" use="optional"/>
             <xs:attribute name="Number" type="NUES9Type" use="required"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="NUES8">
         <xs:annotation>
-            <xs:documentation>KnownFormatID the complicated regular expression patterns provide some ID validation against known patterns.</xs:documentation>
+            <xs:documentation>NUES8 tags most commonly on the smaller sized metal "brite" tags.
+                              Because the pattern of characters matches backtags, it is important that
+                              these rarely used tags be recorded by type when they do appear on CVIs.</xs:documentation>
         </xs:annotation>
         <xs:complexType>
-            <xs:attribute name="Type" type="TagType" fixed="NUES8" use="optional"/>
             <xs:attribute name="Number" type="NUES8Type" use="required"/>
         </xs:complexType>
     </xs:element>
@@ -866,7 +829,6 @@
                 <xs:documentation> Other Formats: No restrictions </xs:documentation>
                 </xs:annotation>
             <xs:complexType>
-                <xs:attribute name="Type" type="TagType" use="optional"/>
                 <xs:attribute name="Number" type="xs:string" use="required"/>
             </xs:complexType>
         </xs:element>
@@ -927,7 +889,8 @@
             <xs:element name="PremId" type="PremIdType" minOccurs="0" maxOccurs="1"/>
             <xs:element name="PremName" type="xs:string" minOccurs="0" maxOccurs="1"/>
             <xs:element ref="Address" minOccurs="1" maxOccurs="1"/>
-            <xs:element ref="ProgramStatus" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="StateZoneOrAreaStatus" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="HerdOrFlockStatus" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element ref="Person" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
@@ -1129,11 +1092,6 @@
                     <xs:documentation> Aquaculture</xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
-            <xs:enumeration value="AVI">
-                <xs:annotation>
-                    <xs:documentation> Avian</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
             <xs:enumeration value="BEF">
                 <xs:annotation>
                     <xs:documentation> Beef</xs:documentation>
@@ -1174,42 +1132,12 @@
                     <xs:documentation> Chickens</xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
-            <xs:enumeration value="CLM">
-                <xs:annotation>
-                    <xs:documentation> Clams</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="CRA">
-                <xs:annotation>
-                    <xs:documentation> Crawfish</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="CTF">
-                <xs:annotation>
-                    <xs:documentation> Catfish</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
             <xs:enumeration value="DAI">
                 <xs:annotation>
                     <xs:documentation> Dairy</xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
-            <xs:enumeration value="DEE">
-                <xs:annotation>
-                    <xs:documentation> Deer</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="DUC">
-                <xs:annotation>
-                    <xs:documentation> Ducks</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="ELK">
-                <xs:annotation>
-                    <xs:documentation> Elk</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="EQU">
+              <xs:enumeration value="EQU">
                 <xs:annotation>
                     <xs:documentation> Equine (Horses, Mules, Donkeys, Burros)</xs:documentation>
                 </xs:annotation>
@@ -1219,34 +1147,9 @@
                     <xs:documentation> Feline</xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
-            <xs:enumeration value="GEE">
-                <xs:annotation>
-                    <xs:documentation> Geese</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="GUI">
-                <xs:annotation>
-                    <xs:documentation> Guineas</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="MSL">
-                <xs:annotation>
-                    <xs:documentation> Mussels</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
             <xs:enumeration value="OVI">
                 <xs:annotation>
                     <xs:documentation> Ovine (Sheep)</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="OYS">
-                <xs:annotation>
-                    <xs:documentation> Oysters</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="PGN">
-                <xs:annotation>
-                    <xs:documentation> Pigeon</xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
             <xs:enumeration value="POR">
@@ -1254,47 +1157,7 @@
                     <xs:documentation> Porcine (Swine)</xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
-            <xs:enumeration value="QUA">
-                <xs:annotation>
-                    <xs:documentation> Quail</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="RTT">
-                <xs:annotation>
-                    <xs:documentation> Ratites (Emus, Ostriches, etc.)</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="SAL">
-                <xs:annotation>
-                    <xs:documentation> Salmon</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="SBA">
-                <xs:annotation>
-                    <xs:documentation> Striped Bass</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="SHR">
-                <xs:annotation>
-                    <xs:documentation> Shrimp</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="SLP">
-                <xs:annotation>
-                    <xs:documentation> Scallops</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="TIL">
-                <xs:annotation>
-                    <xs:documentation> Tilapia</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="TRO">
-                <xs:annotation>
-                    <xs:documentation> Trout</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="TUR">
+             <xs:enumeration value="TUR">
                 <xs:annotation>
                     <xs:documentation> Turkeys</xs:documentation>
                 </xs:annotation>

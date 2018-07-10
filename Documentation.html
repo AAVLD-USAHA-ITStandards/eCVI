@@ -425,7 +425,61 @@
             </ul>
          </li>
       </ul>
-      <h3>Animal</h3>
+      <h3>Laboratory</h3>
+      <h4><i>Attributes</i></h4>
+      <ul>
+         <li><b>AccessionDate</b>: Required
+         </li>
+         <li><b>AccessionNumber</b>: Required
+         </li>
+      </ul>
+      <h4><i>Child Elements</i></h4>
+      <ul>
+         <li><b>LabName</b>: Required
+         </li>
+         <li><b>PremId</b>: Optional<br><i>PremIdType</i><blockquote> PremIdType does minimal validation of true premises identifiers
+               including both PINs (7 characters and LIDs (8 characters). Only nationally
+               registered LIDs are appropriate. Implementing applications are highly encouraged to
+               validate against the appropriate checksum logic. 
+            </blockquote>
+            Pattern(s):
+            <ul>
+               <li>[A-Z0-9]{6,8}</li>
+            </ul>
+         </li>
+         <li><b>AddressBlock</b>: Optional
+         </li>
+      </ul>
+      <h3>AddressBlock</h3>
+      <blockquote>Contacts such as "consignor, if different", "consignee, if different",
+         veterinarian, and carrier may have simple block of text containing more or less
+         structured address. 
+      </blockquote><br><i></i><h3>Field</h3>
+      <h4><i>Attributes</i></h4>
+      <ul>
+         <li><b>AccessionDate</b>: Required
+         </li>
+      </ul>
+      <h4><i>Child Elements</i></h4>
+      <ul>
+         <li><b>PremId</b>: Optional<br><i>PremIdType</i><blockquote> PremIdType does minimal validation of true premises identifiers
+               including both PINs (7 characters and LIDs (8 characters). Only nationally
+               registered LIDs are appropriate. Implementing applications are highly encouraged to
+               validate against the appropriate checksum logic. 
+            </blockquote>
+            Pattern(s):
+            <ul>
+               <li>[A-Z0-9]{6,8}</li>
+            </ul>
+         </li>
+         <li><b>AddressBlock</b>: Optional
+         </li>
+      </ul>
+      <h3>AddressBlock</h3>
+      <blockquote>Contacts such as "consignor, if different", "consignee, if different",
+         veterinarian, and carrier may have simple block of text containing more or less
+         structured address. 
+      </blockquote><br><i></i><h3>Animal</h3>
       <blockquote> The Animal element is used for all individually identifiable animals
          in a shipment even when those may have been entered in an electronic source document
          using shorthand tools such as identifier ranges.  
@@ -536,10 +590,6 @@
                   ( Aquaculture)
                   
                </li>
-               <li>AVI
-                  ( Avian)
-                  
-               </li>
                <li>BEF
                   ( Beef)
                   
@@ -572,32 +622,8 @@
                   ( Chickens)
                   
                </li>
-               <li>CLM
-                  ( Clams)
-                  
-               </li>
-               <li>CRA
-                  ( Crawfish)
-                  
-               </li>
-               <li>CTF
-                  ( Catfish)
-                  
-               </li>
                <li>DAI
                   ( Dairy)
-                  
-               </li>
-               <li>DEE
-                  ( Deer)
-                  
-               </li>
-               <li>DUC
-                  ( Ducks)
-                  
-               </li>
-               <li>ELK
-                  ( Elk)
                   
                </li>
                <li>EQU
@@ -608,64 +634,12 @@
                   ( Feline)
                   
                </li>
-               <li>GEE
-                  ( Geese)
-                  
-               </li>
-               <li>GUI
-                  ( Guineas)
-                  
-               </li>
-               <li>MSL
-                  ( Mussels)
-                  
-               </li>
                <li>OVI
                   ( Ovine (Sheep))
                   
                </li>
-               <li>OYS
-                  ( Oysters)
-                  
-               </li>
-               <li>PGN
-                  ( Pigeon)
-                  
-               </li>
                <li>POR
                   ( Porcine (Swine))
-                  
-               </li>
-               <li>QUA
-                  ( Quail)
-                  
-               </li>
-               <li>RTT
-                  ( Ratites (Emus, Ostriches, etc.))
-                  
-               </li>
-               <li>SAL
-                  ( Salmon)
-                  
-               </li>
-               <li>SBA
-                  ( Striped Bass)
-                  
-               </li>
-               <li>SHR
-                  ( Shrimp)
-                  
-               </li>
-               <li>SLP
-                  ( Scallops)
-                  
-               </li>
-               <li>TIL
-                  ( Tilapia)
-                  
-               </li>
-               <li>TRO
-                  ( Trout)
                   
                </li>
                <li>TUR
@@ -729,72 +703,9 @@
          </li>
       </ul>
       <h3>AIN</h3>
-      <blockquote>KnownFormatID the complicated regular expression patterns provide some ID validation
-         against known patterns.
-      </blockquote>
+      <blockquote>840 (usually RFIF) tags or chips.</blockquote>
       <h4><i>Attributes</i></h4>
       <ul>
-         <li><b>Type</b>: Optional<br><i>TagType</i><blockquote> This lists the known tag types that are supported.</blockquote>
-            Values:
-            <ul>
-               <li>AIN
-                  (840 official animal ID)
-                  
-               </li>
-               <li>AMID
-                  (American ID)
-                  
-               </li>
-               <li>BRAND
-                  (Brand description)
-                  
-               </li>
-               <li>BT
-                  (Backtag)
-                  
-               </li>
-               <li>IMP
-                  ()
-                  
-               </li>
-               <li>MGT
-                  (Management tag)
-                  
-               </li>
-               <li>MFRRFID
-                  (Non 840 RFID tag)
-                  
-               </li>
-               <li>NUES8
-                  (Eight digit national uniform eartag system)
-                  
-               </li>
-               <li>NUES9
-                  (Nine digit national uniform eartag system)
-                  
-               </li>
-               <li>OFORID
-                  (What is this?)
-                  
-               </li>
-               <li>NAME
-                  (Name?)
-                  
-               </li>
-               <li>SGFLID
-                  (Scrapie group flock ID)
-                  
-               </li>
-               <li>NPIN
-                  (Swine PIN Tag)
-                  
-               </li>
-               <li>TAT
-                  (Tattoo)
-                  
-               </li>
-            </ul>
-         </li>
          <li><b>Number</b>: Required<br><i>AINType</i><blockquote>840 AIN (usually RFID) tag.</blockquote>
             Pattern(s):
             <ul>
@@ -807,72 +718,9 @@
          </li>
       </ul>
       <h3>MfrRFID</h3>
-      <blockquote>KnownFormatID the complicated regular expression patterns provide some ID validation
-         against known patterns.
-      </blockquote>
+      <blockquote>900 series but not "900" RFID tags or chips.</blockquote>
       <h4><i>Attributes</i></h4>
       <ul>
-         <li><b>Type</b>: Optional<br><i>TagType</i><blockquote> This lists the known tag types that are supported.</blockquote>
-            Values:
-            <ul>
-               <li>AIN
-                  (840 official animal ID)
-                  
-               </li>
-               <li>AMID
-                  (American ID)
-                  
-               </li>
-               <li>BRAND
-                  (Brand description)
-                  
-               </li>
-               <li>BT
-                  (Backtag)
-                  
-               </li>
-               <li>IMP
-                  ()
-                  
-               </li>
-               <li>MGT
-                  (Management tag)
-                  
-               </li>
-               <li>MFRRFID
-                  (Non 840 RFID tag)
-                  
-               </li>
-               <li>NUES8
-                  (Eight digit national uniform eartag system)
-                  
-               </li>
-               <li>NUES9
-                  (Nine digit national uniform eartag system)
-                  
-               </li>
-               <li>OFORID
-                  (What is this?)
-                  
-               </li>
-               <li>NAME
-                  (Name?)
-                  
-               </li>
-               <li>SGFLID
-                  (Scrapie group flock ID)
-                  
-               </li>
-               <li>NPIN
-                  (Swine PIN Tag)
-                  
-               </li>
-               <li>TAT
-                  (Tattoo)
-                  
-               </li>
-            </ul>
-         </li>
          <li><b>Number</b>: Required<br><i>MfrRFIDType</i><blockquote>900 Series manufacturer tags (always RFID?).</blockquote>
             Pattern(s):
             <ul>
@@ -885,72 +733,9 @@
          </li>
       </ul>
       <h3>NUES9</h3>
-      <blockquote>KnownFormatID the complicated regular expression patterns provide some ID validation
-         against known patterns.
-      </blockquote>
+      <blockquote>NUES9 tags most commonly on metal "brite" tags.</blockquote>
       <h4><i>Attributes</i></h4>
       <ul>
-         <li><b>Type</b>: Optional<br><i>TagType</i><blockquote> This lists the known tag types that are supported.</blockquote>
-            Values:
-            <ul>
-               <li>AIN
-                  (840 official animal ID)
-                  
-               </li>
-               <li>AMID
-                  (American ID)
-                  
-               </li>
-               <li>BRAND
-                  (Brand description)
-                  
-               </li>
-               <li>BT
-                  (Backtag)
-                  
-               </li>
-               <li>IMP
-                  ()
-                  
-               </li>
-               <li>MGT
-                  (Management tag)
-                  
-               </li>
-               <li>MFRRFID
-                  (Non 840 RFID tag)
-                  
-               </li>
-               <li>NUES8
-                  (Eight digit national uniform eartag system)
-                  
-               </li>
-               <li>NUES9
-                  (Nine digit national uniform eartag system)
-                  
-               </li>
-               <li>OFORID
-                  (What is this?)
-                  
-               </li>
-               <li>NAME
-                  (Name?)
-                  
-               </li>
-               <li>SGFLID
-                  (Scrapie group flock ID)
-                  
-               </li>
-               <li>NPIN
-                  (Swine PIN Tag)
-                  
-               </li>
-               <li>TAT
-                  (Tattoo)
-                  
-               </li>
-            </ul>
-         </li>
          <li><b>Number</b>: Required<br><i>NUES9Type</i><blockquote>9 Character NUES (brite) tags.</blockquote>
             Pattern(s):
             <ul>
@@ -965,72 +750,12 @@
          </li>
       </ul>
       <h3>NUES8</h3>
-      <blockquote>KnownFormatID the complicated regular expression patterns provide some ID validation
-         against known patterns.
+      <blockquote>NUES8 tags most commonly on the smaller sized metal "brite" tags.
+         Because the pattern of characters matches backtags, it is important that
+         these rarely used tags be recorded by type when they do appear on CVIs.
       </blockquote>
       <h4><i>Attributes</i></h4>
       <ul>
-         <li><b>Type</b>: Optional<br><i>TagType</i><blockquote> This lists the known tag types that are supported.</blockquote>
-            Values:
-            <ul>
-               <li>AIN
-                  (840 official animal ID)
-                  
-               </li>
-               <li>AMID
-                  (American ID)
-                  
-               </li>
-               <li>BRAND
-                  (Brand description)
-                  
-               </li>
-               <li>BT
-                  (Backtag)
-                  
-               </li>
-               <li>IMP
-                  ()
-                  
-               </li>
-               <li>MGT
-                  (Management tag)
-                  
-               </li>
-               <li>MFRRFID
-                  (Non 840 RFID tag)
-                  
-               </li>
-               <li>NUES8
-                  (Eight digit national uniform eartag system)
-                  
-               </li>
-               <li>NUES9
-                  (Nine digit national uniform eartag system)
-                  
-               </li>
-               <li>OFORID
-                  (What is this?)
-                  
-               </li>
-               <li>NAME
-                  (Name?)
-                  
-               </li>
-               <li>SGFLID
-                  (Scrapie group flock ID)
-                  
-               </li>
-               <li>NPIN
-                  (Swine PIN Tag)
-                  
-               </li>
-               <li>TAT
-                  (Tattoo)
-                  
-               </li>
-            </ul>
-         </li>
          <li><b>Number</b>: Required<br><i>NUES8Type</i><blockquote>8 Character NUES (brite) tags.</blockquote>
             Pattern(s):
             <ul>
@@ -1115,67 +840,6 @@
       <blockquote> Other Formats: No restrictions </blockquote>
       <h4><i>Attributes</i></h4>
       <ul>
-         <li><b>Type</b>: Optional<br><i>TagType</i><blockquote> This lists the known tag types that are supported.</blockquote>
-            Values:
-            <ul>
-               <li>AIN
-                  (840 official animal ID)
-                  
-               </li>
-               <li>AMID
-                  (American ID)
-                  
-               </li>
-               <li>BRAND
-                  (Brand description)
-                  
-               </li>
-               <li>BT
-                  (Backtag)
-                  
-               </li>
-               <li>IMP
-                  ()
-                  
-               </li>
-               <li>MGT
-                  (Management tag)
-                  
-               </li>
-               <li>MFRRFID
-                  (Non 840 RFID tag)
-                  
-               </li>
-               <li>NUES8
-                  (Eight digit national uniform eartag system)
-                  
-               </li>
-               <li>NUES9
-                  (Nine digit national uniform eartag system)
-                  
-               </li>
-               <li>OFORID
-                  (What is this?)
-                  
-               </li>
-               <li>NAME
-                  (Name?)
-                  
-               </li>
-               <li>SGFLID
-                  (Scrapie group flock ID)
-                  
-               </li>
-               <li>NPIN
-                  (Swine PIN Tag)
-                  
-               </li>
-               <li>TAT
-                  (Tattoo)
-                  
-               </li>
-            </ul>
-         </li>
          <li><b>Number</b>: Required
          </li>
       </ul>
@@ -1367,10 +1031,6 @@
                   ( Aquaculture)
                   
                </li>
-               <li>AVI
-                  ( Avian)
-                  
-               </li>
                <li>BEF
                   ( Beef)
                   
@@ -1403,32 +1063,8 @@
                   ( Chickens)
                   
                </li>
-               <li>CLM
-                  ( Clams)
-                  
-               </li>
-               <li>CRA
-                  ( Crawfish)
-                  
-               </li>
-               <li>CTF
-                  ( Catfish)
-                  
-               </li>
                <li>DAI
                   ( Dairy)
-                  
-               </li>
-               <li>DEE
-                  ( Deer)
-                  
-               </li>
-               <li>DUC
-                  ( Ducks)
-                  
-               </li>
-               <li>ELK
-                  ( Elk)
                   
                </li>
                <li>EQU
@@ -1439,64 +1075,12 @@
                   ( Feline)
                   
                </li>
-               <li>GEE
-                  ( Geese)
-                  
-               </li>
-               <li>GUI
-                  ( Guineas)
-                  
-               </li>
-               <li>MSL
-                  ( Mussels)
-                  
-               </li>
                <li>OVI
                   ( Ovine (Sheep))
                   
                </li>
-               <li>OYS
-                  ( Oysters)
-                  
-               </li>
-               <li>PGN
-                  ( Pigeon)
-                  
-               </li>
                <li>POR
                   ( Porcine (Swine))
-                  
-               </li>
-               <li>QUA
-                  ( Quail)
-                  
-               </li>
-               <li>RTT
-                  ( Ratites (Emus, Ostriches, etc.))
-                  
-               </li>
-               <li>SAL
-                  ( Salmon)
-                  
-               </li>
-               <li>SBA
-                  ( Striped Bass)
-                  
-               </li>
-               <li>SHR
-                  ( Shrimp)
-                  
-               </li>
-               <li>SLP
-                  ( Scallops)
-                  
-               </li>
-               <li>TIL
-                  ( Tilapia)
-                  
-               </li>
-               <li>TRO
-                  ( Trout)
                   
                </li>
                <li>TUR
@@ -1673,11 +1257,13 @@
          </li>
          <li><b>Address</b>: Required
          </li>
-         <li><b>ProgramStatus</b>: Optional, may repeat
+         <li><b>StateZoneOrAreaStatus</b>: Optional, may repeat
+         </li>
+         <li><b>HerdOrFlockStatus</b>: Optional, may repeat
          </li>
          <li><b>Person</b>: Optional, may repeat
          </li>
-      </ul><b>See: </b><i>Address</i><br><b>See: </b><i>ProgramStatus</i><br><b>See: </b><i>Person</i><br><h3>ContactType</h3>
+      </ul><b>See: </b><i>Address</i><br><b>See: </b><i>StateZoneOrAreaStatus</i><br><b>See: </b><i>HerdOrFlockStatus</i><br><b>See: </b><i>Person</i><br><h3>ContactType</h3>
       <blockquote> ContactType is used for consignor and consignee that may be actual
          physical locations or other postal addresses.  The AddressBlock form of address
          is used for maximum flexibility because the actual location of contacts in less
