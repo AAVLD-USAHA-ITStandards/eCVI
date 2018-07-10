@@ -28,6 +28,7 @@
             06/25/2018: Clean up documentation.
             07/06/2018: Yet another version of AnimalTags defining just the most common.
             07/06/2018: Minor edits based on committee input.  Further documentation clean up.
+            07/10/2018: Further edits to Species, AnimalTags, Coordinates, and Statuses.
         </xs:documentation>
     </xs:annotation>
     <xs:annotation>
@@ -948,19 +949,9 @@
             <xs:documentation> This lists the known tag types that are supported.</xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:string">
-            <xs:enumeration value="AIN">
-                <xs:annotation>
-                    <xs:documentation>840 official animal ID</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
             <xs:enumeration value="AMID">
                 <xs:annotation>
                     <xs:documentation>American ID</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="BRAND">
-                <xs:annotation>
-                    <xs:documentation>Brand description</xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
             <xs:enumeration value="BT">
@@ -971,26 +962,6 @@
             <xs:enumeration value="IMP">
                 <xs:annotation>
                     <xs:documentation/>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="MGT">
-                <xs:annotation>
-                    <xs:documentation>Management tag</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="MFRRFID">
-                <xs:annotation>
-                    <xs:documentation>Non 840 RFID tag</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="NUES8">
-                <xs:annotation>
-                    <xs:documentation>Eight digit national uniform eartag system</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="NUES9">
-                <xs:annotation>
-                    <xs:documentation>Nine digit national uniform eartag system</xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
             <xs:enumeration value="OFORID">
@@ -1016,6 +987,11 @@
             <xs:enumeration value="TAT">
                 <xs:annotation>
                     <xs:documentation>Tattoo</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="OTHER">
+                <xs:annotation>
+                    <xs:documentation>We would like to always know the type but can't have captured them all.</xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
         </xs:restriction>
