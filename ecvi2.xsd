@@ -29,6 +29,7 @@
             07/06/2018: Yet another version of AnimalTags defining just the most common.
             07/06/2018: Minor edits based on committee input.  Further documentation clean up.
             07/10/2018: Further edits to Species, AnimalTags, Coordinates, and Statuses.
+            07/12/2018: Additional tweaks to statuses.
         </xs:documentation>
     </xs:annotation>
     <xs:annotation>
@@ -545,6 +546,7 @@
             <xs:choice>
                 <xs:element ref="BrucellosisStateOrAreaStatus" minOccurs="1" maxOccurs="1"/>
                 <xs:element ref="TuberculosisStateOrZoneStatus" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="OtherStateOrZoneStatus" minOccurs="1" maxOccurs="1"/>
             </xs:choice>
         </xs:complexType>
     </xs:element>
@@ -554,7 +556,7 @@
             <xs:documentation>Bovine Brucellosis status.</xs:documentation>
         </xs:annotation>
         <xs:complexType>
-            <xs:attribute name="status">
+            <xs:attribute name="Status">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
                         <xs:enumeration value="Free"/>
@@ -573,7 +575,7 @@
             <xs:documentation>Bovine TB status.</xs:documentation>
         </xs:annotation>
         <xs:complexType>
-            <xs:attribute name="status">
+            <xs:attribute name="Status">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
                         <xs:enumeration value="Free"/>
@@ -583,6 +585,16 @@
                     </xs:restriction>
                 </xs:simpleType>                
             </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="OtherStateOrZoneStatus">
+        <xs:annotation>
+            <xs:documentation>Bovine TB status.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:attribute name="Disease" type="xs:string" use="required"/>
+            <xs:attribute name="Status" type="xs:string" use="required"/>
         </xs:complexType>
     </xs:element>
     
@@ -599,10 +611,15 @@
                         NPIP clean, may opionally be included in this attribute.</xs:documentation>
                 </xs:annotation>
             </xs:attribute>
-            <xs:attribute name="HerdFlockID" type="xs:string" use="optional">
+            <xs:attribute name="HerdOrFlockID" type="xs:string" use="optional">
                 <xs:annotation>
                     <xs:documentation>If the status is identified via  herd or flock ID,
                         include that here.</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="Status" type="xs:string" use="optional">
+                <xs:annotation>
+                    <xs:documentation>If the status has a specific level that can do here..</xs:documentation>
                 </xs:annotation>
             </xs:attribute>
         </xs:complexType>
@@ -962,11 +979,6 @@
             <xs:enumeration value="IMP">
                 <xs:annotation>
                     <xs:documentation/>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="OFORID">
-                <xs:annotation>
-                    <xs:documentation>What is this?</xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
             <xs:enumeration value="NAME">
