@@ -30,6 +30,7 @@
             07/06/2018: Minor edits based on committee input.  Further documentation clean up.
             07/10/2018: Further edits to Species, AnimalTags, Coordinates, and Statuses.
             07/12/2018: Additional tweaks to statuses.
+            07/20/2018: Added swine PIN plus management tag (called PINPLUS for now).
         </xs:documentation>
     </xs:annotation>
     <xs:annotation>
@@ -942,7 +943,7 @@
     <xs:simpleType name="PremIdType">
         <xs:annotation>
             <xs:documentation> PremIdType does minimal validation of true premises identifiers
-                including both PINs (7 characters and LIDs (8 characters). Only nationally
+                including both PINs (7 characters and LIDs (6 or 8 characters). Only nationally
                 registered LIDs are appropriate. Implementing applications are highly encouraged to
                 validate against the appropriate checksum logic. </xs:documentation>
         </xs:annotation>
@@ -994,6 +995,11 @@
             <xs:enumeration value="NPIN">
                 <xs:annotation>
                     <xs:documentation>Swine PIN Tag</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="PINPLUS">
+                <xs:annotation>
+                    <xs:documentation>Swine PIN plus Management Tag</xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
             <xs:enumeration value="TAT">

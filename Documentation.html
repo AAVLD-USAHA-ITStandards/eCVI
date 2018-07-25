@@ -34,6 +34,7 @@
          07/06/2018: Minor edits based on committee input.  Further documentation clean up.
          07/10/2018: Further edits to Species, AnimalTags, Coordinates, and Statuses.
          07/12/2018: Additional tweaks to statuses.
+         07/20/2018: Added swine PIN plus management tag (called PINPLUS for now).
          
       </blockquote>
       <blockquote>Copyright © 2017 AAVLD/USAHA it is free for use. Submit suggested changes
@@ -440,7 +441,7 @@
          <li><b>LabName</b>: Required
          </li>
          <li><b>PremId</b>: Optional<br><i>PremIdType</i><blockquote> PremIdType does minimal validation of true premises identifiers
-               including both PINs (7 characters and LIDs (8 characters). Only nationally
+               including both PINs (7 characters and LIDs (6 or 8 characters). Only nationally
                registered LIDs are appropriate. Implementing applications are highly encouraged to
                validate against the appropriate checksum logic. 
             </blockquote>
@@ -465,7 +466,7 @@
       <h4><i>Child Elements</i></h4>
       <ul>
          <li><b>PremId</b>: Optional<br><i>PremIdType</i><blockquote> PremIdType does minimal validation of true premises identifiers
-               including both PINs (7 characters and LIDs (8 characters). Only nationally
+               including both PINs (7 characters and LIDs (6 or 8 characters). Only nationally
                registered LIDs are appropriate. Implementing applications are highly encouraged to
                validate against the appropriate checksum logic. 
             </blockquote>
@@ -799,6 +800,10 @@
                </li>
                <li>NPIN
                   (Swine PIN Tag)
+                  
+               </li>
+               <li>PINPLUS
+                  (Swine PIN plus Management Tag)
                   
                </li>
                <li>TAT
@@ -1222,7 +1227,7 @@
       <h4><i>Child Elements</i></h4>
       <ul>
          <li><b>PremId</b>: Optional<br><i>PremIdType</i><blockquote> PremIdType does minimal validation of true premises identifiers
-               including both PINs (7 characters and LIDs (8 characters). Only nationally
+               including both PINs (7 characters and LIDs (6 or 8 characters). Only nationally
                registered LIDs are appropriate. Implementing applications are highly encouraged to
                validate against the appropriate checksum logic. 
             </blockquote>
