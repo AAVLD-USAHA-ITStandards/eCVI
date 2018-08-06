@@ -53,13 +53,13 @@
                         <xsl:when test="./@ref">
                             <xsl:variable name="elementRef" select="./@ref"/>
                             <xsl:choose>
-                                <xsl:when test="not(preceding::xs:element[@name=$elementRef])">
+                                <xsl:when test="not(preceding::xs:element[@name=$elementRef])"> 
                                      <xsl:apply-templates select="//xs:element[@name = $elementRef]"/>
                                 </xsl:when>
                                 <xsl:otherwise>
                                     <b>See: </b> <i><xsl:value-of select="$elementRef"/></i><br/>
                                 </xsl:otherwise>
-                            </xsl:choose>
+                            </xsl:choose> 
                         </xsl:when>
                         <xsl:when test="./@type">
                             <xsl:variable name="elementType" select="./@type"/>
@@ -162,13 +162,13 @@
                     <xsl:when test="./@ref">
                         <xsl:variable name="elementRef" select="./@ref"/>
                         <xsl:choose>
-                            <xsl:when test="not(preceding::xs:element[@name=$elementRef])">
+                            <xsl:when test="not(preceding::xs:element[@name=$elementRef])"> 
                                 <xsl:apply-templates select="//xs:element[@name = $elementRef]"/>
                             </xsl:when>
                             <xsl:otherwise>
                                 <b>See: </b> <i><xsl:value-of select="$elementRef"/></i><br/>
                             </xsl:otherwise>
-                        </xsl:choose>
+                        </xsl:choose> 
                     </xsl:when>
                     <xsl:when test="./@type">
                         <xsl:variable name="elementType" select="./@type"/>
@@ -260,14 +260,7 @@
                      <xsl:choose>
                         <xsl:when test="./@ref">
                             <xsl:variable name="elementRef" select="./@ref"/>
-                            <xsl:choose>
-                                <xsl:when test="not(preceding::xs:element[@name=$elementRef])">
                                      <xsl:apply-templates select="//xs:element[@name = $elementRef]"/>
-                                </xsl:when>
-                                <xsl:otherwise>
-                                    <b>See: </b> <i><xsl:value-of select="$elementRef"/></i><br/>
-                                </xsl:otherwise>
-                            </xsl:choose>
                         </xsl:when>
                         <xsl:when test="./@type">
                             <xsl:variable name="elementType" select="./@type"/>
