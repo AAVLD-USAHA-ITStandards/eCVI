@@ -33,6 +33,7 @@
          Coordinates, and Statuses. 07/12/2018: Additional
          tweaks to statuses. 07/20/2018: Added swine PIN plus management tag (called PINPLUS
          for now). 
+         08/28/2018: Edited documentation of Accession element
       </blockquote>
       <blockquote>Copyright © 2017 AAVLD/USAHA it is free for use. Submit suggested changes to the maintainers
          at
@@ -394,23 +395,17 @@
       </ul>
       <h3>Accession</h3>
       <blockquote> Accessions are listed for the CVI as a whole and referenced by each test. An accession
-         is defined as... A single
-         Laboratory or Field element may be specified, indicating where tests for this accession
+         is defined as the encounter
+         in which testing was performed.  This may be either laboratory testing or in field
+         testing.  A single
+         Laboratory or Field element must be specified, indicating where tests for this accession
          were performed. InfieldTest is an optional
-         bool (true/false value) indicating if a test was performed in the field. (Is this
-         redundant with the Field element?) ID (see ID) is
-         required, and is the reference number that associates an animal’s individual tests
-         performed as part of this accession. ID is not the
-         lab accession number. That is a distinct element. For Laboratory accessions: Laboratory
-         is a required, containing the following:
-         LabName is a required string. PremId (see PremIdType) is optional only if unavailable.
-         Address (see AddressType) is optional only if
-         unavailable and should contain the lab (physical? contact?) address. AccessionDate
-         is a required date. AccessionNumber is a required
-         string. For Field accessions: PremId (see PremIdType) is optional only if unavailable.
-         Address (see AddressType) is optional only if
-         unavailable and should contain the (physical? contact?) address of the test location.
-         AccessionDate is a required date.
+         boolean (true/false value) indicating if a test was performed in the field. This redundancy
+         is retained from version 1 that did not
+         have a distinct Field test element.  ID is required, and is the reference number that
+         associates an animal’s individual tests performed
+         as part of this accession. ID is not the lab accession number but rather a distinct
+         identifier used for linking within the XML document.  
          
       </blockquote>
       <h4><i>Attributes</i></h4>
@@ -432,6 +427,16 @@
          </li>
       </ul>
       <h3>Laboratory</h3>
+      <blockquote>For testing done in or by a named laboratory, the Laboratory element contains the
+         relevant information.
+         LabName is a required string. 
+         PremId (see PremIdType) is optional only if unavailable. AddressBlock is optional
+         only if
+         unavailable and should contain the lab physical address. AccessionDate is a required
+         date. AccessionNumber is a required
+         string.  Accession number is a distinct identifier assigned by the Laboratory.
+         
+      </blockquote>
       <h4><i>Attributes</i></h4>
       <ul>
          <li><b>AccessionDate</b>: Required
@@ -462,6 +467,14 @@
          and carrier may have simple block
          of text containing more or less structured address. 
       </blockquote><br><i></i><h3>Field</h3>
+      <blockquote>For testing performed outside of a laboratory, the Field element contains the relevant
+         
+         information.  PremId (see PremIdType) is optional only if unavailable. Address (see
+         AddressType) is optional only if
+         unavailable and should contain the physical address of the test location. AccessionDate
+         is a required date.
+         
+      </blockquote>
       <h4><i>Attributes</i></h4>
       <ul>
          <li><b>AccessionDate</b>: Required
