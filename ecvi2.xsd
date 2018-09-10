@@ -17,7 +17,8 @@
             up documentation. 07/06/2018: Yet another version of AnimalTags defining just the most common. 07/06/2018: Minor edits based on committee
             input. Further documentation clean up. 07/10/2018: Further edits to Species, AnimalTags, Coordinates, and Statuses. 07/12/2018: Additional
             tweaks to statuses. 07/20/2018: Added swine PIN plus management tag (called PINPLUS for now). 
-        08/28/2018: Edited documentation of Accession element</xs:documentation>
+        08/28/2018: Edited documentation of Accession element
+        09/10/2018: Fixed typos in Address/State and missing type definitions in Latitude and Longitude</xs:documentation>
     </xs:annotation>
     <xs:annotation>
         <xs:documentation>Copyright © 2017 AAVLD/USAHA it is free for use. Submit suggested changes to the maintainers at
@@ -581,7 +582,7 @@
                 <xs:element name="Line2" type="xs:string" minOccurs="0" maxOccurs="1"/>
                 <xs:element name="Town" type="xs:string" minOccurs="0" maxOccurs="1"/>
                 <xs:element name="County" type="xs:string" minOccurs="0" maxOccurs="1"/>
-                <xs:element name="State" type="StateCodeType" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="State" type="StateCodeType" minOccurs="1" maxOccurs="1"/>
                 <xs:element name="ZIP" minOccurs="0" maxOccurs="1">
                     <xs:simpleType>
                         <xs:restriction base="xs:string">
@@ -605,8 +606,8 @@
                         <xs:documentation>Simple Latitude and Longitude in decimal degrees </xs:documentation>
                     </xs:annotation>
                     <xs:complexType>
-                        <xs:attribute name="Latitude" type="xs:float" use="required"/>
-                        <xs:attribute name="Longitude" type="xs:float" use="required"/>
+                        <xs:attribute name="Latitude" type="LatitudeType" use="required"/>
+                        <xs:attribute name="Longitude" type="LongitudeType" use="required"/>
                     </xs:complexType>
                 </xs:element>
             </xs:sequence>
@@ -1419,7 +1420,27 @@
             </xs:enumeration>
         </xs:restriction>
     </xs:simpleType>
-
+    
+    <xs:simpleType name="LatitudeType">
+        <xs:annotation>
+            <xs:documentation>A positive number indicates North; negative indicates South</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:decimal">
+            <xs:minInclusive value="-90.0"/>
+            <xs:maxInclusive value="90.0"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="LongitudeType">
+        <xs:annotation>
+            <xs:documentation>A negative number indicates West; a positive number indicates East</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:decimal">
+            <xs:minInclusive value="-180.0"/>
+            <xs:maxInclusive value="180.0"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
     <xs:simpleType name="PhotoView">
         <xs:annotation>
             <xs:documentation>Should be obvious but photos are labeled by three views.</xs:documentation>
