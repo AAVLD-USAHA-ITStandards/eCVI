@@ -18,10 +18,12 @@
             input. Further documentation clean up. 07/10/2018: Further edits to Species, AnimalTags, Coordinates, and Statuses. 07/12/2018: Additional
             tweaks to statuses. 07/20/2018: Added swine PIN plus management tag (called PINPLUS for now). 
         08/28/2018: Edited documentation of Accession element
-        09/10/2018: Fixed typos in Address/State and missing type definitions in Latitude and Longitude</xs:documentation>
+        09/10/2018: Fixed typos in Address/State and missing type definitions in Latitude and Longitude
+        09/19/2018: Removed limit of 6 on animal tags.  This had been discussed earlier and not implemented.
+        </xs:documentation>
     </xs:annotation>
     <xs:annotation>
-        <xs:documentation>Copyright © 2017 AAVLD/USAHA it is free for use. Submit suggested changes to the maintainers at
+        <xs:documentation>Copyright © 2017-18 AAVLD/USAHA it is free for use. Submit suggested changes to the maintainers at
             https://github.com/AAVLD-USAHA-ITStandards/eCVI </xs:documentation>
     </xs:annotation>
 
@@ -711,7 +713,7 @@
             </xs:documentation>
         </xs:annotation>
         <xs:complexType>
-            <xs:sequence minOccurs="1" maxOccurs="6">
+            <xs:sequence minOccurs="1" maxOccurs="unbounded">
                 <!-- Why the limit of six? -->
                 <xs:choice>
                     <xs:element ref="AIN"/>
