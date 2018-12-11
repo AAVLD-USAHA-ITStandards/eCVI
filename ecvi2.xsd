@@ -20,6 +20,7 @@
         08/28/2018: Edited documentation of Accession element
         09/10/2018: Fixed typos in Address/State and missing type definitions in Latitude and Longitude
         09/19/2018: Removed limit of 6 on animal tags.  This had been discussed earlier and not implemented.
+        12/11/2018: Corrected typographical error in MovementPurpose "Medical Treatment"
         </xs:documentation>
     </xs:annotation>
     <xs:annotation>
@@ -99,7 +100,7 @@
                             <xs:enumeration value="Grazing"/>
                             <xs:enumeration value="Training"/>
                             <xs:enumeration value="Slaughter"/>
-                            <xs:enumeration value="Medical Treatment:"/>
+                            <xs:enumeration value="Medical Treatment"/>
                             <xs:enumeration value="Exhibition/Show/Rodeo"/>
                             <xs:enumeration value="Breeding"/>
                             <xs:enumeration value="Competition"/>
