@@ -860,7 +860,7 @@
             <xs:documentation>Optional email address following simplified standard email address pattern.</xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:string">
-            <xs:pattern value="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"/>
+            <xs:pattern value="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,24}"/>
         </xs:restriction>
     </xs:simpleType>
 
