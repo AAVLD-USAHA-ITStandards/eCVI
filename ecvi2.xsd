@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.usaha.org/xmlns/ecvi2" version="2.0"
     xmlns="http://www.usaha.org/xmlns/ecvi2">
-
+    <xs:annotation>
+        <xs:documentation>Version 2.01
+        </xs:documentation>
+    </xs:annotation>
     <xs:annotation>
         <xs:documentation> Change Log 08/30/2017: Initial draft of version 2.0 attempts to clone version 1 (labeled version 6.0?) with only minor
             tweaks. 09/01/2017: Added regular expressions to AnimalTags choices. 09/01/2017: Added option for ID/IDREF to Attachment for BrandImage ID
@@ -21,6 +24,7 @@
         09/10/2018: Fixed typos in Address/State and missing type definitions in Latitude and Longitude
         09/19/2018: Removed limit of 6 on animal tags.  This had been discussed earlier and not implemented.
         12/11/2018: Corrected typographical error in MovementPurpose "Medical Treatment"
+        01/23/2019: Corrected email type to allow top-level domains up to 24 characters.
         </xs:documentation>
     </xs:annotation>
     <xs:annotation>
@@ -860,7 +864,7 @@
             <xs:documentation>Optional email address following simplified standard email address pattern.</xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:string">
-            <xs:pattern value="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"/>
+            <xs:pattern value="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,24}"/>
         </xs:restriction>
     </xs:simpleType>
 
