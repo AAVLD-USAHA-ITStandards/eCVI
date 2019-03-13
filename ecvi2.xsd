@@ -25,6 +25,7 @@
         09/19/2018: Removed limit of 6 on animal tags.  This had been discussed earlier and not implemented.
         12/11/2018: Corrected typographical error in MovementPurpose "Medical Treatment"
         01/23/2019: Corrected email type to allow top-level domains up to 24 characters.
+        03/13/2019: Replaced AddressBlock with Address whereever it occurs.
         </xs:documentation>
     </xs:annotation>
     <xs:annotation>
@@ -78,7 +79,7 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element ref="Person" minOccurs="1" maxOccurs="1"/>
-                <xs:element ref="AddressBlock" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="Address" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
             <xs:attribute name="LicenseState" type="xs:string" use="optional"/>
             <xs:attribute name="LicenseNumber" type="xs:string" use="optional"/>
@@ -456,7 +457,7 @@
         <xs:annotation>
             <xs:documentation>For testing done in or by a named laboratory, the Laboratory element contains the relevant information.
                 LabName is a required string. 
-                PremId (see PremIdType) is optional only if unavailable. AddressBlock is optional only if
+                PremId (see PremIdType) is optional only if unavailable. Address is optional only if
                 unavailable and should contain the lab physical address. AccessionDate is a required date. AccessionNumber is a required
                 string.  Accession number is a distinct identifier assigned by the Laboratory.
             </xs:documentation>
@@ -465,7 +466,7 @@
             <xs:sequence>
                 <xs:element name="LabName" type="xs:string" minOccurs="1" maxOccurs="1"/>
                 <xs:element name="PremId" type="PremIdType" minOccurs="0" maxOccurs="1"/>
-                <xs:element ref="AddressBlock" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="Address" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
             <xs:attribute name="AccessionDate" type="xs:date" use="required"/>
             <xs:attribute name="AccessionNumber" type="xs:string" use="required"/>
@@ -482,7 +483,7 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="PremId" type="PremIdType" minOccurs="0" maxOccurs="1"/>
-                <xs:element ref="AddressBlock" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="Address" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
             <xs:attribute name="AccessionDate" type="xs:date" use="required"/>
         </xs:complexType>
@@ -621,17 +622,6 @@
         </xs:complexType>
     </xs:element>
 
-    <xs:element name="AddressBlock">
-        <xs:annotation>
-            <xs:documentation>Contacts such as "consignor, if different", "consignee, if different", veterinarian, and carrier may have simple block
-                of text containing more or less structured address. </xs:documentation>
-        </xs:annotation>
-        <xs:simpleType>
-            <xs:restriction base="xs:string"/>
-        </xs:simpleType>
-    </xs:element>
-
-
     <xs:element name="Test">
         <xs:annotation>
             <xs:documentation> Individual test results are included with each animal and reference via ID/IDREF an accession. For herd testing this
@@ -713,7 +703,7 @@
         <xs:annotation>
             <xs:documentation> This is a jumble of type of ID with the type of device holding the ID. "Tags" is a misnomer. An ID may be either one of
                 the most common known formats (840, 900 series manufacturer tags, NUES9 or NUES8) matching one of the list of regular expressions for
-                common official animal IDs, or some other official type, either or a non-official managment tag. This field also supports brand
+                common official animal IDs, or some other official type, either or a non-official management tag. This field also supports brand
                 descriptions, brand images, and equine description or photographs. These can appear in any order up to six IDs per animal
             </xs:documentation>
         </xs:annotation>
@@ -848,11 +838,10 @@
     <xs:complexType name="ContactType">
         <xs:annotation>
             <xs:documentation> ContactType is used for consignor and consignee that may be actual physical locations or other postal addresses. The
-                AddressBlock form of address is used for maximum flexibility because the actual location of contacts in less important than is the
-                best available means of contact.</xs:documentation>
+                Address should be the best contact address.</xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element ref="AddressBlock" minOccurs="0" maxOccurs="1"/>
+            <xs:element ref="Address" minOccurs="0" maxOccurs="1"/>
             <xs:element ref="Person" minOccurs="1" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
