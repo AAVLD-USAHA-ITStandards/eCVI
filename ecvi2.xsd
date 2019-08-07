@@ -2,7 +2,7 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.usaha.org/xmlns/ecvi2" version="2.0"
     xmlns="http://www.usaha.org/xmlns/ecvi2">
     <xs:annotation>
-        <xs:documentation>Version 2.01
+        <xs:documentation>Version 2.02
         </xs:documentation>
     </xs:annotation>
     <xs:annotation>
@@ -26,6 +26,7 @@
         12/11/2018: Corrected typographical error in MovementPurpose "Medical Treatment"
         01/23/2019: Corrected email type to allow top-level domains up to 24 characters.
         03/13/2019: Replaced AddressBlock with Address whereever it occurs.
+        08/07/2019: Allowed GroupLotID to repeat will be effective Sept 1, 2019 as version 2.02
         </xs:documentation>
     </xs:annotation>
     <xs:annotation>
@@ -248,7 +249,7 @@
                     <xs:element ref="SpeciesCode"/>
                     <xs:element ref="SpeciesOther"/>
                 </xs:choice>
-                <xs:element name="GroupLotID" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="GroupLotID" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="Test" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="Vaccination" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
@@ -582,7 +583,7 @@
         <xs:annotation>
             <xs:documentation>Origin and destination require a structured address. Because of variation in policy between jurisdictions this schema
                 leaves each element optional. However for a CVI to be valid in any jurisdiction, this element must contain enough information for
-                autorities to uniquely identify the location. </xs:documentation>
+                authorities to uniquely identify the location. </xs:documentation>
         </xs:annotation>
         <xs:complexType>
             <xs:sequence>
