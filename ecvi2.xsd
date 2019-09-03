@@ -2,7 +2,7 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.usaha.org/xmlns/ecvi2" version="2.0"
     xmlns="http://www.usaha.org/xmlns/ecvi2">
     <xs:annotation>
-        <xs:documentation>Version 2.1.1
+        <xs:documentation>Version 2.2
         </xs:documentation>
     </xs:annotation>
     <xs:annotation>
@@ -26,7 +26,7 @@
         12/11/2018: Corrected typographical error in MovementPurpose "Medical Treatment"
         01/23/2019: Corrected email type to allow top-level domains up to 24 characters.
         03/13/2019: Replaced AddressBlock with Address whereever it occurs.
-        08/07/2019: Allowed GroupLotID to repeat effective Sept 1, 2019 as version 2.1.1
+        08/07/2019: Allowed GroupLotID to repeat effective Sept 1, 2019 as version 2.2
         </xs:documentation>
     </xs:annotation>
     <xs:annotation>
