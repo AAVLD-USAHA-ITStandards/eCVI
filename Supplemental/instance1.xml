@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eCVI xmlns="http://www.usaha.org/xmlns/ecvi2"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.usaha.org/xmlns/ecvi2 file:/E:/Documents/Box%20Sync/CVIStandards/eCVI_Version2/ecvi2.xsd" CviNumber="CviNumber1" CviNumberIssuedBy="CviNumberIssuedBy1" IssueDate="2006-05-04" ExpirationDate="2006-05-04"
+     ShipmentDate="2006-05-04" EntryPermitNumber="EntryPermitNumber1">
+    <Veterinarian LicenseState="LicenseState1" LicenseNumber="LicenseNumber1" NationalAccreditationNumber="NationalAccreditationNumber1">
+        <Person>
+            <NameParts>
+                <BusinessName>BusinessName0</BusinessName>
+                <FirstName>FirstName0</FirstName>
+                <MiddleName>MiddleName0</MiddleName>
+                <LastName>LastName0</LastName>
+                <OtherName>OtherName0</OtherName>
+            </NameParts>
+<!--            <Name>Name0</Name>-->
+            <Phone Number="0000000000" Comment="Comment1" Type="Unknown"/>
+            <Phone Number="0000000000" Comment="Comment3" Type="Unknown"/>
+            <Email Address="%@-.AA"/>
+            <Email Address="%@-.AA"/>
+        </Person>
+        <Address>
+            <Line1>Line10</Line1>
+            <Line2>Line20</Line2>
+            <Town>Town0</Town>
+            <County>County0</County>
+            <State>AA</State>
+            <ZIP>00000</ZIP>
+            <Country>USA</Country>
+            <GeoPoint Latitude="0" Longitude="0"/>
+        </Address>
+    </Veterinarian>
+    <MovementPurposes>
+        <MovementPurpose>Racing</MovementPurpose>
+        <MovementPurpose>Racing</MovementPurpose>
+        <OtherReason>OtherReason0</OtherReason>
+    </MovementPurposes>
+    <Origin>
+        <PremId>000000</PremId>
+        <PremName>PremName0</PremName>
+        <Address>
+            <Line1>Line11</Line1>
+            <Line2>Line21</Line2>
+            <Town>Town1</Town>
+            <County>County1</County>
+            <State>AA</State>
+            <ZIP>00000</ZIP>
+            <Country>USA</Country>
+            <GeoPoint Latitude="0" Longitude="0"/>
+        </Address>
+        <StateZoneOrAreaStatus>
+            <BrucellosisStateOrAreaStatus Status="Free"/>
+<!--            <TuberculosisStateOrZoneStatus Status="Free"/>-->
+<!--            <OtherStateOrZoneStatus Disease="Disease1" Status="Status5"/>-->
+        </StateZoneOrAreaStatus>
+        <StateZoneOrAreaStatus>
+            <BrucellosisStateOrAreaStatus Status="Free"/>
+<!--            <TuberculosisStateOrZoneStatus Status="Free"/>-->
+<!--            <OtherStateOrZoneStatus Disease="Disease3" Status="Status11"/>-->
+        </StateZoneOrAreaStatus>
+        <HerdOrFlockStatus Disease="Disease5" HerdOrFlockID="HerdOrFlockID1" Status="Status13"/>
+        <HerdOrFlockStatus Disease="Disease7" HerdOrFlockID="HerdOrFlockID3" Status="Status15"/>
+        <Person>
+<!--            <NameParts>
+                <BusinessName>BusinessName1</BusinessName>
+                <FirstName>FirstName1</FirstName>
+                <MiddleName>MiddleName1</MiddleName>
+                <LastName>LastName1</LastName>
+                <OtherName>OtherName1</OtherName>
+            </NameParts>-->
+            <Name>Name1</Name>
+            <Phone Number="0000000000" Comment="Comment5" Type="Unknown"/>
+            <Phone Number="0000000000" Comment="Comment7" Type="Unknown"/>
+            <Email Address="%@-.AA"/>
+            <Email Address="%@-.AA"/>
+        </Person>
+        <Person>
+<!--            <NameParts>
+                <BusinessName>BusinessName2</BusinessName>
+                <FirstName>FirstName2</FirstName>
+                <MiddleName>MiddleName2</MiddleName>
+                <LastName>LastName2</LastName>
+                <OtherName>OtherName2</OtherName>
+            </NameParts>-->
+            <Name>Name2</Name>
+            <Phone Number="0000000000" Comment="Comment9" Type="Unknown"/>
+            <Phone Number="0000000000" Comment="Comment11" Type="Unknown"/>
+            <Email Address="%@-.AA"/>
+            <Email Address="%@-.AA"/>
+        </Person>
+    </Origin>
+    <Destination>
+        <PremId>000000</PremId>
+        <PremName>PremName1</PremName>
+        <Address>
+            <Line1>Line12</Line1>
+            <Line2>Line22</Line2>
+            <Town>Town2</Town>
+            <County>County2</County>
+            <State>AA</State>
+            <ZIP>00000</ZIP>
+            <Country>USA</Country>
+            <GeoPoint Latitude="0" Longitude="0"/>
+        </Address>
+        <StateZoneOrAreaStatus>
+            <BrucellosisStateOrAreaStatus Status="Free"/>
+<!--            <TuberculosisStateOrZoneStatus Status="Free"/>-->
+<!--            <OtherStateOrZoneStatus Disease="Disease9" Status="Status21"/>-->
+        </StateZoneOrAreaStatus>
+        <StateZoneOrAreaStatus>
+<!--            <BrucellosisStateOrAreaStatus Status="Free"/>-->
+            <TuberculosisStateOrZoneStatus Status="Free"/>
+<!--            <OtherStateOrZoneStatus Disease="Disease11" Status="Status27"/>-->
+        </StateZoneOrAreaStatus>
+        <HerdOrFlockStatus Disease="Disease13" HerdOrFlockID="HerdOrFlockID5" Status="Status29"/>
+        <HerdOrFlockStatus Disease="Disease15" HerdOrFlockID="HerdOrFlockID7" Status="Status31"/>
+        <Person>
+            <NameParts>
+                <BusinessName>BusinessName3</BusinessName>
+                <FirstName>FirstName3</FirstName>
+                <MiddleName>MiddleName3</MiddleName>
+                <LastName>LastName3</LastName>
+                <OtherName>OtherName3</OtherName>
+            </NameParts>
+<!--            <Name>Name3</Name>-->
+            <Phone Number="0000000000" Comment="Comment13" Type="Unknown"/>
+            <Phone Number="0000000000" Comment="Comment15" Type="Unknown"/>
+            <Email Address="%@-.AA"/>
+            <Email Address="%@-.AA"/>
+        </Person>
+        <Person>
+<!--            <NameParts>
+                <BusinessName>BusinessName4</BusinessName>
+                <FirstName>FirstName4</FirstName>
+                <MiddleName>MiddleName4</MiddleName>
+                <LastName>LastName4</LastName>
+                <OtherName>OtherName4</OtherName>
+            </NameParts>-->
+            <Name>Name4</Name>
+            <Phone Number="0000000000" Comment="Comment17" Type="Unknown"/>
+            <Phone Number="0000000000" Comment="Comment19" Type="Unknown"/>
+            <Email Address="%@-.AA"/>
+            <Email Address="%@-.AA"/>
+        </Person>
+    </Destination>
+    <Consignor>
+        <Address>
+            <Line1>Line13</Line1>
+            <Line2>Line23</Line2>
+            <Town>Town3</Town>
+            <County>County3</County>
+            <State>AA</State>
+            <ZIP>00000</ZIP>
+            <Country>USA</Country>
+            <GeoPoint Latitude="0" Longitude="0"/>
+        </Address>
+        <Person>
+<!--            <NameParts>
+                <BusinessName>BusinessName5</BusinessName>
+                <FirstName>FirstName5</FirstName>
+                <MiddleName>MiddleName5</MiddleName>
+                <LastName>LastName5</LastName>
+                <OtherName>OtherName5</OtherName>
+            </NameParts>-->
+            <Name>Name5</Name>
+            <Phone Number="0000000000" Comment="Comment21" Type="Unknown"/>
+            <Phone Number="0000000000" Comment="Comment23" Type="Unknown"/>
+            <Email Address="%@-.AA"/>
+            <Email Address="%@-.AA"/>
+        </Person>
+        <Person>
+            <NameParts>
+                <BusinessName>BusinessName6</BusinessName>
+                <FirstName>FirstName6</FirstName>
+                <MiddleName>MiddleName6</MiddleName>
+                <LastName>LastName6</LastName>
+                <OtherName>OtherName6</OtherName>
+            </NameParts>
+<!--            <Name>Name6</Name>-->
+            <Phone Number="0000000000" Comment="Comment25" Type="Unknown"/>
+            <Phone Number="0000000000" Comment="Comment27" Type="Unknown"/>
+            <Email Address="%@-.AA"/>
+            <Email Address="%@-.AA"/>
+        </Person>
+    </Consignor>
+    <Consignee>
+        <Address>
+            <Line1>Line14</Line1>
+            <Line2>Line24</Line2>
+            <Town>Town4</Town>
+            <County>County4</County>
+            <State>AA</State>
+            <ZIP>00000</ZIP>
+            <Country>USA</Country>
+            <GeoPoint Latitude="0" Longitude="0"/>
+        </Address>
+        <Person>
+            <NameParts>
+                <BusinessName>BusinessName7</BusinessName>
+                <FirstName>FirstName7</FirstName>
+                <MiddleName>MiddleName7</MiddleName>
+                <LastName>LastName7</LastName>
+                <OtherName>OtherName7</OtherName>
+            </NameParts>
+<!--            <Name>Name7</Name>-->
+            <Phone Number="0000000000" Comment="Comment29" Type="Unknown"/>
+            <Phone Number="0000000000" Comment="Comment31" Type="Unknown"/>
+            <Email Address="%@-.AA"/>
+            <Email Address="%@-.AA"/>
+        </Person>
+        <Person>
+<!--            <NameParts>
+                <BusinessName>BusinessName8</BusinessName>
+                <FirstName>FirstName8</FirstName>
+                <MiddleName>MiddleName8</MiddleName>
+                <LastName>LastName8</LastName>
+                <OtherName>OtherName8</OtherName>
+            </NameParts>-->
+            <Name>Name8</Name>
+            <Phone Number="0000000000" Comment="Comment33" Type="Unknown"/>
+            <Phone Number="0000000000" Comment="Comment35" Type="Unknown"/>
+            <Email Address="%@-.AA"/>
+            <Email Address="%@-.AA"/>
+        </Person>
+    </Consignee>
+    <Carrier>
+        <Address>
+            <Line1>Line15</Line1>
+            <Line2>Line25</Line2>
+            <Town>Town5</Town>
+            <County>County5</County>
+            <State>AA</State>
+            <ZIP>00000</ZIP>
+            <Country>USA</Country>
+            <GeoPoint Latitude="0" Longitude="0"/>
+        </Address>
+        <Person>
+            <NameParts>
+                <BusinessName>BusinessName9</BusinessName>
+                <FirstName>FirstName9</FirstName>
+                <MiddleName>MiddleName9</MiddleName>
+                <LastName>LastName9</LastName>
+                <OtherName>OtherName9</OtherName>
+            </NameParts>
+<!--            <Name>Name9</Name>-->
+            <Phone Number="0000000000" Comment="Comment37" Type="Unknown"/>
+            <Phone Number="0000000000" Comment="Comment39" Type="Unknown"/>
+            <Email Address="%@-.AA"/>
+            <Email Address="%@-.AA"/>
+        </Person>
+        <Person>
+<!--            <NameParts>
+                <BusinessName>BusinessName10</BusinessName>
+                <FirstName>FirstName10</FirstName>
+                <MiddleName>MiddleName10</MiddleName>
+                <LastName>LastName10</LastName>
+                <OtherName>OtherName10</OtherName>
+            </NameParts>-->
+            <Name>Name10</Name>
+            <Phone Number="0000000000" Comment="Comment41" Type="Unknown"/>
+            <Phone Number="0000000000" Comment="Comment43" Type="Unknown"/>
+            <Email Address="%@-.AA"/>
+            <Email Address="%@-.AA"/>
+        </Person>
+    </Carrier>
+    <TransportMode>air</TransportMode>
+    <Accessions>
+        <Accession InfieldTest="false" id="ID001">
+            <Laboratory AccessionDate="2006-05-04" AccessionNumber="AccessionNumber1">
+                <LabName>LabName0</LabName>
+                <PremId>000000</PremId>
+                <Address>
+                    <Line1>Line16</Line1>
+                    <Line2>Line26</Line2>
+                    <Town>Town6</Town>
+                    <County>County6</County>
+                    <State>AA</State>
+                    <ZIP>00000</ZIP>
+                    <Country>USA</Country>
+                    <GeoPoint Latitude="0" Longitude="0"/>
+                </Address>
+            </Laboratory>
+<!--            <Field AccessionDate="2006-05-04">
+                <PremId>000000</PremId>
+                <Address>
+                    <Line1>Line17</Line1>
+                    <Line2>Line27</Line2>
+                    <Town>Town7</Town>
+                    <County>County7</County>
+                    <State>AA</State>
+                    <ZIP>00000</ZIP>
+                    <Country>USA</Country>
+                    <GeoPoint Latitude="0" Longitude="0"/>
+                </Address>
+            </Field>-->
+        </Accession>
+        <Accession InfieldTest="false" id="ID003">
+            <Laboratory AccessionDate="2006-05-04" AccessionNumber="AccessionNumber3">
+                <LabName>LabName1</LabName>
+                <PremId>000000</PremId>
+                <Address>
+                    <Line1>Line18</Line1>
+                    <Line2>Line28</Line2>
+                    <Town>Town8</Town>
+                    <County>County8</County>
+                    <State>AA</State>
+                    <ZIP>00000</ZIP>
+                    <Country>USA</Country>
+                    <GeoPoint Latitude="0" Longitude="0"/>
+                </Address>
+            </Laboratory>
+<!--            <Field AccessionDate="2006-05-04">
+                <PremId>000000</PremId>
+                <Address>
+                    <Line1>Line19</Line1>
+                    <Line2>Line29</Line2>
+                    <Town>Town9</Town>
+                    <County>County9</County>
+                    <State>AA</State>
+                    <ZIP>00000</ZIP>
+                    <Country>USA</Country>
+                    <GeoPoint Latitude="0" Longitude="0"/>
+                </Address>
+            </Field>-->
+        </Accession>
+    </Accessions>
+    <Animal Age="0d" Breed="Breed1" Sex="Female" SexDetail="SexDetail1" InspectionDate="2006-05-04">
+<!--        <SpeciesCode Code="AQU" Text="Text1"/>-->
+        <SpeciesOther Code="OTH" Text="Text3"/>
+        <AnimalTags>
+<!--            <AIN Number="840000000000000"/>-->
+<!--            <MfrRFID Number="900000000000000"/>-->
+<!--            <NUES9 Number="00AAA0000"/>-->
+<!--            <NUES8 Number="00AA0000"/>-->
+<!--            <OtherOfficialID Type="AMID" Number="Number53"/>-->
+<!--            <ManagementID Number="Number55"/>-->
+<!--            <BrandImage BrandImageRef="ID003" Description="Description1"/>-->
+<!--            <EquineDescription Name="Name1" Description="Description3"/>-->
+            <EquinePhotographs>
+                <Photograph ImageRef="ID002" View="Left"/>
+                <Photograph ImageRef="ID002" View="Left"/>
+            </EquinePhotographs>
+<!--            <AIN Number="840000000000000"/>-->
+<!--            <MfrRFID Number="900000000000000"/>-->
+            <NUES9 Number="00AAA0000"/>
+<!--            <NUES8 Number="00AA0000"/>-->
+<!--            <OtherOfficialID Type="AMID" Number="Number65"/>-->
+<!--            <ManagementID Number="Number67"/>-->
+<!--            <BrandImage BrandImageRef="ID000" Description="Description5"/>-->
+<!--            <EquineDescription Name="Name3" Description="Description7"/>-->
+<!--            <EquinePhotographs>
+                <Photograph ImageRef="ID001" View="Left"/>
+                <Photograph ImageRef="ID000" View="Left"/>
+            </EquinePhotographs>-->
+        </AnimalTags>
+        <Test AccessionRef="ID002" TestCode="TestCode1">
+            <Result ResultName="RESULT">
+<!--                <ResultInteger>0</ResultInteger>-->
+<!--                <ResultString>ResultString0</ResultString>-->
+                <ResultFloat>0</ResultFloat>
+            </Result>
+            <Result ResultName="RESULT">
+<!--                <ResultInteger>0</ResultInteger>-->
+<!--                <ResultString>ResultString1</ResultString>-->
+                <ResultFloat>0</ResultFloat>
+            </Result>
+        </Test>
+        <Test AccessionRef="ID000" TestCode="TestCode3">
+            <Result ResultName="RESULT">
+                <ResultInteger>0</ResultInteger>
+<!--                <ResultString>ResultString2</ResultString>-->
+<!--                <ResultFloat>0</ResultFloat>-->
+            </Result>
+            <Result ResultName="RESULT">
+                <ResultInteger>0</ResultInteger>
+<!--                <ResultString>ResultString3</ResultString>-->
+<!--                <ResultFloat>0</ResultFloat>-->
+            </Result>
+        </Test>
+        <Vaccination Type="Type49" Date="2006-05-04"/>
+        <Vaccination Type="Type51" Date="2006-05-04"/>
+    </Animal>
+    <Animal Age="0d" Breed="Breed3" Sex="Female" SexDetail="SexDetail3" InspectionDate="2006-05-04">
+<!--        <SpeciesCode Code="AQU" Text="Text5"/>-->
+        <SpeciesOther Code="OTH" Text="Text7"/>
+        <AnimalTags>
+<!--            <AIN Number="840000000000000"/>-->
+<!--            <MfrRFID Number="900000000000000"/>-->
+<!--            <NUES9 Number="00AAA0000"/>-->
+<!--            <NUES8 Number="00AA0000"/>-->
+<!--            <OtherOfficialID Type="AMID" Number="Number77"/>-->
+            <ManagementID Number="Number79"/>
+<!--            <BrandImage BrandImageRef="ID000" Description="Description9"/>-->
+<!--            <EquineDescription Name="Name5" Description="Description11"/>-->
+<!--            <EquinePhotographs>
+                <Photograph ImageRef="ID002" View="Left"/>
+                <Photograph ImageRef="ID003" View="Left"/>
+            </EquinePhotographs>-->
+<!--            <AIN Number="840000000000000"/>-->
+<!--            <MfrRFID Number="900000000000000"/>-->
+<!--            <NUES9 Number="00AAA0000"/>-->
+<!--            <NUES8 Number="00AA0000"/>-->
+<!--            <OtherOfficialID Type="AMID" Number="Number89"/>-->
+<!--            <ManagementID Number="Number91"/>-->
+            <BrandImage BrandImageRef="ID000" Description="Description13"/>
+<!--            <EquineDescription Name="Name7" Description="Description15"/>-->
+<!--            <EquinePhotographs>
+                <Photograph ImageRef="ID000" View="Left"/>
+                <Photograph ImageRef="ID001" View="Left"/>
+            </EquinePhotographs>-->
+        </AnimalTags>
+        <Test AccessionRef="ID002" TestCode="TestCode5">
+            <Result ResultName="RESULT">
+<!--                <ResultInteger>0</ResultInteger>-->
+<!--                <ResultString>ResultString4</ResultString>-->
+                <ResultFloat>0</ResultFloat>
+            </Result>
+            <Result ResultName="RESULT">
+                <ResultInteger>0</ResultInteger>
+<!--                <ResultString>ResultString5</ResultString>-->
+<!--                <ResultFloat>0</ResultFloat>-->
+            </Result>
+        </Test>
+        <Test AccessionRef="ID002" TestCode="TestCode7">
+            <Result ResultName="RESULT">
+<!--                <ResultInteger>0</ResultInteger>-->
+                <ResultString>ResultString6</ResultString>
+<!--                <ResultFloat>0</ResultFloat>-->
+            </Result>
+            <Result ResultName="RESULT">
+<!--                <ResultInteger>0</ResultInteger>-->
+<!--                <ResultString>ResultString7</ResultString>-->
+                <ResultFloat>0</ResultFloat>
+            </Result>
+        </Test>
+        <Vaccination Type="Type57" Date="2006-05-04"/>
+        <Vaccination Type="Type59" Date="2006-05-04"/>
+    </Animal>
+    <GroupLot Quantity="0" Unit="Number" Age="0d" Breed="Breed5" Sex="Female" SexDetail="SexDetail5" Description="Description17">
+<!--        <SpeciesCode Code="AQU" Text="Text9"/>-->
+        <SpeciesOther Code="OTH" Text="Text11"/>
+        <GroupLotID>GroupLotID0</GroupLotID>
+        <GroupLotID>GroupLotID1</GroupLotID>
+        <Test AccessionRef="ID001" TestCode="TestCode9">
+            <Result ResultName="RESULT">
+<!--                <ResultInteger>0</ResultInteger>-->
+<!--                <ResultString>ResultString8</ResultString>-->
+                <ResultFloat>0</ResultFloat>
+            </Result>
+            <Result ResultName="RESULT">
+<!--                <ResultInteger>0</ResultInteger>-->
+<!--                <ResultString>ResultString9</ResultString>-->
+                <ResultFloat>0</ResultFloat>
+            </Result>
+        </Test>
+        <Test AccessionRef="ID003" TestCode="TestCode11">
+            <Result ResultName="RESULT">
+<!--                <ResultInteger>0</ResultInteger>-->
+<!--                <ResultString>ResultString10</ResultString>-->
+                <ResultFloat>0</ResultFloat>
+            </Result>
+            <Result ResultName="RESULT">
+<!--                <ResultInteger>0</ResultInteger>-->
+<!--                <ResultString>ResultString11</ResultString>-->
+                <ResultFloat>0</ResultFloat>
+            </Result>
+        </Test>
+        <Vaccination Type="Type61" Date="2006-05-04"/>
+        <Vaccination Type="Type63" Date="2006-05-04"/>
+    </GroupLot>
+    <GroupLot Quantity="0" Unit="Number" Age="0d" Breed="Breed7" Sex="Female" SexDetail="SexDetail7" Description="Description19">
+<!--        <SpeciesCode Code="AQU" Text="Text13"/>-->
+        <SpeciesOther Code="OTH" Text="Text15"/>
+        <GroupLotID>GroupLotID2</GroupLotID>
+        <GroupLotID>GroupLotID3</GroupLotID>
+        <Test AccessionRef="ID002" TestCode="TestCode13">
+            <Result ResultName="RESULT">
+<!--                <ResultInteger>0</ResultInteger>-->
+                <ResultString>ResultString12</ResultString>
+<!--                <ResultFloat>0</ResultFloat>-->
+            </Result>
+            <Result ResultName="RESULT">
+<!--                <ResultInteger>0</ResultInteger>-->
+<!--                <ResultString>ResultString13</ResultString>-->
+                <ResultFloat>0</ResultFloat>
+            </Result>
+        </Test>
+        <Test AccessionRef="ID002" TestCode="TestCode15">
+            <Result ResultName="RESULT">
+<!--                <ResultInteger>0</ResultInteger>-->
+                <ResultString>ResultString14</ResultString>
+<!--                <ResultFloat>0</ResultFloat>-->
+            </Result>
+            <Result ResultName="RESULT">
+<!--                <ResultInteger>0</ResultInteger>-->
+<!--                <ResultString>ResultString15</ResultString>-->
+                <ResultFloat>0</ResultFloat>
+            </Result>
+        </Test>
+        <Vaccination Type="Type65" Date="2006-05-04"/>
+        <Vaccination Type="Type67" Date="2006-05-04"/>
+    </GroupLot>
+    <Statements>Statements0</Statements>
+    <Attachment AttachmentRef="ID000" DocType="Scanned Paper CVI" Filename="Filename1" Comment="Comment45"/>
+    <Attachment AttachmentRef="ID001" DocType="Scanned Paper CVI" Filename="Filename3" Comment="Comment47"/>
+    <MiscAttribute Name="Name9" Value="Value1"/>
+    <MiscAttribute Name="Name11" Value="Value3"/>
+    <Binary ID="ID005" MimeType="a/a">
+        <Payload>ZGVmYXVsdA==</Payload>
+    </Binary>
+    <Binary ID="ID007" MimeType="a/a">
+        <Payload>ZGVmYXVsdA==</Payload>
+    </Binary>
+</eCVI>
