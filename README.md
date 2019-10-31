@@ -3,6 +3,8 @@ eCVI Data Exchange Standard (Starting with version 2)
 
 This project is the home of the AAVLD/USAHA Data Standards Committee's work on the eCVI Data Exchange standard starting with version 2.  See: https://github.com/tracefirst/usaha_committee for version 1
 
+Committee Membership https://github.com/AAVLD-USAHA-ITStandards/eCVI/tree/master/Governance/membership.md
+
 A few words on the documentation approach: 
  
 First and foremost, the XML schema *is* the standard.  All other material is supplemental documentation, committee governance, etc.  The committee sometimes provides "bridge" schemas that will validate content in either of two versions to help implementers synchronize upgrading.
