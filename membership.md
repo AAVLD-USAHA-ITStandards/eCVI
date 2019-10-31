@@ -24,6 +24,7 @@ Justin Smith                      justin.smith@ks.gov                      State
 Keith Roehr                       keith.roehr@state.co.us                  State
 Kent Grant                        kevin.grant@vetenvoy.us                  Other
 Kevin Keuning                     kevin.keuning@siriuscom.com              CVI Vendor
+Kurt Krim                         kurt@vet-sentry.com                      eCVI Vendor
 Kimberly Tsao                     Kimberly.tsao@aphis.usda.gov             Fed
 Michael McGrath                   mmcgrath@tracefirst.com                  DB Vendor
 Mitzy Torres                      mtorres@acclaimsystems.onmicrosoft.com   DB Vendor
@@ -36,4 +37,7 @@ Rod Chitty                        Rodney.a.chitty@aphis.usda.gov           Other
 Shane Linke                       Shane.g.linke@aphis.usda.gov             Fed
 Sunny Geiser-Novotny              sunny.geiser-novotny@aphis.usda.gov      Fed
 Susan Culp                        susan.culp@ag.tamu.edu                   CVI Vendor
+Victor Velez                      VVelez@cdfa.ca.gov                       State
+Stacey Schwabenlander             stacey.schwabenlander@state.mn.us        State
+John Conlon                       jconlon@verticon.com                     Other
 ```
