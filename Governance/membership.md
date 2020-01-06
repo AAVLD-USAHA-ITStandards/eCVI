@@ -12,7 +12,7 @@ NAME                              EMAIL                                    CATEG
 Alex Turner                       Alexander.Turner2@usda.gov               Fed
 Savanna Barksdale                 savanna@tcfa.org                         Producers
 Carissa Allen                     carissa.allen@state.mn.us                State
-Christopher Lusk                  Christopher.luck@siriuscom.com           CVI Vendor
+Christopher Lusk                  Christopher.lusk@siriuscom.com           CVI Vendor
 Craig Carter                      Craig.carter@uky.edu                     Academic
 Dan Shipton                       dshipton@globalvetlink.com               CVI Vendor
 Dee Ellis                         dee.ellis@ag.tamu.edu                    CVI Vendor
@@ -21,7 +21,7 @@ David Ziemann                     dziemann@globalvetlink.com               CVI V
 Jeff Wilcke                       jwilcke@vt.edu                           Academic
 Jill Wagner                       jwagner@globalvetlink.com                CVI Vendor
 John Picanso                      john.picanso@aphis.usda.gov              Fed
-Julie Green                       jmgree@vt.edu                            Academic
+Julie Green                       jmgreen@vt.edu                           Academic
 Justin Smith                      justin.smith@ks.gov                      State
 Keith Roehr                       keith.roehr@state.co.us                  State
 Kent Grant                        kevin.grant@vetenvoy.us                  Other
