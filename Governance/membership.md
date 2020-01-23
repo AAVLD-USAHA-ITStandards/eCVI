@@ -13,7 +13,6 @@ Alex Turner                       Alexander.Turner2@usda.gov               Fed
 Savanna Barksdale                 savanna@tcfa.org                         Producers
 Carissa Allen                     carissa.allen@state.mn.us                State
 Craig Carter                      Craig.carter@uky.edu                     Academic
-Dan Shipton                       dshipton@globalvetlink.com               CVI Vendor
 Dee Ellis                         dee.ellis@ag.tamu.edu                    CVI Vendor
 Dave Dice                         dave.dice@state.co.us                    State
 David Ziemann                     dziemann@globalvetlink.com               CVI Vendor
@@ -24,7 +23,6 @@ Julie Green                       jmgreen@vt.edu                           Acade
 Justin Smith                      justin.smith@ks.gov                      State
 Keith Roehr                       keith.roehr@state.co.us                  State
 Kent Grant                        kevin.grant@vetenvoy.us                  Other
-Kurt Krim                         kurt@vet-sentry.com                      eCVI Vendor
 Kimberly Tsao                     Kimberly.tsao@aphis.usda.gov             Fed
 Michael McGrath                   mmcgrath@tracefirst.com                  DB Vendor
 Mitzy Torres                      mtorres@acclaimsystems.onmicrosoft.com   DB Vendor
@@ -40,4 +38,8 @@ Susan Culp                        susan.culp@ag.tamu.edu                   CVI V
 Victor Velez                      VVelez@cdfa.ca.gov                       State
 Stacey Schwabenlander             stacey.schwabenlander@state.mn.us        State
 John Conlon                       jconlon@verticon.com                     Other
-```
+Ryan Scholz                       rscholz@oda.state.or.us                  State
+Scott Rydberg                     scott@rivercitydata.com                  CVI Vendor
+Russell Iselt                     russell.iselt@tahc.texas.gov             State
+Scott Leibsle                     scott.leibsle@isda.idaho.gov             State
+
