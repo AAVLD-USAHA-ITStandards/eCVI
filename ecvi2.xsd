@@ -30,6 +30,7 @@
         01/23/2020: Changed required attributes of type string to type nonNullString
         01/23/2020: Added 123 and 484 to AIN in addition to MfrRFID
         01/23/2020: Added InspectionDate attribute to GroupLot, optional for now.
+        01/23/2020: Added TotalNumberInConsignment attribute to eCVI, optional for now.
         </xs:documentation>
     </xs:annotation>
     <xs:annotation>
@@ -70,6 +71,7 @@
             <xs:attribute name="ExpirationDate" type="xs:date" use="required"/>
             <xs:attribute name="ShipmentDate" type="xs:date" use="optional"/>
             <xs:attribute name="EntryPermitNumber" type="xs:string" use="optional"/>
+            <xs:attribute name="TotalNumberInConsignment" type="xs:int" use="optional"/>
         </xs:complexType>
     </xs:element>
     <!-- END Document Element -->
