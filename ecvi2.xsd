@@ -28,6 +28,7 @@
         03/13/2019: Replaced AddressBlock with Address whereever it occurs.
         08/07/2019: Allowed GroupLotID to repeat effective Sept 1, 2019 as version 2.2
         01/23/2020: Changed required attributes of type string to type nonNullString
+        01/23/2020: Added 123 and 484 to AIN in addition to MfrRFID
         </xs:documentation>
     </xs:annotation>
     <xs:annotation>
@@ -950,7 +951,7 @@
             <xs:documentation>840 AIN (usually RFID) tag.</xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:string">
-            <xs:pattern value="(840)\d{12}">
+            <xs:pattern value="((840)|(124)|(484))\d{12}">
                 <xs:annotation>
                     <xs:documentation xml:lang="en">840 RFID: 840 followed by 12 digits</xs:documentation>
                 </xs:annotation>
