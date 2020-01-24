@@ -45,9 +45,16 @@
          01/23/2019: Corrected email type to allow top-level domains up to 24 characters.
          03/13/2019: Replaced AddressBlock with Address whereever it occurs.
          08/07/2019: Allowed GroupLotID to repeat effective Sept 1, 2019 as version 2.2
+         01/23/2020: Changed required attributes of type string to type nonNullString
+         01/23/2020: Added 123 and 484 to AIN in addition to MfrRFID
+         01/23/2020: Added InspectionDate attribute to GroupLot, optional for now.
+         01/23/2020: Added TotalNumberInConsignment attribute to eCVI, optional for now.
+         01/24/2020: Added MiscAttribute element to Animal and GroupLot.  Optional and may
+         repeat.
+         01/24/2020: Added Statements element to Animal and GroupLot.  Optional.
          
       </blockquote>
-      <blockquote>Copyright © 2017-18 AAVLD/USAHA it is free for use. Submit suggested changes to the
+      <blockquote>Copyright © 2017-20 AAVLD/USAHA it is free for use. Submit suggested changes to the
          maintainers at
          https://github.com/AAVLD-USAHA-ITStandards/eCVI 
       </blockquote>
@@ -77,6 +84,8 @@
          <li><b>ShipmentDate</b>: Optional
          </li>
          <li><b>EntryPermitNumber</b>: Optional
+         </li>
+         <li><b>TotalNumberInConsignment</b>: Optional
          </li>
       </ul>
       <h2>Child Elements</h2>
@@ -741,7 +750,13 @@
       <ul>
          <li><b>AccessionDate</b>: Required
          </li>
-         <li><b>AccessionNumber</b>: Required
+         <li><b>AccessionNumber</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.
+            </blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
          </li>
       </ul>
       <h4><i>Child Elements</i></h4>
@@ -1472,6 +1487,10 @@
          </li>
          <li><b>Vaccination</b>: Optional, may repeat
          </li>
+         <li><b>Statements</b>: Optional
+         </li>
+         <li><b>MiscAttribute</b>: Optional, may repeat
+         </li>
       </ul>
       <h3>SpeciesCode</h3>
       <blockquote> For animals with official species codes, the code is required with optional text
@@ -1564,7 +1583,13 @@
       <ul>
          <li><b>Code</b>: Optional
          </li>
-         <li><b>Text</b>: Required
+         <li><b>Text</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.
+            </blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
          </li>
       </ul>
       <h3>AnimalTags</h3>
@@ -1604,46 +1629,45 @@
          </li>
       </ul>
       <h3>AIN</h3>
-      <blockquote>840 (usually RFIF) tags or chips.</blockquote>
+      <blockquote>840 (usually RFIF) tags or chips.
+         840 RFID: 840 followed by 12 digits.
+         Also includes Canadian and Mexican national prefixes.
+      </blockquote>
       <h4><i>Attributes</i></h4>
       <ul>
-         <li><b>Number</b>: Required<br><i>AINType</i><blockquote>840 AIN (usually RFID) tag.</blockquote>
+         <li><b>Number</b>: Required<br><i></i>
             Pattern(s):
             <ul>
-               <li>(840)\d{12}
-                  (840 RFID: 840 followed by 12 digits)
-                  
-               </li>
+               <li>((840)|(124)|(484))\d{12}</li>
             </ul>
          </li>
       </ul>
       <h3>MfrRFID</h3>
-      <blockquote>900 series but not "900" RFID tags or chips.</blockquote>
+      <blockquote>900 series but not "900" RFID tags or chips.
+         Non 840 RFID: Company prefix (not 999) followed by 12 digits.
+         Also includes Canadian and Mexican national prefixes.
+      </blockquote>
       <h4><i>Attributes</i></h4>
       <ul>
-         <li><b>Number</b>: Required<br><i>MfrRFIDType</i><blockquote>900 Series manufacturer tags (always RFID?).</blockquote>
+         <li><b>Number</b>: Required<br><i></i>
             Pattern(s):
             <ul>
-               <li>((9[0-8]\d)|(9\d[0-8])|(124)|(484))\d{12}
-                  ( Non 840 RFID: Company prefix (not 999) followed by 12 digits )
-                  
-               </li>
+               <li>((9[0-8]\d)|(9\d[0-8])|(124)|(484))\d{12}</li>
             </ul>
          </li>
       </ul>
       <h3>NUES9</h3>
-      <blockquote>NUES9 tags most commonly on metal "brite" tags.</blockquote>
+      <blockquote>NUES9 tags most commonly on metal "brite" tags.
+         NUES 9 Character: Two digits + three letters + four digits or some state's alpha codes
+         followed by three more
+         letters and four digits
+      </blockquote>
       <h4><i>Attributes</i></h4>
       <ul>
-         <li><b>Number</b>: Required<br><i>NUES9Type</i><blockquote>9 Character NUES (brite) tags.</blockquote>
+         <li><b>Number</b>: Required<br><i></i>
             Pattern(s):
             <ul>
-               <li>(\d{2}|MD|MN|NM|NY|US|WY)[A-Z]{3}\d{4}
-                  ( NUES 9 Character: Two digits + three letters + four digits or some state's alpha
-                  codes followed by three more
-                  letters and four digits )
-                  
-               </li>
+               <li>(\d{2}|MD|MN|NM|NY|US|WY)[A-Z]{3}\d{4}</li>
             </ul>
          </li>
       </ul>
@@ -1652,18 +1676,15 @@
          of characters matches backtags, it
          is important that these rarely used tags be recorded by type when they do appear on
          CVIs.
+         NUES 8 Character: Two digits + two letters + four digits (Note: matches cattle backtag
+         pattern.)
       </blockquote>
       <h4><i>Attributes</i></h4>
       <ul>
-         <li><b>Number</b>: Required<br><i>NUES8Type</i><blockquote>8 Character NUES (brite) tags.</blockquote>
+         <li><b>Number</b>: Required<br><i></i>
             Pattern(s):
             <ul>
-               <li>\d{2}[A-Z]{2}\d{4}
-                  ( NUES 8 Character: Two digits + two letters + four digits (Note: matches cattle backtag
-                  pattern.)
-                  )
-                  
-               </li>
+               <li>\d{2}[A-Z]{2}\d{4}</li>
             </ul>
          </li>
       </ul>
@@ -1712,14 +1733,26 @@
                </li>
             </ul>
          </li>
-         <li><b>Number</b>: Required
+         <li><b>Number</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.
+            </blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
          </li>
       </ul>
       <h3>ManagementID</h3>
       <blockquote> Other Formats: No restrictions </blockquote>
       <h4><i>Attributes</i></h4>
       <ul>
-         <li><b>Number</b>: Required
+         <li><b>Number</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.
+            </blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
          </li>
       </ul>
       <h3>BrandImage</h3>
@@ -1739,7 +1772,13 @@
       <ul>
          <li><b>Name</b>: Optional
          </li>
-         <li><b>Description</b>: Required
+         <li><b>Description</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.
+            </blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
          </li>
       </ul>
       <h3>EquinePhotographs</h3>
@@ -1760,7 +1799,13 @@
       <ul>
          <li><b>AccessionRef</b>: Required
          </li>
-         <li><b>TestCode</b>: Required
+         <li><b>TestCode</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.
+            </blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
          </li>
       </ul>
       <h4><i>Child Elements</i></h4>
@@ -1775,9 +1820,46 @@
       </blockquote>
       <h4><i>Attributes</i></h4>
       <ul>
-         <li><b>Type</b>: Required
+         <li><b>Type</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.
+            </blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
          </li>
          <li><b>Date</b>: Optional
+         </li>
+      </ul>
+      <h3>Statements</h3>
+      <blockquote> Additional statements that may be required by various jurisdictions may be included
+         here. These statements must not
+         take the place of or modify the structured content found elsewhere in the standard.
+      </blockquote>
+      <h3>MiscAttribute</h3>
+      <blockquote>Any additional information needed by specific implementations can be provided as name/value
+         pairs represented as
+         strings. These data must not be essential to proper understanding of the structured
+         content of the standard data but only extend
+         it.
+      </blockquote>
+      <h4><i>Attributes</i></h4>
+      <ul>
+         <li><b>Name</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.
+            </blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
+         </li>
+         <li><b>Value</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.
+            </blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
          </li>
       </ul>
       <h3>GroupLot</h3>
@@ -1869,7 +1951,15 @@
          </li>
          <li><b>SexDetail</b>: Optional
          </li>
-         <li><b>Description</b>: Required
+         <li><b>Description</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.
+            </blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
+         </li>
+         <li><b>InspectionDate</b>: Optional
          </li>
       </ul>
       <h4><i>Child Elements</i></h4>
@@ -1887,6 +1977,10 @@
          <li><b>Test</b>: Optional, may repeat
          </li>
          <li><b>Vaccination</b>: Optional, may repeat
+         </li>
+         <li><b>Statements</b>: Optional
+         </li>
+         <li><b>MiscAttribute</b>: Optional, may repeat
          </li>
       </ul>
       <h3>SpeciesCode</h3>
@@ -1980,7 +2074,13 @@
       <ul>
          <li><b>Code</b>: Optional
          </li>
-         <li><b>Text</b>: Required
+         <li><b>Text</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.
+            </blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
          </li>
       </ul>
       <h3>Test</h3>
@@ -1994,7 +2094,13 @@
       <ul>
          <li><b>AccessionRef</b>: Required
          </li>
-         <li><b>TestCode</b>: Required
+         <li><b>TestCode</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.
+            </blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
          </li>
       </ul>
       <h4><i>Child Elements</i></h4>
@@ -2009,9 +2115,46 @@
       </blockquote>
       <h4><i>Attributes</i></h4>
       <ul>
-         <li><b>Type</b>: Required
+         <li><b>Type</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.
+            </blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
          </li>
          <li><b>Date</b>: Optional
+         </li>
+      </ul>
+      <h3>Statements</h3>
+      <blockquote> Additional statements that may be required by various jurisdictions may be included
+         here. These statements must not
+         take the place of or modify the structured content found elsewhere in the standard.
+      </blockquote>
+      <h3>MiscAttribute</h3>
+      <blockquote>Any additional information needed by specific implementations can be provided as name/value
+         pairs represented as
+         strings. These data must not be essential to proper understanding of the structured
+         content of the standard data but only extend
+         it.
+      </blockquote>
+      <h4><i>Attributes</i></h4>
+      <ul>
+         <li><b>Name</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.
+            </blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
+         </li>
+         <li><b>Value</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.
+            </blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
          </li>
       </ul>
       <h3>Statements</h3>
@@ -2069,7 +2212,13 @@
                </li>
             </ul>
          </li>
-         <li><b>Filename</b>: Required
+         <li><b>Filename</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.
+            </blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
          </li>
          <li><b>Comment</b>: Optional
          </li>
@@ -2083,9 +2232,21 @@
       </blockquote>
       <h4><i>Attributes</i></h4>
       <ul>
-         <li><b>Name</b>: Required
+         <li><b>Name</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.
+            </blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
          </li>
-         <li><b>Value</b>: Required
+         <li><b>Value</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.
+            </blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
          </li>
       </ul>
       <h3>Binary</h3>
@@ -2513,9 +2674,21 @@
       <blockquote>Bovine TB status.</blockquote>
       <h4><i>Attributes</i></h4>
       <ul>
-         <li><b>Disease</b>: Required
+         <li><b>Disease</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.
+            </blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
          </li>
-         <li><b>Status</b>: Required
+         <li><b>Status</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.
+            </blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
          </li>
       </ul>
       <h3>HerdOrFlockStatus</h3>
@@ -2525,7 +2698,13 @@
       </blockquote>
       <h4><i>Attributes</i></h4>
       <ul>
-         <li><b>Disease</b>: Required
+         <li><b>Disease</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.
+            </blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
          </li>
          <li><b>HerdOrFlockID</b>: Optional
          </li>
