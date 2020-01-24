@@ -31,6 +31,7 @@
         01/23/2020: Added 123 and 484 to AIN in addition to MfrRFID
         01/23/2020: Added InspectionDate attribute to GroupLot, optional for now.
         01/24/2020: Added MiscAttribute element to Animal and GroupLot.  Optional and may repeat.
+        01/24/2020: Added Statements element to Animal and GroupLot.  Optional.
         </xs:documentation>
     </xs:annotation>
     <xs:annotation>
@@ -218,6 +219,7 @@
                 <xs:element ref="AnimalTags" minOccurs="1" maxOccurs="1"/>
                 <xs:element ref="Test" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="Vaccination" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="Statements" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="MiscAttribute" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
             <xs:attribute name="Age" type="AgeType" use="optional"/>
@@ -257,6 +259,7 @@
                 <xs:element name="GroupLotID" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="Test" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="Vaccination" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="Statements" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="MiscAttribute" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
             <xs:attribute name="Quantity" type="xs:float" use="optional"/>
