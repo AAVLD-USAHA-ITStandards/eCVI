@@ -38,8 +38,8 @@ Susan Culp                        susan.culp@ag.tamu.edu                   CVI V
 Victor Velez                      VVelez@cdfa.ca.gov                       State
 Stacey Schwabenlander             stacey.schwabenlander@state.mn.us        State
 John Conlon                       jconlon@verticon.com                     Other
-Ryan Scholz                       rscholz@oda.state.or.us                  State
+Ryan Scholz                       rscholz@oda.state.or.us                  State/CVI Vendor
 Scott Rydberg                     scott@rivercitydata.com                  CVI Vendor
-Russell Iselt                     russell.iselt@tahc.texas.gov             State
-Scott Leibsle                     scott.leibsle@isda.idaho.gov             State
-
+Russell Iselt                     russell.iselt@tahc.texas.gov             State/CVI Vendor
+Scott Leibsle                     scott.leibsle@isda.idaho.gov             State/CVI Vendor
+Kurt Sparks                       KSparks@pork.org                         Industry/CVI Vendor
