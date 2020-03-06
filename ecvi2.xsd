@@ -35,6 +35,7 @@
         01/24/2020: Added Statements element to Animal and GroupLot.  Optional.
         01/24/2020: Removed SimpleTypes AINType, MfrRFIDType, NUES9Type and NUES8Type and defined these attributes
             in-line in the definitions of the corresponding element definitions.
+        03/06/2020: Changed AgeType RegEx to allow decimals.
         </xs:documentation>
     </xs:annotation>
     <xs:annotation>
@@ -931,7 +932,7 @@
             <xs:documentation> Age can be expressed as days , weeks, months, years, or as date of birth. </xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:string">
-            <xs:pattern value="(&lt;|&gt;)? ?\d{1,3} ?(d|wk|mo|a)"/>
+            <xs:pattern value="(&lt;|&gt;)? ?\d{1,3}(\.\d+)? ?(d|wk|mo|a)"/>
             <xs:pattern value="(19|20)\d\d-(0[1-9]|1[012])-(0[1-9]|[12]\d|3[01])"/>
         </xs:restriction>
     </xs:simpleType>
