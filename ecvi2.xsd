@@ -34,6 +34,7 @@
         01/24/2020: Added Statements element to Animal and GroupLot.  Optional.
         03/06/2020: Changed AgeType RegEx to allow decimals.
         07/09/2020: Added ReplacesCviNumber attribute. #52
+        07/09/2020: Added Voided attribute. #51
         </xs:documentation>
     </xs:annotation>
     <xs:annotation>
@@ -78,7 +79,15 @@
 =======
             <xs:attribute name="TotalNumberInConsignment" type="xs:int" use="optional"/>
             <xs:attribute name="ReplacesCviNumber" type="nonNullString" use="optional"/>
+<<<<<<< HEAD
 >>>>>>> 4ff47f5... Added ReplacesCviNumber attribute. #52
+=======
+            <xs:attribute name="Voided" type="xs:boolean" default="false" use="optional">
+                <xs:annotation>
+                    <xs:documentation>True indicates that the CVI named in ReplacesCviNumber has been revoked.</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+>>>>>>> cd368ce... Added Voided attribute. #51
         </xs:complexType>
     </xs:element>
     <!-- END Document Element -->
