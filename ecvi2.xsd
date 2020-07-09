@@ -36,6 +36,7 @@
         01/24/2020: Removed SimpleTypes AINType, MfrRFIDType, NUES9Type and NUES8Type and defined these attributes
             in-line in the definitions of the corresponding element definitions.
         03/06/2020: Changed AgeType RegEx to allow decimals.
+        07/09/2020: Added ReplacesCviNumber attribute.
         </xs:documentation>
     </xs:annotation>
     <xs:annotation>
@@ -77,6 +78,7 @@
             <xs:attribute name="ShipmentDate" type="xs:date" use="optional"/>
             <xs:attribute name="EntryPermitNumber" type="xs:string" use="optional"/>
             <xs:attribute name="TotalNumberInConsignment" type="xs:int" use="optional"/>
+            <xs:attribute name="ReplacesCviNumber" type="nonNullString" use="optional"/>
         </xs:complexType>
     </xs:element>
     <!-- END Document Element -->
