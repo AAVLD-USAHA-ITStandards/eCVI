@@ -32,7 +32,8 @@
         01/23/2020: Added InspectionDate attribute to GroupLot, optional for now.
         01/24/2020: Added MiscAttribute element to Animal and GroupLot.  Optional and may repeat.
         01/24/2020: Added Statements element to Animal and GroupLot.  Optional.
-        03/06/2020: Changed AgeType RegEx to allow decimals. #45
+        03/06/2020: Changed AgeType RegEx to allow decimals.
+        07/09/2020: Added ReplacesCviNumber attribute. #52
         </xs:documentation>
     </xs:annotation>
     <xs:annotation>
@@ -73,6 +74,11 @@
             <xs:attribute name="ExpirationDate" type="xs:date" use="required"/>
             <xs:attribute name="ShipmentDate" type="xs:date" use="optional"/>
             <xs:attribute name="EntryPermitNumber" type="xs:string" use="optional"/>
+<<<<<<< HEAD
+=======
+            <xs:attribute name="TotalNumberInConsignment" type="xs:int" use="optional"/>
+            <xs:attribute name="ReplacesCviNumber" type="nonNullString" use="optional"/>
+>>>>>>> 4ff47f5... Added ReplacesCviNumber attribute. #52
         </xs:complexType>
     </xs:element>
     <!-- END Document Element -->
