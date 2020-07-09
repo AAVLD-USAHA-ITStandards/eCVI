@@ -36,6 +36,7 @@
         07/09/2020: Added ReplacesCviNumber attribute. #52
         07/09/2020: Added Voided attribute. #51
         07/09/2020: Added Product and supporting CommodityType enumeration. #50
+        07/09/2020: Added TestName attribute. #44
         </xs:documentation>
     </xs:annotation>
     <xs:annotation>
@@ -716,6 +717,7 @@
                 </xs:annotation>
             </xs:attribute>
             <xs:attribute name="TestCode" type="nonNullString" use="required"/>
+            <xs:attribute name="TestName" type="nonNullString" use="optional"/>
         </xs:complexType>
     </xs:element>
 
