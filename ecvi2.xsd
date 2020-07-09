@@ -35,6 +35,7 @@
         03/06/2020: Changed AgeType RegEx to allow decimals.
         07/09/2020: Added ReplacesCviNumber attribute. #52
         07/09/2020: Added Voided attribute. #51
+        07/09/2020: Added Product and supporting CommodityType enumeration. #50
         </xs:documentation>
     </xs:annotation>
     <xs:annotation>
@@ -64,6 +65,7 @@
                 <xs:element ref="Accessions" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="Animal" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="GroupLot" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="Product" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="Statements" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="Attachment" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="MiscAttribute" minOccurs="0" maxOccurs="unbounded"/>
@@ -289,6 +291,33 @@
         </xs:complexType>
     </xs:element>
 
+    <xs:element name="Product">
+        <xs:annotation>
+            <xs:documentation>Product is used to specify living animal products other than live animals.
+            Examples include eggs and semen.  Test and Vaccination may apply to the product itself or 
+            the "parent" animal(s).</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:choice>
+                    <xs:element ref="SpeciesCode"/>
+                    <xs:element ref="SpeciesOther"/>
+                </xs:choice>
+                <xs:element name="ProductID" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="Test" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="Vaccination" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="Statements" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="MiscAttribute" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="ProductType" type="CommodityType" use="required"/>
+            <xs:attribute name="Quantity" type="xs:float" use="optional"/>
+            <xs:attribute name="Unit" type="xs:string" use="optional" default="Number"/>
+            <xs:attribute name="Breed" type="xs:string" use="optional"/>
+            <xs:attribute name="Description" type="nonNullString" use="required"/>
+            <xs:attribute name="InspectionDate" type="xs:date" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    
     <xs:element name="Statements" type="xs:string">
         <xs:annotation>
             <xs:documentation> Additional statements that may be required by various jurisdictions may be included here. These statements must not
@@ -1133,6 +1162,16 @@
                     <xs:documentation>Only applies to minor species in unusual cases. Supply explanation in SexDetail</xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="CommodityType">
+        <xs:annotation>
+            <xs:documentation>Type of commodity shipped.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Eggs"/>
+            <xs:enumeration value="Semen"/>
         </xs:restriction>
     </xs:simpleType>
 
