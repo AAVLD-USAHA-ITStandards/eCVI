@@ -38,6 +38,7 @@
         03/06/2020: Changed AgeType RegEx to allow decimals.
         07/09/2020: Added ReplacesCviNumber attribute.
         07/09/2020: Added Voided attribute.
+        07/09/2020: Added TestName attribute.
         </xs:documentation>
     </xs:annotation>
     <xs:annotation>
@@ -684,6 +685,7 @@
                 </xs:annotation>
             </xs:attribute>
             <xs:attribute name="TestCode" type="nonNullString" use="required"/>
+            <xs:attribute name="TestName" type="nonNullString" use="optional"/>
         </xs:complexType>
     </xs:element>
 
