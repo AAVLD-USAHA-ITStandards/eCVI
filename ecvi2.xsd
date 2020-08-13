@@ -38,6 +38,7 @@
         07/09/2020: Added Product and supporting CommodityType enumeration. #50
         07/09/2020: Added TestName attribute. #44
         08/13/2020: Added choice element requiring one or more Animal, GroupLot or Product.  #54
+        08/13/2020: Updated annotations in several places. #51, #52, #53
         </xs:documentation>
     </xs:annotation>
     <xs:annotation>
@@ -77,7 +78,12 @@
             </xs:sequence>
             <xs:attribute name="CviNumber" type="nonNullString" use="required"/>
             <xs:attribute name="CviNumberIssuedBy" type="xs:string" use="optional"/>
-            <xs:attribute name="IssueDate" type="xs:date" use="required"/>
+            <xs:attribute name="IssueDate" type="xs:date" use="required">
+                <xs:annotation>
+                    <xs:documentation>The date this eCVI was issued.  For revision or void, it is the
+                                      date of the revision or revocation.</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
             <xs:attribute name="ExpirationDate" type="xs:date" use="required"/>
             <xs:attribute name="ShipmentDate" type="xs:date" use="optional"/>
             <xs:attribute name="EntryPermitNumber" type="xs:string" use="optional"/>
@@ -90,7 +96,9 @@
 =======
             <xs:attribute name="Voided" type="xs:boolean" default="false" use="optional">
                 <xs:annotation>
-                    <xs:documentation>True indicates that the CVI named in ReplacesCviNumber has been revoked.</xs:documentation>
+                    <xs:documentation>True indicates that the CVI named in ReplacesCviNumber has been revoked.
+                                      Voided certificates must include a copy of the human-readable--PDF, etc--
+                                      version of the certificate clearly marked as void.</xs:documentation>
                 </xs:annotation>
             </xs:attribute>
 >>>>>>> cd368ce... Added Voided attribute. #51
@@ -605,7 +613,7 @@
 
     <xs:element name="OtherStateOrZoneStatus">
         <xs:annotation>
-            <xs:documentation>Bovine TB status.</xs:documentation>
+            <xs:documentation>Other Disease Status</xs:documentation>
         </xs:annotation>
         <xs:complexType>
             <xs:attribute name="Disease" type="nonNullString" use="required"/>
