@@ -42,6 +42,7 @@
         07/09/2020: Added Product element and supporting CommodityType enumeration.
         08/13/2020: Added Choice element to require one or more Animal, Group, or Product.
         08/13/2020: Updated annontations in several places.
+        08/13/2020: Added TransportModeOtherDescription.
         </xs:documentation>
     </xs:annotation>
     <xs:annotation>
@@ -68,6 +69,7 @@
                 <xs:element ref="Consignee" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="Carrier" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="TransportMode" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="TransportModeOtherDescription" minOccurs="0" maxOccurs="0"/>
                 <xs:element ref="Accessions" minOccurs="0" maxOccurs="1"/>
                 <xs:choice minOccurs="1" maxOccurs="unbounded">
                     <xs:element ref="Animal"/>
@@ -207,6 +209,7 @@
             </xs:restriction>
         </xs:simpleType>
     </xs:element>
+    <xs:element name="TransportModeOtherDescription" type="nonNullString"/>
 
     <!-- Do these list wrappers add value? -->
     <xs:element name="Accessions">
