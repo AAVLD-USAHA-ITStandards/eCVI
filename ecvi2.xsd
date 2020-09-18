@@ -28,7 +28,7 @@
         03/13/2019: Replaced AddressBlock with Address whereever it occurs.
         08/07/2019: Allowed GroupLotID to repeat effective Sept 1, 2019 as version 2.2
         01/23/2020: Changed required attributes of type string to type nonNullString
-        01/23/2020: Added 123 and 484 to AIN in addition to MfrRFID
+        01/23/2020: Added 124 and 484 to AIN in addition to MfrRFID
         01/23/2020: Added InspectionDate attribute to GroupLot, optional for now.
         01/23/2020: Added TotalNumberInConsignment attribute to eCVI, optional for now.
         01/24/2020: Added MiscAttribute element to Animal and GroupLot.  Optional and may repeat.
