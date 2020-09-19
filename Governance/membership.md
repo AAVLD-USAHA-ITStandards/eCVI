@@ -23,7 +23,7 @@ Julie Green                       jmgreen@vt.edu                           Acade
 Justin Smith                      justin.smith@ks.gov                      State
 Keith Roehr                       keith.roehr@state.co.us                  State
 Kent Grant                        kevin.grant@vetenvoy.us                  Other
-Kimberly Tsao                     Kimberly.tsao@aphis.usda.gov             Fed
+Jodi VandenEng                    jodi.l.vandeneng@usda.gov                Fed
 Michael McGrath                   mmcgrath@tracefirst.com                  DB Vendor
 Mitzy Torres                      mtorres@acclaimsystems.onmicrosoft.com   DB Vendor
 Michael Martin                    mmarti5@clemson.edu                      Academic
