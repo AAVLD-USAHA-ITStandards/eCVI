@@ -43,3 +43,4 @@ Scott Rydberg                     scott@rivercitydata.com                  CVI V
 Russell Iselt                     russell.iselt@tahc.texas.gov             State/CVI Vendor
 Scott Leibsle                     scott.leibsle@isda.idaho.gov             State/CVI Vendor
 Kurt Sparks                       KSparks@pork.org                         Industry/CVI Vendor
+Diane Kitchen                     Diane.Kitchen@fdacs.gov                  State
