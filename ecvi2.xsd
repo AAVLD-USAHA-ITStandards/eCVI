@@ -771,8 +771,7 @@
         </xs:annotation>
         <xs:complexType>
             <xs:sequence minOccurs="1" maxOccurs="unbounded">
-                <!-- Why the limit of six? -->
-                <xs:choice>
+                 <xs:choice>
                     <xs:element ref="AIN"/>
                     <xs:element ref="MfrRFID"/>
                     <xs:element ref="NUES9"/>
