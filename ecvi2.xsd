@@ -2,7 +2,7 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.usaha.org/xmlns/ecvi2" version="2.0"
     xmlns="http://www.usaha.org/xmlns/ecvi2">
     <xs:annotation>
-        <xs:documentation>Version 2.2
+        <xs:documentation>Version 2.3
         </xs:documentation>
     </xs:annotation>
     <xs:annotation>
