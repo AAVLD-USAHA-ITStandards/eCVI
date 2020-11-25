@@ -2,7 +2,7 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.usaha.org/xmlns/ecvi2" version="2.0"
     xmlns="http://www.usaha.org/xmlns/ecvi2">
     <xs:annotation>
-        <xs:documentation>Version 2.2
+        <xs:documentation>Version 2.3
         </xs:documentation>
     </xs:annotation>
     <xs:annotation>
@@ -30,19 +30,15 @@
         01/23/2020: Changed required attributes of type string to type nonNullString
         01/23/2020: Added 124 and 484 to AIN in addition to MfrRFID
         01/23/2020: Added InspectionDate attribute to GroupLot, optional for now.
-        01/23/2020: Added TotalNumberInConsignment attribute to eCVI, optional for now.
         01/24/2020: Added MiscAttribute element to Animal and GroupLot.  Optional and may repeat.
         01/24/2020: Added Statements element to Animal and GroupLot.  Optional.
-        01/24/2020: Removed SimpleTypes AINType, MfrRFIDType, NUES9Type and NUES8Type and defined these attributes
-            in-line in the definitions of the corresponding element definitions.
         03/06/2020: Changed AgeType RegEx to allow decimals.
-        07/09/2020: Added ReplacesCviNumber attribute.
-        07/09/2020: Added Voided attribute.
-        07/09/2020: Added TestName attribute.
-        07/09/2020: Added Product element and supporting CommodityType enumeration.
-        08/13/2020: Added Choice element to require one or more Animal, Group, or Product.
-        08/13/2020: Updated annontations in several places.
-        08/13/2020: Added TransportModeOtherDescription.
+        07/09/2020: Added ReplacesCviNumber attribute. #52
+        07/09/2020: Added Voided attribute. #51
+        07/09/2020: Added Product and supporting CommodityType enumeration. #50
+        07/09/2020: Added TestName attribute. #44
+        08/13/2020: Added choice element requiring one or more Animal, GroupLot or Product.  #54
+        08/13/2020: Updated annotations in several places. #51, #52, #53
         </xs:documentation>
     </xs:annotation>
     <xs:annotation>
@@ -69,7 +65,6 @@
                 <xs:element ref="Consignee" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="Carrier" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="TransportMode" minOccurs="0" maxOccurs="1"/>
-                <xs:element ref="TransportModeOtherDescription" minOccurs="0" maxOccurs="0"/>
                 <xs:element ref="Accessions" minOccurs="0" maxOccurs="1"/>
                 <xs:choice minOccurs="1" maxOccurs="unbounded">
                     <xs:element ref="Animal"/>
@@ -92,7 +87,6 @@
             <xs:attribute name="ExpirationDate" type="xs:date" use="required"/>
             <xs:attribute name="ShipmentDate" type="xs:date" use="optional"/>
             <xs:attribute name="EntryPermitNumber" type="xs:string" use="optional"/>
-            <xs:attribute name="TotalNumberInConsignment" type="xs:int" use="optional"/>
             <xs:attribute name="ReplacesCviNumber" type="nonNullString" use="optional"/>
             <xs:attribute name="Voided" type="xs:boolean" default="false" use="optional">
                 <xs:annotation>
@@ -209,7 +203,6 @@
             </xs:restriction>
         </xs:simpleType>
     </xs:element>
-    <xs:element name="TransportModeOtherDescription" type="nonNullString"/>
 
     <!-- Do these list wrappers add value? -->
     <xs:element name="Accessions">
@@ -778,8 +771,7 @@
         </xs:annotation>
         <xs:complexType>
             <xs:sequence minOccurs="1" maxOccurs="unbounded">
-                <!-- Why the limit of six? -->
-                <xs:choice>
+                 <xs:choice>
                     <xs:element ref="AIN"/>
                     <xs:element ref="MfrRFID"/>
                     <xs:element ref="NUES9"/>
@@ -798,66 +790,35 @@
     <!-- Start Third Level for TagID -->
     <xs:element name="AIN">
         <xs:annotation>
-            <xs:documentation>840 (usually RFIF) tags or chips.
-                840 RFID: 840 followed by 12 digits.
-                Also includes Canadian and Mexican national prefixes.</xs:documentation>
+            <xs:documentation>840 (usually RFIF) tags or chips.</xs:documentation>
         </xs:annotation>
         <xs:complexType>
-            <xs:attribute name="Number" use="required">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:pattern value="((840)|(124)|(484))\d{12}"/>
-                    </xs:restriction>                    
-                </xs:simpleType>
-            </xs:attribute>
+            <xs:attribute name="Number" type="AINType" use="required"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="MfrRFID">
         <xs:annotation>
-            <xs:documentation>900 series but not "900" RFID tags or chips.
-                Non 840 RFID: Company prefix (not 999) followed by 12 digits.
-                Also includes Canadian and Mexican national prefixes.</xs:documentation>
+            <xs:documentation>900 series but not "900" RFID tags or chips.</xs:documentation>
         </xs:annotation>
         <xs:complexType>
-            <xs:attribute name="Number" use="required">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:pattern value="((9[0-8]\d)|(9\d[0-8])|(124)|(484))\d{12}"/>
-                    </xs:restriction>                    
-                </xs:simpleType>
-            </xs:attribute>
+            <xs:attribute name="Number" type="MfrRFIDType" use="required"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="NUES9">
         <xs:annotation>
-            <xs:documentation>NUES9 tags most commonly on metal "brite" tags.
-                NUES 9 Character: Two digits + three letters + four digits or some state's alpha codes followed by three more
-                letters and four digits</xs:documentation>
+            <xs:documentation>NUES9 tags most commonly on metal "brite" tags.</xs:documentation>
         </xs:annotation>
         <xs:complexType>
-            <xs:attribute name="Number" use="required">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:pattern value="(\d{2}|MD|MN|NM|NY|US|WY)[A-Z]{3}\d{4}"/>
-                    </xs:restriction>                   
-                </xs:simpleType>
-            </xs:attribute>
+            <xs:attribute name="Number" type="NUES9Type" use="required"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="NUES8">
         <xs:annotation>
             <xs:documentation>NUES8 tags most commonly on the smaller sized metal "brite" tags. Because the pattern of characters matches backtags, it
-                is important that these rarely used tags be recorded by type when they do appear on CVIs.
-                NUES 8 Character: Two digits + two letters + four digits (Note: matches cattle backtag pattern.)</xs:documentation>
+                is important that these rarely used tags be recorded by type when they do appear on CVIs.</xs:documentation>
         </xs:annotation>
         <xs:complexType>
-            <xs:attribute name="Number" use="required">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:pattern value="\d{2}[A-Z]{2}\d{4}"/>
-                    </xs:restriction>                    
-                </xs:simpleType>
-            </xs:attribute>
+            <xs:attribute name="Number" type="NUES8Type" use="required"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="OtherOfficialID">
@@ -1040,6 +1001,60 @@
                     <xs:documentation>We would like to always know the type but can't have captured them all.</xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="AINType">
+        <xs:annotation>
+            <xs:documentation>840 AIN (usually RFID) tag.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="((840)|(124)|(484))\d{12}">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">840 RFID: 840 followed by 12 digits</xs:documentation>
+                </xs:annotation>
+            </xs:pattern>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="MfrRFIDType">
+        <xs:annotation>
+            <xs:documentation>900 Series manufacturer tags (always RFID?).</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="((9[0-8]\d)|(9\d[0-8])|(124)|(484))\d{12}">
+                <xs:annotation>
+                    <xs:documentation> Non 840 RFID: Company prefix (not 999) followed by 12 digits </xs:documentation>
+                </xs:annotation>
+            </xs:pattern>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="NUES9Type">
+        <xs:annotation>
+            <xs:documentation>9 Character NUES (brite) tags.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="(\d{2}|MD|MN|NM|NY|US|WY)[A-Z]{3}\d{4}">
+                <xs:annotation>
+                    <xs:documentation> NUES 9 Character: Two digits + three letters + four digits or some state's alpha codes followed by three more
+                        letters and four digits </xs:documentation>
+                </xs:annotation>
+            </xs:pattern>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="NUES8Type">
+        <xs:annotation>
+            <xs:documentation>8 Character NUES (brite) tags.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d{2}[A-Z]{2}\d{4}">
+                <xs:annotation>
+                    <xs:documentation> NUES 8 Character: Two digits + two letters + four digits (Note: matches cattle backtag pattern.)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:pattern>
         </xs:restriction>
     </xs:simpleType>
 

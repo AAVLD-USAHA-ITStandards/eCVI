@@ -23,7 +23,7 @@ Julie Green                       jmgreen@vt.edu                           Acade
 Justin Smith                      justin.smith@ks.gov                      State
 Keith Roehr                       keith.roehr@state.co.us                  State
 Kent Grant                        kevin.grant@vetenvoy.us                  Other
-Kimberly Tsao                     Kimberly.tsao@aphis.usda.gov             Fed
+Jodi VandenEng                    jodi.l.vandeneng@usda.gov                Fed
 Michael McGrath                   mmcgrath@tracefirst.com                  DB Vendor
 Mitzy Torres                      mtorres@acclaimsystems.onmicrosoft.com   DB Vendor
 Michael Martin                    mmarti5@clemson.edu                      Academic
@@ -38,8 +38,9 @@ Susan Culp                        susan.culp@ag.tamu.edu                   CVI V
 Victor Velez                      VVelez@cdfa.ca.gov                       State
 Stacey Schwabenlander             stacey.schwabenlander@state.mn.us        State
 John Conlon                       jconlon@verticon.com                     Other
-Ryan Scholz                       rscholz@oda.state.or.us                  State
+Ryan Scholz                       rscholz@oda.state.or.us                  State/CVI Vendor
 Scott Rydberg                     scott@rivercitydata.com                  CVI Vendor
-Russell Iselt                     russell.iselt@tahc.texas.gov             State
-Scott Leibsle                     scott.leibsle@isda.idaho.gov             State
-
+Russell Iselt                     russell.iselt@tahc.texas.gov             State/CVI Vendor
+Scott Leibsle                     scott.leibsle@isda.idaho.gov             State/CVI Vendor
+Kurt Sparks                       KSparks@pork.org                         Industry/CVI Vendor
+Diane Kitchen                     Diane.Kitchen@fdacs.gov                  State
