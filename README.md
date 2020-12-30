@@ -13,7 +13,11 @@ The documentation in human-readable format is a best effort at converting the st
 
 The **Issues** section of this project contains open issues before the committee.  Some of these are being actively worked, while others are on-hold for a future major release, etc.  Anyone who sees problems or areas to improve the standard is encouraged to create a new Issue.  
 
-The **Releases** section of this project contains the numbered release commits.  Releases are numbered Major.Minor.Editorial.  Implementers should be able to ignore differences between versions that vary only in the third part.
+The **Releases** section of this project contains the numbered release commits.  Releases are numbered Major.Minor.Editorial.  Implementers should be able to ignore differences between versions that vary only in the third part. Each release contains a zip and tar.gz file that contains the corresponding ecvi2.xsd file.
+
+The **master** branch contains the current release *plus* any pending changes that have been approved by the committee and are awaiting release.
+
+The **pendingChanges** branch contains the current release *plus* any pending changes both approved and currently under consideration.  Each commit should corresponde as much as possible to one proposed solution to one issue.  
 
 ## Relationship to Other Groups
 
