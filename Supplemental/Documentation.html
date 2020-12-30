@@ -5,9 +5,8 @@
    </head>
    <body>
       <h1>eCVI Version 2 Standard Contents</h1>
-      <blockquote>Version 2.2
-         
-      </blockquote>
+      <blockquote>Version 2.3
+         </blockquote>
       <blockquote> Change Log 08/30/2017: Initial draft of version 2.0 attempts to clone version 1 (labeled
          version 6.0?) with only minor
          tweaks. 09/01/2017: Added regular expressions to AnimalTags choices. 09/01/2017: Added
@@ -45,12 +44,24 @@
          01/23/2019: Corrected email type to allow top-level domains up to 24 characters.
          03/13/2019: Replaced AddressBlock with Address whereever it occurs.
          08/07/2019: Allowed GroupLotID to repeat effective Sept 1, 2019 as version 2.2
-         
-      </blockquote>
-      <blockquote>Copyright © 2017-18 AAVLD/USAHA it is free for use. Submit suggested changes to the
+         01/23/2020: Changed required attributes of type string to type nonNullString
+         01/23/2020: Added 124 and 484 to AIN in addition to MfrRFID
+         01/23/2020: Added InspectionDate attribute to GroupLot, optional for now.
+         01/24/2020: Added MiscAttribute element to Animal and GroupLot.  Optional and may
+         repeat.
+         01/24/2020: Added Statements element to Animal and GroupLot.  Optional.
+         03/06/2020: Changed AgeType RegEx to allow decimals.
+         07/09/2020: Added ReplacesCviNumber attribute. #52
+         07/09/2020: Added Voided attribute. #51
+         07/09/2020: Added Product and supporting CommodityType enumeration. #50
+         07/09/2020: Added TestName attribute. #44
+         08/13/2020: Added choice element requiring one or more Animal, GroupLot or Product.
+         #54
+         08/13/2020: Updated annotations in several places. #51, #52, #53
+         </blockquote>
+      <blockquote>Copyright © 2017-20 AAVLD/USAHA it is free for use. Submit suggested changes to the
          maintainers at
-         https://github.com/AAVLD-USAHA-ITStandards/eCVI 
-      </blockquote>
+         https://github.com/AAVLD-USAHA-ITStandards/eCVI </blockquote>
       <h1>eCVI Document Element</h1>
       <blockquote> The eCVI xml document contains an extract of data from an interstate certificate
          of veterinary inspection (normally
@@ -62,1321 +73,46 @@
          of use-cases can be met using the
          fully-structured (close standard) data. Inevitably, edge cases--even very important
          ones--have had to be left to open standard
-         features such as "other" choices and free-text entry elements.
-      </blockquote>
+         features such as "other" choices and free-text entry elements.</blockquote>
       <h2>Attributes</h2>
       <ul>
-         <li><b>CviNumber</b>: Required
-         </li>
-         <li><b>CviNumberIssuedBy</b>: Optional
-         </li>
-         <li><b>IssueDate</b>: Required
-         </li>
-         <li><b>ExpirationDate</b>: Required
-         </li>
-         <li><b>ShipmentDate</b>: Optional
-         </li>
-         <li><b>EntryPermitNumber</b>: Optional
-         </li>
+         <li><b>CviNumber</b>: Required</li>
+         <li><b>CviNumberIssuedBy</b>: Optional</li>
+         <li><b>IssueDate</b>: Required</li>
+         <blockquote>The date this eCVI was issued.  For revision or void, it is the
+            date of the revision or revocation.</blockquote>
+         <li><b>ExpirationDate</b>: Required</li>
+         <li><b>ShipmentDate</b>: Optional</li>
+         <li><b>EntryPermitNumber</b>: Optional</li>
+         <li><b>ReplacesCviNumber</b>: Optional</li>
+         <li><b>Voided</b>: Optional</li>
+         <blockquote>True indicates that the CVI named in ReplacesCviNumber has been revoked.
+            Voided certificates must include a copy of the human-readable--PDF, etc--
+            version of the certificate clearly marked as void.</blockquote>
       </ul>
       <h2>Child Elements</h2>
       <ul>
-         <li><b>Veterinarian</b>: Required
-         </li>
-         <li><b>MovementPurposes</b>: Required
-         </li>
-         <li><b>Origin</b>: Required
-         </li>
-         <li><b>Destination</b>: Required
-         </li>
-         <li><b>Consignor</b>: Optional
-         </li>
-         <li><b>Consignee</b>: Optional
-         </li>
-         <li><b>Carrier</b>: Optional
-         </li>
-         <li><b>TransportMode</b>: Optional
-         </li>
-         <li><b>Accessions</b>: Optional
-         </li>
-         <li><b>Animal</b>: Optional, may repeat
-         </li>
-         <li><b>GroupLot</b>: Optional, may repeat
-         </li>
-         <li><b>Statements</b>: Optional
-         </li>
-         <li><b>Attachment</b>: Optional, may repeat
-         </li>
-         <li><b>MiscAttribute</b>: Optional, may repeat
-         </li>
-         <li><b>Binary</b>: Optional, may repeat
-         </li>
+         <li><b>Veterinarian</b>: Required</li>
+         <li><b>MovementPurposes</b>: Required</li>
+         <li><b>Origin</b>: Required</li>
+         <li><b>Destination</b>: Required</li>
+         <li><b>Consignor</b>: Optional</li>
+         <li><b>Consignee</b>: Optional</li>
+         <li><b>Carrier</b>: Optional</li>
+         <li><b>TransportMode</b>: Optional</li>
+         <li><b>Accessions</b>: Optional</li>
+         <li><b>Statements</b>: Optional</li>
+         <li><b>Attachment</b>: Optional, may repeat</li>
+         <li><b>MiscAttribute</b>: Optional, may repeat</li>
+         <li><b>Binary</b>: Optional, may repeat</li>
+         <li><b>At least one of: </b></li>
+         <ul>
+            <li><b>Animal</b></li>
+            <li><b>GroupLot</b></li>
+            <li><b>Product</b></li>
+         </ul>
       </ul>
-      <h3>Veterinarian</h3>
-      <blockquote> Veterinarian is a required element for iCVIs. When available deterministic identifier
-         such as license number and state
-         or national accreditation number should be provided. 
-      </blockquote>
-      <h4><i>Attributes</i></h4>
-      <ul>
-         <li><b>LicenseState</b>: Optional
-         </li>
-         <li><b>LicenseNumber</b>: Optional
-         </li>
-         <li><b>NationalAccreditationNumber</b>: Optional
-         </li>
-      </ul>
-      <h4><i>Child Elements</i></h4>
-      <ul>
-         <li><b>Person</b>: Required
-         </li>
-         <li><b>Address</b>: Optional
-         </li>
-      </ul>
-      <h3>Person</h3>
-      <blockquote> Person is defined as a Name string and an optional Phone Number (see Phone). Because
-         of a lack of industry consensus on
-         hanling names, Name can be provided as either a single string (Name) or individual
-         name components (NameParts).
-      </blockquote>
-      <h4><i>Child Elements</i></h4>
-      <ul>
-         <li> Either: 
-            <ul>
-               <li><b>NameParts</b>: Required
-               </li>
-               <li><b>Name</b>: Required
-               </li>
-            </ul>
-         </li>
-         <li><b>Phone</b>: Optional, may repeat
-         </li>
-         <li><b>Email</b>: Optional, may repeat
-         </li>
-      </ul>
-      <h3>NameParts</h3>
-      <blockquote> NameParts defines a structured name for a business or person. BusinessName, FirstName,
-         Middle Name, LastName, OtherName
-         are all optional for applications to use one or more (NameParts with on individual
-         components would validate, the schema language to
-         force "one or more of one or more of these parts" would be more complex than necessary.)
-         
-      </blockquote>
-      <h4><i>Child Elements</i></h4>
-      <ul>
-         <li><b>BusinessName</b>: Optional
-         </li>
-         <li><b>FirstName</b>: Optional
-         </li>
-         <li><b>MiddleName</b>: Optional
-         </li>
-         <li><b>LastName</b>: Optional
-         </li>
-         <li><b>OtherName</b>: Optional
-         </li>
-      </ul>
-      <h3>Phone</h3>
-      <blockquote> The Phone Number specifies type (list enumeration values?) and a ten-digit number,
-         and can include a comment.
-         
-      </blockquote>
-      <h4><i>Attributes</i></h4>
-      <ul>
-         <li><b>Number</b>: Required<br><i></i>
-            Pattern(s):
-            <ul>
-               <li>\d{10}</li>
-            </ul>
-         </li>
-         <li><b>Comment</b>: Optional
-         </li>
-         <li><b>Type</b>: Required<br><i></i>
-            Values:
-            <ul>
-               <li>Unknown
-                  (Probably the most common.)
-                  
-               </li>
-               <li>Landline
-                  (If known to be fixed location.)
-                  
-               </li>
-               <li>Cellphone
-                  (If known to be a mobile phone.)
-                  
-               </li>
-               <li>Fax
-                  (Fax line.)
-                  
-               </li>
-            </ul>
-         </li>
-      </ul>
-      <h3>Email</h3>
-      <h4><i>Attributes</i></h4>
-      <ul>
-         <li><b>Address</b>: Required<br><i>EmailType</i><blockquote>Optional email address following simplified standard email address pattern.</blockquote>
-            Pattern(s):
-            <ul>
-               <li>[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,24}</li>
-            </ul>
-         </li>
-      </ul>
-      <h3>Address</h3>
-      <blockquote>Origin and destination require a structured address. Because of variation in policy
-         between jurisdictions this schema
-         leaves each element optional. However for a CVI to be valid in any jurisdiction, this
-         element must contain enough information for
-         authorities to uniquely identify the location. 
-      </blockquote>
-      <h4><i>Child Elements</i></h4>
-      <ul>
-         <li><b>Line1</b>: Optional
-         </li>
-         <li><b>Line2</b>: Optional
-         </li>
-         <li><b>Town</b>: Optional
-         </li>
-         <li><b>County</b>: Optional
-         </li>
-         <li><b>State</b>: Required<br><i>StateCodeType</i><blockquote>State Code includes territories, APO addresses, etc. Does NOT include Canadian provinces
-               or Mexican
-               states.
-            </blockquote>
-            Values:
-            <ul>
-               <li>AA
-                  (Military postal system in the Americas)
-                  
-               </li>
-               <li>AE
-                  (Military postal system in Europe Africa and Canada)
-                  
-               </li>
-               <li>AK
-                  (Alaska)
-                  
-               </li>
-               <li>AL
-                  (Alabama)
-                  
-               </li>
-               <li>AP
-                  (Military postal system in the Pacific)
-                  
-               </li>
-               <li>AR
-                  (Arkansas)
-                  
-               </li>
-               <li>AS
-                  (American Samoa)
-                  
-               </li>
-               <li>AZ
-                  (Arizona)
-                  
-               </li>
-               <li>CA
-                  (California)
-                  
-               </li>
-               <li>CO
-                  (Colorado)
-                  
-               </li>
-               <li>CT
-                  (Connecticut)
-                  
-               </li>
-               <li>DC
-                  (Washington District of Columbia)
-                  
-               </li>
-               <li>DE
-                  (Delaware)
-                  
-               </li>
-               <li>FL
-                  (Florida)
-                  
-               </li>
-               <li>FM
-                  (Federated States of Micronesia)
-                  
-               </li>
-               <li>GA
-                  (Georgia)
-                  
-               </li>
-               <li>GU
-                  (Guam)
-                  
-               </li>
-               <li>HI
-                  (Hawaii)
-                  
-               </li>
-               <li>IA
-                  (Iowa)
-                  
-               </li>
-               <li>ID
-                  (Idaho)
-                  
-               </li>
-               <li>IL
-                  (Illinois)
-                  
-               </li>
-               <li>IN
-                  (Indiana)
-                  
-               </li>
-               <li>KS
-                  (Kansas)
-                  
-               </li>
-               <li>KY
-                  (Kentucky)
-                  
-               </li>
-               <li>LA
-                  (Louisiana)
-                  
-               </li>
-               <li>MA
-                  (Massachusetts)
-                  
-               </li>
-               <li>MD
-                  (Maryland)
-                  
-               </li>
-               <li>ME
-                  (Maine)
-                  
-               </li>
-               <li>MH
-                  (Marshall Islands)
-                  
-               </li>
-               <li>MI
-                  (Michigan)
-                  
-               </li>
-               <li>MN
-                  (Minnesota)
-                  
-               </li>
-               <li>MO
-                  (Missouri)
-                  
-               </li>
-               <li>MP
-                  (Northern Mariana Islands)
-                  
-               </li>
-               <li>MS
-                  (Mississippi)
-                  
-               </li>
-               <li>MT
-                  (Montana)
-                  
-               </li>
-               <li>NC
-                  (North Carolina)
-                  
-               </li>
-               <li>ND
-                  (North Dakota)
-                  
-               </li>
-               <li>NE
-                  (Nebraska)
-                  
-               </li>
-               <li>NH
-                  (New Hampshire)
-                  
-               </li>
-               <li>NJ
-                  (New Jersey)
-                  
-               </li>
-               <li>NM
-                  (New Mexico)
-                  
-               </li>
-               <li>NV
-                  (Nevada)
-                  
-               </li>
-               <li>NY
-                  (New York)
-                  
-               </li>
-               <li>OH
-                  (Ohio)
-                  
-               </li>
-               <li>OK
-                  (Oklahoma)
-                  
-               </li>
-               <li>OR
-                  (Oregon)
-                  
-               </li>
-               <li>PA
-                  (Pennsylvania)
-                  
-               </li>
-               <li>PR
-                  (Puerto Rico)
-                  
-               </li>
-               <li>PW
-                  (Palau)
-                  
-               </li>
-               <li>RI
-                  (Rhode Island)
-                  
-               </li>
-               <li>SC
-                  (South Carolina)
-                  
-               </li>
-               <li>SD
-                  (South Dakota)
-                  
-               </li>
-               <li>TN
-                  (Tennessee)
-                  
-               </li>
-               <li>TX
-                  (Texas)
-                  
-               </li>
-               <li>UT
-                  (Utah)
-                  
-               </li>
-               <li>VA
-                  (Virginia)
-                  
-               </li>
-               <li>VI
-                  (U.S. Virgin Islands)
-                  
-               </li>
-               <li>VT
-                  (Vermont)
-                  
-               </li>
-               <li>WA
-                  (Washington)
-                  
-               </li>
-               <li>WI
-                  (Wisconsin)
-                  
-               </li>
-               <li>WV
-                  (West Virginia)
-                  
-               </li>
-               <li>WY
-                  (Wyoming)
-                  
-               </li>
-            </ul>
-         </li>
-         <li><b>ZIP</b>: Optional<br><i></i>
-            Pattern(s):
-            <ul>
-               <li>\d{5}</li>
-               <li>\d{5}-\d{4}</li>
-            </ul>
-         </li>
-         <li><b>Country</b>: Optional<br><i></i>
-            Values:
-            <ul>
-               <li>USA
-                  ()
-                  
-               </li>
-            </ul>
-         </li>
-         <li><b>GeoPoint</b>: Optional
-         </li>
-      </ul>
-      <h3>MovementPurposes</h3>
-      <blockquote> Movement Purposes is required, however, it may be an empty list. This is a challenging
-         element to populate because
-         there are some many factors that become important in regulatory decision making. This
-         list encompasses many different aspects of the
-         animal's use, reason for movement, etc. As with many elements, the goal has been to
-         enumerate those most often used in regulatory and
-         other decision making but leave "Other" available. If "Other" is selected a reason
-         should be supplied as text in the "OtherReason"
-         element.
-      </blockquote>
-      <h4><i>Child Elements</i></h4>
-      <ul>
-         <li><b>MovementPurpose</b>: Optional, may repeat<br><i></i>
-            Values:
-            <ul>
-               <li>Racing
-                  ()
-                  
-               </li>
-               <li>Sale
-                  ()
-                  
-               </li>
-               <li>Grazing
-                  ()
-                  
-               </li>
-               <li>Training
-                  ()
-                  
-               </li>
-               <li>Slaughter
-                  ()
-                  
-               </li>
-               <li>Medical Treatment
-                  ()
-                  
-               </li>
-               <li>Exhibition/Show/Rodeo
-                  ()
-                  
-               </li>
-               <li>Breeding
-                  ()
-                  
-               </li>
-               <li>Competition
-                  ()
-                  
-               </li>
-               <li>Feeding to condition
-                  ()
-                  
-               </li>
-               <li>Feeding to slaughter
-                  ()
-                  
-               </li>
-               <li>Laying Hens
-                  ()
-                  
-               </li>
-               <li>Hunting for harvest
-                  ()
-                  
-               </li>
-               <li>Companion Animal
-                  ()
-                  
-               </li>
-               <li>Personal Travel/Transit
-                  ()
-                  
-               </li>
-               <li>Owner relocating
-                  ()
-                  
-               </li>
-               <li>Evacuation from Natural Disaster
-                  ()
-                  
-               </li>
-               <li>Other
-                  ()
-                  
-               </li>
-            </ul>
-         </li>
-         <li><b>OtherReason</b>: Optional
-         </li>
-      </ul>
-      <h3>Origin</h3>
-      <blockquote>The physical location of the animal(s) prior to movement is required. Must be a physical
-         (911)
-         address.
-      </blockquote>
-      <ul>
-         <li>See: <i>PremType</i></li>
-      </ul>
-      <h3>Destination</h3>
-      <blockquote>The intended physical location of the animal(s) after movement is required. Must be
-         a physical (911)
-         address.
-      </blockquote>
-      <ul>
-         <li>See: <i>PremType</i></li>
-      </ul>
-      <h3>Consignor</h3>
-      <blockquote>The contact information for the person or business responsible for the animal(s) prior
-         to movement. Only required if
-         different from Origin.
-      </blockquote>
-      <ul>
-         <li>See: <i>ContactType</i></li>
-      </ul>
-      <h3>Consignee</h3>
-      <blockquote>The contact information for the person or business responsible for the animal(s) after
-         to movement. Only required if
-         different from Destination.
-      </blockquote>
-      <ul>
-         <li>See: <i>ContactType</i></li>
-      </ul>
-      <h3>Carrier</h3>
-      <blockquote>The contact information for the person or business responsible for moving the animals
-         from origin to destination.
-         
-      </blockquote>
-      <ul>
-         <li>See: <i>ContactType</i></li>
-      </ul>
-      <h3>TransportMode</h3>
-      <blockquote>If important for certification of ability to travel the mode, air, car, rail, truck
-         or boat (ship). 
-      </blockquote><br><i></i>
-      Values:
-      <ul>
-         <li>air
-            ()
-            
-         </li>
-         <li>boat
-            ()
-            
-         </li>
-         <li>car
-            ()
-            
-         </li>
-         <li>rail
-            ()
-            
-         </li>
-         <li>truck
-            ()
-            
-         </li>
-         <li>land
-            ()
-            
-         </li>
-         <li>other
-            ()
-            
-         </li>
-      </ul>
-      <h3>Accessions</h3>
-      <blockquote>Because many herd movements have testing performed in one accession, the accession(s)
-         is(are) listed here and referenced
-         by each test rather than duplicating all the accession information for each test on
-         each animal.
-      </blockquote>
-      <h4><i>Child Elements</i></h4>
-      <ul>
-         <li><b>Accession</b>: Optional, may repeat
-         </li>
-      </ul>
-      <h3>Accession</h3>
-      <blockquote> Accessions are listed for the CVI as a whole and referenced by each test. An accession
-         is defined as the encounter
-         in which testing was performed.  This may be either laboratory testing or in field
-         testing.  A single
-         Laboratory or Field element must be specified, indicating where tests for this accession
-         were performed. InfieldTest is an optional
-         boolean (true/false value) indicating if a test was performed in the field. This redundancy
-         is retained from version 1 that did not
-         have a distinct Field test element.  ID is required, and is the reference number that
-         associates an animal’s individual tests performed
-         as part of this accession. ID is not the lab accession number but rather a distinct
-         identifier used for linking within the XML document.  
-         
-      </blockquote>
-      <h4><i>Attributes</i></h4>
-      <ul>
-         <li><b>InfieldTest</b>: Optional
-         </li>
-         <li><b>id</b>: Required
-         </li>
-      </ul>
-      <h4><i>Child Elements</i></h4>
-      <ul>
-         <li> Either: 
-            <ul>
-               <li><b>Laboratory</b>: Required
-               </li>
-               <li><b>Field</b>: Required
-               </li>
-            </ul>
-         </li>
-      </ul>
-      <h3>Laboratory</h3>
-      <blockquote>For testing done in or by a named laboratory, the Laboratory element contains the
-         relevant information.
-         LabName is a required string. 
-         PremId (see PremIdType) is optional only if unavailable. Address is optional only
-         if
-         unavailable and should contain the lab physical address. AccessionDate is a required
-         date. AccessionNumber is a required
-         string.  Accession number is a distinct identifier assigned by the Laboratory.
-         
-      </blockquote>
-      <h4><i>Attributes</i></h4>
-      <ul>
-         <li><b>AccessionDate</b>: Required
-         </li>
-         <li><b>AccessionNumber</b>: Required
-         </li>
-      </ul>
-      <h4><i>Child Elements</i></h4>
-      <ul>
-         <li><b>LabName</b>: Required
-         </li>
-         <li><b>PremId</b>: Optional<br><i>PremIdType</i><blockquote> PremIdType does minimal validation of true premises identifiers including both PINs
-               (7 characters and LIDs (6 or 8
-               characters). Only nationally registered LIDs are appropriate. Implementing applications
-               are highly encouraged to validate against the
-               appropriate checksum logic. 
-            </blockquote>
-            Pattern(s):
-            <ul>
-               <li>[A-Z0-9]{6,8}</li>
-            </ul>
-         </li>
-         <li><b>Address</b>: Optional
-         </li>
-      </ul>
-      <h3>Address</h3>
-      <blockquote>Origin and destination require a structured address. Because of variation in policy
-         between jurisdictions this schema
-         leaves each element optional. However for a CVI to be valid in any jurisdiction, this
-         element must contain enough information for
-         authorities to uniquely identify the location. 
-      </blockquote>
-      <h4><i>Child Elements</i></h4>
-      <ul>
-         <li><b>Line1</b>: Optional
-         </li>
-         <li><b>Line2</b>: Optional
-         </li>
-         <li><b>Town</b>: Optional
-         </li>
-         <li><b>County</b>: Optional
-         </li>
-         <li><b>State</b>: Required<br><i>StateCodeType</i><blockquote>State Code includes territories, APO addresses, etc. Does NOT include Canadian provinces
-               or Mexican
-               states.
-            </blockquote>
-            Values:
-            <ul>
-               <li>AA
-                  (Military postal system in the Americas)
-                  
-               </li>
-               <li>AE
-                  (Military postal system in Europe Africa and Canada)
-                  
-               </li>
-               <li>AK
-                  (Alaska)
-                  
-               </li>
-               <li>AL
-                  (Alabama)
-                  
-               </li>
-               <li>AP
-                  (Military postal system in the Pacific)
-                  
-               </li>
-               <li>AR
-                  (Arkansas)
-                  
-               </li>
-               <li>AS
-                  (American Samoa)
-                  
-               </li>
-               <li>AZ
-                  (Arizona)
-                  
-               </li>
-               <li>CA
-                  (California)
-                  
-               </li>
-               <li>CO
-                  (Colorado)
-                  
-               </li>
-               <li>CT
-                  (Connecticut)
-                  
-               </li>
-               <li>DC
-                  (Washington District of Columbia)
-                  
-               </li>
-               <li>DE
-                  (Delaware)
-                  
-               </li>
-               <li>FL
-                  (Florida)
-                  
-               </li>
-               <li>FM
-                  (Federated States of Micronesia)
-                  
-               </li>
-               <li>GA
-                  (Georgia)
-                  
-               </li>
-               <li>GU
-                  (Guam)
-                  
-               </li>
-               <li>HI
-                  (Hawaii)
-                  
-               </li>
-               <li>IA
-                  (Iowa)
-                  
-               </li>
-               <li>ID
-                  (Idaho)
-                  
-               </li>
-               <li>IL
-                  (Illinois)
-                  
-               </li>
-               <li>IN
-                  (Indiana)
-                  
-               </li>
-               <li>KS
-                  (Kansas)
-                  
-               </li>
-               <li>KY
-                  (Kentucky)
-                  
-               </li>
-               <li>LA
-                  (Louisiana)
-                  
-               </li>
-               <li>MA
-                  (Massachusetts)
-                  
-               </li>
-               <li>MD
-                  (Maryland)
-                  
-               </li>
-               <li>ME
-                  (Maine)
-                  
-               </li>
-               <li>MH
-                  (Marshall Islands)
-                  
-               </li>
-               <li>MI
-                  (Michigan)
-                  
-               </li>
-               <li>MN
-                  (Minnesota)
-                  
-               </li>
-               <li>MO
-                  (Missouri)
-                  
-               </li>
-               <li>MP
-                  (Northern Mariana Islands)
-                  
-               </li>
-               <li>MS
-                  (Mississippi)
-                  
-               </li>
-               <li>MT
-                  (Montana)
-                  
-               </li>
-               <li>NC
-                  (North Carolina)
-                  
-               </li>
-               <li>ND
-                  (North Dakota)
-                  
-               </li>
-               <li>NE
-                  (Nebraska)
-                  
-               </li>
-               <li>NH
-                  (New Hampshire)
-                  
-               </li>
-               <li>NJ
-                  (New Jersey)
-                  
-               </li>
-               <li>NM
-                  (New Mexico)
-                  
-               </li>
-               <li>NV
-                  (Nevada)
-                  
-               </li>
-               <li>NY
-                  (New York)
-                  
-               </li>
-               <li>OH
-                  (Ohio)
-                  
-               </li>
-               <li>OK
-                  (Oklahoma)
-                  
-               </li>
-               <li>OR
-                  (Oregon)
-                  
-               </li>
-               <li>PA
-                  (Pennsylvania)
-                  
-               </li>
-               <li>PR
-                  (Puerto Rico)
-                  
-               </li>
-               <li>PW
-                  (Palau)
-                  
-               </li>
-               <li>RI
-                  (Rhode Island)
-                  
-               </li>
-               <li>SC
-                  (South Carolina)
-                  
-               </li>
-               <li>SD
-                  (South Dakota)
-                  
-               </li>
-               <li>TN
-                  (Tennessee)
-                  
-               </li>
-               <li>TX
-                  (Texas)
-                  
-               </li>
-               <li>UT
-                  (Utah)
-                  
-               </li>
-               <li>VA
-                  (Virginia)
-                  
-               </li>
-               <li>VI
-                  (U.S. Virgin Islands)
-                  
-               </li>
-               <li>VT
-                  (Vermont)
-                  
-               </li>
-               <li>WA
-                  (Washington)
-                  
-               </li>
-               <li>WI
-                  (Wisconsin)
-                  
-               </li>
-               <li>WV
-                  (West Virginia)
-                  
-               </li>
-               <li>WY
-                  (Wyoming)
-                  
-               </li>
-            </ul>
-         </li>
-         <li><b>ZIP</b>: Optional<br><i></i>
-            Pattern(s):
-            <ul>
-               <li>\d{5}</li>
-               <li>\d{5}-\d{4}</li>
-            </ul>
-         </li>
-         <li><b>Country</b>: Optional<br><i></i>
-            Values:
-            <ul>
-               <li>USA
-                  ()
-                  
-               </li>
-            </ul>
-         </li>
-         <li><b>GeoPoint</b>: Optional
-         </li>
-      </ul>
-      <h3>Field</h3>
-      <blockquote>For testing performed outside of a laboratory, the Field element contains the relevant
-         
-         information.  PremId (see PremIdType) is optional only if unavailable. Address (see
-         AddressType) is optional only if
-         unavailable and should contain the physical address of the test location. AccessionDate
-         is a required date.
-         
-      </blockquote>
-      <h4><i>Attributes</i></h4>
-      <ul>
-         <li><b>AccessionDate</b>: Required
-         </li>
-      </ul>
-      <h4><i>Child Elements</i></h4>
-      <ul>
-         <li><b>PremId</b>: Optional<br><i>PremIdType</i><blockquote> PremIdType does minimal validation of true premises identifiers including both PINs
-               (7 characters and LIDs (6 or 8
-               characters). Only nationally registered LIDs are appropriate. Implementing applications
-               are highly encouraged to validate against the
-               appropriate checksum logic. 
-            </blockquote>
-            Pattern(s):
-            <ul>
-               <li>[A-Z0-9]{6,8}</li>
-            </ul>
-         </li>
-         <li><b>Address</b>: Optional
-         </li>
-      </ul>
-      <h3>Address</h3>
-      <blockquote>Origin and destination require a structured address. Because of variation in policy
-         between jurisdictions this schema
-         leaves each element optional. However for a CVI to be valid in any jurisdiction, this
-         element must contain enough information for
-         authorities to uniquely identify the location. 
-      </blockquote>
-      <h4><i>Child Elements</i></h4>
-      <ul>
-         <li><b>Line1</b>: Optional
-         </li>
-         <li><b>Line2</b>: Optional
-         </li>
-         <li><b>Town</b>: Optional
-         </li>
-         <li><b>County</b>: Optional
-         </li>
-         <li><b>State</b>: Required<br><i>StateCodeType</i><blockquote>State Code includes territories, APO addresses, etc. Does NOT include Canadian provinces
-               or Mexican
-               states.
-            </blockquote>
-            Values:
-            <ul>
-               <li>AA
-                  (Military postal system in the Americas)
-                  
-               </li>
-               <li>AE
-                  (Military postal system in Europe Africa and Canada)
-                  
-               </li>
-               <li>AK
-                  (Alaska)
-                  
-               </li>
-               <li>AL
-                  (Alabama)
-                  
-               </li>
-               <li>AP
-                  (Military postal system in the Pacific)
-                  
-               </li>
-               <li>AR
-                  (Arkansas)
-                  
-               </li>
-               <li>AS
-                  (American Samoa)
-                  
-               </li>
-               <li>AZ
-                  (Arizona)
-                  
-               </li>
-               <li>CA
-                  (California)
-                  
-               </li>
-               <li>CO
-                  (Colorado)
-                  
-               </li>
-               <li>CT
-                  (Connecticut)
-                  
-               </li>
-               <li>DC
-                  (Washington District of Columbia)
-                  
-               </li>
-               <li>DE
-                  (Delaware)
-                  
-               </li>
-               <li>FL
-                  (Florida)
-                  
-               </li>
-               <li>FM
-                  (Federated States of Micronesia)
-                  
-               </li>
-               <li>GA
-                  (Georgia)
-                  
-               </li>
-               <li>GU
-                  (Guam)
-                  
-               </li>
-               <li>HI
-                  (Hawaii)
-                  
-               </li>
-               <li>IA
-                  (Iowa)
-                  
-               </li>
-               <li>ID
-                  (Idaho)
-                  
-               </li>
-               <li>IL
-                  (Illinois)
-                  
-               </li>
-               <li>IN
-                  (Indiana)
-                  
-               </li>
-               <li>KS
-                  (Kansas)
-                  
-               </li>
-               <li>KY
-                  (Kentucky)
-                  
-               </li>
-               <li>LA
-                  (Louisiana)
-                  
-               </li>
-               <li>MA
-                  (Massachusetts)
-                  
-               </li>
-               <li>MD
-                  (Maryland)
-                  
-               </li>
-               <li>ME
-                  (Maine)
-                  
-               </li>
-               <li>MH
-                  (Marshall Islands)
-                  
-               </li>
-               <li>MI
-                  (Michigan)
-                  
-               </li>
-               <li>MN
-                  (Minnesota)
-                  
-               </li>
-               <li>MO
-                  (Missouri)
-                  
-               </li>
-               <li>MP
-                  (Northern Mariana Islands)
-                  
-               </li>
-               <li>MS
-                  (Mississippi)
-                  
-               </li>
-               <li>MT
-                  (Montana)
-                  
-               </li>
-               <li>NC
-                  (North Carolina)
-                  
-               </li>
-               <li>ND
-                  (North Dakota)
-                  
-               </li>
-               <li>NE
-                  (Nebraska)
-                  
-               </li>
-               <li>NH
-                  (New Hampshire)
-                  
-               </li>
-               <li>NJ
-                  (New Jersey)
-                  
-               </li>
-               <li>NM
-                  (New Mexico)
-                  
-               </li>
-               <li>NV
-                  (Nevada)
-                  
-               </li>
-               <li>NY
-                  (New York)
-                  
-               </li>
-               <li>OH
-                  (Ohio)
-                  
-               </li>
-               <li>OK
-                  (Oklahoma)
-                  
-               </li>
-               <li>OR
-                  (Oregon)
-                  
-               </li>
-               <li>PA
-                  (Pennsylvania)
-                  
-               </li>
-               <li>PR
-                  (Puerto Rico)
-                  
-               </li>
-               <li>PW
-                  (Palau)
-                  
-               </li>
-               <li>RI
-                  (Rhode Island)
-                  
-               </li>
-               <li>SC
-                  (South Carolina)
-                  
-               </li>
-               <li>SD
-                  (South Dakota)
-                  
-               </li>
-               <li>TN
-                  (Tennessee)
-                  
-               </li>
-               <li>TX
-                  (Texas)
-                  
-               </li>
-               <li>UT
-                  (Utah)
-                  
-               </li>
-               <li>VA
-                  (Virginia)
-                  
-               </li>
-               <li>VI
-                  (U.S. Virgin Islands)
-                  
-               </li>
-               <li>VT
-                  (Vermont)
-                  
-               </li>
-               <li>WA
-                  (Washington)
-                  
-               </li>
-               <li>WI
-                  (Wisconsin)
-                  
-               </li>
-               <li>WV
-                  (West Virginia)
-                  
-               </li>
-               <li>WY
-                  (Wyoming)
-                  
-               </li>
-            </ul>
-         </li>
-         <li><b>ZIP</b>: Optional<br><i></i>
-            Pattern(s):
-            <ul>
-               <li>\d{5}</li>
-               <li>\d{5}-\d{4}</li>
-            </ul>
-         </li>
-         <li><b>Country</b>: Optional<br><i></i>
-            Values:
-            <ul>
-               <li>USA
-                  ()
-                  
-               </li>
-            </ul>
-         </li>
-         <li><b>GeoPoint</b>: Optional
-         </li>
-      </ul>
-      <h3>Animal</h3>
+      <h2>Animal</h2>
       <blockquote> The Animal element is used for all individually identifiable animals in a shipment
          even when those may have been
          entered in an electronic source document using shorthand tools such as identifier
@@ -1401,155 +137,122 @@
          an allowable value for a single Animal (provided for use with Group). InspectionDate
          is a required date, and is the date the animals
          were inspected by the vet. If the inspection took place over multiple days, use the
-         first date. 
-      </blockquote>
+         first date. </blockquote>
       <h4><i>Attributes</i></h4>
       <ul>
          <li><b>Age</b>: Optional<br><i>AgeType</i><blockquote> Age can be expressed as days , weeks, months, years, or as date of birth. </blockquote>
             Pattern(s):
             <ul>
-               <li>(&lt;|&gt;)? ?\d{1,3} ?(d|wk|mo|a)</li>
+               <li>(&lt;|&gt;)? ?\d{1,3}(\.\d+)? ?(d|wk|mo|a)</li>
                <li>(19|20)\d\d-(0[1-9]|1[012])-(0[1-9]|[12]\d|3[01])</li>
             </ul>
          </li>
-         <li><b>Breed</b>: Optional
-         </li>
+         <li><b>Breed</b>: Optional</li>
          <li><b>Sex</b>: Optional<br><i>SexType</i><blockquote>Sex type only becomes complicated for groups and minor species.</blockquote>
             Values:
             <ul>
                <li>Female
                   ()
-                  
-               </li>
+                  </li>
                <li>Male
                   ()
-                  
-               </li>
+                  </li>
                <li>Spayed Female
                   ()
-                  
-               </li>
+                  </li>
                <li>Neutered Male
                   ()
-                  
-               </li>
+                  </li>
                <li>True Hermaphrodite
                   ()
-                  
-               </li>
+                  </li>
                <li>Mixed Group
                   (Only applicable to Group.)
-                  
-               </li>
+                  </li>
                <li>Gender Unknown
                   (Only applies to minor species in unusual cases such as non sexually dimorphic birds.)
-                  
-               </li>
+                  </li>
                <li>Other
                   (Only applies to minor species in unusual cases. Supply explanation in SexDetail)
-                  
-               </li>
+                  </li>
             </ul>
          </li>
-         <li><b>SexDetail</b>: Optional
-         </li>
-         <li><b>InspectionDate</b>: Required
-         </li>
+         <li><b>SexDetail</b>: Optional</li>
+         <li><b>InspectionDate</b>: Required</li>
       </ul>
       <h4><i>Child Elements</i></h4>
       <ul>
          <li> Either: 
             <ul>
-               <li><b>SpeciesCode</b>: Required
-               </li>
-               <li><b>SpeciesOther</b>: Required
-               </li>
+               <li><b>SpeciesCode</b>: Required</li>
+               <li><b>SpeciesOther</b>: Required</li>
             </ul>
          </li>
-         <li><b>AnimalTags</b>: Required
-         </li>
-         <li><b>Test</b>: Optional, may repeat
-         </li>
-         <li><b>Vaccination</b>: Optional, may repeat
-         </li>
+         <li><b>AnimalTags</b>: Required</li>
+         <li><b>Test</b>: Optional, may repeat</li>
+         <li><b>Vaccination</b>: Optional, may repeat</li>
+         <li><b>Statements</b>: Optional</li>
+         <li><b>MiscAttribute</b>: Optional, may repeat</li>
       </ul>
       <h3>SpeciesCode</h3>
       <blockquote> For animals with official species codes, the code is required with optional text
          to add detail if necessary.
-         
-      </blockquote>
+         </blockquote>
       <h4><i>Attributes</i></h4>
       <ul>
          <li><b>Code</b>: Required<br><i>SpeciesCodes</i><blockquote> A subset of USDA species codes to support the most common eCVI usages. All other
                species can be sent as SpeciesOther
-               which is not enumerated.
-            </blockquote>
+               which is not enumerated.</blockquote>
             Values:
             <ul>
                <li>AQU
                   ( Aquaculture)
-                  
-               </li>
+                  </li>
                <li>BEF
                   ( Beef)
-                  
-               </li>
+                  </li>
                <li>BIS
                   ( Bison)
-                  
-               </li>
+                  </li>
                <li>BOV
                   ( Bovine (Bison and Cattle) DEPRECATED)
-                  
-               </li>
+                  </li>
                <li>CAM
                   ( Camelid (Alpacas, Llamas, etc.))
-                  
-               </li>
+                  </li>
                <li>CAN
                   ( Canine)
-                  
-               </li>
+                  </li>
                <li>CAP
                   ( Caprine (Goats))
-                  
-               </li>
+                  </li>
                <li>CER
                   ( Cervids)
-                  
-               </li>
+                  </li>
                <li>CHI
                   ( Chickens)
-                  
-               </li>
+                  </li>
                <li>DAI
                   ( Dairy)
-                  
-               </li>
+                  </li>
                <li>EQU
                   ( Equine (Horses, Mules, Donkeys, Burros))
-                  
-               </li>
+                  </li>
                <li>FEL
                   ( Feline)
-                  
-               </li>
+                  </li>
                <li>OVI
                   ( Ovine (Sheep))
-                  
-               </li>
+                  </li>
                <li>POR
                   ( Porcine (Swine))
-                  
-               </li>
+                  </li>
                <li>TUR
                   ( Turkeys)
-                  
-               </li>
+                  </li>
             </ul>
          </li>
-         <li><b>Text</b>: Optional
-         </li>
+         <li><b>Text</b>: Optional</li>
       </ul>
       <h3>SpeciesOther</h3>
       <blockquote> The species coded in the standard include only those commonly needed for regulatory
@@ -1558,13 +261,16 @@
          may understand these other codes, human readable
          Text is required in addition to the code. For animals without an official species
          code, the code may be omitted the default value is
-         OTH and text used to define the actual taxonomy is required.
-      </blockquote>
+         OTH and text used to define the actual taxonomy is required.</blockquote>
       <h4><i>Attributes</i></h4>
       <ul>
-         <li><b>Code</b>: Optional
-         </li>
-         <li><b>Text</b>: Required
+         <li><b>Code</b>: Optional</li>
+         <li><b>Text</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.</blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
          </li>
       </ul>
       <h3>AnimalTags</h3>
@@ -1576,30 +282,20 @@
          management tag. This field also supports brand
          descriptions, brand images, and equine description or photographs. These can appear
          in any order up to six IDs per animal
-         
-      </blockquote>
+         </blockquote>
       <h4><i>Child Elements</i></h4>
       <ul>
          <li> Either: 
             <ul>
-               <li><b>AIN</b>: Required
-               </li>
-               <li><b>MfrRFID</b>: Required
-               </li>
-               <li><b>NUES9</b>: Required
-               </li>
-               <li><b>NUES8</b>: Required
-               </li>
-               <li><b>OtherOfficialID</b>: Required
-               </li>
-               <li><b>ManagementID</b>: Required
-               </li>
-               <li><b>BrandImage</b>: Required
-               </li>
-               <li><b>EquineDescription</b>: Required
-               </li>
-               <li><b>EquinePhotographs</b>: Required
-               </li>
+               <li><b>AIN</b>: Required</li>
+               <li><b>MfrRFID</b>: Required</li>
+               <li><b>NUES9</b>: Required</li>
+               <li><b>NUES8</b>: Required</li>
+               <li><b>OtherOfficialID</b>: Required</li>
+               <li><b>ManagementID</b>: Required</li>
+               <li><b>BrandImage</b>: Required</li>
+               <li><b>EquineDescription</b>: Required</li>
+               <li><b>EquinePhotographs</b>: Required</li>
             </ul>
          </li>
       </ul>
@@ -1610,10 +306,9 @@
          <li><b>Number</b>: Required<br><i>AINType</i><blockquote>840 AIN (usually RFID) tag.</blockquote>
             Pattern(s):
             <ul>
-               <li>(840)\d{12}
+               <li>((840)|(124)|(484))\d{12}
                   (840 RFID: 840 followed by 12 digits)
-                  
-               </li>
+                  </li>
             </ul>
          </li>
       </ul>
@@ -1626,8 +321,7 @@
             <ul>
                <li>((9[0-8]\d)|(9\d[0-8])|(124)|(484))\d{12}
                   ( Non 840 RFID: Company prefix (not 999) followed by 12 digits )
-                  
-               </li>
+                  </li>
             </ul>
          </li>
       </ul>
@@ -1642,8 +336,7 @@
                   ( NUES 9 Character: Two digits + three letters + four digits or some state's alpha
                   codes followed by three more
                   letters and four digits )
-                  
-               </li>
+                  </li>
             </ul>
          </li>
       </ul>
@@ -1651,8 +344,7 @@
       <blockquote>NUES8 tags most commonly on the smaller sized metal "brite" tags. Because the pattern
          of characters matches backtags, it
          is important that these rarely used tags be recorded by type when they do appear on
-         CVIs.
-      </blockquote>
+         CVIs.</blockquote>
       <h4><i>Attributes</i></h4>
       <ul>
          <li><b>Number</b>: Required<br><i>NUES8Type</i><blockquote>8 Character NUES (brite) tags.</blockquote>
@@ -1662,8 +354,7 @@
                   ( NUES 8 Character: Two digits + two letters + four digits (Note: matches cattle backtag
                   pattern.)
                   )
-                  
-               </li>
+                  </li>
             </ul>
          </li>
       </ul>
@@ -1676,111 +367,151 @@
             <ul>
                <li>AMID
                   (American ID)
-                  
-               </li>
+                  </li>
                <li>BT
                   (Backtag)
-                  
-               </li>
+                  </li>
                <li>IMP
                   ()
-                  
-               </li>
+                  </li>
                <li>NAME
                   (Name?)
-                  
-               </li>
+                  </li>
                <li>SGFLID
                   (Scrapie group flock ID)
-                  
-               </li>
+                  </li>
                <li>NPIN
                   (Swine PIN Tag)
-                  
-               </li>
+                  </li>
                <li>PINPLUS
                   (Swine PIN plus Management Tag)
-                  
-               </li>
+                  </li>
                <li>TAT
                   (Tattoo)
-                  
-               </li>
+                  </li>
                <li>OTHER
                   (We would like to always know the type but can't have captured them all.)
-                  
-               </li>
+                  </li>
             </ul>
          </li>
-         <li><b>Number</b>: Required
+         <li><b>Number</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.</blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
          </li>
       </ul>
       <h3>ManagementID</h3>
       <blockquote> Other Formats: No restrictions </blockquote>
       <h4><i>Attributes</i></h4>
       <ul>
-         <li><b>Number</b>: Required
+         <li><b>Number</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.</blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
          </li>
       </ul>
       <h3>BrandImage</h3>
       <blockquote> This should be PNG/JPEG/GIF/PDF format. The format is specified in the Binary mime
-         type.
-      </blockquote>
+         type.</blockquote>
       <h4><i>Attributes</i></h4>
       <ul>
-         <li><b>BrandImageRef</b>: Required
-         </li>
-         <li><b>Description</b>: Optional
-         </li>
+         <li><b>BrandImageRef</b>: Required</li>
+         <li><b>Description</b>: Optional</li>
       </ul>
       <h3>EquineDescription</h3>
       <blockquote> Equine registered name is only legal identification with description </blockquote>
       <h4><i>Attributes</i></h4>
       <ul>
-         <li><b>Name</b>: Optional
-         </li>
-         <li><b>Description</b>: Required
+         <li><b>Name</b>: Optional</li>
+         <li><b>Description</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.</blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
          </li>
       </ul>
       <h3>EquinePhotographs</h3>
       <blockquote> Photos are also official. </blockquote>
       <h4><i>Child Elements</i></h4>
       <ul>
-         <li><b>Photograph</b>: Required, may repeat
-         </li>
+         <li><b>Photograph</b>: Required, may repeat</li>
       </ul>
       <h3>Test</h3>
       <blockquote> Individual test results are included with each animal and reference via ID/IDREF
          an accession. For herd testing this
          allows one accession with many tests. For tests such as Equine Coggins tests that
          are one per accession it results in slight extra
-         overhead. 
-      </blockquote>
+         overhead. </blockquote>
       <h4><i>Attributes</i></h4>
       <ul>
-         <li><b>AccessionRef</b>: Required
+         <li><b>AccessionRef</b>: Required</li>
+         <li><b>TestCode</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.</blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
          </li>
-         <li><b>TestCode</b>: Required
+         <li><b>TestName</b>: Optional<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.</blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
          </li>
       </ul>
       <h4><i>Child Elements</i></h4>
       <ul>
-         <li><b>Result</b>: Required, may repeat
-         </li>
+         <li><b>Result</b>: Required, may repeat</li>
       </ul>
       <h3>Vaccination</h3>
       <blockquote>Vaccination information for animal or group. For now the type of vaccine is left as
          a simple string. Ideally will become
-         a coded value from a standard set. The date is optional but highly suggested. 
-      </blockquote>
+         a coded value from a standard set. The date is optional but highly suggested. </blockquote>
       <h4><i>Attributes</i></h4>
       <ul>
-         <li><b>Type</b>: Required
+         <li><b>Type</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.</blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
          </li>
-         <li><b>Date</b>: Optional
+         <li><b>Date</b>: Optional</li>
+      </ul>
+      <h3>Statements</h3>
+      <blockquote> Additional statements that may be required by various jurisdictions may be included
+         here. These statements must not
+         take the place of or modify the structured content found elsewhere in the standard.</blockquote>
+      <h3>MiscAttribute</h3>
+      <blockquote>Any additional information needed by specific implementations can be provided as name/value
+         pairs represented as
+         strings. These data must not be essential to proper understanding of the structured
+         content of the standard data but only extend
+         it.</blockquote>
+      <h4><i>Attributes</i></h4>
+      <ul>
+         <li><b>Name</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.</blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
+         </li>
+         <li><b>Value</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.</blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
          </li>
       </ul>
-      <h3>GroupLot</h3>
+      <h2>GroupLot</h2>
       <blockquote> GroupLot is used for any grouping of similar animals that do not require individual
          identification. Rules for what
          constitute legal groups are defined in the federal ADT rule and various other legal
@@ -1813,159 +544,131 @@
          and
          https://www.aphis.usda.gov/animal_health/vs_ocio/downloads/date_standards/icvi_data_concepts.pdf.
          Sex (see SexType) is optional.
-         SexDetail is an optional string. . 
-      </blockquote>
+         SexDetail is an optional string. . </blockquote>
       <h4><i>Attributes</i></h4>
       <ul>
-         <li><b>Quantity</b>: Optional
-         </li>
-         <li><b>Unit</b>: Optional
-         </li>
+         <li><b>Quantity</b>: Optional</li>
+         <li><b>Unit</b>: Optional</li>
          <li><b>Age</b>: Optional<br><i>AgeType</i><blockquote> Age can be expressed as days , weeks, months, years, or as date of birth. </blockquote>
             Pattern(s):
             <ul>
-               <li>(&lt;|&gt;)? ?\d{1,3} ?(d|wk|mo|a)</li>
+               <li>(&lt;|&gt;)? ?\d{1,3}(\.\d+)? ?(d|wk|mo|a)</li>
                <li>(19|20)\d\d-(0[1-9]|1[012])-(0[1-9]|[12]\d|3[01])</li>
             </ul>
          </li>
-         <li><b>Breed</b>: Optional
-         </li>
+         <li><b>Breed</b>: Optional</li>
          <li><b>Sex</b>: Optional<br><i>SexType</i><blockquote>Sex type only becomes complicated for groups and minor species.</blockquote>
             Values:
             <ul>
                <li>Female
                   ()
-                  
-               </li>
+                  </li>
                <li>Male
                   ()
-                  
-               </li>
+                  </li>
                <li>Spayed Female
                   ()
-                  
-               </li>
+                  </li>
                <li>Neutered Male
                   ()
-                  
-               </li>
+                  </li>
                <li>True Hermaphrodite
                   ()
-                  
-               </li>
+                  </li>
                <li>Mixed Group
                   (Only applicable to Group.)
-                  
-               </li>
+                  </li>
                <li>Gender Unknown
                   (Only applies to minor species in unusual cases such as non sexually dimorphic birds.)
-                  
-               </li>
+                  </li>
                <li>Other
                   (Only applies to minor species in unusual cases. Supply explanation in SexDetail)
-                  
-               </li>
+                  </li>
             </ul>
          </li>
-         <li><b>SexDetail</b>: Optional
+         <li><b>SexDetail</b>: Optional</li>
+         <li><b>Description</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.</blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
          </li>
-         <li><b>Description</b>: Required
-         </li>
+         <li><b>InspectionDate</b>: Optional</li>
       </ul>
       <h4><i>Child Elements</i></h4>
       <ul>
          <li> Either: 
             <ul>
-               <li><b>SpeciesCode</b>: Required
-               </li>
-               <li><b>SpeciesOther</b>: Required
-               </li>
+               <li><b>SpeciesCode</b>: Required</li>
+               <li><b>SpeciesOther</b>: Required</li>
             </ul>
          </li>
-         <li><b>GroupLotID</b>: Optional, may repeat
-         </li>
-         <li><b>Test</b>: Optional, may repeat
-         </li>
-         <li><b>Vaccination</b>: Optional, may repeat
-         </li>
+         <li><b>GroupLotID</b>: Optional, may repeat</li>
+         <li><b>Test</b>: Optional, may repeat</li>
+         <li><b>Vaccination</b>: Optional, may repeat</li>
+         <li><b>Statements</b>: Optional</li>
+         <li><b>MiscAttribute</b>: Optional, may repeat</li>
       </ul>
       <h3>SpeciesCode</h3>
       <blockquote> For animals with official species codes, the code is required with optional text
          to add detail if necessary.
-         
-      </blockquote>
+         </blockquote>
       <h4><i>Attributes</i></h4>
       <ul>
          <li><b>Code</b>: Required<br><i>SpeciesCodes</i><blockquote> A subset of USDA species codes to support the most common eCVI usages. All other
                species can be sent as SpeciesOther
-               which is not enumerated.
-            </blockquote>
+               which is not enumerated.</blockquote>
             Values:
             <ul>
                <li>AQU
                   ( Aquaculture)
-                  
-               </li>
+                  </li>
                <li>BEF
                   ( Beef)
-                  
-               </li>
+                  </li>
                <li>BIS
                   ( Bison)
-                  
-               </li>
+                  </li>
                <li>BOV
                   ( Bovine (Bison and Cattle) DEPRECATED)
-                  
-               </li>
+                  </li>
                <li>CAM
                   ( Camelid (Alpacas, Llamas, etc.))
-                  
-               </li>
+                  </li>
                <li>CAN
                   ( Canine)
-                  
-               </li>
+                  </li>
                <li>CAP
                   ( Caprine (Goats))
-                  
-               </li>
+                  </li>
                <li>CER
                   ( Cervids)
-                  
-               </li>
+                  </li>
                <li>CHI
                   ( Chickens)
-                  
-               </li>
+                  </li>
                <li>DAI
                   ( Dairy)
-                  
-               </li>
+                  </li>
                <li>EQU
                   ( Equine (Horses, Mules, Donkeys, Burros))
-                  
-               </li>
+                  </li>
                <li>FEL
                   ( Feline)
-                  
-               </li>
+                  </li>
                <li>OVI
                   ( Ovine (Sheep))
-                  
-               </li>
+                  </li>
                <li>POR
                   ( Porcine (Swine))
-                  
-               </li>
+                  </li>
                <li>TUR
                   ( Turkeys)
-                  
-               </li>
+                  </li>
             </ul>
          </li>
-         <li><b>Text</b>: Optional
-         </li>
+         <li><b>Text</b>: Optional</li>
       </ul>
       <h3>SpeciesOther</h3>
       <blockquote> The species coded in the standard include only those commonly needed for regulatory
@@ -1974,13 +677,16 @@
          may understand these other codes, human readable
          Text is required in addition to the code. For animals without an official species
          code, the code may be omitted the default value is
-         OTH and text used to define the actual taxonomy is required.
-      </blockquote>
+         OTH and text used to define the actual taxonomy is required.</blockquote>
       <h4><i>Attributes</i></h4>
       <ul>
-         <li><b>Code</b>: Optional
-         </li>
-         <li><b>Text</b>: Required
+         <li><b>Code</b>: Optional</li>
+         <li><b>Text</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.</blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
          </li>
       </ul>
       <h3>Test</h3>
@@ -1988,159 +694,349 @@
          an accession. For herd testing this
          allows one accession with many tests. For tests such as Equine Coggins tests that
          are one per accession it results in slight extra
-         overhead. 
-      </blockquote>
+         overhead. </blockquote>
       <h4><i>Attributes</i></h4>
       <ul>
-         <li><b>AccessionRef</b>: Required
+         <li><b>AccessionRef</b>: Required</li>
+         <li><b>TestCode</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.</blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
          </li>
-         <li><b>TestCode</b>: Required
+         <li><b>TestName</b>: Optional<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.</blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
          </li>
       </ul>
       <h4><i>Child Elements</i></h4>
       <ul>
-         <li><b>Result</b>: Required, may repeat
-         </li>
+         <li><b>Result</b>: Required, may repeat</li>
       </ul>
       <h3>Vaccination</h3>
       <blockquote>Vaccination information for animal or group. For now the type of vaccine is left as
          a simple string. Ideally will become
-         a coded value from a standard set. The date is optional but highly suggested. 
-      </blockquote>
+         a coded value from a standard set. The date is optional but highly suggested. </blockquote>
       <h4><i>Attributes</i></h4>
       <ul>
-         <li><b>Type</b>: Required
+         <li><b>Type</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.</blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
          </li>
-         <li><b>Date</b>: Optional
-         </li>
+         <li><b>Date</b>: Optional</li>
       </ul>
       <h3>Statements</h3>
       <blockquote> Additional statements that may be required by various jurisdictions may be included
          here. These statements must not
-         take the place of or modify the structured content found elsewhere in the standard.
-      </blockquote>
-      <h3>Attachment</h3>
-      <blockquote> Attachments can be used for text or binary additional information not specifically
-         carried in one of the other Binary
-         elements. Assumed to be from a file so Filename is required along with a reference
-         to the Binary content. Be aware that receiving
-         applications may ignore unknown or unexpected attachments. The actual binary content
-         of the attachment is carried in the Binary
-         element as are any other Binary fields. DocType is a required string. (put enumeration
-         values in table somehow? Is this list
-         adequate?). Filename is a required string. (Why require a file name? many may never
-         have actually resided in a named file.) Comment is
-         an optional string. (For what purpose?)
-      </blockquote>
-      <h4><i>Attributes</i></h4>
-      <ul>
-         <li><b>AttachmentRef</b>: Required
-         </li>
-         <li><b>DocType</b>: Required<br><i></i>
-            Values:
-            <ul>
-               <li>Scanned Paper CVI
-                  (For sending an image of original paper CVI along with the extracted data. These may
-                  be image PDF or
-                  other image format. )
-                  
-               </li>
-               <li>Scanned Test Chart
-                  (For sending scanned test charts along with electronic CVI or extracted data. These
-                  may be image PDF
-                  or other image format. )
-                  
-               </li>
-               <li>PDF CVI
-                  (For sending data form PDF CVI along with extracted data. These would be Adobe PDF
-                  forms, or XFA
-                  forms. )
-                  
-               </li>
-               <li>PDF Test Chart
-                  (For sending data form PDF Test Chart along with electronic CVI or extracted data.
-                  These would be
-                  Adobe PDF forms, or XFA forms. )
-                  
-               </li>
-               <li>Other
-                  (All other uses.)
-                  
-               </li>
-            </ul>
-         </li>
-         <li><b>Filename</b>: Required
-         </li>
-         <li><b>Comment</b>: Optional
-         </li>
-      </ul>
+         take the place of or modify the structured content found elsewhere in the standard.</blockquote>
       <h3>MiscAttribute</h3>
       <blockquote>Any additional information needed by specific implementations can be provided as name/value
          pairs represented as
          strings. These data must not be essential to proper understanding of the structured
          content of the standard data but only extend
-         it.
-      </blockquote>
+         it.</blockquote>
       <h4><i>Attributes</i></h4>
       <ul>
-         <li><b>Name</b>: Required
-         </li>
-         <li><b>Value</b>: Required
-         </li>
-      </ul>
-      <h3>Binary</h3>
-      <blockquote>All binary content is included as Binary and referenced in specific elements by ID/IDREF.</blockquote>
-      <h4><i>Attributes</i></h4>
-      <ul>
-         <li><b>ID</b>: Required
-         </li>
-         <li><b>MimeType</b>: Optional<br><i>MimeType</i><blockquote>For complete information see: https://www.iana.org/assignments/media-types/media-types.xhtml.
-               For common examples see:
-               https://en.wikipedia.org/wiki/Media_type 
-            </blockquote>
+         <li><b>Name</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.</blockquote>
             Pattern(s):
             <ul>
-               <li>.{1,127}/.{1,127}</li>
+               <li>.*[^\s].*</li>
+            </ul>
+         </li>
+         <li><b>Value</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.</blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
+         </li>
+      </ul>
+      <h3>Product</h3>
+      <blockquote>Product is used to specify living animal products other than live animals.
+         Examples include eggs and semen.  Test and Vaccination may apply to the product itself
+         or 
+         the "parent" animal(s).</blockquote>
+      <h4><i>Attributes</i></h4>
+      <ul>
+         <li><b>ProductType</b>: Required<br><i>CommodityType</i><blockquote>Type of commodity shipped.</blockquote>
+            Values:
+            <ul>
+               <li>Eggs
+                  ()
+                  </li>
+               <li>Semen
+                  ()
+                  </li>
+            </ul>
+         </li>
+         <li><b>Quantity</b>: Optional</li>
+         <li><b>Unit</b>: Optional</li>
+         <li><b>Breed</b>: Optional</li>
+         <li><b>Description</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.</blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
+         </li>
+         <li><b>InspectionDate</b>: Optional</li>
+      </ul>
+      <h4><i>Child Elements</i></h4>
+      <ul>
+         <li> Either: 
+            <ul>
+               <li><b>SpeciesCode</b>: Required</li>
+               <li><b>SpeciesOther</b>: Required</li>
+            </ul>
+         </li>
+         <li><b>ProductID</b>: Optional, may repeat</li>
+         <li><b>Test</b>: Optional, may repeat</li>
+         <li><b>Vaccination</b>: Optional, may repeat</li>
+         <li><b>Statements</b>: Optional</li>
+         <li><b>MiscAttribute</b>: Optional, may repeat</li>
+      </ul>
+      <h3>SpeciesCode</h3>
+      <blockquote> For animals with official species codes, the code is required with optional text
+         to add detail if necessary.
+         </blockquote>
+      <h4><i>Attributes</i></h4>
+      <ul>
+         <li><b>Code</b>: Required<br><i>SpeciesCodes</i><blockquote> A subset of USDA species codes to support the most common eCVI usages. All other
+               species can be sent as SpeciesOther
+               which is not enumerated.</blockquote>
+            Values:
+            <ul>
+               <li>AQU
+                  ( Aquaculture)
+                  </li>
+               <li>BEF
+                  ( Beef)
+                  </li>
+               <li>BIS
+                  ( Bison)
+                  </li>
+               <li>BOV
+                  ( Bovine (Bison and Cattle) DEPRECATED)
+                  </li>
+               <li>CAM
+                  ( Camelid (Alpacas, Llamas, etc.))
+                  </li>
+               <li>CAN
+                  ( Canine)
+                  </li>
+               <li>CAP
+                  ( Caprine (Goats))
+                  </li>
+               <li>CER
+                  ( Cervids)
+                  </li>
+               <li>CHI
+                  ( Chickens)
+                  </li>
+               <li>DAI
+                  ( Dairy)
+                  </li>
+               <li>EQU
+                  ( Equine (Horses, Mules, Donkeys, Burros))
+                  </li>
+               <li>FEL
+                  ( Feline)
+                  </li>
+               <li>OVI
+                  ( Ovine (Sheep))
+                  </li>
+               <li>POR
+                  ( Porcine (Swine))
+                  </li>
+               <li>TUR
+                  ( Turkeys)
+                  </li>
+            </ul>
+         </li>
+         <li><b>Text</b>: Optional</li>
+      </ul>
+      <h3>SpeciesOther</h3>
+      <blockquote> The species coded in the standard include only those commonly needed for regulatory
+         action related to the movement.
+         Many other official species codes can be found at http://???? Because not all systems
+         may understand these other codes, human readable
+         Text is required in addition to the code. For animals without an official species
+         code, the code may be omitted the default value is
+         OTH and text used to define the actual taxonomy is required.</blockquote>
+      <h4><i>Attributes</i></h4>
+      <ul>
+         <li><b>Code</b>: Optional</li>
+         <li><b>Text</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.</blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
+         </li>
+      </ul>
+      <h3>Test</h3>
+      <blockquote> Individual test results are included with each animal and reference via ID/IDREF
+         an accession. For herd testing this
+         allows one accession with many tests. For tests such as Equine Coggins tests that
+         are one per accession it results in slight extra
+         overhead. </blockquote>
+      <h4><i>Attributes</i></h4>
+      <ul>
+         <li><b>AccessionRef</b>: Required</li>
+         <li><b>TestCode</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.</blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
+         </li>
+         <li><b>TestName</b>: Optional<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.</blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
             </ul>
          </li>
       </ul>
       <h4><i>Child Elements</i></h4>
       <ul>
-         <li><b>Payload</b>: Required
-         </li>
+         <li><b>Result</b>: Required, may repeat</li>
       </ul>
-      <h2>Defined Types:</h2>
-      <h3>PremType</h3>
-      <blockquote> PremType is used for origin and destination, and must be actual physical (animal?)
-         locations. PremId (see PremIdType)
-         is optional only if unavailable. PremName is an optional string. Address is required
-         (see AddressType). ProgramStatus (see
-         ProgramStatusType) is optional, but there is no limit on additional ProgramStatuses.
-         Person (see PersonType) is required (why?), and
-         there is no limit on additional Persons. 
-      </blockquote>
-      <h4><i>Child Elements</i></h4>
+      <h3>Vaccination</h3>
+      <blockquote>Vaccination information for animal or group. For now the type of vaccine is left as
+         a simple string. Ideally will become
+         a coded value from a standard set. The date is optional but highly suggested. </blockquote>
+      <h4><i>Attributes</i></h4>
       <ul>
-         <li><b>PremId</b>: Optional<br><i>PremIdType</i><blockquote> PremIdType does minimal validation of true premises identifiers including both PINs
-               (7 characters and LIDs (6 or 8
-               characters). Only nationally registered LIDs are appropriate. Implementing applications
-               are highly encouraged to validate against the
-               appropriate checksum logic. 
-            </blockquote>
+         <li><b>Type</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.</blockquote>
             Pattern(s):
             <ul>
-               <li>[A-Z0-9]{6,8}</li>
+               <li>.*[^\s].*</li>
             </ul>
          </li>
-         <li><b>PremName</b>: Optional
+         <li><b>Date</b>: Optional</li>
+      </ul>
+      <h3>Statements</h3>
+      <blockquote> Additional statements that may be required by various jurisdictions may be included
+         here. These statements must not
+         take the place of or modify the structured content found elsewhere in the standard.</blockquote>
+      <h3>MiscAttribute</h3>
+      <blockquote>Any additional information needed by specific implementations can be provided as name/value
+         pairs represented as
+         strings. These data must not be essential to proper understanding of the structured
+         content of the standard data but only extend
+         it.</blockquote>
+      <h4><i>Attributes</i></h4>
+      <ul>
+         <li><b>Name</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.</blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
          </li>
-         <li><b>Address</b>: Required
+         <li><b>Value</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.</blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
          </li>
-         <li><b>StateZoneOrAreaStatus</b>: Optional, may repeat
+      </ul>
+      <h3>Veterinarian</h3>
+      <blockquote> Veterinarian is a required element for iCVIs. When available deterministic identifier
+         such as license number and state
+         or national accreditation number should be provided. </blockquote>
+      <h4><i>Attributes</i></h4>
+      <ul>
+         <li><b>LicenseState</b>: Optional</li>
+         <li><b>LicenseNumber</b>: Optional</li>
+         <li><b>NationalAccreditationNumber</b>: Optional</li>
+      </ul>
+      <h4><i>Child Elements</i></h4>
+      <ul>
+         <li><b>Person</b>: Required</li>
+         <li><b>Address</b>: Optional</li>
+      </ul>
+      <h3>Person</h3>
+      <blockquote> Person is defined as a Name string and an optional Phone Number (see Phone). Because
+         of a lack of industry consensus on
+         hanling names, Name can be provided as either a single string (Name) or individual
+         name components (NameParts).</blockquote>
+      <h4><i>Child Elements</i></h4>
+      <ul>
+         <li> Either: 
+            <ul>
+               <li><b>NameParts</b>: Required</li>
+               <li><b>Name</b>: Required</li>
+            </ul>
          </li>
-         <li><b>HerdOrFlockStatus</b>: Optional, may repeat
+         <li><b>Phone</b>: Optional, may repeat</li>
+         <li><b>Email</b>: Optional, may repeat</li>
+      </ul>
+      <h3>NameParts</h3>
+      <blockquote> NameParts defines a structured name for a business or person. BusinessName, FirstName,
+         Middle Name, LastName, OtherName
+         are all optional for applications to use one or more (NameParts with on individual
+         components would validate, the schema language to
+         force "one or more of one or more of these parts" would be more complex than necessary.)
+         </blockquote>
+      <h4><i>Child Elements</i></h4>
+      <ul>
+         <li><b>BusinessName</b>: Optional</li>
+         <li><b>FirstName</b>: Optional</li>
+         <li><b>MiddleName</b>: Optional</li>
+         <li><b>LastName</b>: Optional</li>
+         <li><b>OtherName</b>: Optional</li>
+      </ul>
+      <h3>Phone</h3>
+      <blockquote> The Phone Number specifies type (list enumeration values?) and a ten-digit number,
+         and can include a comment.
+         </blockquote>
+      <h4><i>Attributes</i></h4>
+      <ul>
+         <li><b>Number</b>: Required<br><i></i>
+            Pattern(s):
+            <ul>
+               <li>\d{10}</li>
+            </ul>
          </li>
-         <li><b>Person</b>: Optional, may repeat
+         <li><b>Comment</b>: Optional</li>
+         <li><b>Type</b>: Required<br><i></i>
+            Values:
+            <ul>
+               <li>Unknown
+                  (Probably the most common.)
+                  </li>
+               <li>Landline
+                  (If known to be fixed location.)
+                  </li>
+               <li>Cellphone
+                  (If known to be a mobile phone.)
+                  </li>
+               <li>Fax
+                  (Fax line.)
+                  </li>
+            </ul>
+         </li>
+      </ul>
+      <h3>Email</h3>
+      <h4><i>Attributes</i></h4>
+      <ul>
+         <li><b>Address</b>: Required<br><i>EmailType</i><blockquote>Optional email address following simplified standard email address pattern.</blockquote>
+            Pattern(s):
+            <ul>
+               <li>[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,24}</li>
+            </ul>
          </li>
       </ul>
       <h3>Address</h3>
@@ -2148,272 +1044,204 @@
          between jurisdictions this schema
          leaves each element optional. However for a CVI to be valid in any jurisdiction, this
          element must contain enough information for
-         authorities to uniquely identify the location. 
-      </blockquote>
+         authorities to uniquely identify the location. </blockquote>
       <h4><i>Child Elements</i></h4>
       <ul>
-         <li><b>Line1</b>: Optional
-         </li>
-         <li><b>Line2</b>: Optional
-         </li>
-         <li><b>Town</b>: Optional
-         </li>
-         <li><b>County</b>: Optional
-         </li>
+         <li><b>Line1</b>: Optional</li>
+         <li><b>Line2</b>: Optional</li>
+         <li><b>Town</b>: Optional</li>
+         <li><b>County</b>: Optional</li>
          <li><b>State</b>: Required<br><i>StateCodeType</i><blockquote>State Code includes territories, APO addresses, etc. Does NOT include Canadian provinces
                or Mexican
-               states.
-            </blockquote>
+               states.</blockquote>
             Values:
             <ul>
                <li>AA
                   (Military postal system in the Americas)
-                  
-               </li>
+                  </li>
                <li>AE
                   (Military postal system in Europe Africa and Canada)
-                  
-               </li>
+                  </li>
                <li>AK
                   (Alaska)
-                  
-               </li>
+                  </li>
                <li>AL
                   (Alabama)
-                  
-               </li>
+                  </li>
                <li>AP
                   (Military postal system in the Pacific)
-                  
-               </li>
+                  </li>
                <li>AR
                   (Arkansas)
-                  
-               </li>
+                  </li>
                <li>AS
                   (American Samoa)
-                  
-               </li>
+                  </li>
                <li>AZ
                   (Arizona)
-                  
-               </li>
+                  </li>
                <li>CA
                   (California)
-                  
-               </li>
+                  </li>
                <li>CO
                   (Colorado)
-                  
-               </li>
+                  </li>
                <li>CT
                   (Connecticut)
-                  
-               </li>
+                  </li>
                <li>DC
                   (Washington District of Columbia)
-                  
-               </li>
+                  </li>
                <li>DE
                   (Delaware)
-                  
-               </li>
+                  </li>
                <li>FL
                   (Florida)
-                  
-               </li>
+                  </li>
                <li>FM
                   (Federated States of Micronesia)
-                  
-               </li>
+                  </li>
                <li>GA
                   (Georgia)
-                  
-               </li>
+                  </li>
                <li>GU
                   (Guam)
-                  
-               </li>
+                  </li>
                <li>HI
                   (Hawaii)
-                  
-               </li>
+                  </li>
                <li>IA
                   (Iowa)
-                  
-               </li>
+                  </li>
                <li>ID
                   (Idaho)
-                  
-               </li>
+                  </li>
                <li>IL
                   (Illinois)
-                  
-               </li>
+                  </li>
                <li>IN
                   (Indiana)
-                  
-               </li>
+                  </li>
                <li>KS
                   (Kansas)
-                  
-               </li>
+                  </li>
                <li>KY
                   (Kentucky)
-                  
-               </li>
+                  </li>
                <li>LA
                   (Louisiana)
-                  
-               </li>
+                  </li>
                <li>MA
                   (Massachusetts)
-                  
-               </li>
+                  </li>
                <li>MD
                   (Maryland)
-                  
-               </li>
+                  </li>
                <li>ME
                   (Maine)
-                  
-               </li>
+                  </li>
                <li>MH
                   (Marshall Islands)
-                  
-               </li>
+                  </li>
                <li>MI
                   (Michigan)
-                  
-               </li>
+                  </li>
                <li>MN
                   (Minnesota)
-                  
-               </li>
+                  </li>
                <li>MO
                   (Missouri)
-                  
-               </li>
+                  </li>
                <li>MP
                   (Northern Mariana Islands)
-                  
-               </li>
+                  </li>
                <li>MS
                   (Mississippi)
-                  
-               </li>
+                  </li>
                <li>MT
                   (Montana)
-                  
-               </li>
+                  </li>
                <li>NC
                   (North Carolina)
-                  
-               </li>
+                  </li>
                <li>ND
                   (North Dakota)
-                  
-               </li>
+                  </li>
                <li>NE
                   (Nebraska)
-                  
-               </li>
+                  </li>
                <li>NH
                   (New Hampshire)
-                  
-               </li>
+                  </li>
                <li>NJ
                   (New Jersey)
-                  
-               </li>
+                  </li>
                <li>NM
                   (New Mexico)
-                  
-               </li>
+                  </li>
                <li>NV
                   (Nevada)
-                  
-               </li>
+                  </li>
                <li>NY
                   (New York)
-                  
-               </li>
+                  </li>
                <li>OH
                   (Ohio)
-                  
-               </li>
+                  </li>
                <li>OK
                   (Oklahoma)
-                  
-               </li>
+                  </li>
                <li>OR
                   (Oregon)
-                  
-               </li>
+                  </li>
                <li>PA
                   (Pennsylvania)
-                  
-               </li>
+                  </li>
                <li>PR
                   (Puerto Rico)
-                  
-               </li>
+                  </li>
                <li>PW
                   (Palau)
-                  
-               </li>
+                  </li>
                <li>RI
                   (Rhode Island)
-                  
-               </li>
+                  </li>
                <li>SC
                   (South Carolina)
-                  
-               </li>
+                  </li>
                <li>SD
                   (South Dakota)
-                  
-               </li>
+                  </li>
                <li>TN
                   (Tennessee)
-                  
-               </li>
+                  </li>
                <li>TX
                   (Texas)
-                  
-               </li>
+                  </li>
                <li>UT
                   (Utah)
-                  
-               </li>
+                  </li>
                <li>VA
                   (Virginia)
-                  
-               </li>
+                  </li>
                <li>VI
                   (U.S. Virgin Islands)
-                  
-               </li>
+                  </li>
                <li>VT
                   (Vermont)
-                  
-               </li>
+                  </li>
                <li>WA
                   (Washington)
-                  
-               </li>
+                  </li>
                <li>WI
                   (Wisconsin)
-                  
-               </li>
+                  </li>
                <li>WV
                   (West Virginia)
-                  
-               </li>
+                  </li>
                <li>WY
                   (Wyoming)
-                  
-               </li>
+                  </li>
             </ul>
          </li>
          <li><b>ZIP</b>: Optional<br><i></i>
@@ -2428,28 +1256,1046 @@
             <ul>
                <li>USA
                   ()
-                  
-               </li>
+                  </li>
             </ul>
          </li>
-         <li><b>GeoPoint</b>: Optional
-         </li>
+         <li><b>GeoPoint</b>: Optional</li>
       </ul>
-      <h3>StateZoneOrAreaStatus</h3>
-      <blockquote>Statuses are explicitly enumerated for bovine Brucellosis and TB, and left as simple
-         name/value for others.
-         
-      </blockquote>
+      <h3>MovementPurposes</h3>
+      <blockquote> Movement Purposes is required, however, it may be an empty list. This is a challenging
+         element to populate because
+         there are some many factors that become important in regulatory decision making. This
+         list encompasses many different aspects of the
+         animal's use, reason for movement, etc. As with many elements, the goal has been to
+         enumerate those most often used in regulatory and
+         other decision making but leave "Other" available. If "Other" is selected a reason
+         should be supplied as text in the "OtherReason"
+         element.</blockquote>
+      <h4><i>Child Elements</i></h4>
+      <ul>
+         <li><b>MovementPurpose</b>: Optional, may repeat<br><i></i>
+            Values:
+            <ul>
+               <li>Racing
+                  ()
+                  </li>
+               <li>Sale
+                  ()
+                  </li>
+               <li>Grazing
+                  ()
+                  </li>
+               <li>Training
+                  ()
+                  </li>
+               <li>Slaughter
+                  ()
+                  </li>
+               <li>Medical Treatment
+                  ()
+                  </li>
+               <li>Exhibition/Show/Rodeo
+                  ()
+                  </li>
+               <li>Breeding
+                  ()
+                  </li>
+               <li>Competition
+                  ()
+                  </li>
+               <li>Feeding to condition
+                  ()
+                  </li>
+               <li>Feeding to slaughter
+                  ()
+                  </li>
+               <li>Laying Hens
+                  ()
+                  </li>
+               <li>Hunting for harvest
+                  ()
+                  </li>
+               <li>Companion Animal
+                  ()
+                  </li>
+               <li>Personal Travel/Transit
+                  ()
+                  </li>
+               <li>Owner relocating
+                  ()
+                  </li>
+               <li>Evacuation from Natural Disaster
+                  ()
+                  </li>
+               <li>Other
+                  ()
+                  </li>
+            </ul>
+         </li>
+         <li><b>OtherReason</b>: Optional</li>
+      </ul>
+      <h3>Origin</h3>
+      <blockquote>The physical location of the animal(s) prior to movement is required. Must be a physical
+         (911)
+         address.</blockquote>
+      <ul>
+         <li>See: <i>PremType</i></li>
+      </ul>
+      <h3>Destination</h3>
+      <blockquote>The intended physical location of the animal(s) after movement is required. Must be
+         a physical (911)
+         address.</blockquote>
+      <ul>
+         <li>See: <i>PremType</i></li>
+      </ul>
+      <h3>Consignor</h3>
+      <blockquote>The contact information for the person or business responsible for the animal(s) prior
+         to movement. Only required if
+         different from Origin.</blockquote>
+      <ul>
+         <li>See: <i>ContactType</i></li>
+      </ul>
+      <h3>Consignee</h3>
+      <blockquote>The contact information for the person or business responsible for the animal(s) after
+         to movement. Only required if
+         different from Destination.</blockquote>
+      <ul>
+         <li>See: <i>ContactType</i></li>
+      </ul>
+      <h3>Carrier</h3>
+      <blockquote>The contact information for the person or business responsible for moving the animals
+         from origin to destination.
+         </blockquote>
+      <ul>
+         <li>See: <i>ContactType</i></li>
+      </ul>
+      <h3>TransportMode</h3>
+      <blockquote>If important for certification of ability to travel the mode, air, car, rail, truck
+         or boat (ship). </blockquote><br><i></i>
+      Values:
+      <ul>
+         <li>air
+            ()
+            </li>
+         <li>boat
+            ()
+            </li>
+         <li>car
+            ()
+            </li>
+         <li>rail
+            ()
+            </li>
+         <li>truck
+            ()
+            </li>
+         <li>land
+            ()
+            </li>
+         <li>other
+            ()
+            </li>
+      </ul>
+      <h3>Accessions</h3>
+      <blockquote>Because many herd movements have testing performed in one accession, the accession(s)
+         is(are) listed here and referenced
+         by each test rather than duplicating all the accession information for each test on
+         each animal.</blockquote>
+      <h4><i>Child Elements</i></h4>
+      <ul>
+         <li><b>Accession</b>: Optional, may repeat</li>
+      </ul>
+      <h3>Accession</h3>
+      <blockquote> Accessions are listed for the CVI as a whole and referenced by each test. An accession
+         is defined as the encounter
+         in which testing was performed.  This may be either laboratory testing or in field
+         testing.  A single
+         Laboratory or Field element must be specified, indicating where tests for this accession
+         were performed. InfieldTest is an optional
+         boolean (true/false value) indicating if a test was performed in the field. This redundancy
+         is retained from version 1 that did not
+         have a distinct Field test element.  ID is required, and is the reference number that
+         associates an animal’s individual tests performed
+         as part of this accession. ID is not the lab accession number but rather a distinct
+         identifier used for linking within the XML document.  
+         </blockquote>
+      <h4><i>Attributes</i></h4>
+      <ul>
+         <li><b>InfieldTest</b>: Optional</li>
+         <li><b>id</b>: Required</li>
+      </ul>
       <h4><i>Child Elements</i></h4>
       <ul>
          <li> Either: 
             <ul>
-               <li><b>BrucellosisStateOrAreaStatus</b>: Required
-               </li>
-               <li><b>TuberculosisStateOrZoneStatus</b>: Required
-               </li>
-               <li><b>OtherStateOrZoneStatus</b>: Required
-               </li>
+               <li><b>Laboratory</b>: Required</li>
+               <li><b>Field</b>: Required</li>
+            </ul>
+         </li>
+      </ul>
+      <h3>Laboratory</h3>
+      <blockquote>For testing done in or by a named laboratory, the Laboratory element contains the
+         relevant information.
+         LabName is a required string. 
+         PremId (see PremIdType) is optional only if unavailable. Address is optional only
+         if
+         unavailable and should contain the lab physical address. AccessionDate is a required
+         date. AccessionNumber is a required
+         string.  Accession number is a distinct identifier assigned by the Laboratory.
+         </blockquote>
+      <h4><i>Attributes</i></h4>
+      <ul>
+         <li><b>AccessionDate</b>: Required</li>
+         <li><b>AccessionNumber</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.</blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
+         </li>
+      </ul>
+      <h4><i>Child Elements</i></h4>
+      <ul>
+         <li><b>LabName</b>: Required</li>
+         <li><b>PremId</b>: Optional<br><i>PremIdType</i><blockquote> PremIdType does minimal validation of true premises identifiers including both PINs
+               (7 characters and LIDs (6 or 8
+               characters). Only nationally registered LIDs are appropriate. Implementing applications
+               are highly encouraged to validate against the
+               appropriate checksum logic. </blockquote>
+            Pattern(s):
+            <ul>
+               <li>[A-Z0-9]{6,8}</li>
+            </ul>
+         </li>
+         <li><b>Address</b>: Optional</li>
+      </ul>
+      <h3>Address</h3>
+      <blockquote>Origin and destination require a structured address. Because of variation in policy
+         between jurisdictions this schema
+         leaves each element optional. However for a CVI to be valid in any jurisdiction, this
+         element must contain enough information for
+         authorities to uniquely identify the location. </blockquote>
+      <h4><i>Child Elements</i></h4>
+      <ul>
+         <li><b>Line1</b>: Optional</li>
+         <li><b>Line2</b>: Optional</li>
+         <li><b>Town</b>: Optional</li>
+         <li><b>County</b>: Optional</li>
+         <li><b>State</b>: Required<br><i>StateCodeType</i><blockquote>State Code includes territories, APO addresses, etc. Does NOT include Canadian provinces
+               or Mexican
+               states.</blockquote>
+            Values:
+            <ul>
+               <li>AA
+                  (Military postal system in the Americas)
+                  </li>
+               <li>AE
+                  (Military postal system in Europe Africa and Canada)
+                  </li>
+               <li>AK
+                  (Alaska)
+                  </li>
+               <li>AL
+                  (Alabama)
+                  </li>
+               <li>AP
+                  (Military postal system in the Pacific)
+                  </li>
+               <li>AR
+                  (Arkansas)
+                  </li>
+               <li>AS
+                  (American Samoa)
+                  </li>
+               <li>AZ
+                  (Arizona)
+                  </li>
+               <li>CA
+                  (California)
+                  </li>
+               <li>CO
+                  (Colorado)
+                  </li>
+               <li>CT
+                  (Connecticut)
+                  </li>
+               <li>DC
+                  (Washington District of Columbia)
+                  </li>
+               <li>DE
+                  (Delaware)
+                  </li>
+               <li>FL
+                  (Florida)
+                  </li>
+               <li>FM
+                  (Federated States of Micronesia)
+                  </li>
+               <li>GA
+                  (Georgia)
+                  </li>
+               <li>GU
+                  (Guam)
+                  </li>
+               <li>HI
+                  (Hawaii)
+                  </li>
+               <li>IA
+                  (Iowa)
+                  </li>
+               <li>ID
+                  (Idaho)
+                  </li>
+               <li>IL
+                  (Illinois)
+                  </li>
+               <li>IN
+                  (Indiana)
+                  </li>
+               <li>KS
+                  (Kansas)
+                  </li>
+               <li>KY
+                  (Kentucky)
+                  </li>
+               <li>LA
+                  (Louisiana)
+                  </li>
+               <li>MA
+                  (Massachusetts)
+                  </li>
+               <li>MD
+                  (Maryland)
+                  </li>
+               <li>ME
+                  (Maine)
+                  </li>
+               <li>MH
+                  (Marshall Islands)
+                  </li>
+               <li>MI
+                  (Michigan)
+                  </li>
+               <li>MN
+                  (Minnesota)
+                  </li>
+               <li>MO
+                  (Missouri)
+                  </li>
+               <li>MP
+                  (Northern Mariana Islands)
+                  </li>
+               <li>MS
+                  (Mississippi)
+                  </li>
+               <li>MT
+                  (Montana)
+                  </li>
+               <li>NC
+                  (North Carolina)
+                  </li>
+               <li>ND
+                  (North Dakota)
+                  </li>
+               <li>NE
+                  (Nebraska)
+                  </li>
+               <li>NH
+                  (New Hampshire)
+                  </li>
+               <li>NJ
+                  (New Jersey)
+                  </li>
+               <li>NM
+                  (New Mexico)
+                  </li>
+               <li>NV
+                  (Nevada)
+                  </li>
+               <li>NY
+                  (New York)
+                  </li>
+               <li>OH
+                  (Ohio)
+                  </li>
+               <li>OK
+                  (Oklahoma)
+                  </li>
+               <li>OR
+                  (Oregon)
+                  </li>
+               <li>PA
+                  (Pennsylvania)
+                  </li>
+               <li>PR
+                  (Puerto Rico)
+                  </li>
+               <li>PW
+                  (Palau)
+                  </li>
+               <li>RI
+                  (Rhode Island)
+                  </li>
+               <li>SC
+                  (South Carolina)
+                  </li>
+               <li>SD
+                  (South Dakota)
+                  </li>
+               <li>TN
+                  (Tennessee)
+                  </li>
+               <li>TX
+                  (Texas)
+                  </li>
+               <li>UT
+                  (Utah)
+                  </li>
+               <li>VA
+                  (Virginia)
+                  </li>
+               <li>VI
+                  (U.S. Virgin Islands)
+                  </li>
+               <li>VT
+                  (Vermont)
+                  </li>
+               <li>WA
+                  (Washington)
+                  </li>
+               <li>WI
+                  (Wisconsin)
+                  </li>
+               <li>WV
+                  (West Virginia)
+                  </li>
+               <li>WY
+                  (Wyoming)
+                  </li>
+            </ul>
+         </li>
+         <li><b>ZIP</b>: Optional<br><i></i>
+            Pattern(s):
+            <ul>
+               <li>\d{5}</li>
+               <li>\d{5}-\d{4}</li>
+            </ul>
+         </li>
+         <li><b>Country</b>: Optional<br><i></i>
+            Values:
+            <ul>
+               <li>USA
+                  ()
+                  </li>
+            </ul>
+         </li>
+         <li><b>GeoPoint</b>: Optional</li>
+      </ul>
+      <h3>Field</h3>
+      <blockquote>For testing performed outside of a laboratory, the Field element contains the relevant
+         
+         information.  PremId (see PremIdType) is optional only if unavailable. Address (see
+         AddressType) is optional only if
+         unavailable and should contain the physical address of the test location. AccessionDate
+         is a required date.
+         </blockquote>
+      <h4><i>Attributes</i></h4>
+      <ul>
+         <li><b>AccessionDate</b>: Required</li>
+      </ul>
+      <h4><i>Child Elements</i></h4>
+      <ul>
+         <li><b>PremId</b>: Optional<br><i>PremIdType</i><blockquote> PremIdType does minimal validation of true premises identifiers including both PINs
+               (7 characters and LIDs (6 or 8
+               characters). Only nationally registered LIDs are appropriate. Implementing applications
+               are highly encouraged to validate against the
+               appropriate checksum logic. </blockquote>
+            Pattern(s):
+            <ul>
+               <li>[A-Z0-9]{6,8}</li>
+            </ul>
+         </li>
+         <li><b>Address</b>: Optional</li>
+      </ul>
+      <h3>Address</h3>
+      <blockquote>Origin and destination require a structured address. Because of variation in policy
+         between jurisdictions this schema
+         leaves each element optional. However for a CVI to be valid in any jurisdiction, this
+         element must contain enough information for
+         authorities to uniquely identify the location. </blockquote>
+      <h4><i>Child Elements</i></h4>
+      <ul>
+         <li><b>Line1</b>: Optional</li>
+         <li><b>Line2</b>: Optional</li>
+         <li><b>Town</b>: Optional</li>
+         <li><b>County</b>: Optional</li>
+         <li><b>State</b>: Required<br><i>StateCodeType</i><blockquote>State Code includes territories, APO addresses, etc. Does NOT include Canadian provinces
+               or Mexican
+               states.</blockquote>
+            Values:
+            <ul>
+               <li>AA
+                  (Military postal system in the Americas)
+                  </li>
+               <li>AE
+                  (Military postal system in Europe Africa and Canada)
+                  </li>
+               <li>AK
+                  (Alaska)
+                  </li>
+               <li>AL
+                  (Alabama)
+                  </li>
+               <li>AP
+                  (Military postal system in the Pacific)
+                  </li>
+               <li>AR
+                  (Arkansas)
+                  </li>
+               <li>AS
+                  (American Samoa)
+                  </li>
+               <li>AZ
+                  (Arizona)
+                  </li>
+               <li>CA
+                  (California)
+                  </li>
+               <li>CO
+                  (Colorado)
+                  </li>
+               <li>CT
+                  (Connecticut)
+                  </li>
+               <li>DC
+                  (Washington District of Columbia)
+                  </li>
+               <li>DE
+                  (Delaware)
+                  </li>
+               <li>FL
+                  (Florida)
+                  </li>
+               <li>FM
+                  (Federated States of Micronesia)
+                  </li>
+               <li>GA
+                  (Georgia)
+                  </li>
+               <li>GU
+                  (Guam)
+                  </li>
+               <li>HI
+                  (Hawaii)
+                  </li>
+               <li>IA
+                  (Iowa)
+                  </li>
+               <li>ID
+                  (Idaho)
+                  </li>
+               <li>IL
+                  (Illinois)
+                  </li>
+               <li>IN
+                  (Indiana)
+                  </li>
+               <li>KS
+                  (Kansas)
+                  </li>
+               <li>KY
+                  (Kentucky)
+                  </li>
+               <li>LA
+                  (Louisiana)
+                  </li>
+               <li>MA
+                  (Massachusetts)
+                  </li>
+               <li>MD
+                  (Maryland)
+                  </li>
+               <li>ME
+                  (Maine)
+                  </li>
+               <li>MH
+                  (Marshall Islands)
+                  </li>
+               <li>MI
+                  (Michigan)
+                  </li>
+               <li>MN
+                  (Minnesota)
+                  </li>
+               <li>MO
+                  (Missouri)
+                  </li>
+               <li>MP
+                  (Northern Mariana Islands)
+                  </li>
+               <li>MS
+                  (Mississippi)
+                  </li>
+               <li>MT
+                  (Montana)
+                  </li>
+               <li>NC
+                  (North Carolina)
+                  </li>
+               <li>ND
+                  (North Dakota)
+                  </li>
+               <li>NE
+                  (Nebraska)
+                  </li>
+               <li>NH
+                  (New Hampshire)
+                  </li>
+               <li>NJ
+                  (New Jersey)
+                  </li>
+               <li>NM
+                  (New Mexico)
+                  </li>
+               <li>NV
+                  (Nevada)
+                  </li>
+               <li>NY
+                  (New York)
+                  </li>
+               <li>OH
+                  (Ohio)
+                  </li>
+               <li>OK
+                  (Oklahoma)
+                  </li>
+               <li>OR
+                  (Oregon)
+                  </li>
+               <li>PA
+                  (Pennsylvania)
+                  </li>
+               <li>PR
+                  (Puerto Rico)
+                  </li>
+               <li>PW
+                  (Palau)
+                  </li>
+               <li>RI
+                  (Rhode Island)
+                  </li>
+               <li>SC
+                  (South Carolina)
+                  </li>
+               <li>SD
+                  (South Dakota)
+                  </li>
+               <li>TN
+                  (Tennessee)
+                  </li>
+               <li>TX
+                  (Texas)
+                  </li>
+               <li>UT
+                  (Utah)
+                  </li>
+               <li>VA
+                  (Virginia)
+                  </li>
+               <li>VI
+                  (U.S. Virgin Islands)
+                  </li>
+               <li>VT
+                  (Vermont)
+                  </li>
+               <li>WA
+                  (Washington)
+                  </li>
+               <li>WI
+                  (Wisconsin)
+                  </li>
+               <li>WV
+                  (West Virginia)
+                  </li>
+               <li>WY
+                  (Wyoming)
+                  </li>
+            </ul>
+         </li>
+         <li><b>ZIP</b>: Optional<br><i></i>
+            Pattern(s):
+            <ul>
+               <li>\d{5}</li>
+               <li>\d{5}-\d{4}</li>
+            </ul>
+         </li>
+         <li><b>Country</b>: Optional<br><i></i>
+            Values:
+            <ul>
+               <li>USA
+                  ()
+                  </li>
+            </ul>
+         </li>
+         <li><b>GeoPoint</b>: Optional</li>
+      </ul>
+      <h3>Statements</h3>
+      <blockquote> Additional statements that may be required by various jurisdictions may be included
+         here. These statements must not
+         take the place of or modify the structured content found elsewhere in the standard.</blockquote>
+      <h3>Attachment</h3>
+      <blockquote> Attachments can be used for text or binary additional information not specifically
+         carried in one of the other Binary
+         elements. Assumed to be from a file so Filename is required along with a reference
+         to the Binary content. Be aware that receiving
+         applications may ignore unknown or unexpected attachments. The actual binary content
+         of the attachment is carried in the Binary
+         element as are any other Binary fields. DocType is a required string. (put enumeration
+         values in table somehow? Is this list
+         adequate?). Filename is a required string. (Why require a file name? many may never
+         have actually resided in a named file.) Comment is
+         an optional string. (For what purpose?)</blockquote>
+      <h4><i>Attributes</i></h4>
+      <ul>
+         <li><b>AttachmentRef</b>: Required</li>
+         <li><b>DocType</b>: Required<br><i></i>
+            Values:
+            <ul>
+               <li>Scanned Paper CVI
+                  (For sending an image of original paper CVI along with the extracted data. These may
+                  be image PDF or
+                  other image format. )
+                  </li>
+               <li>Scanned Test Chart
+                  (For sending scanned test charts along with electronic CVI or extracted data. These
+                  may be image PDF
+                  or other image format. )
+                  </li>
+               <li>PDF CVI
+                  (For sending data form PDF CVI along with extracted data. These would be Adobe PDF
+                  forms, or XFA
+                  forms. )
+                  </li>
+               <li>PDF Test Chart
+                  (For sending data form PDF Test Chart along with electronic CVI or extracted data.
+                  These would be
+                  Adobe PDF forms, or XFA forms. )
+                  </li>
+               <li>Other
+                  (All other uses.)
+                  </li>
+            </ul>
+         </li>
+         <li><b>Filename</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.</blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
+         </li>
+         <li><b>Comment</b>: Optional</li>
+      </ul>
+      <h3>MiscAttribute</h3>
+      <blockquote>Any additional information needed by specific implementations can be provided as name/value
+         pairs represented as
+         strings. These data must not be essential to proper understanding of the structured
+         content of the standard data but only extend
+         it.</blockquote>
+      <h4><i>Attributes</i></h4>
+      <ul>
+         <li><b>Name</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.</blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
+         </li>
+         <li><b>Value</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.</blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
+         </li>
+      </ul>
+      <h3>Binary</h3>
+      <blockquote>All binary content is included as Binary and referenced in specific elements by ID/IDREF.</blockquote>
+      <h4><i>Attributes</i></h4>
+      <ul>
+         <li><b>ID</b>: Required</li>
+         <li><b>MimeType</b>: Optional<br><i>MimeType</i><blockquote>For complete information see: https://www.iana.org/assignments/media-types/media-types.xhtml.
+               For common examples see:
+               https://en.wikipedia.org/wiki/Media_type </blockquote>
+            Pattern(s):
+            <ul>
+               <li>.{1,127}/.{1,127}</li>
+            </ul>
+         </li>
+      </ul>
+      <h4><i>Child Elements</i></h4>
+      <ul>
+         <li><b>Payload</b>: Required</li>
+      </ul>
+      <h2>Defined Types:</h2>
+      <h3>PremType</h3>
+      <blockquote> PremType is used for origin and destination, and must be actual physical (animal?)
+         locations. PremId (see PremIdType)
+         is optional only if unavailable. PremName is an optional string. Address is required
+         (see AddressType). ProgramStatus (see
+         ProgramStatusType) is optional, but there is no limit on additional ProgramStatuses.
+         Person (see PersonType) is required (why?), and
+         there is no limit on additional Persons. </blockquote>
+      <h4><i>Child Elements</i></h4>
+      <ul>
+         <li><b>PremId</b>: Optional<br><i>PremIdType</i><blockquote> PremIdType does minimal validation of true premises identifiers including both PINs
+               (7 characters and LIDs (6 or 8
+               characters). Only nationally registered LIDs are appropriate. Implementing applications
+               are highly encouraged to validate against the
+               appropriate checksum logic. </blockquote>
+            Pattern(s):
+            <ul>
+               <li>[A-Z0-9]{6,8}</li>
+            </ul>
+         </li>
+         <li><b>PremName</b>: Optional</li>
+         <li><b>Address</b>: Required</li>
+         <li><b>StateZoneOrAreaStatus</b>: Optional, may repeat</li>
+         <li><b>HerdOrFlockStatus</b>: Optional, may repeat</li>
+         <li><b>Person</b>: Optional, may repeat</li>
+      </ul>
+      <h3>Address</h3>
+      <blockquote>Origin and destination require a structured address. Because of variation in policy
+         between jurisdictions this schema
+         leaves each element optional. However for a CVI to be valid in any jurisdiction, this
+         element must contain enough information for
+         authorities to uniquely identify the location. </blockquote>
+      <h4><i>Child Elements</i></h4>
+      <ul>
+         <li><b>Line1</b>: Optional</li>
+         <li><b>Line2</b>: Optional</li>
+         <li><b>Town</b>: Optional</li>
+         <li><b>County</b>: Optional</li>
+         <li><b>State</b>: Required<br><i>StateCodeType</i><blockquote>State Code includes territories, APO addresses, etc. Does NOT include Canadian provinces
+               or Mexican
+               states.</blockquote>
+            Values:
+            <ul>
+               <li>AA
+                  (Military postal system in the Americas)
+                  </li>
+               <li>AE
+                  (Military postal system in Europe Africa and Canada)
+                  </li>
+               <li>AK
+                  (Alaska)
+                  </li>
+               <li>AL
+                  (Alabama)
+                  </li>
+               <li>AP
+                  (Military postal system in the Pacific)
+                  </li>
+               <li>AR
+                  (Arkansas)
+                  </li>
+               <li>AS
+                  (American Samoa)
+                  </li>
+               <li>AZ
+                  (Arizona)
+                  </li>
+               <li>CA
+                  (California)
+                  </li>
+               <li>CO
+                  (Colorado)
+                  </li>
+               <li>CT
+                  (Connecticut)
+                  </li>
+               <li>DC
+                  (Washington District of Columbia)
+                  </li>
+               <li>DE
+                  (Delaware)
+                  </li>
+               <li>FL
+                  (Florida)
+                  </li>
+               <li>FM
+                  (Federated States of Micronesia)
+                  </li>
+               <li>GA
+                  (Georgia)
+                  </li>
+               <li>GU
+                  (Guam)
+                  </li>
+               <li>HI
+                  (Hawaii)
+                  </li>
+               <li>IA
+                  (Iowa)
+                  </li>
+               <li>ID
+                  (Idaho)
+                  </li>
+               <li>IL
+                  (Illinois)
+                  </li>
+               <li>IN
+                  (Indiana)
+                  </li>
+               <li>KS
+                  (Kansas)
+                  </li>
+               <li>KY
+                  (Kentucky)
+                  </li>
+               <li>LA
+                  (Louisiana)
+                  </li>
+               <li>MA
+                  (Massachusetts)
+                  </li>
+               <li>MD
+                  (Maryland)
+                  </li>
+               <li>ME
+                  (Maine)
+                  </li>
+               <li>MH
+                  (Marshall Islands)
+                  </li>
+               <li>MI
+                  (Michigan)
+                  </li>
+               <li>MN
+                  (Minnesota)
+                  </li>
+               <li>MO
+                  (Missouri)
+                  </li>
+               <li>MP
+                  (Northern Mariana Islands)
+                  </li>
+               <li>MS
+                  (Mississippi)
+                  </li>
+               <li>MT
+                  (Montana)
+                  </li>
+               <li>NC
+                  (North Carolina)
+                  </li>
+               <li>ND
+                  (North Dakota)
+                  </li>
+               <li>NE
+                  (Nebraska)
+                  </li>
+               <li>NH
+                  (New Hampshire)
+                  </li>
+               <li>NJ
+                  (New Jersey)
+                  </li>
+               <li>NM
+                  (New Mexico)
+                  </li>
+               <li>NV
+                  (Nevada)
+                  </li>
+               <li>NY
+                  (New York)
+                  </li>
+               <li>OH
+                  (Ohio)
+                  </li>
+               <li>OK
+                  (Oklahoma)
+                  </li>
+               <li>OR
+                  (Oregon)
+                  </li>
+               <li>PA
+                  (Pennsylvania)
+                  </li>
+               <li>PR
+                  (Puerto Rico)
+                  </li>
+               <li>PW
+                  (Palau)
+                  </li>
+               <li>RI
+                  (Rhode Island)
+                  </li>
+               <li>SC
+                  (South Carolina)
+                  </li>
+               <li>SD
+                  (South Dakota)
+                  </li>
+               <li>TN
+                  (Tennessee)
+                  </li>
+               <li>TX
+                  (Texas)
+                  </li>
+               <li>UT
+                  (Utah)
+                  </li>
+               <li>VA
+                  (Virginia)
+                  </li>
+               <li>VI
+                  (U.S. Virgin Islands)
+                  </li>
+               <li>VT
+                  (Vermont)
+                  </li>
+               <li>WA
+                  (Washington)
+                  </li>
+               <li>WI
+                  (Wisconsin)
+                  </li>
+               <li>WV
+                  (West Virginia)
+                  </li>
+               <li>WY
+                  (Wyoming)
+                  </li>
+            </ul>
+         </li>
+         <li><b>ZIP</b>: Optional<br><i></i>
+            Pattern(s):
+            <ul>
+               <li>\d{5}</li>
+               <li>\d{5}-\d{4}</li>
+            </ul>
+         </li>
+         <li><b>Country</b>: Optional<br><i></i>
+            Values:
+            <ul>
+               <li>USA
+                  ()
+                  </li>
+            </ul>
+         </li>
+         <li><b>GeoPoint</b>: Optional</li>
+      </ul>
+      <h3>StateZoneOrAreaStatus</h3>
+      <blockquote>Statuses are explicitly enumerated for bovine Brucellosis and TB, and left as simple
+         name/value for others.
+         </blockquote>
+      <h4><i>Child Elements</i></h4>
+      <ul>
+         <li> Either: 
+            <ul>
+               <li><b>BrucellosisStateOrAreaStatus</b>: Required</li>
+               <li><b>TuberculosisStateOrZoneStatus</b>: Required</li>
+               <li><b>OtherStateOrZoneStatus</b>: Required</li>
             </ul>
          </li>
       </ul>
@@ -2462,24 +2308,19 @@
             <ul>
                <li>Free
                   ()
-                  
-               </li>
+                  </li>
                <li>Class A
                   ()
-                  
-               </li>
+                  </li>
                <li>Class B
                   ()
-                  
-               </li>
+                  </li>
                <li>Class C
                   ()
-                  
-               </li>
+                  </li>
                <li>GYA, DSA (Class A)
                   ()
-                  
-               </li>
+                  </li>
             </ul>
          </li>
       </ul>
@@ -2492,66 +2333,69 @@
             <ul>
                <li>Free
                   ()
-                  
-               </li>
+                  </li>
                <li>Modified Accredited Advanced State or Zone (MAA)
                   ()
-                  
-               </li>
+                  </li>
                <li>Modified Accredited State or Zone (MA)
                   ()
-                  
-               </li>
+                  </li>
                <li>Non Accredited State or Zone (NA)
                   ()
-                  
-               </li>
+                  </li>
             </ul>
          </li>
       </ul>
       <h3>OtherStateOrZoneStatus</h3>
-      <blockquote>Bovine TB status.</blockquote>
+      <blockquote>Other Disease Status</blockquote>
       <h4><i>Attributes</i></h4>
       <ul>
-         <li><b>Disease</b>: Required
+         <li><b>Disease</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.</blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
          </li>
-         <li><b>Status</b>: Required
+         <li><b>Status</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.</blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
          </li>
       </ul>
       <h3>HerdOrFlockStatus</h3>
       <blockquote>Herd or flock status vary enough that enumerating all the variations was impractical.
          These statuses are represented as
-         a name, value pair with an optional herd or flock ID
-      </blockquote>
+         a name, value pair with an optional herd or flock ID</blockquote>
       <h4><i>Attributes</i></h4>
       <ul>
-         <li><b>Disease</b>: Required
+         <li><b>Disease</b>: Required<br><i>nonNullString</i><blockquote>Require at least one non-whitespace character as least common denominator
+               for required elements.</blockquote>
+            Pattern(s):
+            <ul>
+               <li>.*[^\s].*</li>
+            </ul>
          </li>
-         <li><b>HerdOrFlockID</b>: Optional
-         </li>
-         <li><b>Status</b>: Optional
-         </li>
+         <li><b>HerdOrFlockID</b>: Optional</li>
+         <li><b>Status</b>: Optional</li>
       </ul>
       <h3>Person</h3>
       <blockquote> Person is defined as a Name string and an optional Phone Number (see Phone). Because
          of a lack of industry consensus on
          hanling names, Name can be provided as either a single string (Name) or individual
-         name components (NameParts).
-      </blockquote>
+         name components (NameParts).</blockquote>
       <h4><i>Child Elements</i></h4>
       <ul>
          <li> Either: 
             <ul>
-               <li><b>NameParts</b>: Required
-               </li>
-               <li><b>Name</b>: Required
-               </li>
+               <li><b>NameParts</b>: Required</li>
+               <li><b>Name</b>: Required</li>
             </ul>
          </li>
-         <li><b>Phone</b>: Optional, may repeat
-         </li>
-         <li><b>Email</b>: Optional, may repeat
-         </li>
+         <li><b>Phone</b>: Optional, may repeat</li>
+         <li><b>Email</b>: Optional, may repeat</li>
       </ul>
       <h3>NameParts</h3>
       <blockquote> NameParts defines a structured name for a business or person. BusinessName, FirstName,
@@ -2559,26 +2403,19 @@
          are all optional for applications to use one or more (NameParts with on individual
          components would validate, the schema language to
          force "one or more of one or more of these parts" would be more complex than necessary.)
-         
-      </blockquote>
+         </blockquote>
       <h4><i>Child Elements</i></h4>
       <ul>
-         <li><b>BusinessName</b>: Optional
-         </li>
-         <li><b>FirstName</b>: Optional
-         </li>
-         <li><b>MiddleName</b>: Optional
-         </li>
-         <li><b>LastName</b>: Optional
-         </li>
-         <li><b>OtherName</b>: Optional
-         </li>
+         <li><b>BusinessName</b>: Optional</li>
+         <li><b>FirstName</b>: Optional</li>
+         <li><b>MiddleName</b>: Optional</li>
+         <li><b>LastName</b>: Optional</li>
+         <li><b>OtherName</b>: Optional</li>
       </ul>
       <h3>Phone</h3>
       <blockquote> The Phone Number specifies type (list enumeration values?) and a ten-digit number,
          and can include a comment.
-         
-      </blockquote>
+         </blockquote>
       <h4><i>Attributes</i></h4>
       <ul>
          <li><b>Number</b>: Required<br><i></i>
@@ -2587,27 +2424,22 @@
                <li>\d{10}</li>
             </ul>
          </li>
-         <li><b>Comment</b>: Optional
-         </li>
+         <li><b>Comment</b>: Optional</li>
          <li><b>Type</b>: Required<br><i></i>
             Values:
             <ul>
                <li>Unknown
                   (Probably the most common.)
-                  
-               </li>
+                  </li>
                <li>Landline
                   (If known to be fixed location.)
-                  
-               </li>
+                  </li>
                <li>Cellphone
                   (If known to be a mobile phone.)
-                  
-               </li>
+                  </li>
                <li>Fax
                   (Fax line.)
-                  
-               </li>
+                  </li>
             </ul>
          </li>
       </ul>
@@ -2624,286 +2456,215 @@
       <h3>ContactType</h3>
       <blockquote> ContactType is used for consignor and consignee that may be actual physical locations
          or other postal addresses. The
-         Address should be the best contact address.
-      </blockquote>
+         Address should be the best contact address.</blockquote>
       <h4><i>Child Elements</i></h4>
       <ul>
-         <li><b>Address</b>: Optional
-         </li>
-         <li><b>Person</b>: Required, may repeat
-         </li>
+         <li><b>Address</b>: Optional</li>
+         <li><b>Person</b>: Required, may repeat</li>
       </ul>
       <h3>Address</h3>
       <blockquote>Origin and destination require a structured address. Because of variation in policy
          between jurisdictions this schema
          leaves each element optional. However for a CVI to be valid in any jurisdiction, this
          element must contain enough information for
-         authorities to uniquely identify the location. 
-      </blockquote>
+         authorities to uniquely identify the location. </blockquote>
       <h4><i>Child Elements</i></h4>
       <ul>
-         <li><b>Line1</b>: Optional
-         </li>
-         <li><b>Line2</b>: Optional
-         </li>
-         <li><b>Town</b>: Optional
-         </li>
-         <li><b>County</b>: Optional
-         </li>
+         <li><b>Line1</b>: Optional</li>
+         <li><b>Line2</b>: Optional</li>
+         <li><b>Town</b>: Optional</li>
+         <li><b>County</b>: Optional</li>
          <li><b>State</b>: Required<br><i>StateCodeType</i><blockquote>State Code includes territories, APO addresses, etc. Does NOT include Canadian provinces
                or Mexican
-               states.
-            </blockquote>
+               states.</blockquote>
             Values:
             <ul>
                <li>AA
                   (Military postal system in the Americas)
-                  
-               </li>
+                  </li>
                <li>AE
                   (Military postal system in Europe Africa and Canada)
-                  
-               </li>
+                  </li>
                <li>AK
                   (Alaska)
-                  
-               </li>
+                  </li>
                <li>AL
                   (Alabama)
-                  
-               </li>
+                  </li>
                <li>AP
                   (Military postal system in the Pacific)
-                  
-               </li>
+                  </li>
                <li>AR
                   (Arkansas)
-                  
-               </li>
+                  </li>
                <li>AS
                   (American Samoa)
-                  
-               </li>
+                  </li>
                <li>AZ
                   (Arizona)
-                  
-               </li>
+                  </li>
                <li>CA
                   (California)
-                  
-               </li>
+                  </li>
                <li>CO
                   (Colorado)
-                  
-               </li>
+                  </li>
                <li>CT
                   (Connecticut)
-                  
-               </li>
+                  </li>
                <li>DC
                   (Washington District of Columbia)
-                  
-               </li>
+                  </li>
                <li>DE
                   (Delaware)
-                  
-               </li>
+                  </li>
                <li>FL
                   (Florida)
-                  
-               </li>
+                  </li>
                <li>FM
                   (Federated States of Micronesia)
-                  
-               </li>
+                  </li>
                <li>GA
                   (Georgia)
-                  
-               </li>
+                  </li>
                <li>GU
                   (Guam)
-                  
-               </li>
+                  </li>
                <li>HI
                   (Hawaii)
-                  
-               </li>
+                  </li>
                <li>IA
                   (Iowa)
-                  
-               </li>
+                  </li>
                <li>ID
                   (Idaho)
-                  
-               </li>
+                  </li>
                <li>IL
                   (Illinois)
-                  
-               </li>
+                  </li>
                <li>IN
                   (Indiana)
-                  
-               </li>
+                  </li>
                <li>KS
                   (Kansas)
-                  
-               </li>
+                  </li>
                <li>KY
                   (Kentucky)
-                  
-               </li>
+                  </li>
                <li>LA
                   (Louisiana)
-                  
-               </li>
+                  </li>
                <li>MA
                   (Massachusetts)
-                  
-               </li>
+                  </li>
                <li>MD
                   (Maryland)
-                  
-               </li>
+                  </li>
                <li>ME
                   (Maine)
-                  
-               </li>
+                  </li>
                <li>MH
                   (Marshall Islands)
-                  
-               </li>
+                  </li>
                <li>MI
                   (Michigan)
-                  
-               </li>
+                  </li>
                <li>MN
                   (Minnesota)
-                  
-               </li>
+                  </li>
                <li>MO
                   (Missouri)
-                  
-               </li>
+                  </li>
                <li>MP
                   (Northern Mariana Islands)
-                  
-               </li>
+                  </li>
                <li>MS
                   (Mississippi)
-                  
-               </li>
+                  </li>
                <li>MT
                   (Montana)
-                  
-               </li>
+                  </li>
                <li>NC
                   (North Carolina)
-                  
-               </li>
+                  </li>
                <li>ND
                   (North Dakota)
-                  
-               </li>
+                  </li>
                <li>NE
                   (Nebraska)
-                  
-               </li>
+                  </li>
                <li>NH
                   (New Hampshire)
-                  
-               </li>
+                  </li>
                <li>NJ
                   (New Jersey)
-                  
-               </li>
+                  </li>
                <li>NM
                   (New Mexico)
-                  
-               </li>
+                  </li>
                <li>NV
                   (Nevada)
-                  
-               </li>
+                  </li>
                <li>NY
                   (New York)
-                  
-               </li>
+                  </li>
                <li>OH
                   (Ohio)
-                  
-               </li>
+                  </li>
                <li>OK
                   (Oklahoma)
-                  
-               </li>
+                  </li>
                <li>OR
                   (Oregon)
-                  
-               </li>
+                  </li>
                <li>PA
                   (Pennsylvania)
-                  
-               </li>
+                  </li>
                <li>PR
                   (Puerto Rico)
-                  
-               </li>
+                  </li>
                <li>PW
                   (Palau)
-                  
-               </li>
+                  </li>
                <li>RI
                   (Rhode Island)
-                  
-               </li>
+                  </li>
                <li>SC
                   (South Carolina)
-                  
-               </li>
+                  </li>
                <li>SD
                   (South Dakota)
-                  
-               </li>
+                  </li>
                <li>TN
                   (Tennessee)
-                  
-               </li>
+                  </li>
                <li>TX
                   (Texas)
-                  
-               </li>
+                  </li>
                <li>UT
                   (Utah)
-                  
-               </li>
+                  </li>
                <li>VA
                   (Virginia)
-                  
-               </li>
+                  </li>
                <li>VI
                   (U.S. Virgin Islands)
-                  
-               </li>
+                  </li>
                <li>VT
                   (Vermont)
-                  
-               </li>
+                  </li>
                <li>WA
                   (Washington)
-                  
-               </li>
+                  </li>
                <li>WI
                   (Wisconsin)
-                  
-               </li>
+                  </li>
                <li>WV
                   (West Virginia)
-                  
-               </li>
+                  </li>
                <li>WY
                   (Wyoming)
-                  
-               </li>
+                  </li>
             </ul>
          </li>
          <li><b>ZIP</b>: Optional<br><i></i>
@@ -2918,33 +2679,26 @@
             <ul>
                <li>USA
                   ()
-                  
-               </li>
+                  </li>
             </ul>
          </li>
-         <li><b>GeoPoint</b>: Optional
-         </li>
+         <li><b>GeoPoint</b>: Optional</li>
       </ul>
       <h3>Person</h3>
       <blockquote> Person is defined as a Name string and an optional Phone Number (see Phone). Because
          of a lack of industry consensus on
          hanling names, Name can be provided as either a single string (Name) or individual
-         name components (NameParts).
-      </blockquote>
+         name components (NameParts).</blockquote>
       <h4><i>Child Elements</i></h4>
       <ul>
          <li> Either: 
             <ul>
-               <li><b>NameParts</b>: Required
-               </li>
-               <li><b>Name</b>: Required
-               </li>
+               <li><b>NameParts</b>: Required</li>
+               <li><b>Name</b>: Required</li>
             </ul>
          </li>
-         <li><b>Phone</b>: Optional, may repeat
-         </li>
-         <li><b>Email</b>: Optional, may repeat
-         </li>
+         <li><b>Phone</b>: Optional, may repeat</li>
+         <li><b>Email</b>: Optional, may repeat</li>
       </ul>
       <h3>NameParts</h3>
       <blockquote> NameParts defines a structured name for a business or person. BusinessName, FirstName,
@@ -2952,26 +2706,19 @@
          are all optional for applications to use one or more (NameParts with on individual
          components would validate, the schema language to
          force "one or more of one or more of these parts" would be more complex than necessary.)
-         
-      </blockquote>
+         </blockquote>
       <h4><i>Child Elements</i></h4>
       <ul>
-         <li><b>BusinessName</b>: Optional
-         </li>
-         <li><b>FirstName</b>: Optional
-         </li>
-         <li><b>MiddleName</b>: Optional
-         </li>
-         <li><b>LastName</b>: Optional
-         </li>
-         <li><b>OtherName</b>: Optional
-         </li>
+         <li><b>BusinessName</b>: Optional</li>
+         <li><b>FirstName</b>: Optional</li>
+         <li><b>MiddleName</b>: Optional</li>
+         <li><b>LastName</b>: Optional</li>
+         <li><b>OtherName</b>: Optional</li>
       </ul>
       <h3>Phone</h3>
       <blockquote> The Phone Number specifies type (list enumeration values?) and a ten-digit number,
          and can include a comment.
-         
-      </blockquote>
+         </blockquote>
       <h4><i>Attributes</i></h4>
       <ul>
          <li><b>Number</b>: Required<br><i></i>
@@ -2980,27 +2727,22 @@
                <li>\d{10}</li>
             </ul>
          </li>
-         <li><b>Comment</b>: Optional
-         </li>
+         <li><b>Comment</b>: Optional</li>
          <li><b>Type</b>: Required<br><i></i>
             Values:
             <ul>
                <li>Unknown
                   (Probably the most common.)
-                  
-               </li>
+                  </li>
                <li>Landline
                   (If known to be fixed location.)
-                  
-               </li>
+                  </li>
                <li>Cellphone
                   (If known to be a mobile phone.)
-                  
-               </li>
+                  </li>
                <li>Fax
                   (Fax line.)
-                  
-               </li>
+                  </li>
             </ul>
          </li>
       </ul>
