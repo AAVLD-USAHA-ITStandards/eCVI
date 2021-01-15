@@ -577,12 +577,14 @@
 
     <xs:element name="Laboratory">
         <xs:annotation>
-            <xs:documentation>For testing done in or by a named laboratory, the Laboratory element
-                contains the relevant information. LabName is a required string. PremId (see
-                PremIdType) is optional only if unavailable. Address is optional only if unavailable
-                and should contain the lab physical address. AccessionDate is a required date.
-                AccessionNumber is a required string. Accession number is a distinct identifier
-                assigned by the Laboratory. </xs:documentation>
+            <xs:documentation>For testing done in or by a named laboratory, the Laboratory element contains the relevant information.
+                LabName is a required string. 
+                PremId (see PremIdType) is optional only if unavailable. Address is optional only if
+                unavailable and should contain the lab physical address. AccessionDate is a required date. AccessionNumber is a required
+                string.  Accession number is a distinct identifier assigned by the Laboratory.
+                NOTE: Only if the laboratory does not provide an accession number, this value may be set to
+                "Not Provided".  This usage is not applicable to equine Coggins test accessions.
+            </xs:documentation>
         </xs:annotation>
         <xs:complexType>
             <xs:sequence>
