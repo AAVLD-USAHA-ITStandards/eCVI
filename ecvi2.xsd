@@ -1073,7 +1073,7 @@
             </xs:enumeration>
             <xs:enumeration value="BEF">
                 <xs:annotation>
-                    <xs:documentation> Beef</xs:documentation>
+                    <xs:documentation> Beef Cattle</xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
             <xs:enumeration value="BIS">
@@ -1113,7 +1113,7 @@
             </xs:enumeration>
             <xs:enumeration value="DAI">
                 <xs:annotation>
-                    <xs:documentation> Dairy</xs:documentation>
+                    <xs:documentation> Dairy Cattle</xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
             <xs:enumeration value="EQU">
