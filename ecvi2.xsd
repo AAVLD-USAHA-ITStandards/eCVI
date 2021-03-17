@@ -6,46 +6,42 @@
         <xs:documentation>Version 2.3 </xs:documentation>
     </xs:annotation>
     <xs:annotation>
-        <xs:documentation> Change Log 08/30/2017: Initial draft of version 2.0 attempts to clone
-            version 1 (labeled version 6.0?) with only minor tweaks. 09/01/2017: Added regular
-            expressions to AnimalTags choices. 09/01/2017: Added option for ID/IDREF to Attachment
-            for BrandImage ID Type. 11/16/2017: Collapsed animal tag choices into known structure
-            and not. 12/14/2017: Added Equine description and photos as AnimalTag choices.
-            01/16/2018: Removed string length restrictions not part of regular expressions.
-            01/16/2018: Spelled out latitude and longitude in geo point. 01/16/2018: Rearranged
-            TagType to put Type as first attribute. 02/08/2018: Restructured Species to SpeciesCode
-            vs. SpeciesOther. 02/08/2018: Restructured All Binary data into ID/IDREF to eliminate
-            duplication 02/28/2018: Converted comments to annotation elements except where simply
-            labeling code sections, etc. Works with an XSLT to generate skeleton documentation.
-            03/06-08/2018: Additional annotations added. Ongoing. 04/04/2018: Added Carrier and
-            Transport mode optional elements. Added email in addition to Phone on person. Added
-            miscellaneous attributes element. Changed Breed element to basic string. 04/25/2018:
-            Fixed apostrophe character in Johne's Disease enumeration value. 05/20/2018: Added
-            CVINumberIssuedBy as optional attribute. 05/29/2018: Converted GeoPoint from attributes
-            for Latitude and Longitude to single coordinates element in KML format. 06/06/2018:
-            Simplified Name and Address Block for contacts. 06/25/2018: Clean up documentation.
-            07/06/2018: Yet another version of AnimalTags defining just the most common. 07/06/2018:
-            Minor edits based on committee input. Further documentation clean up. 07/10/2018:
-            Further edits to Species, AnimalTags, Coordinates, and Statuses. 07/12/2018: Additional
-            tweaks to statuses. 07/20/2018: Added swine PIN plus management tag (called PINPLUS for
-            now). 08/28/2018: Edited documentation of Accession element 09/10/2018: Fixed typos in
-            Address/State and missing type definitions in Latitude and Longitude 09/19/2018: Removed
-            limit of 6 on animal tags. This had been discussed earlier and not implemented.
-            12/11/2018: Corrected typographical error in MovementPurpose "Medical Treatment"
-            01/23/2019: Corrected email type to allow top-level domains up to 24 characters.
-            03/13/2019: Replaced AddressBlock with Address whereever it occurs. 08/07/2019: Allowed
-            GroupLotID to repeat effective Sept 1, 2019 as version 2.2 01/23/2020: Changed required
-            attributes of type string to type nonNullString 01/23/2020: Added 124 and 484 to AIN in
-            addition to MfrRFID 01/23/2020: Added InspectionDate attribute to GroupLot, optional for
-            now. 01/24/2020: Added MiscAttribute element to Animal and GroupLot. Optional and may
-            repeat. 01/24/2020: Added Statements element to Animal and GroupLot. Optional.
-            03/06/2020: Changed AgeType RegEx to allow decimals. 07/09/2020: Added ReplacesCviNumber
-            attribute. #52 07/09/2020: Added Voided attribute. #51 07/09/2020: Added Product and
-            supporting CommodityType enumeration. #50 07/09/2020: Added TestName attribute. #44
-            08/13/2020: Added choice element requiring one or more Animal, GroupLot or Product. #54
-            08/13/2020: Updated annotations in several places. #51, #52, #53 
-            TBD: Clarifcation
-            around usage of Voided and ReplacesCviNumber attributes </xs:documentation>
+        <xs:documentation> Change Log 08/30/2017: Initial draft of version 2.0 attempts to clone version 1 (labeled version 6.0?) with only minor
+            tweaks. 09/01/2017: Added regular expressions to AnimalTags choices. 09/01/2017: Added option for ID/IDREF to Attachment for BrandImage ID
+            Type. 11/16/2017: Collapsed animal tag choices into known structure and not. 12/14/2017: Added Equine description and photos as AnimalTag
+            choices. 01/16/2018: Removed string length restrictions not part of regular expressions. 01/16/2018: Spelled out latitude and longitude in
+            geo point. 01/16/2018: Rearranged TagType to put Type as first attribute. 02/08/2018: Restructured Species to SpeciesCode vs.
+            SpeciesOther. 02/08/2018: Restructured All Binary data into ID/IDREF to eliminate duplication 02/28/2018: Converted comments to annotation
+            elements except where simply labeling code sections, etc. Works with an XSLT to generate skeleton documentation. 03/06-08/2018: Additional
+            annotations added. Ongoing. 04/04/2018: Added Carrier and Transport mode optional elements. Added email in addition to Phone on person.
+            Added miscellaneous attributes element. Changed Breed element to basic string. 04/25/2018: Fixed apostrophe character in Johne's Disease
+            enumeration value. 05/20/2018: Added CVINumberIssuedBy as optional attribute. 05/29/2018: Converted GeoPoint from attributes for Latitude
+            and Longitude to single coordinates element in KML format. 06/06/2018: Simplified Name and Address Block for contacts. 06/25/2018: Clean
+            up documentation. 07/06/2018: Yet another version of AnimalTags defining just the most common. 07/06/2018: Minor edits based on committee
+            input. Further documentation clean up. 07/10/2018: Further edits to Species, AnimalTags, Coordinates, and Statuses. 07/12/2018: Additional
+            tweaks to statuses. 07/20/2018: Added swine PIN plus management tag (called PINPLUS for now). 
+        08/28/2018: Edited documentation of Accession element
+        09/10/2018: Fixed typos in Address/State and missing type definitions in Latitude and Longitude
+        09/19/2018: Removed limit of 6 on animal tags.  This had been discussed earlier and not implemented.
+        12/11/2018: Corrected typographical error in MovementPurpose "Medical Treatment"
+        01/23/2019: Corrected email type to allow top-level domains up to 24 characters.
+        03/13/2019: Replaced AddressBlock with Address whereever it occurs.
+        08/07/2019: Allowed GroupLotID to repeat effective Sept 1, 2019 as version 2.2
+        01/23/2020: Changed required attributes of type string to type nonNullString
+        01/23/2020: Added 124 and 484 to AIN in addition to MfrRFID
+        01/23/2020: Added InspectionDate attribute to GroupLot, optional for now.
+        01/24/2020: Added MiscAttribute element to Animal and GroupLot.  Optional and may repeat.
+        01/24/2020: Added Statements element to Animal and GroupLot.  Optional.
+        03/06/2020: Changed AgeType RegEx to allow decimals.
+        07/09/2020: Added ReplacesCviNumber attribute. #52
+        07/09/2020: Added Voided attribute. #51
+        07/09/2020: Added Product and supporting CommodityType enumeration. #50
+        07/09/2020: Added TestName attribute. #44
+        08/13/2020: Added choice element requiring one or more Animal, GroupLot or Product.  #54
+        08/13/2020: Updated annotations in several places. #51, #52, #53
+        01-02/2021: Documentation element updates #8, #61
+        03/17/2021: Converted Veterinarian to Natural Person.  First and last names required. #63
+        </xs:documentation>
     </xs:annotation>
     <xs:annotation>
         <xs:documentation>Copyright © 2017-20 AAVLD/USAHA it is free for use. Submit suggested
@@ -125,7 +121,29 @@
         </xs:annotation>
         <xs:complexType>
             <xs:sequence>
-                <xs:element ref="Person" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="Person" minOccurs="1" maxOccurs="1">
+                    <xs:annotation>
+                        <xs:documentation>NOTE: Person as defined in Veterinarian can only be a natural person.
+                        That is, it cannot be a business, must include first and last name.  If the single 
+                        string element Name is used instead, it must include first and last name although
+                        that requirement is not schema enforceable.</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:choice>
+                                <xs:sequence>
+                                    <xs:element name="FirstName" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                                    <xs:element name="MiddleName" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                                    <xs:element name="LastName" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                                    <xs:element name="OtherName" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                                </xs:sequence>
+                                <xs:element name="Name" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                            </xs:choice>
+                            <xs:element ref="Phone" minOccurs="0" maxOccurs="unbounded"/>
+                            <xs:element ref="Email" minOccurs="0" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
                 <xs:element ref="Address" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
             <xs:attribute name="LicenseState" type="xs:string" use="optional"/>
@@ -481,7 +499,7 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-
+    
     <xs:element name="NameParts">
         <xs:annotation>
             <xs:documentation> NameParts defines a structured name for a business or person.
