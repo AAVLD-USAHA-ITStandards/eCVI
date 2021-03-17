@@ -39,6 +39,8 @@
         07/09/2020: Added TestName attribute. #44
         08/13/2020: Added choice element requiring one or more Animal, GroupLot or Product.  #54
         08/13/2020: Updated annotations in several places. #51, #52, #53
+        01-02/2021: Documentation element updates #8, #61
+        03/17/2021: Converted Veterinarian to Natural Person.  First and last names required. #63
         </xs:documentation>
     </xs:annotation>
     <xs:annotation>
@@ -107,7 +109,29 @@
         </xs:annotation>
         <xs:complexType>
             <xs:sequence>
-                <xs:element ref="Person" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="Person" minOccurs="1" maxOccurs="1">
+                    <xs:annotation>
+                        <xs:documentation>NOTE: Person as defined in Veterinarian can only be a natural person.
+                        That is, it cannot be a business, must include first and last name.  If the single 
+                        string element Name is used instead, it must include first and last name although
+                        that requirement is not schema enforceable.</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:choice>
+                                <xs:sequence>
+                                    <xs:element name="FirstName" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                                    <xs:element name="MiddleName" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                                    <xs:element name="LastName" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                                    <xs:element name="OtherName" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                                </xs:sequence>
+                                <xs:element name="Name" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                            </xs:choice>
+                            <xs:element ref="Phone" minOccurs="0" maxOccurs="unbounded"/>
+                            <xs:element ref="Email" minOccurs="0" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
                 <xs:element ref="Address" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
             <xs:attribute name="LicenseState" type="xs:string" use="optional"/>
@@ -425,7 +449,7 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-
+    
     <xs:element name="NameParts">
         <xs:annotation>
             <xs:documentation> NameParts defines a structured name for a business or person. BusinessName, FirstName, Middle Name, LastName, OtherName
