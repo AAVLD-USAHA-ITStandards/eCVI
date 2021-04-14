@@ -39,7 +39,7 @@
         07/09/2020: Added TestName attribute. #44
         08/13/2020: Added choice element requiring one or more Animal, GroupLot or Product.  #54
         08/13/2020: Updated annotations in several places. #51, #52, #53
-        TBD: Clarifcation around usage of Voided and ReplacesCviNumber attributes
+        04/14/2021: Clarifcation around usage of Voided and ReplacesCviNumber attributes
         </xs:documentation>
     </xs:annotation>
     <xs:annotation>
@@ -88,23 +88,21 @@
             <xs:attribute name="ExpirationDate" type="xs:date" use="required"/>
             <xs:attribute name="ShipmentDate" type="xs:date" use="optional"/>
             <xs:attribute name="EntryPermitNumber" type="xs:string" use="optional"/>
-            <xs:choice  minOccurs="0" maxOccurs="1">
-                <xs:attribute name="ReplacesCviNumber" type="nonNullString" use="optional">
-                    <xs:annotation>
-                        <xs:documentation>If present, this value is the number of the CVI that is superceded by this
-                                          CVI. The presense of this value also implies that the superceded CVI must
-                                          be considered void, regardless of whether or not there was an explicit
-                                          void request preceding this CVI message.</xs:documentation>
-                    </xs:annotation>
-                </xs:attribute>
-                <xs:attribute name="Voided" type="xs:boolean" default="false" use="optional">
-                    <xs:annotation>
-                        <xs:documentation>True indicates that this CVI has been revoked.
-                                          Voided certificates must include a copy of the human-readable--PDF, etc--
-                                          version of the certificate clearly marked as void.</xs:documentation>
-                    </xs:annotation>
-                </xs:attribute>
-            </xs:choice>
+            <xs:attribute name="ReplacesCviNumber" type="nonNullString" use="optional">
+                <xs:annotation>
+                    <xs:documentation>If present, this value is the number of the CVI that is superceded by this
+                                      CVI. The presense of this value also implies that the superceded CVI must
+                                      be considered void, regardless of whether or not there was an explicit
+                                      void request preceding this CVI message.</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="Voided" type="xs:boolean" default="false" use="optional">
+                <xs:annotation>
+                    <xs:documentation>True indicates that this CVI has been revoked.
+                                      Voided certificates must include a copy of the human-readable--PDF, etc--
+                                      version of the certificate clearly marked as void.</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
         </xs:complexType>
     </xs:element>
     <!-- END Document Element -->
