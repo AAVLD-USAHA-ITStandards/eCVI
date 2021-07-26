@@ -45,9 +45,8 @@
             08/13/2020: Added choice element requiring one or more Animal, GroupLot or Product. #54
             08/13/2020: Updated annotations in several places. #51, #52, #53 01/02/2021:
             Documentation element updates #8, #61 03/17/2021: Converted Veterinarian to Natural
-            Person. First and last names required. #63 
-        05/13/2021: Relax Address element for all but Origin, Destination and Field (accession) #69
-        </xs:documentation>
+            Person. First and last names required. #63 05/13/2021: Relax Address element for all but
+            Origin, Destination and Field (accession) #69 </xs:documentation>
     </xs:annotation>
     <xs:annotation>
         <xs:documentation>Copyright © 2017-20 AAVLD/USAHA it is free for use. Submit suggested
@@ -139,16 +138,20 @@
                     <xs:complexType>
                         <xs:sequence>
                             <xs:choice>
-                                <xs:sequence>
-                                    <xs:element name="FirstName" type="xs:string" minOccurs="1"
-                                        maxOccurs="1"/>
-                                    <xs:element name="MiddleName" type="xs:string" minOccurs="0"
-                                        maxOccurs="1"/>
-                                    <xs:element name="LastName" type="xs:string" minOccurs="1"
-                                        maxOccurs="1"/>
-                                    <xs:element name="OtherName" type="xs:string" minOccurs="0"
-                                        maxOccurs="1"/>
-                                </xs:sequence>
+                                <xs:element name="NameParts">
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                            <xs:element name="FirstName" type="xs:string"
+                                                minOccurs="1" maxOccurs="1"/>
+                                            <xs:element name="MiddleName" type="xs:string"
+                                                minOccurs="0" maxOccurs="1"/>
+                                            <xs:element name="LastName" type="xs:string"
+                                                minOccurs="1" maxOccurs="1"/>
+                                            <xs:element name="OtherName" type="xs:string"
+                                                minOccurs="0" maxOccurs="1"/>
+                                        </xs:sequence>
+                                    </xs:complexType>
+                                </xs:element>
                                 <xs:element name="Name" type="xs:string" minOccurs="1" maxOccurs="1"
                                 />
                             </xs:choice>
@@ -781,14 +784,14 @@
             </xs:element>
         </xs:sequence>
     </xs:complexType>
-    
+
     <xs:complexType name="InternationalAddress">
         <xs:annotation>
-            <xs:documentation>Consignor, consignee, carrier, etc. may have US or international addresses.
-                              Because these are more complicated and not as essential for machine processing
-                              constraints such as state and zipcode are removed.
-                              "State or Provence" uses element State and "Postal code" uses element ZIP 
-                              simply to keep the structure constent with common US usage.</xs:documentation>
+            <xs:documentation>Consignor, consignee, carrier, etc. may have US or international
+                addresses. Because these are more complicated and not as essential for machine
+                processing constraints such as state and zipcode are removed. "State or Provence"
+                uses element State and "Postal code" uses element ZIP simply to keep the structure
+                constent with common US usage.</xs:documentation>
         </xs:annotation>
         <xs:sequence>
             <xs:element name="Line1" type="xs:string" minOccurs="0" maxOccurs="1"/>
@@ -819,7 +822,7 @@
             </xs:element>
         </xs:sequence>
     </xs:complexType>
-    
+
 
     <xs:element name="Test">
         <xs:annotation>
