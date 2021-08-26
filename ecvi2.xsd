@@ -153,7 +153,7 @@
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
-                <xs:element name="Address" type="InternationalAddress" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="Address" type="Address" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
             <xs:attribute name="LicenseState" type="xs:string" use="optional"/>
             <xs:attribute name="LicenseNumber" type="xs:string" use="optional"/>
@@ -617,7 +617,7 @@
             <xs:sequence>
                 <xs:element name="LabName" type="xs:string" minOccurs="1" maxOccurs="1"/>
                 <xs:element name="PremId" type="PremIdType" minOccurs="0" maxOccurs="1"/>
-                <xs:element name="Address" type="InternationalAddress" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="Address" type="Address" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
             <xs:attribute name="AccessionDate" type="xs:date" use="required"/>
             <xs:attribute name="AccessionNumber" type="nonNullString" use="required"/>
@@ -635,7 +635,7 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="PremId" type="PremIdType" minOccurs="0" maxOccurs="1"/>
-                <xs:element name="Address" type="USAddress" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="Address" type="Address" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
             <xs:attribute name="AccessionDate" type="xs:date" use="required"/>
         </xs:complexType>
@@ -1001,7 +1001,7 @@
         <xs:sequence>
             <xs:element name="PremId" type="PremIdType" minOccurs="0" maxOccurs="1"/>
             <xs:element name="PremName" type="xs:string" minOccurs="0" maxOccurs="1"/>
-            <xs:element name="Address" type="USAddress" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="Address" type="Address" minOccurs="1" maxOccurs="1"/>
             <xs:element ref="StateZoneOrAreaStatus" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element ref="HerdOrFlockStatus" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element ref="Person" minOccurs="0" maxOccurs="unbounded"/>
