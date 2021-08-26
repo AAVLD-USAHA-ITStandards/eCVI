@@ -153,7 +153,7 @@
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
-                <xs:element name="Address" type="Address" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="Address" type="InternationalAddress" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
             <xs:attribute name="LicenseState" type="xs:string" use="optional"/>
             <xs:attribute name="LicenseNumber" type="xs:string" use="optional"/>
@@ -617,7 +617,7 @@
             <xs:sequence>
                 <xs:element name="LabName" type="xs:string" minOccurs="1" maxOccurs="1"/>
                 <xs:element name="PremId" type="PremIdType" minOccurs="0" maxOccurs="1"/>
-                <xs:element name="Address" type="Address" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="Address" type="InternationalAddress" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
             <xs:attribute name="AccessionDate" type="xs:date" use="required"/>
             <xs:attribute name="AccessionNumber" type="nonNullString" use="required"/>
@@ -635,7 +635,7 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="PremId" type="PremIdType" minOccurs="0" maxOccurs="1"/>
-                <xs:element name="Address" type="Address" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="Address" type="USAddress" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
             <xs:attribute name="AccessionDate" type="xs:date" use="required"/>
         </xs:complexType>
@@ -733,7 +733,7 @@
         </xs:complexType>
     </xs:element>
 
-    <xs:complexType name="Address">
+    <xs:complexType name="USAddress">
         <xs:annotation>
             <xs:documentation>Origin and destination require a structured address. Because of
                 variation in policy between jurisdictions this schema leaves each element optional.
@@ -777,7 +777,45 @@
             </xs:element>
         </xs:sequence>
     </xs:complexType>
-
+    
+    <xs:complexType name="InternationalAddress">
+        <xs:annotation>
+            <xs:documentation>Consignor, consignee, carrier, etc. may have US or international
+                addresses. Because these are more complicated and not as essential for machine
+                processing constraints such as state and zipcode are removed. "State or Provence"
+                uses element State and "Postal code" uses element ZIP simply to keep the structure
+                constent with common US usage.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Line1" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Line2" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Town" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="County" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="State" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="ZIP" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Country" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>All countries have three character codes.</xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:length value="3"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="GeoPoint" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>Simple Latitude and Longitude in decimal degrees
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:attribute name="Latitude" type="LatitudeType" use="required"/>
+                    <xs:attribute name="Longitude" type="LongitudeType" use="required"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    
 
     <xs:element name="Test">
         <xs:annotation>
@@ -1001,7 +1039,7 @@
         <xs:sequence>
             <xs:element name="PremId" type="PremIdType" minOccurs="0" maxOccurs="1"/>
             <xs:element name="PremName" type="xs:string" minOccurs="0" maxOccurs="1"/>
-            <xs:element name="Address" type="Address" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="Address" type="USAddress" minOccurs="1" maxOccurs="1"/>
             <xs:element ref="StateZoneOrAreaStatus" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element ref="HerdOrFlockStatus" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element ref="Person" minOccurs="0" maxOccurs="unbounded"/>
@@ -1015,7 +1053,7 @@
                 address.</xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element name="Address" type="Address" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Address" type="InternationalAddress" minOccurs="0" maxOccurs="1"/>
             <xs:element ref="Person" minOccurs="1" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
