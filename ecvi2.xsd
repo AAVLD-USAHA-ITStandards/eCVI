@@ -778,44 +778,6 @@
         </xs:sequence>
     </xs:complexType>
 
-    <xs:complexType name="InternationalAddress">
-        <xs:annotation>
-            <xs:documentation>Consignor, consignee, carrier, etc. may have US or international
-                addresses. Because these are more complicated and not as essential for machine
-                processing constraints such as state and zipcode are removed. "State or Provence"
-                uses element State and "Postal code" uses element ZIP simply to keep the structure
-                constent with common US usage.</xs:documentation>
-        </xs:annotation>
-        <xs:sequence>
-            <xs:element name="Line1" type="xs:string" minOccurs="0" maxOccurs="1"/>
-            <xs:element name="Line2" type="xs:string" minOccurs="0" maxOccurs="1"/>
-            <xs:element name="Town" type="xs:string" minOccurs="0" maxOccurs="1"/>
-            <xs:element name="County" type="xs:string" minOccurs="0" maxOccurs="1"/>
-            <xs:element name="State" type="xs:string" minOccurs="1" maxOccurs="1"/>
-            <xs:element name="ZIP" type="xs:string" minOccurs="0" maxOccurs="1"/>
-            <xs:element name="Country" minOccurs="0" maxOccurs="1">
-                <xs:annotation>
-                    <xs:documentation>All countries have three character codes.</xs:documentation>
-                </xs:annotation>
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:length value="3"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
-            <xs:element name="GeoPoint" minOccurs="0" maxOccurs="1">
-                <xs:annotation>
-                    <xs:documentation>Simple Latitude and Longitude in decimal degrees
-                    </xs:documentation>
-                </xs:annotation>
-                <xs:complexType>
-                    <xs:attribute name="Latitude" type="LatitudeType" use="required"/>
-                    <xs:attribute name="Longitude" type="LongitudeType" use="required"/>
-                </xs:complexType>
-            </xs:element>
-        </xs:sequence>
-    </xs:complexType>
-
 
     <xs:element name="Test">
         <xs:annotation>
@@ -1053,7 +1015,7 @@
                 address.</xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element name="Address" type="InternationalAddress" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Address" type="Address" minOccurs="0" maxOccurs="1"/>
             <xs:element ref="Person" minOccurs="1" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
