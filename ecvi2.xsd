@@ -733,7 +733,7 @@
         </xs:complexType>
     </xs:element>
 
-    <xs:complexType name="USAddress">
+    <xs:complexType name="Address">
         <xs:annotation>
             <xs:documentation>Origin and destination require a structured address. Because of
                 variation in policy between jurisdictions this schema leaves each element optional.
