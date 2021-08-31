@@ -46,7 +46,8 @@
             08/13/2020: Updated annotations in several places. #51, #52, #53 01/02/2021:
             Documentation element updates #8, #61 03/17/2021: Converted Veterinarian to Natural
             Person. First and last names required. #63 05/13/2021: Relax Address element for all but
-            Origin, Destination and Field (accession) #69 </xs:documentation>
+            Origin, Destination and Field (accession) #69 
+            08/31/2021: Added optional BusinessName to Veterinarian. #63 </xs:documentation>
     </xs:annotation>
     <xs:annotation>
         <xs:documentation>Copyright © 2017-20 AAVLD/USAHA it is free for use. Submit suggested
@@ -134,6 +135,8 @@
                                 <xs:element name="NameParts">
                                     <xs:complexType>
                                         <xs:sequence>
+                                            <xs:element name="BusinessName" type="xs:string"
+                                                minOccurs="0" maxOccurs="1"/>
                                             <xs:element name="FirstName" type="xs:string"
                                                 minOccurs="1" maxOccurs="1"/>
                                             <xs:element name="MiddleName" type="xs:string"
