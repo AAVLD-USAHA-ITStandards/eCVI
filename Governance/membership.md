@@ -1,7 +1,7 @@
 Co-chairs
 ==
 ```
-Susan Culp                        Susan.Culp@ag.tamu.edu
+Susan Culp                        sculp@me.com
 Michael Martin                    mmarti5@clemson.edu
 ```
 
