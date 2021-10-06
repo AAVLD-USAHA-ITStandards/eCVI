@@ -363,7 +363,7 @@
             <xs:attribute name="Unit" type="xs:string" use="optional" default="Number"/>
             <xs:attribute name="Age" type="AgeType" use="optional"/>
             <xs:attribute name="Breed" type="xs:string" use="optional"/>
-            <xs:attribute name="Sex" type="SexType" use="optional"/>
+            <xs:attribute name="Sex" type="GroupSexType" use="optional"/>
             <xs:attribute name="SexDetail" type="xs:string" use="optional"/>
             <xs:attribute name="Description" type="nonNullString" use="required"/>
             <xs:attribute name="InspectionDate" type="xs:date" use="optional"/>
@@ -1316,10 +1316,33 @@
             <xs:enumeration value="Spayed Female"/>
             <xs:enumeration value="Neutered Male"/>
             <xs:enumeration value="True Hermaphrodite"/>
-            <xs:enumeration value="Mixed Group">
+             <xs:enumeration value="Gender Unknown">
                 <xs:annotation>
-                    <xs:documentation>Only applicable to Group.</xs:documentation>
+                    <xs:documentation>Only applies to minor species in unusual cases such as non
+                        sexually dimorphic birds.</xs:documentation>
                 </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="Other">
+                <xs:annotation>
+                    <xs:documentation>Only applies to minor species in unusual cases. Supply
+                        explanation in SexDetail</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="GroupSexType">
+        <xs:annotation>
+            <xs:documentation>Sex type only becomes complicated for groups and minor
+                species.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Female"/>
+            <xs:enumeration value="Male"/>
+            <xs:enumeration value="Spayed Female"/>
+            <xs:enumeration value="Neutered Male"/>
+            <xs:enumeration value="True Hermaphrodite"/>
+            <xs:enumeration value="Mixed Group">
             </xs:enumeration>
             <xs:enumeration value="Gender Unknown">
                 <xs:annotation>
