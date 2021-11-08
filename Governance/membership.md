@@ -1,7 +1,7 @@
 Co-chairs
 ==
 ```
-Susan Culp                        Susan.Culp@ag.tamu.edu
+Susan Culp                        sculp@me.com
 Michael Martin                    mmarti5@clemson.edu
 ```
 
@@ -42,6 +42,6 @@ Ryan Scholz                       rscholz@oda.state.or.us                  State
 Scott Rydberg                     scott@rivercitydata.com                  CVI Vendor
 Russell Iselt                     russell.iselt@tahc.texas.gov             State/CVI Vendor
 Scott Leibsle                     scott.leibsle@isda.idaho.gov             State/CVI Vendor
-
+David Hecimovich                  dhecimovich@agr.wa.gov                   State
 Diane Kitchen                     Diane.Kitchen@fdacs.gov                  State
 Maria Cooper                      mcooper1@boah.in.gov                     State
