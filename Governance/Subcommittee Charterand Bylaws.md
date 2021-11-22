@@ -34,10 +34,7 @@ Members provide expertise on various aspects of animal health information system
 balanced between producers of animal health software and services and consumers of the same,
 mainly state and federal regulatory agencies. Additional members provide specialized knowledge of
 the standards and regulatory domains. Members are appointed by the Chair of the AAVLD/USAHA
-Committee on Animal Health Surveillance and Information Systems. Nominations to the
-
-
-subcommittee will seek balanced representation of four categories: Federal Government, State
+Committee on Animal Health Surveillance and Information Systems. Nominations to the subcommittee will seek balanced representation of four categories: Federal Government, State
 Government, Industry, and Academia. Other representation may include sister organizations, etc.
 Subcommittee members must be members of the AAVLD/USAHA Committee on Animal Health
 Surveillance and Information Systems. AAVLD or USAHA members nominated to the subcommittee
