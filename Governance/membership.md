@@ -32,7 +32,7 @@ Randy Munger                      randy.d.munger@aphis.usda.gov            Fed
 Rod Chitty                        Rodney.a.chitty@aphis.usda.gov           Other
 Shane Linke                       Shane.g.linke@aphis.usda.gov             Fed
 Sunny Geiser-Novotny              sunny.geiser-novotny@aphis.usda.gov      Fed
-Susan Culp                        susan.culp@ag.tamu.edu                   CVI Vendor
+Susan Culp                        sculp@me.com                             Other
 Victor Velez                      VVelez@cdfa.ca.gov                       State
 John Conlon                       jconlon@verticon.com                     Other
 Ryan Scholz                       rscholz@oda.state.or.us                  State/CVI Vendor
