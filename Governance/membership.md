@@ -3,6 +3,7 @@ Co-chairs
 ```
 Susan Culp                        sculp@me.com
 Michael Martin                    mmarti5@clemson.edu
+Carissa Allen                     carissa.allen@state.mn.us
 ```
 
 Members
