@@ -2,7 +2,7 @@ Co-chairs
 ==
 ```
 Susan Culp                        sculp@me.com
-Michael Martin                    mmarti5@clemson.edu
+Michael Martin                    michael.martin.dvm.mph@gmail.com
 Carissa Allen                     carissa.allen@state.mn.us
 ```
 
@@ -25,7 +25,7 @@ Kent Grant                        kevin.grant@vetenvoy.us                  Other
 Jodi VandenEng                    jodi.l.vandeneng@usda.gov                Fed
 Michael McGrath                   mmcgrath@tracefirst.com                  DB Vendor
 Mitzy Torres                      mtorres@acclaimsystems.onmicrosoft.com   DB Vendor
-Michael Martin                    mmarti5@clemson.edu                      Academic
+Michael Martin                    michael.martin.dvm.mph@gmail.com         Academic
 Nate Plumm                        nate.d.plumm@aphis.usda.gov              Fed
 Nephi Harvey                      nephi@fort-supply.com                    CVI Vendor
 Patrick Webb                      pwebb@pork.org                           Industry/CVI Vendor
