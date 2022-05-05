@@ -11,7 +11,7 @@ Members
 ```
 NAME                              EMAIL                                    CATEGORY
 Alex Turner                       Alexander.Turner2@usda.gov               Fed
-Savanna Barksdale                 savanna@tcfa.org                         Producers
+
 Carissa Allen                     carissa.allen@state.mn.us                State
 Craig Carter                      Craig.carter@uky.edu                     Academic
 Dee Ellis                         dee.ellis@ag.tamu.edu                    CVI Vendor
