@@ -47,7 +47,9 @@
             Documentation element updates #8, #61 03/17/2021: Converted Veterinarian to Natural
             Person. First and last names required. #63 05/13/2021: Relax Address element for all but
             Origin, Destination and Field (accession) #69 
-            08/31/2021: Added optional BusinessName to Veterinarian. #63 </xs:documentation>
+            08/31/2021: Added optional BusinessName to Veterinarian. #63 
+            8/18/2022: Added all state abbreviations to NUES9 regular expression. #74
+        </xs:documentation>
     </xs:annotation>
     <xs:annotation>
         <xs:documentation>Copyright © 2017-20 AAVLD/USAHA it is free for use. Submit suggested
