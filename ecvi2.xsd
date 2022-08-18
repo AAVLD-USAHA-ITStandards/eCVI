@@ -3,7 +3,7 @@
     targetNamespace="http://www.usaha.org/xmlns/ecvi2" version="2.0"
     xmlns="http://www.usaha.org/xmlns/ecvi2">
     <xs:annotation>
-        <xs:documentation>Version 2.3 </xs:documentation>
+        <xs:documentation>Version 2.4 </xs:documentation>
     </xs:annotation>
     <xs:annotation>
         <xs:documentation> Change Log 08/30/2017: Initial draft of version 2.0 attempts to clone
