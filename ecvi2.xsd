@@ -804,7 +804,11 @@
             <xs:element name="Line2" type="xs:string" minOccurs="0" maxOccurs="1"/>
             <xs:element name="Town" type="xs:string" minOccurs="0" maxOccurs="1"/>
             <xs:element name="County" type="xs:string" minOccurs="0" maxOccurs="1"/>
-            <xs:element name="State" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="State" type="xs:string" minOccurs="1" maxOccurs="1">
+                <xs:annotation>
+                     <xs:documentation>US states and territories should use the 2 character USPS abbreviation. Foreign states and territoties should use the full text name.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
             <xs:element name="ZIP" type="xs:string" minOccurs="0" maxOccurs="1"/>
             <xs:element name="Country" minOccurs="0" maxOccurs="1">
                 <xs:annotation>
