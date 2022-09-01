@@ -49,6 +49,7 @@
             07/09/2020: Added TestName attribute. #44
             08/13/2020: Added choice element requiring one or more Animal, GroupLot or Product. #54
             08/13/2020: Updated annotations in several places. #51, #52, #53 
+            08/13/2020: Added TransportModeOtherDescription
             01/02/2021: Documentation element updates #8, #61
             3/17/2021: Converted Veterinarian to Natural Person. First and last names required. #63 
             5/13/2021: Relax Address element for all but Origin, Destination and Field (accession) #69 
@@ -84,6 +85,7 @@
                 <xs:element ref="Consignee" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="Carrier" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="TransportMode" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="TransportModeOtherDescription" minOccurs="0" maxOccurs="0"/>
                 <xs:element ref="Accessions" minOccurs="0" maxOccurs="1"/>
                 <xs:choice minOccurs="1" maxOccurs="unbounded">
                     <xs:element ref="Animal"/>
@@ -211,6 +213,7 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
+    <xs:element name="TransportModeOtherDescription" type="nonNullString"/>
 
     <!-- These are defined here as elements simply to make it easier to navigate 
          via Element list in some editors -->
