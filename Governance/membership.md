@@ -2,8 +2,8 @@ Co-chairs
 ==
 ```
 Susan Culp                        sculp@me.com
-Michael Martin                    michael.martin.dvm.mph@gmail.com
 Carissa Allen                     carissa.allen@state.mn.us
+Ryan Scholz                       Ryan.SCHOLZ@oda.oregon.gov
 ```
 
 Members
@@ -45,3 +45,5 @@ Maria Cooper                      mcooper1@boah.in.gov                     State
 Michael Russell                   mrussell@globalvetlink.com               CVI Vendor
 Peter Mundschenk                  drpmundschenk@gmail.com                  Other
 Stacey Schwabenlander             Stacey.schwabenlander@usda.gov           Fed
+Kathy Finnerty                    kfinnerty@tracefirst.com                 DB Vendor
+KJ Osenenko                       kosenenko@tracefirst.com                 DB Vendor
