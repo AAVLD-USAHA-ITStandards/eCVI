@@ -85,7 +85,8 @@
                 <xs:element ref="Consignee" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="Carrier" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="TransportMode" minOccurs="0" maxOccurs="1"/>
-                <xs:element ref="TransportModeOtherDescription" minOccurs="0" maxOccurs="0"/>
+                <xs:element ref="TransportModeOtherDescription" minOccurs="0" maxOccurs="1"/>
+
                 <xs:element ref="Accessions" minOccurs="0" maxOccurs="1"/>
                 <xs:choice minOccurs="1" maxOccurs="unbounded">
                     <xs:element ref="Animal"/>
