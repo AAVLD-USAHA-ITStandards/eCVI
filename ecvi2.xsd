@@ -1,54 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-    targetNamespace="http://www.usaha.org/xmlns/ecvi2" version="2.0"
+    targetNamespace="http://www.usaha.org/xmlns/ecvi2" version="2.4"
     xmlns="http://www.usaha.org/xmlns/ecvi2">
     <xs:annotation>
-        <xs:documentation>Version 2.3 </xs:documentation>
+        <xs:documentation>Version 2.4 </xs:documentation>
     </xs:annotation>
     <xs:annotation>
-        <xs:documentation> Change Log 08/30/2017: Initial draft of version 2.0 attempts to clone
-            version 1 (labeled version 6.0?) with only minor tweaks. 09/01/2017: Added regular
-            expressions to AnimalTags choices. 09/01/2017: Added option for ID/IDREF to Attachment
-            for BrandImage ID Type. 11/16/2017: Collapsed animal tag choices into known structure
-            and not. 12/14/2017: Added Equine description and photos as AnimalTag choices.
+        <xs:documentation> Change Log 
+            08/30/2017: Initial draft of version 2.0 attempts to clone version 1 (labeled version 6.0?) with only minor tweaks. 
+            09/01/2017: Added regular expressions to AnimalTags choices. 
+            09/01/2017: Added option for ID/IDREF to Attachment for BrandImage ID Type. 
+            11/16/2017: Collapsed animal tag choices into known structure and not. 
+            12/14/2017: Added Equine description and photos as AnimalTag choices.
             01/16/2018: Removed string length restrictions not part of regular expressions.
-            01/16/2018: Spelled out latitude and longitude in geo point. 01/16/2018: Rearranged
-            TagType to put Type as first attribute. 02/08/2018: Restructured Species to SpeciesCode
-            vs. SpeciesOther. 02/08/2018: Restructured All Binary data into ID/IDREF to eliminate
-            duplication 02/28/2018: Converted comments to annotation elements except where simply
-            labeling code sections, etc. Works with an XSLT to generate skeleton documentation.
-            03/06-08/2018: Additional annotations added. Ongoing. 04/04/2018: Added Carrier and
-            Transport mode optional elements. Added email in addition to Phone on person. Added
-            miscellaneous attributes element. Changed Breed element to basic string. 04/25/2018:
-            Fixed apostrophe character in Johne's Disease enumeration value. 05/20/2018: Added
-            CVINumberIssuedBy as optional attribute. 05/29/2018: Converted GeoPoint from attributes
-            for Latitude and Longitude to single coordinates element in KML format. 06/06/2018:
-            Simplified Name and Address Block for contacts. 06/25/2018: Clean up documentation.
-            07/06/2018: Yet another version of AnimalTags defining just the most common. 07/06/2018:
-            Minor edits based on committee input. Further documentation clean up. 07/10/2018:
-            Further edits to Species, AnimalTags, Coordinates, and Statuses. 07/12/2018: Additional
-            tweaks to statuses. 07/20/2018: Added swine PIN plus management tag (called PINPLUS for
-            now). 08/28/2018: Edited documentation of Accession element 09/10/2018: Fixed typos in
-            Address/State and missing type definitions in Latitude and Longitude 09/19/2018: Removed
-            limit of 6 on animal tags. This had been discussed earlier and not implemented.
+            01/16/2018: Spelled out latitude and longitude in geo point. 
+            01/16/2018: Rearranged TagType to put Type as first attribute. 
+            02/08/2018: Restructured Species to SpeciesCode vs. SpeciesOther. 
+            02/08/2018: Restructured All Binary data into ID/IDREF to eliminate duplication 
+            02/28/2018: Converted comments to annotation elements except where simply labeling code sections, etc. Works with an XSLT to generate skeleton documentation.
+            03/08/2018: Additional annotations added. Ongoing. 
+            04/04/2018: Added Carrier and Transport mode optional elements. Added email in addition to Phone on person. Added miscellaneous attributes element. Changed Breed element to basic string. 
+            04/25/2018: Fixed apostrophe character in Johne's Disease enumeration value. 
+            05/20/2018: Added CVINumberIssuedBy as optional attribute. 
+            05/29/2018: Converted GeoPoint from attributes for Latitude and Longitude to single coordinates element in KML format. 
+            06/06/2018: Simplified Name and Address Block for contacts. 
+            06/25/2018: Clean up documentation.
+            07/06/2018: Yet another version of AnimalTags defining just the most common. 
+            07/06/2018: Minor edits based on committee input. Further documentation clean up. 
+            07/10/2018: Further edits to Species, AnimalTags, Coordinates, and Statuses. 
+            07/12/2018: Additional tweaks to statuses. 
+            07/20/2018: Added swine PIN plus management tag (called PINPLUS for now). 
+            08/28/2018: Edited documentation of Accession element 
+            09/10/2018: Fixed typos in Address/State and missing type definitions in Latitude and Longitude 
+            09/19/2018: Removed limit of 6 on animal tags. This had been discussed earlier and not implemented.
             12/11/2018: Corrected typographical error in MovementPurpose "Medical Treatment"
             01/23/2019: Corrected email type to allow top-level domains up to 24 characters.
-            03/13/2019: Replaced AddressBlock with Address whereever it occurs. 08/07/2019: Allowed
-            GroupLotID to repeat effective Sept 1, 2019 as version 2.2 01/23/2020: Changed required
-            attributes of type string to type nonNullString 01/23/2020: Added 124 and 484 to AIN in
-            addition to MfrRFID 01/23/2020: Added InspectionDate attribute to GroupLot, optional for
-            now. 01/24/2020: Added MiscAttribute element to Animal and GroupLot. Optional and may
-            repeat. 01/24/2020: Added Statements element to Animal and GroupLot. Optional.
-            03/06/2020: Changed AgeType RegEx to allow decimals. 07/09/2020: Added ReplacesCviNumber
-            attribute. #52 07/09/2020: Added Voided attribute. #51 07/09/2020: Added Product and
-            supporting CommodityType enumeration. #50 07/09/2020: Added TestName attribute. #44
+            03/13/2019: Replaced AddressBlock with Address whereever it occurs. 
+            08/07/2019: Allowed GroupLotID to repeat effective Sept 1, 2019 as version 2.2 
+            01/23/2020: Changed required attributes of type string to type nonNullString 
+            01/23/2020: Added 124 and 484 to AIN in addition to MfrRFID 
+            01/23/2020: Added InspectionDate attribute to GroupLot, optional for now. 
+            01/24/2020: Added MiscAttribute element to Animal and GroupLot. Optional and may repeat. 
+            01/24/2020: Added Statements element to Animal and GroupLot. Optional.
+            03/06/2020: Changed AgeType RegEx to allow decimals. 
+            07/09/2020: Added ReplacesCviNumber attribute. #52 
+            07/09/2020: Added Voided attribute. #51 
+            07/09/2020: Added Product and supporting CommodityType enumeration. #50 
+            07/09/2020: Added TestName attribute. #44
             08/13/2020: Added choice element requiring one or more Animal, GroupLot or Product. #54
             08/13/2020: Updated annotations in several places. #51, #52, #53 
-            TBD: Clarifcation
-            around usage of Voided and ReplacesCviNumber attributes </xs:documentation>
+            08/13/2020: Added TransportModeOtherDescription
+            01/02/2021: Documentation element updates #8, #61
+            3/17/2021: Converted Veterinarian to Natural Person. First and last names required. #63 
+            5/13/2021: Relax Address element for all but Origin, Destination and Field (accession) #69 
+            8/31/2021: Added optional BusinessName to Veterinarian. #63 
+            8/18/2022: Added all state abbreviations to NUES9 regular expression. #74
+        </xs:documentation>
     </xs:annotation>
     <xs:annotation>
-        <xs:documentation>Copyright © 2017-20 AAVLD/USAHA it is free for use. Submit suggested
+        <xs:documentation>Copyright © 2017-22 AAVLD/USAHA it is free for use. Submit suggested
             changes to the maintainers at https://github.com/AAVLD-USAHA-ITStandards/eCVI
         </xs:documentation>
     </xs:annotation>
@@ -75,6 +85,8 @@
                 <xs:element ref="Consignee" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="Carrier" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="TransportMode" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="TransportModeOtherDescription" minOccurs="0" maxOccurs="1"/>
+
                 <xs:element ref="Accessions" minOccurs="0" maxOccurs="1"/>
                 <xs:choice minOccurs="1" maxOccurs="unbounded">
                     <xs:element ref="Animal"/>
@@ -97,19 +109,13 @@
             <xs:attribute name="ExpirationDate" type="xs:date" use="required"/>
             <xs:attribute name="ShipmentDate" type="xs:date" use="optional"/>
             <xs:attribute name="EntryPermitNumber" type="xs:string" use="optional"/>
-            <xs:attribute name="ReplacesCviNumber" type="nonNullString" use="optional">
-                <xs:annotation>
-                    <xs:documentation>If present, this value is the number of the CVI that is
-                        superceded by this CVI. The presense of this value also implies that the
-                        superceded CVI must be considered void, regardless of whether or not there
-                        was an explicit void request preceding this CVI message.</xs:documentation>
-                </xs:annotation>
-            </xs:attribute>
+            <xs:attribute name="ReplacesCviNumber" type="nonNullString" use="optional"/>
             <xs:attribute name="Voided" type="xs:boolean" default="false" use="optional">
                 <xs:annotation>
-                    <xs:documentation>True indicates that this CVI has been revoked. Voided
-                        certificates must include a copy of the human-readable--PDF, etc-- version
-                        of the certificate clearly marked as void.</xs:documentation>
+                    <xs:documentation>True indicates that the CVI named in ReplacesCviNumber has
+                        been revoked. Voided certificates must include a copy of the
+                        human-readable--PDF, etc-- version of the certificate clearly marked as
+                        void.</xs:documentation>
                 </xs:annotation>
             </xs:attribute>
         </xs:complexType>
@@ -125,8 +131,42 @@
         </xs:annotation>
         <xs:complexType>
             <xs:sequence>
-                <xs:element ref="Person" minOccurs="1" maxOccurs="1"/>
-                <xs:element ref="Address" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="Person" minOccurs="1" maxOccurs="1">
+                    <xs:annotation>
+                        <xs:documentation>NOTE: Person as defined in Veterinarian can only be a
+                            natural person. That is, it cannot be a business, must include first and
+                            last name. If the single string element Name is used instead, it must
+                            include first and last name although that requirement is not schema
+                            enforceable.</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:choice>
+                                <xs:element name="NameParts">
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                            <xs:element name="BusinessName" type="xs:string"
+                                                minOccurs="0" maxOccurs="1"/>
+                                            <xs:element name="FirstName" type="xs:string"
+                                                minOccurs="1" maxOccurs="1"/>
+                                            <xs:element name="MiddleName" type="xs:string"
+                                                minOccurs="0" maxOccurs="1"/>
+                                            <xs:element name="LastName" type="xs:string"
+                                                minOccurs="1" maxOccurs="1"/>
+                                            <xs:element name="OtherName" type="xs:string"
+                                                minOccurs="0" maxOccurs="1"/>
+                                        </xs:sequence>
+                                    </xs:complexType>
+                                </xs:element>
+                                <xs:element name="Name" type="xs:string" minOccurs="1" maxOccurs="1"
+                                />
+                            </xs:choice>
+                            <xs:element ref="Phone" minOccurs="0" maxOccurs="unbounded"/>
+                            <xs:element ref="Email" minOccurs="0" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Address" type="InternationalAddress" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
             <xs:attribute name="LicenseState" type="xs:string" use="optional"/>
             <xs:attribute name="LicenseNumber" type="xs:string" use="optional"/>
@@ -174,6 +214,7 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
+    <xs:element name="TransportModeOtherDescription" type="nonNullString"/>
 
     <!-- These are defined here as elements simply to make it easier to navigate 
          via Element list in some editors -->
@@ -333,7 +374,7 @@
             <xs:attribute name="Unit" type="xs:string" use="optional" default="Number"/>
             <xs:attribute name="Age" type="AgeType" use="optional"/>
             <xs:attribute name="Breed" type="xs:string" use="optional"/>
-            <xs:attribute name="Sex" type="SexType" use="optional"/>
+            <xs:attribute name="Sex" type="GroupSexType" use="optional"/>
             <xs:attribute name="SexDetail" type="xs:string" use="optional"/>
             <xs:attribute name="Description" type="nonNullString" use="required"/>
             <xs:attribute name="InspectionDate" type="xs:date" use="optional"/>
@@ -582,13 +623,15 @@
                 PremIdType) is optional only if unavailable. Address is optional only if unavailable
                 and should contain the lab physical address. AccessionDate is a required date.
                 AccessionNumber is a required string. Accession number is a distinct identifier
-                assigned by the Laboratory. </xs:documentation>
+                assigned by the Laboratory. NOTE: Only if the laboratory does not provide an
+                accession number, this value may be set to "Not Provided". This usage is not
+                applicable to equine Coggins test accessions. </xs:documentation>
         </xs:annotation>
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="LabName" type="xs:string" minOccurs="1" maxOccurs="1"/>
                 <xs:element name="PremId" type="PremIdType" minOccurs="0" maxOccurs="1"/>
-                <xs:element ref="Address" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="Address" type="InternationalAddress" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
             <xs:attribute name="AccessionDate" type="xs:date" use="required"/>
             <xs:attribute name="AccessionNumber" type="nonNullString" use="required"/>
@@ -606,7 +649,7 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="PremId" type="PremIdType" minOccurs="0" maxOccurs="1"/>
-                <xs:element ref="Address" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="Address" type="USAddress" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
             <xs:attribute name="AccessionDate" type="xs:date" use="required"/>
         </xs:complexType>
@@ -704,52 +747,93 @@
         </xs:complexType>
     </xs:element>
 
-    <xs:element name="Address">
+    <xs:complexType name="USAddress">
         <xs:annotation>
             <xs:documentation>Origin and destination require a structured address. Because of
                 variation in policy between jurisdictions this schema leaves each element optional.
                 However for a CVI to be valid in any jurisdiction, this element must contain enough
                 information for authorities to uniquely identify the location. </xs:documentation>
         </xs:annotation>
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="Line1" type="xs:string" minOccurs="0" maxOccurs="1"/>
-                <xs:element name="Line2" type="xs:string" minOccurs="0" maxOccurs="1"/>
-                <xs:element name="Town" type="xs:string" minOccurs="0" maxOccurs="1"/>
-                <xs:element name="County" type="xs:string" minOccurs="0" maxOccurs="1"/>
-                <xs:element name="State" type="StateCodeType" minOccurs="1" maxOccurs="1"/>
-                <xs:element name="ZIP" minOccurs="0" maxOccurs="1">
-                    <xs:simpleType>
-                        <xs:restriction base="xs:string">
-                            <xs:pattern value="\d{5}"/>
-                            <xs:pattern value="\d{5}-\d{4}"/>
-                        </xs:restriction>
-                    </xs:simpleType>
-                </xs:element>
-                <xs:element name="Country" minOccurs="0" maxOccurs="1">
-                    <xs:annotation>
-                        <xs:documentation>Country is restricted to USA by project scope. Derivative
-                            schemas may expand this list. </xs:documentation>
-                    </xs:annotation>
-                    <xs:simpleType>
-                        <xs:restriction base="xs:string">
-                            <xs:enumeration value="USA"/>
-                        </xs:restriction>
-                    </xs:simpleType>
-                </xs:element>
-                <xs:element name="GeoPoint" minOccurs="0" maxOccurs="1">
-                    <xs:annotation>
-                        <xs:documentation>Simple Latitude and Longitude in decimal degrees
-                        </xs:documentation>
-                    </xs:annotation>
-                    <xs:complexType>
-                        <xs:attribute name="Latitude" type="LatitudeType" use="required"/>
-                        <xs:attribute name="Longitude" type="LongitudeType" use="required"/>
-                    </xs:complexType>
-                </xs:element>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
+        <xs:sequence>
+            <xs:element name="Line1" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Line2" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Town" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="County" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="State" type="StateCodeType" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="ZIP" minOccurs="0" maxOccurs="1">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="\d{5}"/>
+                        <xs:pattern value="\d{5}-\d{4}"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Country" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>Country is restricted to USA by project scope. Derivative
+                        schemas may expand this list. </xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="USA"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="GeoPoint" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>Simple Latitude and Longitude in decimal degrees
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:attribute name="Latitude" type="LatitudeType" use="required"/>
+                    <xs:attribute name="Longitude" type="LongitudeType" use="required"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="InternationalAddress">
+        <xs:annotation>
+            <xs:documentation>Consignor, consignee, carrier, etc. may have US or international
+                addresses. Because these are more complicated and not as essential for machine
+                processing constraints such as state and zipcode are removed. "State or Provence"
+                uses element State and "Postal code" uses element ZIP simply to keep the structure
+                constent with common US usage.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Line1" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Line2" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Town" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="County" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="State" type="xs:string" minOccurs="1" maxOccurs="1">
+                <xs:annotation>
+                     <xs:documentation>US states and territories should use the 2 character USPS abbreviation. Foreign states and territoties should use the full text name.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="ZIP" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Country" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>All countries have three character codes.</xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:length value="3"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="GeoPoint" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>Simple Latitude and Longitude in decimal degrees
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:attribute name="Latitude" type="LatitudeType" use="required"/>
+                    <xs:attribute name="Longitude" type="LongitudeType" use="required"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    
 
     <xs:element name="Test">
         <xs:annotation>
@@ -973,7 +1057,7 @@
         <xs:sequence>
             <xs:element name="PremId" type="PremIdType" minOccurs="0" maxOccurs="1"/>
             <xs:element name="PremName" type="xs:string" minOccurs="0" maxOccurs="1"/>
-            <xs:element ref="Address" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="Address" type="USAddress" minOccurs="1" maxOccurs="1"/>
             <xs:element ref="StateZoneOrAreaStatus" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element ref="HerdOrFlockStatus" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element ref="Person" minOccurs="0" maxOccurs="unbounded"/>
@@ -987,7 +1071,7 @@
                 address.</xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element ref="Address" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Address" type="InternationalAddress" minOccurs="0" maxOccurs="1"/>
             <xs:element ref="Person" minOccurs="1" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
@@ -1127,7 +1211,8 @@
             <xs:documentation>9 Character NUES (brite) tags.</xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:string">
-            <xs:pattern value="(\d{2}|MD|MN|NM|NY|US|WY)[A-Z]{3}\d{4}">
+            <xs:pattern value="(\d{2}|AL|AK|AZ|AR|CA|CO|CT|DE|DC|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|PR
+RI|SC|SD|TN|TX|UT|US|VA|WA|WV|WI|WY)[A-Z]{3}\d{4}">
                 <xs:annotation>
                     <xs:documentation> NUES 9 Character: Two digits + three letters + four digits or
                         some state's alpha codes followed by three more letters and four digits
@@ -1165,7 +1250,7 @@
             </xs:enumeration>
             <xs:enumeration value="BEF">
                 <xs:annotation>
-                    <xs:documentation> Beef</xs:documentation>
+                    <xs:documentation> Beef Cattle</xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
             <xs:enumeration value="BIS">
@@ -1205,7 +1290,7 @@
             </xs:enumeration>
             <xs:enumeration value="DAI">
                 <xs:annotation>
-                    <xs:documentation> Dairy</xs:documentation>
+                    <xs:documentation> Dairy Cattle</xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
             <xs:enumeration value="EQU">
@@ -1247,10 +1332,33 @@
             <xs:enumeration value="Spayed Female"/>
             <xs:enumeration value="Neutered Male"/>
             <xs:enumeration value="True Hermaphrodite"/>
-            <xs:enumeration value="Mixed Group">
+             <xs:enumeration value="Gender Unknown">
                 <xs:annotation>
-                    <xs:documentation>Only applicable to Group.</xs:documentation>
+                    <xs:documentation>Only applies to minor species in unusual cases such as non
+                        sexually dimorphic birds.</xs:documentation>
                 </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="Other">
+                <xs:annotation>
+                    <xs:documentation>Only applies to minor species in unusual cases. Supply
+                        explanation in SexDetail</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="GroupSexType">
+        <xs:annotation>
+            <xs:documentation>Sex type only becomes complicated for groups and minor
+                species.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Female"/>
+            <xs:enumeration value="Male"/>
+            <xs:enumeration value="Spayed Female"/>
+            <xs:enumeration value="Neutered Male"/>
+            <xs:enumeration value="True Hermaphrodite"/>
+            <xs:enumeration value="Mixed Group">
             </xs:enumeration>
             <xs:enumeration value="Gender Unknown">
                 <xs:annotation>
