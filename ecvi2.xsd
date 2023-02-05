@@ -55,10 +55,11 @@
             5/13/2021: Relax Address element for all but Origin, Destination and Field (accession) #69 
             8/31/2021: Added optional BusinessName to Veterinarian. #63 
             8/18/2022: Added all state abbreviations to NUES9 regular expression. #74
+            02/05/2023: Updated copyright statement
         </xs:documentation>
     </xs:annotation>
     <xs:annotation>
-        <xs:documentation>Copyright © 2017-22 AAVLD/USAHA it is free for use. Submit suggested
+        <xs:documentation>Copyright © 2017-23 AAVLD/USAHA it is free for use. Submit suggested
             changes to the maintainers at https://github.com/AAVLD-USAHA-ITStandards/eCVI
         </xs:documentation>
     </xs:annotation>
