@@ -57,7 +57,7 @@
             8/18/2022: Added all state abbreviations to NUES9 regular expression. #74
             02/05/2023: Updated copyright statement
             02/06/2023: Update MfrRFID documentation to read correctly. #78
-            02/06/2023: Added InternationalAIN Type #79
+            02/06/2023: Added InternationalAIN Type #79, Removed 124 & 484 prefixes from AIN and MfrRFID.
         </xs:documentation>
     </xs:annotation>
     <xs:annotation>
@@ -955,7 +955,7 @@
     <!-- Start Third Level for TagID -->
     <xs:element name="AIN">
         <xs:annotation>
-            <xs:documentation>840 (usually RFIF) tags or chips.</xs:documentation>
+            <xs:documentation>840 (usually RFID) tags or chips.</xs:documentation>
         </xs:annotation>
         <xs:complexType>
             <xs:attribute name="Number" type="AINType" use="required"/>
@@ -1194,7 +1194,7 @@
             <xs:documentation>840 AIN (usually RFID) tag.</xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:string">
-            <xs:pattern value="((840)|(124)|(484))\d{12}">
+            <xs:pattern value="(840)\d{12}">
                 <xs:annotation>
                     <xs:documentation xml:lang="en">840 RFID: 840 followed by 12
                         digits</xs:documentation>
@@ -1222,7 +1222,7 @@
             <xs:documentation>900 Series manufacturer tags (always RFID?).</xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:string">
-            <xs:pattern value="((9[0-8]\d)|(9\d[0-8])|(124)|(484))\d{12}">
+            <xs:pattern value="((9[0-8]\d)|(9\d[0-8]))\d{12}">
                 <xs:annotation>
                     <xs:documentation> Non 840 RFID: Company prefix (not 999) followed by 12 digits
                     </xs:documentation>
