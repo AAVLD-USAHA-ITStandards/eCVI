@@ -257,6 +257,14 @@
         </xs:simpleType>
     </xs:element>
 
+    <xs:element name="Approval" type="ApprovalType">
+        <xs:annotation>
+            <xs:documentation>
+                Regulatory approval(s) of the movement record.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
     <!-- Do these list wrappers add value? -->
     <xs:element name="Accessions">
         <xs:annotation>
@@ -1012,6 +1020,19 @@
             <xs:element ref="Person" minOccurs="1" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
+
+    <xs:complexType name="ApprovalType">
+        <xs:annotation>
+            <xs:documentation>
+                Used to confer regulatory official approval of a movement document.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element ref="Person" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="ApprovalListType" use="required"/>
+        <xs:attribute name="Date" type="xs:date" use="required"/>
+    </xs:complexType>
     <!-- END Complex Reused Types -->
 
 
@@ -1756,6 +1777,31 @@
             <xs:pattern value=".{1,127}/.{1,127}"/>
         </xs:restriction>
     </xs:simpleType>
+    
+    <xs:simpleType name="ApprovalListType">
+        <xs:annotation>
+            <xs:documentation> 
+                This list includes the approval types associated with covered movement documents.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="NPIPParticipation">
+                <xs:annotation>
+                    <xs:documentation>
+                        Certification of current NPIP participation (used for NPIP 9-3).
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="NPIPClassification">
+                <xs:annotation>
+                    <xs:documentation>
+                        Certification correct of NPIP classification of listed products (used for NPIP 9-3).
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>        
+
     <!-- END Simple Enumerated or Pattered Types -->
 
 </xs:schema>
