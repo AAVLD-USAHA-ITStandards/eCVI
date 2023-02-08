@@ -58,6 +58,7 @@
             02/05/2023: Updated copyright statement
             02/06/2023: Update MfrRFID documentation to read correctly. #78
             02/06/2023: Added InternationalAIN Type #79, Removed 124 & 484 prefixes from AIN and MfrRFID.
+            02/07/2023: Added international phone number type. #73
         </xs:documentation>
     </xs:annotation>
     <xs:annotation>
@@ -165,6 +166,7 @@
                                 />
                             </xs:choice>
                             <xs:element ref="Phone" minOccurs="0" maxOccurs="unbounded"/>
+                            <xs:element ref="InternationalPhone" minOccurs="0" maxOccurs="unbounded"/>
                             <xs:element ref="Email" minOccurs="0" maxOccurs="unbounded"/>
                         </xs:sequence>
                     </xs:complexType>
@@ -510,7 +512,7 @@
     <xs:element name="Person">
         <xs:annotation>
             <xs:documentation> Person is defined as a Name string and an optional Phone Number (see
-                Phone). Because of a lack of industry consensus on hanling names, Name can be
+                Phone, InternationalPhone). Because of a lack of industry consensus on hanling names, Name can be
                 provided as either a single string (Name) or individual name components
                 (NameParts).</xs:documentation>
         </xs:annotation>
@@ -521,6 +523,7 @@
                     <xs:element name="Name" type="xs:string" minOccurs="1" maxOccurs="1"/>
                 </xs:choice>
                 <xs:element ref="Phone" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="InternationalPhone" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="Email" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
         </xs:complexType>
@@ -555,6 +558,49 @@
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
                         <xs:pattern value="\d{10}"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="Comment" type="xs:string" use="optional"/>
+            <xs:attribute name="Type" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="Unknown">
+                            <xs:annotation>
+                                <xs:documentation>Probably the most common.</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                        <xs:enumeration value="Landline">
+                            <xs:annotation>
+                                <xs:documentation>If known to be fixed location.</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                        <xs:enumeration value="Cellphone">
+                            <xs:annotation>
+                                <xs:documentation>If known to be a mobile phone.</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                        <xs:enumeration value="Fax">
+                            <xs:annotation>
+                                <xs:documentation>Fax line.</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="InternationalPhone">
+        <xs:annotation>
+            <xs:documentation> The International Phone Number specifies type (list enumeration values?), a
+                phone number including international country code, and can include a comment. </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:attribute name="Number" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$"/>
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
