@@ -153,30 +153,6 @@
     <!-- END Proposed NPIP 9-3 Element-->
 
 
-    <!-- BEGIN Proposed Sighting Location Element-->
-    <xs:element name="Sighting">
-        <xs:annotation>
-            <xs:documentation>
-                The Sighting xml document contains an basic traceability sighting element used to document the sighting of an individual or group of animals with individual identification. This schema tries to capture those data elements and the level of detail needed for regulatory decision support, disease traceability, and business interoperability. 
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="Location" type="PremType" minOccurs="1" maxOccurs="1"/>
-                <xs:element ref="Animal" minOccurs="1" maxOccurs="unbounded"/>
-                <xs:element ref="Statements" minOccurs="0" maxOccurs="1"/>
-                <xs:element ref="Attachment" minOccurs="0" maxOccurs="unbounded"/>
-                <xs:element ref="MiscAttribute" minOccurs="0" maxOccurs="unbounded"/>
-                <xs:element ref="Binary" minOccurs="0" maxOccurs="unbounded"/>
-            </xs:sequence>
-            <xs:attribute name="SightingType" type="xs:string" use="required"/>
-            <xs:attribute name="SightingDate" type="xs:date" use="optional"/>
-            <xs:attribute name="SourceSystem" type="xs:string" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-    <!-- END Proposed US Cattle Trace Element-->
-    
-
     <!-- BEGIN Top Level Elements -->
     <xs:element name="Veterinarian">
         <xs:annotation>
