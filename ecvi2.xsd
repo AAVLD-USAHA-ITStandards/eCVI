@@ -1329,11 +1329,6 @@ RI|SC|SD|TN|TX|UT|US|VA|WA|WV|WI|WY)[A-Z]{3}\d{4}">
                     <xs:documentation> Bison</xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
-            <xs:enumeration value="BOV">
-                <xs:annotation>
-                    <xs:documentation> Bovine (Bison and Cattle) DEPRECATED</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
             <xs:enumeration value="CAM">
                 <xs:annotation>
                     <xs:documentation> Camelid (Alpacas, Llamas, etc.)</xs:documentation>
