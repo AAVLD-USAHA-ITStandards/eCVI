@@ -1,0 +1,22 @@
+<Movement xmlns="http://www.usaha.org/xmlns/ecvi2" MovementId="999999" MovementIdIssuedBy="AgView"
+    MovementDate="2023-02-10">
+    <Origin>
+        <PremId>0049Z4J</PremId>
+        <Address>
+            <State>OR</State>
+        </Address>
+        <HerdOrFlockStatus Disease="ASF" HerdOrFlockID="0049Z4J" Status="US-SHIP Certified" />
+        <HerdOrFlockStatus Disease="CSF" HerdOrFlockID="0049Z4J" Status="US-SHIP Certified" />
+    </Origin>
+    <Destination>
+        <PremId>00QN5FP</PremId>
+        <Address>
+            <State>OR</State>
+        </Address>
+        <HerdOrFlockStatus Disease="ASF" HerdOrFlockID="00QN5FP" Status="US-SHIP Certified" />
+        <HerdOrFlockStatus Disease="CSF" HerdOrFlockID="00QN5FP" Status="US-SHIP Certified" />
+    </Destination>
+    <GroupLot Quantity="250" Description="Market to Slaughter">
+        <SpeciesCode Code="POR" />
+    </GroupLot>
+</Movement>
