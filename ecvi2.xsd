@@ -59,6 +59,10 @@
             5/13/2021: Relax Address element for all but Origin, Destination and Field (accession) #69 
             8/31/2021: Added optional BusinessName to Veterinarian. #63 
             8/18/2022: Added all state abbreviations to NUES9 regular expression. #74
+            02/08/2023: Added ApprovalType to allow approval of generic traceability element.
+            02/10/2023: Created generic traceability sighting element.
+            02/10/2023: Created generic traceability movement element.
+            02/11/2023: Added approval element to generic movement element.
         </xs:documentation>
     </xs:annotation>
 
