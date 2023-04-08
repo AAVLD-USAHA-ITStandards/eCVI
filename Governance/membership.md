@@ -17,7 +17,6 @@ Dee Ellis                         dee.ellis@ag.tamu.edu                    CVI V
 Dave Dice                         dave.dice@state.co.us                    State
 Jeff Wilcke                       jwilcke@vt.edu                           Academic
 Jill Wagner                       jwagner@globalvetlink.com                CVI Vendor
-
 Julie Green                       jmgreen@vt.edu                           Academic
 Justin Smith                      justin.smith@ks.gov                      State
 Kent Grant                        kevin.grant@vetenvoy.us                  Other
