@@ -29,7 +29,7 @@ Nate Plumm                        nate.d.plumm@aphis.usda.gov              Fed
 Nephi Harvey                      nephi@fort-supply.com                    CVI Vendor
 Patrick Webb                      pwebb@pork.org                           Industry/CVI Vendor
 Randy Munger                      randy.d.munger@aphis.usda.gov            Fed
-Rod Chitty                        Rodney.a.chitty@aphis.usda.gov           Other
+
 Shane Linke                       Shane.g.linke@aphis.usda.gov             Fed
 Sunny Geiser-Novotny              sunny.geiser-novotny@usda.gov            Fed
 Susan Culp                        sculp@me.com                             Other
