@@ -926,8 +926,11 @@
                     <xs:documentation> Points to ID in Accession element </xs:documentation>
                 </xs:annotation>
             </xs:attribute>
-            <xs:attribute name="TestCode" type="nonNullString" use="required"/>
-            <xs:attribute name="TestName" type="nonNullString" use="optional"/>
+            <xs:choice minOccurs="1" maxOccurs="1">
+                <xs:element ref="DiseaseCode"/>
+                <xs:element ref="DiseaseOther"/>
+            </xs:choice>
+            <xs:attribute name="TestType" type="nonNullString" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -957,6 +960,32 @@
         </xs:complexType>
     </xs:element>
 
+    <xs:element name="DiseaseCode">
+        <xs:annotation>
+            <xs:documentation> For diseases with official disease codes, the code is required with
+                optional text to add detail if necessary. </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:attribute name="Code" type="DiseaseCode" use="required"/>
+            <xs:attribute name="Text" type="xs:string" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="DiseaseOther">
+        <xs:annotation>
+            <xs:documentation> The disease coded in the standard include only those commonly needed
+                for regulatory action related to the movement. Many other disease codes potentially 
+                exist. Because not all systems may understand these other codes,
+                human readable Text is required in addition to the code. For diseases without an
+                official disease code, the code may be omitted the default value is OTH and text
+                used to define the actual disease is required.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:attribute name="Code" default="OTH" use="optional"/>
+            <xs:attribute name="Text" type="nonNullString" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
     <xs:element name="Vaccination">
         <xs:annotation>
             <xs:documentation>Vaccination information for animal or group. For now the type of
@@ -964,7 +993,11 @@
                 standard set. The date is optional but highly suggested. </xs:documentation>
         </xs:annotation>
         <xs:complexType>
-            <xs:attribute name="Type" type="nonNullString" use="required"/>
+            <xs:choice minOccurs="1" maxOccurs="1">
+                <xs:element ref="DiseaseCode"/>
+                <xs:element ref="DiseaseOther"/>
+            </xs:choice>
+            <xs:attribute name="VaccineType" type="nonNullString" use="optional"/>
             <xs:attribute name="Date" type="xs:date" use="optional"/>
         </xs:complexType>
 
@@ -1450,6 +1483,29 @@ RI|SC|SD|TN|TX|UT|US|VA|WA|WV|WI|WY)[A-Z]{3}\d{4}">
             <xs:enumeration value="Semen"/>
         </xs:restriction>
     </xs:simpleType>
+
+    <xs:simpleType name="DiseaseType">
+        <xs:annotation>
+            <xs:documentation>Disease/condition used in testing and vaccination.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Avian Influenza"/>
+            <xs:enumeration value="Bovine Viral Diarrhea Virus"/>
+            <xs:enumeration value="Brucella abortus"/>
+            <xs:enumeration value="Brucella canis"/>
+            <xs:enumeration value="Brucella ovis"/>
+            <xs:enumeration value="Brucella suis"/>
+            <xs:enumeration value="Caprine Arthritis and Encephalitis"/>
+            <xs:enumeration value="Corynebacterium pseudotuberculosis"/>
+            <xs:enumeration value="Equine Infectious Anemia"/>
+            <xs:enumeration value="Pseudorabies"/>
+            <xs:enumeration value="Rabies"/>
+            <xs:enumeration value="Salmonella pullorum"/>
+            <xs:enumeration value="Tritrichomonas foetus"/>
+            <xs:enumeration value="Tuberculosis"/>
+        </xs:restriction>
+    </xs:simpleType>
+ 
 
     <xs:simpleType name="StateCodeType">
         <xs:annotation>
