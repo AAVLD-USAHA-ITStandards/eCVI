@@ -59,7 +59,10 @@
             02/06/2023: Update MfrRFID documentation to read correctly. #78
             02/06/2023: Added InternationalAIN Type #79, Removed 124 & 484 prefixes from AIN and MfrRFID.
             02/07/2023: Added international phone number type. #73
-            
+            02/08/2023: Remove depricated BOX species code. #80
+            07/05/2023: Expand CommodityType enumerated list to include SFS commodities. #81
+            07/05/2023: Make phone type optional. #82
+            07/05/2023: Add enumerated DiseaseType list, DiseaseCode, and DiseaseOther elements. Changed test and vaccination to require either DiseaseCode or DiseaseOther with optional testtype or vaccinetype strings.
         </xs:documentation>
     </xs:annotation>
     <xs:annotation>
