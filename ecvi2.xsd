@@ -562,7 +562,7 @@
                 </xs:simpleType>
             </xs:attribute>
             <xs:attribute name="Comment" type="xs:string" use="optional"/>
-            <xs:attribute name="Type" use="required">
+            <xs:attribute name="Type" use="optional">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
                         <xs:enumeration value="Unknown">
