@@ -59,6 +59,7 @@
             02/06/2023: Update MfrRFID documentation to read correctly. #78
             02/06/2023: Added InternationalAIN Type #79, Removed 124 & 484 prefixes from AIN and MfrRFID.
             02/07/2023: Added international phone number type. #73
+            
         </xs:documentation>
     </xs:annotation>
     <xs:annotation>
@@ -1479,8 +1480,18 @@ RI|SC|SD|TN|TX|UT|US|VA|WA|WV|WI|WY)[A-Z]{3}\d{4}">
             <xs:documentation>Type of commodity shipped.</xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:string">
-            <xs:enumeration value="Eggs"/>
+            <xs:enumeration value="Embryos"/>
+            <xs:enumeration value="Hatching Eggs"/>
+            <xs:enumeration value="Liquid Egg (Non-Pasteurized)"/>
+            <xs:enumeration value="Liquid Egg (Pasteurized)"/>
+            <xs:enumeration value="Milk (Pasteurized)"/>
+            <xs:enumeration value="Milk (Raw)"/>
+            <xs:enumeration value="Mohair/Cashmere"/>
+            <xs:enumeration value="Shell Eggs (Nest Run)"/>
+            <xs:enumeration value="Shell Eggs (Washed/Sanitized)"/>
+            <xs:enumeration value="Shells/Inedible Egg Product"/>
             <xs:enumeration value="Semen"/>
+            <xs:enumeration value="Wool"/>
         </xs:restriction>
     </xs:simpleType>
 
