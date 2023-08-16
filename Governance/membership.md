@@ -19,7 +19,6 @@ Jill Wagner                       jwagner@globalvetlink.com                CVI V
 Julie Green                       jmgreen@vt.edu                           Academic
 Justin Smith                      justin.smith@ks.gov                      State
 Kent Grant                        kevin.grant@vetenvoy.us                  Other
-Jodi VandenEng                    jodi.l.vandeneng@usda.gov                Fed
 Michael McGrath                   mmcgrath@tracefirst.com                  DB Vendor
 Mitzy Torres                      mtorres@acclaimsystems.onmicrosoft.com   DB Vendor
 Michael Martin                    michael.martin.dvm.mph@gmail.com         Academic
