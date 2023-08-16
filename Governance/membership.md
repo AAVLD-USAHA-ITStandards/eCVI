@@ -18,7 +18,6 @@ Dave Dice                         dave.dice@state.co.us                    State
 Jill Wagner                       jwagner@globalvetlink.com                CVI Vendor
 Julie Green                       jmgreen@vt.edu                           Academic
 Justin Smith                      justin.smith@ks.gov                      State
-Kent Grant                        kevin.grant@vetenvoy.us                  Other
 Michael McGrath                   mmcgrath@tracefirst.com                  DB Vendor
 Mitzy Torres                      mtorres@acclaimsystems.onmicrosoft.com   DB Vendor
 Michael Martin                    michael.martin.dvm.mph@gmail.com         Academic
