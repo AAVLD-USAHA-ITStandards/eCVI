@@ -15,7 +15,6 @@ Carissa Allen                     carissa.allen@state.mn.us                State
 Craig Carter                      Craig.carter@uky.edu                     Academic
 Dee Ellis                         dee.ellis@ag.tamu.edu                    CVI Vendor
 Dave Dice                         dave.dice@state.co.us                    State
-Jeff Wilcke                       jwilcke@vt.edu                           Academic
 Jill Wagner                       jwagner@globalvetlink.com                CVI Vendor
 Julie Green                       jmgreen@vt.edu                           Academic
 Justin Smith                      justin.smith@ks.gov                      State
