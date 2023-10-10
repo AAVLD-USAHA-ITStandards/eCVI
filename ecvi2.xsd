@@ -67,7 +67,6 @@
             02/10/2023: Created generic traceability sighting element.
             02/10/2023: Created generic traceability movement element.
             02/11/2023: Added approval element to generic movement element.
-            10/10/2023: Add XMLSchemaVersion attribute to Movement and Sighting elements.
         </xs:documentation>
     </xs:annotation>
 
