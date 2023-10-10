@@ -63,6 +63,7 @@
             07/05/2023: Expand CommodityType enumerated list to include SFS commodities. #81
             07/05/2023: Make phone type optional. #82
             07/05/2023: Add enumerated DiseaseType list, DiseaseCode, and DiseaseOther elements. Changed test and vaccination to require either DiseaseCode or DiseaseOther with optional testtype or vaccinetype strings.
+            10/10/2023: Add XMLSchemaVersion attribute to eCVI element.
         </xs:documentation>
     </xs:annotation>
     <xs:annotation>
@@ -106,6 +107,11 @@
                 <xs:element ref="MiscAttribute" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="Binary" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
+            <xs:attribute name="XMLSchemaVersion" type="nonNullString" use="required">
+                <xs:annotation>
+                    <xs:documentation>The eCVI XML Schema version that the eCVI should be validated against</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
             <xs:attribute name="CviNumber" type="nonNullString" use="required"/>
             <xs:attribute name="CviNumberIssuedBy" type="xs:string" use="optional"/>
             <xs:attribute name="IssueDate" type="xs:date" use="required">
