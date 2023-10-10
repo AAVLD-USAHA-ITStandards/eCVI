@@ -1,0 +1,70 @@
+<Movement xmlns="http://www.usaha.org/xmlns/ecvi2" MovementId="AR 001-2780" MovementIdIssuedBy="NPIP" MovementDate="2023-02-16">
+    <Origin>
+        <PremName>ABC Breeding Farm</PremName>
+        <Address>
+            <Line1>9999 N Main St</Line1>
+            <Town>Somewhere</Town>
+            <State>AR</State>
+            <Zip>71000</Zip>
+        </Address>
+        <HerdOrFlockStatus Disease="U.S. Avian Influenza Clean" HerdOrFlockID="AR001" />
+        <HerdOrFlockStatus Disease="U.S. M. synoviae Clean" HerdOrFlockID="AR001" />
+        <HerdOrFlockStatus Disease="U.S. M. gallisepticum Clean" HerdOrFlockID="AR001" />
+        <HerdOrFlockStatus Disease="U.S. Pullorum-Typhoid Clean" HerdOrFlockID="AR001" />
+        <Person>
+            <NameParts>
+                <BusinessName>ABC Breeding Farm</BusinessName>
+            </NameParts>
+            <Phone>8001234567</Phone>
+        </Person>
+    </Origin>
+    <Destination>
+        <PremName>Oregon Hatcheries Inc</PremName>
+        <Address>
+            <Line1>123 S Hatchery Ln</Line1>
+            <Town>Salem</Town>
+            <State>OR</State>
+            <Zip>97000</Zip>
+        </Address>
+        <Person>
+            <NameParts>
+                <BusinessName>Oregon Hatcheries Inc</BusinessName>
+            </NameParts>
+            <Phone>5039991234</Phone>
+        </Person>
+    </Destination>
+    <Consignee>
+        <Address>
+            <Line1>123 S Hatchery Ln</Line1>
+            <Town>Salem</Town>
+            <State>OR</State>
+            <Zip>97000</Zip>
+        </Address>
+        <Person>
+            <NameParts>
+                <BusinessName>Oregon Hatcheries Inc</BusinessName>
+            </NameParts>
+            <Phone>5039991234</Phone>
+        </Person>
+    </Consignee>
+    <Approval Type="NPIPParticipation" Date="2023-02-10">
+        <Personn>
+            <NameParts>
+                <FirstName>Some</FirstName>
+                <LastName>Person</LastName>
+            </NameParts>
+        </Personn>
+    </Approval>
+    <Approval Type="NPIPClassification" Date="2023-02-10">
+        <Personn>
+            <NameParts>
+                <FirstName>Some</FirstName>
+                <LastName>Person</LastName>
+            </NameParts>
+        </Personn>
+    </Approval>
+    <Product ProductType="Eggs" Quantity="270144" Unit="Eggs" Breed="Broiler Hatching Eggs" Description="Meat type commercial production stock">
+        <SpeciesCode Code="CHI" />
+    </Product>
+    <Statements>Load #12345</Statements>
+</Movement>
