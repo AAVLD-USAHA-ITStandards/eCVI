@@ -67,6 +67,7 @@
             02/10/2023: Created generic traceability sighting element.
             02/10/2023: Created generic traceability movement element.
             02/11/2023: Added approval element to generic movement element.
+            10/10/2023: Add XMLSchemaVersion attribute to Movement and Sighting elements.
         </xs:documentation>
     </xs:annotation>
 
@@ -150,6 +151,11 @@
                 <xs:element ref="MiscAttribute" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="Binary" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
+            <xs:attribute name="XMLSchemaVersion" type="nonNullString" use="required">
+                <xs:annotation>
+                    <xs:documentation>The eCVI XML Schema version that the movement should be validated against</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
             <xs:attribute name="MovementId" type="nonNullString" use="required"/>
             <xs:attribute name="MovementIdIssuedBy" type="xs:string" use="optional"/>
             <xs:attribute name="MovementDate" type="xs:date" use="optional"/>
@@ -181,6 +187,11 @@
                 <xs:element ref="MiscAttribute" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="Binary" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
+            <xs:attribute name="XMLSchemaVersion" type="nonNullString" use="required">
+                <xs:annotation>
+                    <xs:documentation>The eCVI XML Schema version that the sighting should be validated against</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
             <xs:attribute name="SightingType" type="xs:string" use="required"/>
             <xs:attribute name="SightingDate" type="xs:date" use="optional"/>
             <xs:attribute name="SourceSystem" type="xs:string" use="optional"/>
