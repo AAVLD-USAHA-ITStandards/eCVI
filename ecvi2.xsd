@@ -64,6 +64,7 @@
             07/05/2023: Make phone type optional. #82
             07/05/2023: Add enumerated DiseaseType list, DiseaseCode, and DiseaseOther elements. Changed test and vaccination to require either DiseaseCode or DiseaseOther with optional testtype or vaccinetype strings.
             10/10/2023: Add XMLSchemaVersion attribute to eCVI element.
+            10/10/2023: Make InternationalPhone Type attribute optional.
         </xs:documentation>
     </xs:annotation>
     <xs:annotation>
@@ -615,7 +616,7 @@
                 </xs:simpleType>
             </xs:attribute>
             <xs:attribute name="Comment" type="xs:string" use="optional"/>
-            <xs:attribute name="Type" use="required">
+            <xs:attribute name="Type" use="optional">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
                         <xs:enumeration value="Unknown">
