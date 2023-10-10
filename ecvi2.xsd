@@ -67,6 +67,12 @@
             02/10/2023: Created generic traceability sighting element.
             02/10/2023: Created generic traceability movement element.
             02/11/2023: Added approval element to generic movement element.
+            02/08/2023: Remove depricated BOX species code. #80
+            07/05/2023: Expand CommodityType enumerated list to include SFS commodities. #81
+            07/05/2023: Make phone type optional. #82
+            07/05/2023: Add enumerated DiseaseType list, DiseaseCode, and DiseaseOther elements. Changed test and vaccination to require either DiseaseCode or DiseaseOther with optional testtype or vaccinetype strings.
+            10/10/2023: Add XMLSchemaVersion attribute to eCVI, Movement, and Sighting elements.
+            10/10/2023: Make InternationalPhone Type attribute optional.
         </xs:documentation>
     </xs:annotation>
 
@@ -101,6 +107,11 @@
                 <xs:element ref="MiscAttribute" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="Binary" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
+            <xs:attribute name="XMLSchemaVersion" type="nonNullString" use="required">
+                <xs:annotation>
+                    <xs:documentation>The eCVI XML Schema version that the eCVI should be validated against</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
             <xs:attribute name="CviNumber" type="nonNullString" use="required"/>
             <xs:attribute name="CviNumberIssuedBy" type="xs:string" use="optional"/>
             <xs:attribute name="IssueDate" type="xs:date" use="required">
@@ -585,7 +596,7 @@
                 </xs:simpleType>
             </xs:attribute>
             <xs:attribute name="Comment" type="xs:string" use="optional"/>
-            <xs:attribute name="Type" use="required">
+            <xs:attribute name="Type" use="optional">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
                         <xs:enumeration value="Unknown">
@@ -628,7 +639,7 @@
                 </xs:simpleType>
             </xs:attribute>
             <xs:attribute name="Comment" type="xs:string" use="optional"/>
-            <xs:attribute name="Type" use="required">
+            <xs:attribute name="Type" use="optional">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
                         <xs:enumeration value="Unknown">
@@ -942,8 +953,11 @@
                     </xs:documentation>
                 </xs:annotation>
             </xs:attribute>
-            <xs:attribute name="TestCode" type="nonNullString" use="required"/>
-            <xs:attribute name="TestName" type="nonNullString" use="optional"/>
+            <xs:choice minOccurs="1" maxOccurs="1">
+                <xs:element ref="DiseaseCode"/>
+                <xs:element ref="DiseaseOther"/>
+            </xs:choice>
+            <xs:attribute name="TestType" type="nonNullString" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -971,6 +985,32 @@
         </xs:complexType>
     </xs:element>
 
+    <xs:element name="DiseaseCode">
+        <xs:annotation>
+            <xs:documentation> For diseases with official disease codes, the code is required with
+                optional text to add detail if necessary. </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:attribute name="Code" type="DiseaseCode" use="required"/>
+            <xs:attribute name="Text" type="xs:string" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="DiseaseOther">
+        <xs:annotation>
+            <xs:documentation> The disease coded in the standard include only those commonly needed
+                for regulatory action related to the movement. Many other disease codes potentially 
+                exist. Because not all systems may understand these other codes,
+                human readable Text is required in addition to the code. For diseases without an
+                official disease code, the code may be omitted the default value is OTH and text
+                used to define the actual disease is required.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:attribute name="Code" default="OTH" use="optional"/>
+            <xs:attribute name="Text" type="nonNullString" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
     <xs:element name="Vaccination">
         <xs:annotation>
             <xs:documentation>
@@ -978,7 +1018,11 @@
             </xs:documentation>
         </xs:annotation>
         <xs:complexType>
-            <xs:attribute name="Type" type="nonNullString" use="required"/>
+            <xs:choice minOccurs="1" maxOccurs="1">
+                <xs:element ref="DiseaseCode"/>
+                <xs:element ref="DiseaseOther"/>
+            </xs:choice>
+            <xs:attribute name="VaccineType" type="nonNullString" use="optional"/>
             <xs:attribute name="Date" type="xs:date" use="optional"/>
         </xs:complexType>
     </xs:element>
@@ -1547,10 +1591,43 @@
             <xs:documentation>Type of commodity shipped.</xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:string">
-            <xs:enumeration value="Eggs"/>
+            <xs:enumeration value="Embryos"/>
+            <xs:enumeration value="Hatching Eggs"/>
+            <xs:enumeration value="Liquid Egg (Non-Pasteurized)"/>
+            <xs:enumeration value="Liquid Egg (Pasteurized)"/>
+            <xs:enumeration value="Milk (Pasteurized)"/>
+            <xs:enumeration value="Milk (Raw)"/>
+            <xs:enumeration value="Mohair/Cashmere"/>
+            <xs:enumeration value="Shell Eggs (Nest Run)"/>
+            <xs:enumeration value="Shell Eggs (Washed/Sanitized)"/>
+            <xs:enumeration value="Shells/Inedible Egg Product"/>
             <xs:enumeration value="Semen"/>
+            <xs:enumeration value="Wool"/>
         </xs:restriction>
     </xs:simpleType>
+
+    <xs:simpleType name="DiseaseType">
+        <xs:annotation>
+            <xs:documentation>Disease/condition used in testing and vaccination.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Avian Influenza"/>
+            <xs:enumeration value="Bovine Viral Diarrhea Virus"/>
+            <xs:enumeration value="Brucella abortus"/>
+            <xs:enumeration value="Brucella canis"/>
+            <xs:enumeration value="Brucella ovis"/>
+            <xs:enumeration value="Brucella suis"/>
+            <xs:enumeration value="Caprine Arthritis and Encephalitis"/>
+            <xs:enumeration value="Corynebacterium pseudotuberculosis"/>
+            <xs:enumeration value="Equine Infectious Anemia"/>
+            <xs:enumeration value="Pseudorabies"/>
+            <xs:enumeration value="Rabies"/>
+            <xs:enumeration value="Salmonella pullorum"/>
+            <xs:enumeration value="Tritrichomonas foetus"/>
+            <xs:enumeration value="Tuberculosis"/>
+        </xs:restriction>
+    </xs:simpleType>
+ 
 
     <xs:simpleType name="StateCodeType">
         <xs:annotation>
