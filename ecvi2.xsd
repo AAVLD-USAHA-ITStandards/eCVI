@@ -191,6 +191,7 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="Location" type="PremType" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="Accessions" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="Animal" minOccurs="1" maxOccurs="unbounded"/>
                 <xs:element ref="Statements" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="Attachment" minOccurs="0" maxOccurs="unbounded"/>
