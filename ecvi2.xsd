@@ -61,7 +61,7 @@
             8/18/2022: Added all state abbreviations to NUES9 regular expression. #74
             02/05/2023: Updated copyright statement
             02/06/2023: Update MfrRFID documentation to read correctly. #78
-            02/06/2023: Added InternationalAIN Type #79, Removed 124 & 484 prefixes from AIN and MfrRFID.
+            02/06/2023: Added InternationalAIN Type #79, Removed 124 and 484 prefixes from AIN and MfrRFID.
             02/07/2023: Added international phone number type. #73
             02/08/2023: Added ApprovalType to allow approval of generic traceability element.
             02/10/2023: Created generic traceability sighting element.
@@ -946,6 +946,10 @@
                         </xs:attribute>
                     </xs:complexType>
                 </xs:element>
+                <xs:choice minOccurs="1" maxOccurs="1">
+                    <xs:element ref="DiseaseCode"/>
+                    <xs:element ref="DiseaseOther"/>
+                </xs:choice>
             </xs:sequence>
             <xs:attribute name="AccessionRef" type="xs:IDREF" use="required">
                 <xs:annotation>
@@ -954,10 +958,6 @@
                     </xs:documentation>
                 </xs:annotation>
             </xs:attribute>
-            <xs:choice minOccurs="1" maxOccurs="1">
-                <xs:element ref="DiseaseCode"/>
-                <xs:element ref="DiseaseOther"/>
-            </xs:choice>
             <xs:attribute name="TestType" type="nonNullString" use="optional"/>
         </xs:complexType>
     </xs:element>
@@ -992,7 +992,7 @@
                 optional text to add detail if necessary. </xs:documentation>
         </xs:annotation>
         <xs:complexType>
-            <xs:attribute name="Code" type="DiseaseCode" use="required"/>
+            <xs:attribute name="Code" type="DiseaseType" use="required"/>
             <xs:attribute name="Text" type="xs:string" use="optional"/>
         </xs:complexType>
     </xs:element>
