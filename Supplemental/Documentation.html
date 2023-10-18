@@ -4,7 +4,7 @@
    </head>
    <body>
       <h1>eCVI Version 2 Standard Contents</h1>
-      <blockquote>Version 2.4 </blockquote>
+      <blockquote>Version 3.0 </blockquote>
       <blockquote> Change Log 
             08/30/2017: Initial draft of version 2.0 attempts to clone version 1 (labeled version 6.0?) with only minor tweaks. 
             09/01/2017: Added regular expressions to AnimalTags choices. 
@@ -54,30 +54,36 @@
             5/13/2021: Relax Address element for all but Origin, Destination and Field (accession) #69 
             8/31/2021: Added optional BusinessName to Veterinarian. #63 
             8/18/2022: Added all state abbreviations to NUES9 regular expression. #74
+            02/05/2023: Updated copyright statement
+            02/06/2023: Update MfrRFID documentation to read correctly. #78
+            02/06/2023: Added InternationalAIN Type #79, Removed 124 and 484 prefixes from AIN and MfrRFID.
+            02/07/2023: Added international phone number type. #73
+            02/08/2023: Added ApprovalType to allow approval of generic traceability element.
+            02/10/2023: Created generic traceability sighting element.
+            02/10/2023: Created generic traceability movement element.
+            02/11/2023: Added approval element to generic movement element.
+            02/08/2023: Remove depricated BOX species code. #80
+            07/05/2023: Expand CommodityType enumerated list to include SFS commodities. #81
+            07/05/2023: Make phone type optional. #82
+            07/05/2023: Add enumerated DiseaseType list, DiseaseCode, and DiseaseOther elements. Changed test and vaccination to require either DiseaseCode or DiseaseOther with optional testtype or vaccinetype strings.
+            10/10/2023: Add XMLSchemaVersion attribute to eCVI, Movement, and Sighting elements.
+            10/10/2023: Make InternationalPhone Type attribute optional.
         </blockquote>
-      <blockquote>Copyright © 2017-22 AAVLD/USAHA it is free for use. Submit suggested
-            changes to the maintainers at https://github.com/AAVLD-USAHA-ITStandards/eCVI
-        </blockquote>
+      <blockquote>Copyright © 2017-23 AAVLD/USAHA it is free for use. Submit suggested changes to the maintainers at https://github.com/AAVLD-USAHA-ITStandards/eCVI</blockquote>
       <h1>eCVI Document Element</h1>
-      <blockquote> The eCVI xml document contains an extract of data from an interstate
-                certificate of veterinary inspection (normally electronic) used to communicate the
-                information to another computer system. It does not constitute the legal document;
-                that remains the job of the originating application. This schema tries to capture
-                those data elements and the level of detail needed for regulatory decision support,
-                disease traceability, and business interoperability. A large majority of use-cases
-                can be met using the fully-structured (close standard) data. Inevitably, edge
-                cases--even very important ones--have had to be left to open standard features such
-                as "other" choices and free-text entry elements.</blockquote>
+      <blockquote> The eCVI xml document contains an extract of data from an interstate certificate of veterinary inspection (normally electronic) used to communicate the information to another computer system. It does not constitute the legal document; that remains the job of the originating application. This schema tries to capture those data elements and the level of detail needed for regulatory decision support, disease traceability, and business interoperability. A large majority of use-cases can be met using the fully-structured (close standard) data. Inevitably, edge cases--even very important ones--have had to be left to open standard features such as "other" choices and free-text entry elements.</blockquote>
       <h2>Attributes</h2>
       <ul>
+         <li>
+            <b>XMLSchemaVersion</b>: Required</li>
+         <blockquote>The eCVI XML Schema version that the eCVI should be validated against</blockquote>
          <li>
             <b>CviNumber</b>: Required</li>
          <li>
             <b>CviNumberIssuedBy</b>: Optional</li>
          <li>
             <b>IssueDate</b>: Required</li>
-         <blockquote>The date this eCVI was issued. For revision or void, it is the
-                        date of the revision or revocation.</blockquote>
+         <blockquote>The date this eCVI was issued. For revision or void, it is the date of the revision or revocation.</blockquote>
          <li>
             <b>ExpirationDate</b>: Required</li>
          <li>
@@ -88,10 +94,7 @@
             <b>ReplacesCviNumber</b>: Optional</li>
          <li>
             <b>Voided</b>: Optional</li>
-         <blockquote>True indicates that the CVI named in ReplacesCviNumber has
-                        been revoked. Voided certificates must include a copy of the
-                        human-readable--PDF, etc-- version of the certificate clearly marked as
-                        void.</blockquote>
+         <blockquote>True indicates that the CVI named in ReplacesCviNumber has been revoked. Voided certificates must include a copy of the human-readable--PDF, etc-- version of the certificate clearly marked as void.</blockquote>
       </ul>
       <h2>Child Elements</h2>
       <ul>
@@ -139,26 +142,8 @@
          </ul>
       </ul>
       <h2>Animal</h2>
-      <blockquote> The Animal element is used for all individually identifiable animals
-                in a shipment even when those may have been entered in an electronic source document
-                using shorthand tools such as identifier ranges. Animal species may be designated by
-                code (see SpeciesCode) or other (see SpeciesOther). At least one animal tag (see
-                AnimalTags) is required. Test (see TestType) is optional, and there is no limit on
-                additional Tests. Age is optional (although often required by regulatory policy) and
-                may be specified as either: a number of days, weeks, months or years plus the
-                standard code for units (d|wk|mo|a) (example: 3wk), age definitions adhere to UCUM -
-                http://unitsofmeasure.org/ucum.html), or as a specific date of birth as a four-digit
-                year, two-digit month, and two-digit date, separated by dashes (example:
-                2001-05-31). Breed is optional and specified by a two or three uppercase letter code
-                or by a string description such as "black". The code list is not specified in the
-                standard but most are available at: https://www.naab-css.org/uniform-breed-codes,
-                and
-                https://www.aphis.usda.gov/animal_health/vs_ocio/downloads/date_standards/icvi_data_concepts.pdf.
-                Sex (see SexType) reflects the most common variations needed for regulatory. If
-                other configurations are needed they are provided as a string in SexDetail. "Mixed"
-                is not an allowable value for a single Animal (provided for use with Group).
-                InspectionDate is a required date, and is the date the animals were inspected by the
-                vet. If the inspection took place over multiple days, use the first date.
+      <blockquote> 
+                The Animal element is used for all individually identifiable animals in a shipment even when those may have been entered in an electronic source document using shorthand tools such as identifier ranges. Animal species may be designated by code (see SpeciesCode) or other (see SpeciesOther). At least one animal tag (see AnimalTags) is required. Test (see TestType) is optional, and there is no limit on additional Tests. Age is optional (although often required by regulatory policy) and may be specified as either: a number of days, weeks, months or years plus the standard code for units (d|wk|mo|a) (example: 3wk), age definitions adhere to UCUM - http://unitsofmeasure.org/ucum.html), or as a specific date of birth as a four-digit year, two-digit month, and two-digit date, separated by dashes (example: 2001-05-31). Breed is optional and specified by a two or three uppercase letter code or by a string description such as "black". The code list is not specified in the standard but most are available at: https://www.naab-css.org/uniform-breed-codes, and https://www.aphis.usda.gov/animal_health/vs_ocio/downloads/date_standards/icvi_data_concepts.pdf. Sex (see SexType) reflects the most common variations needed for regulatory. If other configurations are needed they are provided as a string in SexDetail. "Mixed" is not an allowable value for a single Animal (provided for use with Group). InspectionDate is a required date, and is the date the animals were inspected by the vet. If the inspection took place over multiple days, use the first date.
             </blockquote>
       <h4>
          <i>Attributes</i>
@@ -167,8 +152,9 @@
          <li>
             <b>Age</b>: Optional<br/>
             <i>AgeType</i>
-            <blockquote> Age can be expressed as days , weeks, months, years, or as date of
-                birth. </blockquote>
+            <blockquote> 
+                Age can be expressed as days , weeks, months, years, or as date of birth. 
+            </blockquote>
             Pattern(s):<ul>
                <li>(&lt;|&gt;)? ?\d{1,3}(\.\d+)? ?(d|wk|mo|a)</li>
                <li>(19|20)\d\d-(0[1-9]|1[012])-(0[1-9]|[12]\d|3[01])</li>
@@ -179,8 +165,9 @@
          <li>
             <b>Sex</b>: Optional<br/>
             <i>SexType</i>
-            <blockquote>Sex type only becomes complicated for groups and minor
-                species.</blockquote>
+            <blockquote>
+                Sex type only becomes complicated for groups and minor species.
+            </blockquote>
             Values:<ul>
                <li>Female
                         ()
@@ -198,12 +185,12 @@
                         ()
                     </li>
                <li>Gender Unknown
-                        (Only applies to minor species in unusual cases such as non
-                        sexually dimorphic birds.)
+                        (
+                        Only applies to minor species in unusual cases such as non sexually dimorphic birds.
+                    )
                     </li>
                <li>Other
-                        (Only applies to minor species in unusual cases. Supply
-                        explanation in SexDetail)
+                        (Only applies to minor species in unusual cases. Supply explanation in SexDetail)
                     </li>
             </ul>
          </li>
@@ -235,8 +222,9 @@
             <b>MiscAttribute</b>: Optional, may repeat</li>
       </ul>
       <h3>SpeciesCode</h3>
-      <blockquote> For animals with official species codes, the code is required with
-                optional text to add detail if necessary. </blockquote>
+      <blockquote> 
+                For animals with official species codes, the code is required with optional text to add detail if necessary. 
+            </blockquote>
       <h4>
          <i>Attributes</i>
       </h4>
@@ -244,54 +232,79 @@
          <li>
             <b>Code</b>: Required<br/>
             <i>SpeciesCodes</i>
-            <blockquote> A subset of USDA species codes to support the most common eCVI
-                usages. All other species can be sent as SpeciesOther which is not
-                enumerated.</blockquote>
+            <blockquote> 
+                A subset of USDA species codes to support the most common eCVI usages. All other species can be sent as SpeciesOther which is not enumerated.
+            </blockquote>
             Values:<ul>
                <li>AQU
-                        ( Aquaculture)
+                        ( 
+                        Aquaculture
+                    )
                     </li>
                <li>BEF
-                        ( Beef Cattle)
+                        ( 
+                        Beef Cattle
+                    )
                     </li>
                <li>BIS
-                        ( Bison)
-                    </li>
-               <li>BOV
-                        ( Bovine (Bison and Cattle) DEPRECATED)
+                        ( 
+                        Bison
+                    )
                     </li>
                <li>CAM
-                        ( Camelid (Alpacas, Llamas, etc.))
+                        ( 
+                        Camelid (Alpacas, Llamas, etc.)
+                    )
                     </li>
                <li>CAN
-                        ( Canine)
+                        ( 
+                        Canine
+                    )
                     </li>
                <li>CAP
-                        ( Caprine (Goats))
+                        ( 
+                        Caprine (Goats)
+                    )
                     </li>
                <li>CER
-                        ( Cervids)
+                        ( 
+                        Cervids
+                    )
                     </li>
                <li>CHI
-                        ( Chickens)
+                        ( 
+                        Chickens
+                    )
                     </li>
                <li>DAI
-                        ( Dairy Cattle)
+                        ( 
+                        Dairy Cattle
+                    )
                     </li>
                <li>EQU
-                        ( Equine (Horses, Mules, Donkeys, Burros))
+                        ( 
+                        Equine (Horses, Mules, Donkeys, Burros)
+                    )
                     </li>
                <li>FEL
-                        ( Feline)
+                        ( 
+                        Feline
+                    )
                     </li>
                <li>OVI
-                        ( Ovine (Sheep))
+                        ( 
+                        Ovine (Sheep)
+                    )
                     </li>
                <li>POR
-                        ( Porcine (Swine))
+                        ( 
+                        Porcine (Swine)
+                    )
                     </li>
                <li>TUR
-                        ( Turkeys)
+                        ( 
+                        Turkeys
+                    )
                     </li>
             </ul>
          </li>
@@ -299,12 +312,9 @@
             <b>Text</b>: Optional</li>
       </ul>
       <h3>SpeciesOther</h3>
-      <blockquote> The species coded in the standard include only those commonly needed
-                for regulatory action related to the movement. Many other official species codes can
-                be found at http://???? Because not all systems may understand these other codes,
-                human readable Text is required in addition to the code. For animals without an
-                official species code, the code may be omitted the default value is OTH and text
-                used to define the actual taxonomy is required.</blockquote>
+      <blockquote> 
+                The species coded in the standard include only those commonly needed for regulatory action related to the movement. Many other official species codes can be found at http://???? Because not all systems may understand these other codes, human readable Text is required in addition to the code. For animals without an official species code, the code may be omitted the default value is OTH and text used to define the actual taxonomy is required.
+            </blockquote>
       <h4>
          <i>Attributes</i>
       </h4>
@@ -314,21 +324,18 @@
          <li>
             <b>Text</b>: Required<br/>
             <i>nonNullString</i>
-            <blockquote>Require at least one non-whitespace character as least common
-                denominator for required elements.</blockquote>
+            <blockquote>
+                Require at least one non-whitespace character as least common denominator for required elements.
+            </blockquote>
             Pattern(s):<ul>
                <li>.*[^\s].*</li>
             </ul>
          </li>
       </ul>
       <h3>AnimalTags</h3>
-      <blockquote> This is a jumble of type of ID with the type of device holding the
-                ID. "Tags" is a misnomer. An ID may be either one of the most common known formats
-                (840, 900 series manufacturer tags, NUES9 or NUES8) matching one of the list of
-                regular expressions for common official animal IDs, or some other official type,
-                either or a non-official management tag. This field also supports brand
-                descriptions, brand images, and equine description or photographs. These can appear
-                in any order up to six IDs per animal </blockquote>
+      <blockquote> 
+                This is a jumble of type of ID with the type of device holding the ID. "Tags" is a misnomer. An ID may be either one of the most common known formats (840, 900 series manufacturer tags, NUES9 or NUES8) matching one of the list of regular expressions for common official animal IDs, or some other official type, either or a non-official management tag. This field also supports brand descriptions, brand images, and equine description or photographs. These can appear in any order up to six IDs per animal 
+            </blockquote>
       <h4>
          <i>Child Elements</i>
       </h4>
@@ -356,7 +363,9 @@
          </li>
       </ul>
       <h3>AIN</h3>
-      <blockquote>840 (usually RFIF) tags or chips.</blockquote>
+      <blockquote>
+                840 (usually RFIF) tags or chips.
+            </blockquote>
       <h4>
          <i>Attributes</i>
       </h4>
@@ -364,17 +373,22 @@
          <li>
             <b>Number</b>: Required<br/>
             <i>AINType</i>
-            <blockquote>840 AIN (usually RFID) tag.</blockquote>
+            <blockquote>
+                840 AIN (usually RFID) tag.
+            </blockquote>
             Pattern(s):<ul>
-               <li>((840)|(124)|(484))\d{12}
-                            (840 RFID: 840 followed by 12
-                        digits)
+               <li>(840)\d{12}
+                            (
+                        840 RFID: 840 followed by 12 digits
+                    )
                         </li>
             </ul>
          </li>
       </ul>
       <h3>MfrRFID</h3>
-      <blockquote>900 series but not "900" RFID tags or chips.</blockquote>
+      <blockquote>
+                900 series but not "999" RFID tags or chips.
+            </blockquote>
       <h4>
          <i>Attributes</i>
       </h4>
@@ -382,17 +396,22 @@
          <li>
             <b>Number</b>: Required<br/>
             <i>MfrRFIDType</i>
-            <blockquote>900 Series manufacturer tags (always RFID?).</blockquote>
+            <blockquote>
+                900 Series manufacturer tags (always RFID?).
+            </blockquote>
             Pattern(s):<ul>
-               <li>((9[0-8]\d)|(9\d[0-8])|(124)|(484))\d{12}
-                            ( Non 840 RFID: Company prefix (not 999) followed by 12 digits
+               <li>((9[0-8]\d)|(9\d[0-8]))\d{12}
+                            ( 
+                        Non 840 RFID: Company prefix (not 999) followed by 12 digits
                     )
                         </li>
             </ul>
          </li>
       </ul>
       <h3>NUES9</h3>
-      <blockquote>NUES9 tags most commonly on metal "brite" tags.</blockquote>
+      <blockquote>
+                NUES9 tags most commonly on metal "brite" tags.
+            </blockquote>
       <h4>
          <i>Attributes</i>
       </h4>
@@ -400,20 +419,22 @@
          <li>
             <b>Number</b>: Required<br/>
             <i>NUES9Type</i>
-            <blockquote>9 Character NUES (brite) tags.</blockquote>
+            <blockquote>
+                9 Character NUES (brite) tags.
+            </blockquote>
             Pattern(s):<ul>
-               <li>(\d{2}|AL|AK|AZ|AR|CA|CO|CT|DE|DC|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|PR RI|SC|SD|TN|TX|UT|US|VA|WA|WV|WI|WY)[A-Z]{3}\d{4}
-                            ( NUES 9 Character: Two digits + three letters + four digits or
-                        some state's alpha codes followed by three more letters and four digits
+               <li>(\d{2}|AL|AK|AZ|AR|CA|CO|CT|DE|DC|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|PR|RI|SC|SD|TN|TX|UT|US|VA|WA|WV|WI|WY)[A-Z]{3}\d{4}
+                            ( 
+                        NUES 9 Character: Two digits + three letters + four digits or some state's alpha codes followed by three more letters and four digits
                     )
                         </li>
             </ul>
          </li>
       </ul>
       <h3>NUES8</h3>
-      <blockquote>NUES8 tags most commonly on the smaller sized metal "brite" tags.
-                Because the pattern of characters matches backtags, it is important that these
-                rarely used tags be recorded by type when they do appear on CVIs.</blockquote>
+      <blockquote>
+                NUES8 tags most commonly on the smaller sized metal "brite" tags. Because the pattern of characters matches backtags, it is important that these rarely used tags be recorded by type when they do appear on CVIs.
+            </blockquote>
       <h4>
          <i>Attributes</i>
       </h4>
@@ -421,17 +442,22 @@
          <li>
             <b>Number</b>: Required<br/>
             <i>NUES8Type</i>
-            <blockquote>8 Character NUES (brite) tags.</blockquote>
+            <blockquote>
+                8 Character NUES (brite) tags.
+            </blockquote>
             Pattern(s):<ul>
                <li>\d{2}[A-Z]{2}\d{4}
-                            ( NUES 8 Character: Two digits + two letters + four digits
-                        (Note: matches cattle backtag pattern.) )
+                            ( 
+                        NUES 8 Character: Two digits + two letters + four digits (Note: matches cattle backtag pattern.) 
+                    )
                         </li>
             </ul>
          </li>
       </ul>
       <h3>OtherOfficialID</h3>
-      <blockquote> Other Formats: No restrictions </blockquote>
+      <blockquote> 
+                Other Formats: No restrictions 
+            </blockquote>
       <h4>
          <i>Attributes</i>
       </h4>
@@ -439,50 +465,72 @@
          <li>
             <b>Type</b>: Optional<br/>
             <i>TagType</i>
-            <blockquote> This lists the known tag types that are supported.</blockquote>
+            <blockquote> 
+                This lists the known tag types that are supported.
+            </blockquote>
             Values:<ul>
                <li>AMID
-                        (American ID)
+                        (
+                        American ID
+                    )
                     </li>
                <li>BT
-                        (Backtag)
+                        (
+                        Backtag
+                    )
                     </li>
                <li>IMP
-                        ()
+                        ( 
+                        
+                    )
                     </li>
                <li>NAME
-                        (Name?)
+                        (
+                        Name?
+                    )
                     </li>
                <li>SGFLID
-                        (Scrapie group flock ID)
+                        (
+                        Scrapie group flock ID
+                    )
                     </li>
                <li>NPIN
-                        (Swine PIN Tag)
+                        (
+                        Swine PIN Tag
+                    )
                     </li>
                <li>PINPLUS
-                        (Swine PIN plus Management Tag)
+                        (
+                        Swine PIN plus Management Tag
+                    )
                     </li>
                <li>TAT
-                        (Tattoo)
+                        (
+                        Tattoo
+                    )
                     </li>
                <li>OTHER
-                        (We would like to always know the type but can't have captured
-                        them all.)
+                        (
+                        We would like to always know the type but can't have captured them all.
+                    )
                     </li>
             </ul>
          </li>
          <li>
             <b>Number</b>: Required<br/>
             <i>nonNullString</i>
-            <blockquote>Require at least one non-whitespace character as least common
-                denominator for required elements.</blockquote>
+            <blockquote>
+                Require at least one non-whitespace character as least common denominator for required elements.
+            </blockquote>
             Pattern(s):<ul>
                <li>.*[^\s].*</li>
             </ul>
          </li>
       </ul>
       <h3>ManagementID</h3>
-      <blockquote> Other Formats: No restrictions </blockquote>
+      <blockquote> 
+                Other Formats: No restrictions 
+            </blockquote>
       <h4>
          <i>Attributes</i>
       </h4>
@@ -490,16 +538,18 @@
          <li>
             <b>Number</b>: Required<br/>
             <i>nonNullString</i>
-            <blockquote>Require at least one non-whitespace character as least common
-                denominator for required elements.</blockquote>
+            <blockquote>
+                Require at least one non-whitespace character as least common denominator for required elements.
+            </blockquote>
             Pattern(s):<ul>
                <li>.*[^\s].*</li>
             </ul>
          </li>
       </ul>
       <h3>BrandImage</h3>
-      <blockquote> This should be PNG/JPEG/GIF/PDF format. The format is specified in
-                the Binary mime type.</blockquote>
+      <blockquote> 
+                This should be PNG/JPEG/GIF/PDF format. The format is specified in the Binary mime type.
+            </blockquote>
       <h4>
          <i>Attributes</i>
       </h4>
@@ -510,7 +560,8 @@
             <b>Description</b>: Optional</li>
       </ul>
       <h3>EquineDescription</h3>
-      <blockquote> Equine registered name is only legal identification with description
+      <blockquote> 
+                Equine registered name is only legal identification with description
             </blockquote>
       <h4>
          <i>Attributes</i>
@@ -521,15 +572,18 @@
          <li>
             <b>Description</b>: Required<br/>
             <i>nonNullString</i>
-            <blockquote>Require at least one non-whitespace character as least common
-                denominator for required elements.</blockquote>
+            <blockquote>
+                Require at least one non-whitespace character as least common denominator for required elements.
+            </blockquote>
             Pattern(s):<ul>
                <li>.*[^\s].*</li>
             </ul>
          </li>
       </ul>
       <h3>EquinePhotographs</h3>
-      <blockquote> Photos are also official. </blockquote>
+      <blockquote> 
+                Photos are also official. 
+            </blockquote>
       <h4>
          <i>Child Elements</i>
       </h4>
@@ -538,10 +592,9 @@
             <b>Photograph</b>: Required, may repeat</li>
       </ul>
       <h3>Test</h3>
-      <blockquote> Individual test results are included with each animal and reference
-                via ID/IDREF an accession. For herd testing this allows one accession with many
-                tests. For tests such as Equine Coggins tests that are one per accession it results
-                in slight extra overhead. </blockquote>
+      <blockquote> 
+                Individual test results are included with each animal and reference via ID/IDREF an accession. For herd testing this allows one accession with many tests. For tests such as Equine Coggins tests that are one per accession it results in slight extra overhead. 
+            </blockquote>
       <h4>
          <i>Attributes</i>
       </h4>
@@ -549,19 +602,11 @@
          <li>
             <b>AccessionRef</b>: Required</li>
          <li>
-            <b>TestCode</b>: Required<br/>
+            <b>TestType</b>: Optional<br/>
             <i>nonNullString</i>
-            <blockquote>Require at least one non-whitespace character as least common
-                denominator for required elements.</blockquote>
-            Pattern(s):<ul>
-               <li>.*[^\s].*</li>
-            </ul>
-         </li>
-         <li>
-            <b>TestName</b>: Optional<br/>
-            <i>nonNullString</i>
-            <blockquote>Require at least one non-whitespace character as least common
-                denominator for required elements.</blockquote>
+            <blockquote>
+                Require at least one non-whitespace character as least common denominator for required elements.
+            </blockquote>
             Pattern(s):<ul>
                <li>.*[^\s].*</li>
             </ul>
@@ -573,20 +618,111 @@
       <ul>
          <li>
             <b>Result</b>: Required, may repeat</li>
+         <li> Either: <ul>
+               <li>
+                  <b>DiseaseCode</b>: Required</li>
+               <li>
+                  <b>DiseaseOther</b>: Required</li>
+            </ul>
+         </li>
       </ul>
-      <h3>Vaccination</h3>
-      <blockquote>Vaccination information for animal or group. For now the type of
-                vaccine is left as a simple string. Ideally will become a coded value from a
-                standard set. The date is optional but highly suggested. </blockquote>
+      <h3>DiseaseCode</h3>
+      <blockquote> For diseases with official disease codes, the code is required with
+                optional text to add detail if necessary. </blockquote>
       <h4>
          <i>Attributes</i>
       </h4>
       <ul>
          <li>
-            <b>Type</b>: Required<br/>
+            <b>Code</b>: Required<br/>
+            <i>DiseaseType</i>
+            <blockquote>Disease/condition used in testing and vaccination.</blockquote>
+            Values:<ul>
+               <li>Avian Influenza
+                        ()
+                    </li>
+               <li>Bovine Viral Diarrhea Virus
+                        ()
+                    </li>
+               <li>Brucella abortus
+                        ()
+                    </li>
+               <li>Brucella canis
+                        ()
+                    </li>
+               <li>Brucella ovis
+                        ()
+                    </li>
+               <li>Brucella suis
+                        ()
+                    </li>
+               <li>Caprine Arthritis and Encephalitis
+                        ()
+                    </li>
+               <li>Corynebacterium pseudotuberculosis
+                        ()
+                    </li>
+               <li>Equine Infectious Anemia
+                        ()
+                    </li>
+               <li>Pseudorabies
+                        ()
+                    </li>
+               <li>Rabies
+                        ()
+                    </li>
+               <li>Salmonella pullorum
+                        ()
+                    </li>
+               <li>Tritrichomonas foetus
+                        ()
+                    </li>
+               <li>Tuberculosis
+                        ()
+                    </li>
+            </ul>
+         </li>
+         <li>
+            <b>Text</b>: Optional</li>
+      </ul>
+      <h3>DiseaseOther</h3>
+      <blockquote> The disease coded in the standard include only those commonly needed
+                for regulatory action related to the movement. Many other disease codes potentially 
+                exist. Because not all systems may understand these other codes,
+                human readable Text is required in addition to the code. For diseases without an
+                official disease code, the code may be omitted the default value is OTH and text
+                used to define the actual disease is required.</blockquote>
+      <h4>
+         <i>Attributes</i>
+      </h4>
+      <ul>
+         <li>
+            <b>Code</b>: Optional</li>
+         <li>
+            <b>Text</b>: Required<br/>
             <i>nonNullString</i>
-            <blockquote>Require at least one non-whitespace character as least common
-                denominator for required elements.</blockquote>
+            <blockquote>
+                Require at least one non-whitespace character as least common denominator for required elements.
+            </blockquote>
+            Pattern(s):<ul>
+               <li>.*[^\s].*</li>
+            </ul>
+         </li>
+      </ul>
+      <h3>Vaccination</h3>
+      <blockquote>
+                Vaccination information for animal or group. For now the type of vaccine is left as a simple string. Ideally will become a coded value from a standard set. The date is optional but highly suggested. 
+            </blockquote>
+      <h4>
+         <i>Attributes</i>
+      </h4>
+      <ul>
+         <li>
+            <b>VaccineType</b>: Optional<br/>
+            <i>nonNullString</i>
+            <blockquote>
+                Require at least one non-whitespace character as least common denominator for required elements.
+            </blockquote>
             Pattern(s):<ul>
                <li>.*[^\s].*</li>
             </ul>
@@ -595,14 +731,13 @@
             <b>Date</b>: Optional</li>
       </ul>
       <h3>Statements</h3>
-      <blockquote> Additional statements that may be required by various jurisdictions
-                may be included here. These statements must not take the place of or modify the
-                structured content found elsewhere in the standard.</blockquote>
+      <blockquote> 
+                Additional statements that may be required by various jurisdictions may be included here. These statements must not take the place of or modify the structured content found elsewhere in the standard.
+            </blockquote>
       <h3>MiscAttribute</h3>
-      <blockquote>Any additional information needed by specific implementations can be
-                provided as name/value pairs represented as strings. These data must not be
-                essential to proper understanding of the structured content of the standard data but
-                only extend it.</blockquote>
+      <blockquote>
+                Any additional information needed by specific implementations can be provided as name/value pairs represented as strings. These data must not be essential to proper understanding of the structured content of the standard data but only extend it.
+            </blockquote>
       <h4>
          <i>Attributes</i>
       </h4>
@@ -610,8 +745,9 @@
          <li>
             <b>Name</b>: Required<br/>
             <i>nonNullString</i>
-            <blockquote>Require at least one non-whitespace character as least common
-                denominator for required elements.</blockquote>
+            <blockquote>
+                Require at least one non-whitespace character as least common denominator for required elements.
+            </blockquote>
             Pattern(s):<ul>
                <li>.*[^\s].*</li>
             </ul>
@@ -619,41 +755,17 @@
          <li>
             <b>Value</b>: Required<br/>
             <i>nonNullString</i>
-            <blockquote>Require at least one non-whitespace character as least common
-                denominator for required elements.</blockquote>
+            <blockquote>
+                Require at least one non-whitespace character as least common denominator for required elements.
+            </blockquote>
             Pattern(s):<ul>
                <li>.*[^\s].*</li>
             </ul>
          </li>
       </ul>
       <h2>GroupLot</h2>
-      <blockquote> GroupLot is used for any grouping of similar animals that do not
-                require individual identification. Rules for what constitute legal groups are
-                defined in the federal ADT rule and various other legal sources. In general groups
-                contain only animals of the same species and general age. All attributes apply to
-                all members of the group. If significant variation exists, multiple GroupLot
-                elements may be needed. Description is the phrase recorded on the iCVI that defines
-                the group and justifies the absence of individual animal IDs. Because this phrase is
-                not easily computer interpretable, various structured elements are included that may
-                overlap the contents of the description. Species may be designated by code (see
-                SpeciesCodeType) or other (see SpeciesOtherType). A single GroupLotID is allowed as
-                a single string, not further defined in order to be species neutral. Quantity is a
-                optional number. Unit by default is "Number", as in a count. A different unit can be
-                specified as an optional string (guidelines on standardized units?). Edge cases
-                might require number to be a total weight of things like fish or shellfish. In those
-                cases "number" may be a decimal. Age is optional and may be specified as either: a
-                number of days, weeks, months or years plus the standard code for units (d|wk|mo|a)
-                (example: 3wk), age definitions adhere to UCUM -
-                http://unitsofmeasure.org/ucum.html), or as a specific date of birth as a four-digit
-                year, two-digit month, and two-digit date, separated by dashes (example:
-                2001-05-31). It is understood that groups consist of individuals varying in age so
-                that the Age element here represents a rough mid-point. In practice, Age is often
-                omitted and included in the Description such as "Feeder steers under 18 months."
-                Breed is optional and specified by two or three uppercase letters. The list is not
-                specified in the standard but most are available at:
-                https://www.naab-css.org/uniform-breed-codes, and
-                https://www.aphis.usda.gov/animal_health/vs_ocio/downloads/date_standards/icvi_data_concepts.pdf.
-                Sex (see SexType) is optional. SexDetail is an optional string. .
+      <blockquote> 
+                GroupLot is used for any grouping of similar animals that do not require individual identification. Rules for what constitute legal groups are defined in the federal ADT rule and various other legal sources. In general groups contain only animals of the same species and general age. All attributes apply to all members of the group. If significant variation exists, multiple GroupLot elements may be needed. Description is the phrase recorded on the iCVI that defines the group and justifies the absence of individual animal IDs. Because this phrase is not easily computer interpretable, various structured elements are included that may overlap the contents of the description. Species may be designated by code (see SpeciesCodeType) or other (see SpeciesOtherType). A single GroupLotID is allowed as a single string, not further defined in order to be species neutral. Quantity is a optional number. Unit by default is "Number", as in a count. A different unit can be specified as an optional string (guidelines on standardized units?). Edge cases might require number to be a total weight of things like fish or shellfish. In those cases "number" may be a decimal. Age is optional and may be specified as either: a number of days, weeks, months or years plus the standard code for units (d|wk|mo|a) (example: 3wk), age definitions adhere to UCUM - http://unitsofmeasure.org/ucum.html), or as a specific date of birth as a four-digit year, two-digit month, and two-digit date, separated by dashes (example: 2001-05-31). It is understood that groups consist of individuals varying in age so that the Age element here represents a rough mid-point. In practice, Age is often omitted and included in the Description such as "Feeder steers under 18 months." Breed is optional and specified by two or three uppercase letters. The list is not specified in the standard but most are available at: https://www.naab-css.org/uniform-breed-codes, and https://www.aphis.usda.gov/animal_health/vs_ocio/downloads/date_standards/icvi_data_concepts.pdf. Sex (see SexType) is optional. SexDetail is an optional string. .
             </blockquote>
       <h4>
          <i>Attributes</i>
@@ -666,8 +778,9 @@
          <li>
             <b>Age</b>: Optional<br/>
             <i>AgeType</i>
-            <blockquote> Age can be expressed as days , weeks, months, years, or as date of
-                birth. </blockquote>
+            <blockquote> 
+                Age can be expressed as days , weeks, months, years, or as date of birth. 
+            </blockquote>
             Pattern(s):<ul>
                <li>(&lt;|&gt;)? ?\d{1,3}(\.\d+)? ?(d|wk|mo|a)</li>
                <li>(19|20)\d\d-(0[1-9]|1[012])-(0[1-9]|[12]\d|3[01])</li>
@@ -678,8 +791,9 @@
          <li>
             <b>Sex</b>: Optional<br/>
             <i>GroupSexType</i>
-            <blockquote>Sex type only becomes complicated for groups and minor
-                species.</blockquote>
+            <blockquote>
+                Sex type becomes complicated for groups and minor species.
+            </blockquote>
             Values:<ul>
                <li>Female
                         ()
@@ -700,12 +814,14 @@
                         ()
                     </li>
                <li>Gender Unknown
-                        (Only applies to minor species in unusual cases such as non
-                        sexually dimorphic birds.)
+                        (
+                        Only applies to minor species in unusual cases such as non sexually dimorphic birds.
+                    )
                     </li>
                <li>Other
-                        (Only applies to minor species in unusual cases. Supply
-                        explanation in SexDetail)
+                        (
+                        Only applies to minor species in unusual cases. Supply explanation in SexDetail
+                    )
                     </li>
             </ul>
          </li>
@@ -714,8 +830,9 @@
          <li>
             <b>Description</b>: Required<br/>
             <i>nonNullString</i>
-            <blockquote>Require at least one non-whitespace character as least common
-                denominator for required elements.</blockquote>
+            <blockquote>
+                Require at least one non-whitespace character as least common denominator for required elements.
+            </blockquote>
             Pattern(s):<ul>
                <li>.*[^\s].*</li>
             </ul>
@@ -746,8 +863,9 @@
             <b>MiscAttribute</b>: Optional, may repeat</li>
       </ul>
       <h3>SpeciesCode</h3>
-      <blockquote> For animals with official species codes, the code is required with
-                optional text to add detail if necessary. </blockquote>
+      <blockquote> 
+                For animals with official species codes, the code is required with optional text to add detail if necessary. 
+            </blockquote>
       <h4>
          <i>Attributes</i>
       </h4>
@@ -755,54 +873,79 @@
          <li>
             <b>Code</b>: Required<br/>
             <i>SpeciesCodes</i>
-            <blockquote> A subset of USDA species codes to support the most common eCVI
-                usages. All other species can be sent as SpeciesOther which is not
-                enumerated.</blockquote>
+            <blockquote> 
+                A subset of USDA species codes to support the most common eCVI usages. All other species can be sent as SpeciesOther which is not enumerated.
+            </blockquote>
             Values:<ul>
                <li>AQU
-                        ( Aquaculture)
+                        ( 
+                        Aquaculture
+                    )
                     </li>
                <li>BEF
-                        ( Beef Cattle)
+                        ( 
+                        Beef Cattle
+                    )
                     </li>
                <li>BIS
-                        ( Bison)
-                    </li>
-               <li>BOV
-                        ( Bovine (Bison and Cattle) DEPRECATED)
+                        ( 
+                        Bison
+                    )
                     </li>
                <li>CAM
-                        ( Camelid (Alpacas, Llamas, etc.))
+                        ( 
+                        Camelid (Alpacas, Llamas, etc.)
+                    )
                     </li>
                <li>CAN
-                        ( Canine)
+                        ( 
+                        Canine
+                    )
                     </li>
                <li>CAP
-                        ( Caprine (Goats))
+                        ( 
+                        Caprine (Goats)
+                    )
                     </li>
                <li>CER
-                        ( Cervids)
+                        ( 
+                        Cervids
+                    )
                     </li>
                <li>CHI
-                        ( Chickens)
+                        ( 
+                        Chickens
+                    )
                     </li>
                <li>DAI
-                        ( Dairy Cattle)
+                        ( 
+                        Dairy Cattle
+                    )
                     </li>
                <li>EQU
-                        ( Equine (Horses, Mules, Donkeys, Burros))
+                        ( 
+                        Equine (Horses, Mules, Donkeys, Burros)
+                    )
                     </li>
                <li>FEL
-                        ( Feline)
+                        ( 
+                        Feline
+                    )
                     </li>
                <li>OVI
-                        ( Ovine (Sheep))
+                        ( 
+                        Ovine (Sheep)
+                    )
                     </li>
                <li>POR
-                        ( Porcine (Swine))
+                        ( 
+                        Porcine (Swine)
+                    )
                     </li>
                <li>TUR
-                        ( Turkeys)
+                        ( 
+                        Turkeys
+                    )
                     </li>
             </ul>
          </li>
@@ -810,12 +953,9 @@
             <b>Text</b>: Optional</li>
       </ul>
       <h3>SpeciesOther</h3>
-      <blockquote> The species coded in the standard include only those commonly needed
-                for regulatory action related to the movement. Many other official species codes can
-                be found at http://???? Because not all systems may understand these other codes,
-                human readable Text is required in addition to the code. For animals without an
-                official species code, the code may be omitted the default value is OTH and text
-                used to define the actual taxonomy is required.</blockquote>
+      <blockquote> 
+                The species coded in the standard include only those commonly needed for regulatory action related to the movement. Many other official species codes can be found at http://???? Because not all systems may understand these other codes, human readable Text is required in addition to the code. For animals without an official species code, the code may be omitted the default value is OTH and text used to define the actual taxonomy is required.
+            </blockquote>
       <h4>
          <i>Attributes</i>
       </h4>
@@ -825,18 +965,18 @@
          <li>
             <b>Text</b>: Required<br/>
             <i>nonNullString</i>
-            <blockquote>Require at least one non-whitespace character as least common
-                denominator for required elements.</blockquote>
+            <blockquote>
+                Require at least one non-whitespace character as least common denominator for required elements.
+            </blockquote>
             Pattern(s):<ul>
                <li>.*[^\s].*</li>
             </ul>
          </li>
       </ul>
       <h3>Test</h3>
-      <blockquote> Individual test results are included with each animal and reference
-                via ID/IDREF an accession. For herd testing this allows one accession with many
-                tests. For tests such as Equine Coggins tests that are one per accession it results
-                in slight extra overhead. </blockquote>
+      <blockquote> 
+                Individual test results are included with each animal and reference via ID/IDREF an accession. For herd testing this allows one accession with many tests. For tests such as Equine Coggins tests that are one per accession it results in slight extra overhead. 
+            </blockquote>
       <h4>
          <i>Attributes</i>
       </h4>
@@ -844,19 +984,11 @@
          <li>
             <b>AccessionRef</b>: Required</li>
          <li>
-            <b>TestCode</b>: Required<br/>
+            <b>TestType</b>: Optional<br/>
             <i>nonNullString</i>
-            <blockquote>Require at least one non-whitespace character as least common
-                denominator for required elements.</blockquote>
-            Pattern(s):<ul>
-               <li>.*[^\s].*</li>
-            </ul>
-         </li>
-         <li>
-            <b>TestName</b>: Optional<br/>
-            <i>nonNullString</i>
-            <blockquote>Require at least one non-whitespace character as least common
-                denominator for required elements.</blockquote>
+            <blockquote>
+                Require at least one non-whitespace character as least common denominator for required elements.
+            </blockquote>
             Pattern(s):<ul>
                <li>.*[^\s].*</li>
             </ul>
@@ -868,20 +1000,111 @@
       <ul>
          <li>
             <b>Result</b>: Required, may repeat</li>
+         <li> Either: <ul>
+               <li>
+                  <b>DiseaseCode</b>: Required</li>
+               <li>
+                  <b>DiseaseOther</b>: Required</li>
+            </ul>
+         </li>
       </ul>
-      <h3>Vaccination</h3>
-      <blockquote>Vaccination information for animal or group. For now the type of
-                vaccine is left as a simple string. Ideally will become a coded value from a
-                standard set. The date is optional but highly suggested. </blockquote>
+      <h3>DiseaseCode</h3>
+      <blockquote> For diseases with official disease codes, the code is required with
+                optional text to add detail if necessary. </blockquote>
       <h4>
          <i>Attributes</i>
       </h4>
       <ul>
          <li>
-            <b>Type</b>: Required<br/>
+            <b>Code</b>: Required<br/>
+            <i>DiseaseType</i>
+            <blockquote>Disease/condition used in testing and vaccination.</blockquote>
+            Values:<ul>
+               <li>Avian Influenza
+                        ()
+                    </li>
+               <li>Bovine Viral Diarrhea Virus
+                        ()
+                    </li>
+               <li>Brucella abortus
+                        ()
+                    </li>
+               <li>Brucella canis
+                        ()
+                    </li>
+               <li>Brucella ovis
+                        ()
+                    </li>
+               <li>Brucella suis
+                        ()
+                    </li>
+               <li>Caprine Arthritis and Encephalitis
+                        ()
+                    </li>
+               <li>Corynebacterium pseudotuberculosis
+                        ()
+                    </li>
+               <li>Equine Infectious Anemia
+                        ()
+                    </li>
+               <li>Pseudorabies
+                        ()
+                    </li>
+               <li>Rabies
+                        ()
+                    </li>
+               <li>Salmonella pullorum
+                        ()
+                    </li>
+               <li>Tritrichomonas foetus
+                        ()
+                    </li>
+               <li>Tuberculosis
+                        ()
+                    </li>
+            </ul>
+         </li>
+         <li>
+            <b>Text</b>: Optional</li>
+      </ul>
+      <h3>DiseaseOther</h3>
+      <blockquote> The disease coded in the standard include only those commonly needed
+                for regulatory action related to the movement. Many other disease codes potentially 
+                exist. Because not all systems may understand these other codes,
+                human readable Text is required in addition to the code. For diseases without an
+                official disease code, the code may be omitted the default value is OTH and text
+                used to define the actual disease is required.</blockquote>
+      <h4>
+         <i>Attributes</i>
+      </h4>
+      <ul>
+         <li>
+            <b>Code</b>: Optional</li>
+         <li>
+            <b>Text</b>: Required<br/>
             <i>nonNullString</i>
-            <blockquote>Require at least one non-whitespace character as least common
-                denominator for required elements.</blockquote>
+            <blockquote>
+                Require at least one non-whitespace character as least common denominator for required elements.
+            </blockquote>
+            Pattern(s):<ul>
+               <li>.*[^\s].*</li>
+            </ul>
+         </li>
+      </ul>
+      <h3>Vaccination</h3>
+      <blockquote>
+                Vaccination information for animal or group. For now the type of vaccine is left as a simple string. Ideally will become a coded value from a standard set. The date is optional but highly suggested. 
+            </blockquote>
+      <h4>
+         <i>Attributes</i>
+      </h4>
+      <ul>
+         <li>
+            <b>VaccineType</b>: Optional<br/>
+            <i>nonNullString</i>
+            <blockquote>
+                Require at least one non-whitespace character as least common denominator for required elements.
+            </blockquote>
             Pattern(s):<ul>
                <li>.*[^\s].*</li>
             </ul>
@@ -890,14 +1113,13 @@
             <b>Date</b>: Optional</li>
       </ul>
       <h3>Statements</h3>
-      <blockquote> Additional statements that may be required by various jurisdictions
-                may be included here. These statements must not take the place of or modify the
-                structured content found elsewhere in the standard.</blockquote>
+      <blockquote> 
+                Additional statements that may be required by various jurisdictions may be included here. These statements must not take the place of or modify the structured content found elsewhere in the standard.
+            </blockquote>
       <h3>MiscAttribute</h3>
-      <blockquote>Any additional information needed by specific implementations can be
-                provided as name/value pairs represented as strings. These data must not be
-                essential to proper understanding of the structured content of the standard data but
-                only extend it.</blockquote>
+      <blockquote>
+                Any additional information needed by specific implementations can be provided as name/value pairs represented as strings. These data must not be essential to proper understanding of the structured content of the standard data but only extend it.
+            </blockquote>
       <h4>
          <i>Attributes</i>
       </h4>
@@ -905,8 +1127,9 @@
          <li>
             <b>Name</b>: Required<br/>
             <i>nonNullString</i>
-            <blockquote>Require at least one non-whitespace character as least common
-                denominator for required elements.</blockquote>
+            <blockquote>
+                Require at least one non-whitespace character as least common denominator for required elements.
+            </blockquote>
             Pattern(s):<ul>
                <li>.*[^\s].*</li>
             </ul>
@@ -914,17 +1137,18 @@
          <li>
             <b>Value</b>: Required<br/>
             <i>nonNullString</i>
-            <blockquote>Require at least one non-whitespace character as least common
-                denominator for required elements.</blockquote>
+            <blockquote>
+                Require at least one non-whitespace character as least common denominator for required elements.
+            </blockquote>
             Pattern(s):<ul>
                <li>.*[^\s].*</li>
             </ul>
          </li>
       </ul>
       <h3>Product</h3>
-      <blockquote>Product is used to specify living animal products other than live
-                animals. Examples include eggs and semen. Test and Vaccination may apply to the
-                product itself or the "parent" animal(s).</blockquote>
+      <blockquote>
+                Product is used to specify living animal products other than live animals. Examples include eggs and semen. Test and Vaccination may apply to the product itself or the "parent" animal(s).
+            </blockquote>
       <h4>
          <i>Attributes</i>
       </h4>
@@ -934,10 +1158,40 @@
             <i>CommodityType</i>
             <blockquote>Type of commodity shipped.</blockquote>
             Values:<ul>
-               <li>Eggs
+               <li>Embryos
+                        ()
+                    </li>
+               <li>Hatching Eggs
+                        ()
+                    </li>
+               <li>Liquid Egg (Non-Pasteurized)
+                        ()
+                    </li>
+               <li>Liquid Egg (Pasteurized)
+                        ()
+                    </li>
+               <li>Milk (Pasteurized)
+                        ()
+                    </li>
+               <li>Milk (Raw)
+                        ()
+                    </li>
+               <li>Mohair/Cashmere
+                        ()
+                    </li>
+               <li>Shell Eggs (Nest Run)
+                        ()
+                    </li>
+               <li>Shell Eggs (Washed/Sanitized)
+                        ()
+                    </li>
+               <li>Shells/Inedible Egg Product
                         ()
                     </li>
                <li>Semen
+                        ()
+                    </li>
+               <li>Wool
                         ()
                     </li>
             </ul>
@@ -951,8 +1205,9 @@
          <li>
             <b>Description</b>: Required<br/>
             <i>nonNullString</i>
-            <blockquote>Require at least one non-whitespace character as least common
-                denominator for required elements.</blockquote>
+            <blockquote>
+                Require at least one non-whitespace character as least common denominator for required elements.
+            </blockquote>
             Pattern(s):<ul>
                <li>.*[^\s].*</li>
             </ul>
@@ -983,8 +1238,9 @@
             <b>MiscAttribute</b>: Optional, may repeat</li>
       </ul>
       <h3>SpeciesCode</h3>
-      <blockquote> For animals with official species codes, the code is required with
-                optional text to add detail if necessary. </blockquote>
+      <blockquote> 
+                For animals with official species codes, the code is required with optional text to add detail if necessary. 
+            </blockquote>
       <h4>
          <i>Attributes</i>
       </h4>
@@ -992,54 +1248,79 @@
          <li>
             <b>Code</b>: Required<br/>
             <i>SpeciesCodes</i>
-            <blockquote> A subset of USDA species codes to support the most common eCVI
-                usages. All other species can be sent as SpeciesOther which is not
-                enumerated.</blockquote>
+            <blockquote> 
+                A subset of USDA species codes to support the most common eCVI usages. All other species can be sent as SpeciesOther which is not enumerated.
+            </blockquote>
             Values:<ul>
                <li>AQU
-                        ( Aquaculture)
+                        ( 
+                        Aquaculture
+                    )
                     </li>
                <li>BEF
-                        ( Beef Cattle)
+                        ( 
+                        Beef Cattle
+                    )
                     </li>
                <li>BIS
-                        ( Bison)
-                    </li>
-               <li>BOV
-                        ( Bovine (Bison and Cattle) DEPRECATED)
+                        ( 
+                        Bison
+                    )
                     </li>
                <li>CAM
-                        ( Camelid (Alpacas, Llamas, etc.))
+                        ( 
+                        Camelid (Alpacas, Llamas, etc.)
+                    )
                     </li>
                <li>CAN
-                        ( Canine)
+                        ( 
+                        Canine
+                    )
                     </li>
                <li>CAP
-                        ( Caprine (Goats))
+                        ( 
+                        Caprine (Goats)
+                    )
                     </li>
                <li>CER
-                        ( Cervids)
+                        ( 
+                        Cervids
+                    )
                     </li>
                <li>CHI
-                        ( Chickens)
+                        ( 
+                        Chickens
+                    )
                     </li>
                <li>DAI
-                        ( Dairy Cattle)
+                        ( 
+                        Dairy Cattle
+                    )
                     </li>
                <li>EQU
-                        ( Equine (Horses, Mules, Donkeys, Burros))
+                        ( 
+                        Equine (Horses, Mules, Donkeys, Burros)
+                    )
                     </li>
                <li>FEL
-                        ( Feline)
+                        ( 
+                        Feline
+                    )
                     </li>
                <li>OVI
-                        ( Ovine (Sheep))
+                        ( 
+                        Ovine (Sheep)
+                    )
                     </li>
                <li>POR
-                        ( Porcine (Swine))
+                        ( 
+                        Porcine (Swine)
+                    )
                     </li>
                <li>TUR
-                        ( Turkeys)
+                        ( 
+                        Turkeys
+                    )
                     </li>
             </ul>
          </li>
@@ -1047,12 +1328,9 @@
             <b>Text</b>: Optional</li>
       </ul>
       <h3>SpeciesOther</h3>
-      <blockquote> The species coded in the standard include only those commonly needed
-                for regulatory action related to the movement. Many other official species codes can
-                be found at http://???? Because not all systems may understand these other codes,
-                human readable Text is required in addition to the code. For animals without an
-                official species code, the code may be omitted the default value is OTH and text
-                used to define the actual taxonomy is required.</blockquote>
+      <blockquote> 
+                The species coded in the standard include only those commonly needed for regulatory action related to the movement. Many other official species codes can be found at http://???? Because not all systems may understand these other codes, human readable Text is required in addition to the code. For animals without an official species code, the code may be omitted the default value is OTH and text used to define the actual taxonomy is required.
+            </blockquote>
       <h4>
          <i>Attributes</i>
       </h4>
@@ -1062,18 +1340,18 @@
          <li>
             <b>Text</b>: Required<br/>
             <i>nonNullString</i>
-            <blockquote>Require at least one non-whitespace character as least common
-                denominator for required elements.</blockquote>
+            <blockquote>
+                Require at least one non-whitespace character as least common denominator for required elements.
+            </blockquote>
             Pattern(s):<ul>
                <li>.*[^\s].*</li>
             </ul>
          </li>
       </ul>
       <h3>Test</h3>
-      <blockquote> Individual test results are included with each animal and reference
-                via ID/IDREF an accession. For herd testing this allows one accession with many
-                tests. For tests such as Equine Coggins tests that are one per accession it results
-                in slight extra overhead. </blockquote>
+      <blockquote> 
+                Individual test results are included with each animal and reference via ID/IDREF an accession. For herd testing this allows one accession with many tests. For tests such as Equine Coggins tests that are one per accession it results in slight extra overhead. 
+            </blockquote>
       <h4>
          <i>Attributes</i>
       </h4>
@@ -1081,19 +1359,11 @@
          <li>
             <b>AccessionRef</b>: Required</li>
          <li>
-            <b>TestCode</b>: Required<br/>
+            <b>TestType</b>: Optional<br/>
             <i>nonNullString</i>
-            <blockquote>Require at least one non-whitespace character as least common
-                denominator for required elements.</blockquote>
-            Pattern(s):<ul>
-               <li>.*[^\s].*</li>
-            </ul>
-         </li>
-         <li>
-            <b>TestName</b>: Optional<br/>
-            <i>nonNullString</i>
-            <blockquote>Require at least one non-whitespace character as least common
-                denominator for required elements.</blockquote>
+            <blockquote>
+                Require at least one non-whitespace character as least common denominator for required elements.
+            </blockquote>
             Pattern(s):<ul>
                <li>.*[^\s].*</li>
             </ul>
@@ -1105,20 +1375,111 @@
       <ul>
          <li>
             <b>Result</b>: Required, may repeat</li>
+         <li> Either: <ul>
+               <li>
+                  <b>DiseaseCode</b>: Required</li>
+               <li>
+                  <b>DiseaseOther</b>: Required</li>
+            </ul>
+         </li>
       </ul>
-      <h3>Vaccination</h3>
-      <blockquote>Vaccination information for animal or group. For now the type of
-                vaccine is left as a simple string. Ideally will become a coded value from a
-                standard set. The date is optional but highly suggested. </blockquote>
+      <h3>DiseaseCode</h3>
+      <blockquote> For diseases with official disease codes, the code is required with
+                optional text to add detail if necessary. </blockquote>
       <h4>
          <i>Attributes</i>
       </h4>
       <ul>
          <li>
-            <b>Type</b>: Required<br/>
+            <b>Code</b>: Required<br/>
+            <i>DiseaseType</i>
+            <blockquote>Disease/condition used in testing and vaccination.</blockquote>
+            Values:<ul>
+               <li>Avian Influenza
+                        ()
+                    </li>
+               <li>Bovine Viral Diarrhea Virus
+                        ()
+                    </li>
+               <li>Brucella abortus
+                        ()
+                    </li>
+               <li>Brucella canis
+                        ()
+                    </li>
+               <li>Brucella ovis
+                        ()
+                    </li>
+               <li>Brucella suis
+                        ()
+                    </li>
+               <li>Caprine Arthritis and Encephalitis
+                        ()
+                    </li>
+               <li>Corynebacterium pseudotuberculosis
+                        ()
+                    </li>
+               <li>Equine Infectious Anemia
+                        ()
+                    </li>
+               <li>Pseudorabies
+                        ()
+                    </li>
+               <li>Rabies
+                        ()
+                    </li>
+               <li>Salmonella pullorum
+                        ()
+                    </li>
+               <li>Tritrichomonas foetus
+                        ()
+                    </li>
+               <li>Tuberculosis
+                        ()
+                    </li>
+            </ul>
+         </li>
+         <li>
+            <b>Text</b>: Optional</li>
+      </ul>
+      <h3>DiseaseOther</h3>
+      <blockquote> The disease coded in the standard include only those commonly needed
+                for regulatory action related to the movement. Many other disease codes potentially 
+                exist. Because not all systems may understand these other codes,
+                human readable Text is required in addition to the code. For diseases without an
+                official disease code, the code may be omitted the default value is OTH and text
+                used to define the actual disease is required.</blockquote>
+      <h4>
+         <i>Attributes</i>
+      </h4>
+      <ul>
+         <li>
+            <b>Code</b>: Optional</li>
+         <li>
+            <b>Text</b>: Required<br/>
             <i>nonNullString</i>
-            <blockquote>Require at least one non-whitespace character as least common
-                denominator for required elements.</blockquote>
+            <blockquote>
+                Require at least one non-whitespace character as least common denominator for required elements.
+            </blockquote>
+            Pattern(s):<ul>
+               <li>.*[^\s].*</li>
+            </ul>
+         </li>
+      </ul>
+      <h3>Vaccination</h3>
+      <blockquote>
+                Vaccination information for animal or group. For now the type of vaccine is left as a simple string. Ideally will become a coded value from a standard set. The date is optional but highly suggested. 
+            </blockquote>
+      <h4>
+         <i>Attributes</i>
+      </h4>
+      <ul>
+         <li>
+            <b>VaccineType</b>: Optional<br/>
+            <i>nonNullString</i>
+            <blockquote>
+                Require at least one non-whitespace character as least common denominator for required elements.
+            </blockquote>
             Pattern(s):<ul>
                <li>.*[^\s].*</li>
             </ul>
@@ -1127,14 +1488,13 @@
             <b>Date</b>: Optional</li>
       </ul>
       <h3>Statements</h3>
-      <blockquote> Additional statements that may be required by various jurisdictions
-                may be included here. These statements must not take the place of or modify the
-                structured content found elsewhere in the standard.</blockquote>
+      <blockquote> 
+                Additional statements that may be required by various jurisdictions may be included here. These statements must not take the place of or modify the structured content found elsewhere in the standard.
+            </blockquote>
       <h3>MiscAttribute</h3>
-      <blockquote>Any additional information needed by specific implementations can be
-                provided as name/value pairs represented as strings. These data must not be
-                essential to proper understanding of the structured content of the standard data but
-                only extend it.</blockquote>
+      <blockquote>
+                Any additional information needed by specific implementations can be provided as name/value pairs represented as strings. These data must not be essential to proper understanding of the structured content of the standard data but only extend it.
+            </blockquote>
       <h4>
          <i>Attributes</i>
       </h4>
@@ -1142,8 +1502,9 @@
          <li>
             <b>Name</b>: Required<br/>
             <i>nonNullString</i>
-            <blockquote>Require at least one non-whitespace character as least common
-                denominator for required elements.</blockquote>
+            <blockquote>
+                Require at least one non-whitespace character as least common denominator for required elements.
+            </blockquote>
             Pattern(s):<ul>
                <li>.*[^\s].*</li>
             </ul>
@@ -1151,17 +1512,18 @@
          <li>
             <b>Value</b>: Required<br/>
             <i>nonNullString</i>
-            <blockquote>Require at least one non-whitespace character as least common
-                denominator for required elements.</blockquote>
+            <blockquote>
+                Require at least one non-whitespace character as least common denominator for required elements.
+            </blockquote>
             Pattern(s):<ul>
                <li>.*[^\s].*</li>
             </ul>
          </li>
       </ul>
       <h3>Veterinarian</h3>
-      <blockquote> Veterinarian is a required element for iCVIs. When available
-                deterministic identifier such as license number and state or national accreditation
-                number should be provided. </blockquote>
+      <blockquote> 
+                Veterinarian is a required element for iCVIs. When available deterministic identifier such as license number and state or national accreditation number should be provided. 
+            </blockquote>
       <h4>
          <i>Attributes</i>
       </h4>
@@ -1183,11 +1545,9 @@
             <b>Address</b>: Optional</li>
       </ul>
       <h3>InternationalAddress</h3>
-      <blockquote>Consignor, consignee, carrier, etc. may have US or international
-                addresses. Because these are more complicated and not as essential for machine
-                processing constraints such as state and zipcode are removed. "State or Provence"
-                uses element State and "Postal code" uses element ZIP simply to keep the structure
-                constent with common US usage.</blockquote>
+      <blockquote>
+                Consignor, consignee, carrier, etc. may have US or international addresses. Because these are more complicated and not as essential for machine processing constraints such as state and zipcode are removed. "State or Provence" uses element State and "Postal code" uses element ZIP simply to keep the structure constent with common US usage.
+            </blockquote>
       <h4>
          <i>Child Elements</i>
       </h4>
@@ -1212,13 +1572,9 @@
             <b>GeoPoint</b>: Optional</li>
       </ul>
       <h3>MovementPurposes</h3>
-      <blockquote> Movement Purposes is required, however, it may be an empty list. This
-                is a challenging element to populate because there are some many factors that become
-                important in regulatory decision making. This list encompasses many different
-                aspects of the animal's use, reason for movement, etc. As with many elements, the
-                goal has been to enumerate those most often used in regulatory and other decision
-                making but leave "Other" available. If "Other" is selected a reason should be
-                supplied as text in the "OtherReason" element.</blockquote>
+      <blockquote> 
+                Movement Purposes is required, however, it may be an empty list. This is a challenging element to populate because there are some many factors that become important in regulatory decision making. This list encompasses many different aspects of the animal's use, reason for movement, etc. As with many elements, the goal has been to enumerate those most often used in regulatory and other decision making but leave "Other" available. If "Other" is selected a reason should be supplied as text in the "OtherReason" element.
+            </blockquote>
       <h4>
          <i>Child Elements</i>
       </h4>
@@ -1287,45 +1643,48 @@
             <b>OtherReason</b>: Optional</li>
       </ul>
       <h3>Origin</h3>
-      <blockquote>The physical location of the animal(s) prior to movement is required.
-                Must be a physical (911) address.</blockquote>
+      <blockquote>
+                The physical location of the animal(s) prior to movement is required. Must be a physical (911) address.
+            </blockquote>
       <ul>
          <li>See: <i>PremType</i>
          </li>
       </ul>
       <h3>Destination</h3>
-      <blockquote>The intended physical location of the animal(s) after movement is
-                required. Must be a physical (911) address.</blockquote>
+      <blockquote>
+                The intended physical location of the animal(s) after movement is required. Must be a physical (911) address.
+            </blockquote>
       <ul>
          <li>See: <i>PremType</i>
          </li>
       </ul>
       <h3>Consignor</h3>
-      <blockquote>The contact information for the person or business responsible for the
-                animal(s) prior to movement. Only required if different from
-                Origin.</blockquote>
+      <blockquote>
+                The contact information for the person or business responsible for the animal(s) prior to movement. Only required if different from Origin.
+            </blockquote>
       <ul>
          <li>See: <i>ContactType</i>
          </li>
       </ul>
       <h3>Consignee</h3>
-      <blockquote>The contact information for the person or business responsible for the
-                animal(s) after to movement. Only required if different from
-                Destination.</blockquote>
+      <blockquote>
+                The contact information for the person or business responsible for the animal(s) after to movement. Only required if different from Destination.
+            </blockquote>
       <ul>
          <li>See: <i>ContactType</i>
          </li>
       </ul>
       <h3>Carrier</h3>
-      <blockquote>The contact information for the person or business responsible for
-                moving the animals from origin to destination. </blockquote>
+      <blockquote>
+                The contact information for the person or business responsible for moving the animals from origin to destination. 
+            </blockquote>
       <ul>
          <li>See: <i>ContactType</i>
          </li>
       </ul>
       <h3>TransportMode</h3>
-      <blockquote>If important for certification of ability to travel the mode, air,
-                car, rail, truck or boat (ship). </blockquote>
+      <blockquote>If important for certification of ability to travel the mode, air, car, rail, truck or boat (ship). 
+        </blockquote>
       <br/>
       <i/>
             Values:<ul>
@@ -1357,10 +1716,9 @@
          </li>
       </ul>
       <h3>Accessions</h3>
-      <blockquote>Because many herd movements have testing performed in one accession,
-                the accession(s) is(are) listed here and referenced by each test rather than
-                duplicating all the accession information for each test on each
-                animal.</blockquote>
+      <blockquote>
+                Because many herd movements have testing performed in one accession, the accession(s) is(are) listed here and referenced by each test rather than duplicating all the accession information for each test on each animal.
+            </blockquote>
       <h4>
          <i>Child Elements</i>
       </h4>
@@ -1369,16 +1727,9 @@
             <b>Accession</b>: Optional, may repeat</li>
       </ul>
       <h3>Accession</h3>
-      <blockquote> Accessions are listed for the CVI as a whole and referenced by each
-                test. An accession is defined as the encounter in which testing was performed. This
-                may be either laboratory testing or in field testing. A single Laboratory or Field
-                element must be specified, indicating where tests for this accession were performed.
-                InfieldTest is an optional boolean (true/false value) indicating if a test was
-                performed in the field. This redundancy is retained from version 1 that did not have
-                a distinct Field test element. ID is required, and is the reference number that
-                associates an animal’s individual tests performed as part of this accession. ID is
-                not the lab accession number but rather a distinct identifier used for linking
-                within the XML document. </blockquote>
+      <blockquote> 
+                Accessions are listed for the CVI as a whole and referenced by each test. An accession is defined as the encounter in which testing was performed. This may be either laboratory testing or in field testing. A single Laboratory or Field element must be specified, indicating where tests for this accession were performed. InfieldTest is an optional boolean (true/false value) indicating if a test was performed in the field. This redundancy is retained from version 1 that did not have a distinct Field test element. ID is required, and is the reference number that associates an animal's individual tests performed as part of this accession. ID is not the lab accession number but rather a distinct identifier used for linking within the XML document. 
+            </blockquote>
       <h4>
          <i>Attributes</i>
       </h4>
@@ -1401,14 +1752,9 @@
          </li>
       </ul>
       <h3>Laboratory</h3>
-      <blockquote>For testing done in or by a named laboratory, the Laboratory element
-                contains the relevant information. LabName is a required string. PremId (see
-                PremIdType) is optional only if unavailable. Address is optional only if unavailable
-                and should contain the lab physical address. AccessionDate is a required date.
-                AccessionNumber is a required string. Accession number is a distinct identifier
-                assigned by the Laboratory. NOTE: Only if the laboratory does not provide an
-                accession number, this value may be set to "Not Provided". This usage is not
-                applicable to equine Coggins test accessions. </blockquote>
+      <blockquote>
+                For testing done in or by a named laboratory, the Laboratory element contains the relevant information. LabName is a required string. PremId (see PremIdType) is optional only if unavailable. Address is optional only if unavailable and should contain the lab physical address. AccessionDate is a required date. AccessionNumber is a required string. Accession number is a distinct identifier assigned by the Laboratory. NOTE: Only if the laboratory does not provide an accession number, this value may be set to "Not Provided". This usage is not applicable to equine Coggins test accessions. 
+            </blockquote>
       <h4>
          <i>Attributes</i>
       </h4>
@@ -1418,8 +1764,9 @@
          <li>
             <b>AccessionNumber</b>: Required<br/>
             <i>nonNullString</i>
-            <blockquote>Require at least one non-whitespace character as least common
-                denominator for required elements.</blockquote>
+            <blockquote>
+                Require at least one non-whitespace character as least common denominator for required elements.
+            </blockquote>
             Pattern(s):<ul>
                <li>.*[^\s].*</li>
             </ul>
@@ -1434,10 +1781,9 @@
          <li>
             <b>PremId</b>: Optional<br/>
             <i>PremIdType</i>
-            <blockquote> PremIdType does minimal validation of true premises identifiers
-                including both PINs (7 characters and LIDs (6 or 8 characters). Only nationally
-                registered LIDs are appropriate. Implementing applications are highly encouraged to
-                validate against the appropriate checksum logic. </blockquote>
+            <blockquote> 
+                PremIdType does minimal validation of true premises identifiers including both PINs (7 characters and LIDs (6 or 8 characters). Only nationally registered LIDs are appropriate. Implementing applications are highly encouraged to validate against the appropriate checksum logic. 
+            </blockquote>
             Pattern(s):<ul>
                <li>[A-Z0-9]{6,8}</li>
             </ul>
@@ -1446,11 +1792,9 @@
             <b>Address</b>: Optional</li>
       </ul>
       <h3>InternationalAddress</h3>
-      <blockquote>Consignor, consignee, carrier, etc. may have US or international
-                addresses. Because these are more complicated and not as essential for machine
-                processing constraints such as state and zipcode are removed. "State or Provence"
-                uses element State and "Postal code" uses element ZIP simply to keep the structure
-                constent with common US usage.</blockquote>
+      <blockquote>
+                Consignor, consignee, carrier, etc. may have US or international addresses. Because these are more complicated and not as essential for machine processing constraints such as state and zipcode are removed. "State or Provence" uses element State and "Postal code" uses element ZIP simply to keep the structure constent with common US usage.
+            </blockquote>
       <h4>
          <i>Child Elements</i>
       </h4>
@@ -1475,10 +1819,8 @@
             <b>GeoPoint</b>: Optional</li>
       </ul>
       <h3>Field</h3>
-      <blockquote>For testing performed outside of a laboratory, the Field element
-                contains the relevant information. PremId (see PremIdType) is optional only if
-                unavailable. Address (see AddressType) is optional only if unavailable and should
-                contain the physical address of the test location. AccessionDate is a required date.
+      <blockquote>
+                For testing performed outside of a laboratory, the Field element contains the relevant information. PremId (see PremIdType) is optional only if unavailable. Address (see AddressType) is optional only if unavailable and should contain the physical address of the test location. AccessionDate is a required date.
             </blockquote>
       <h4>
          <i>Attributes</i>
@@ -1494,10 +1836,9 @@
          <li>
             <b>PremId</b>: Optional<br/>
             <i>PremIdType</i>
-            <blockquote> PremIdType does minimal validation of true premises identifiers
-                including both PINs (7 characters and LIDs (6 or 8 characters). Only nationally
-                registered LIDs are appropriate. Implementing applications are highly encouraged to
-                validate against the appropriate checksum logic. </blockquote>
+            <blockquote> 
+                PremIdType does minimal validation of true premises identifiers including both PINs (7 characters and LIDs (6 or 8 characters). Only nationally registered LIDs are appropriate. Implementing applications are highly encouraged to validate against the appropriate checksum logic. 
+            </blockquote>
             Pattern(s):<ul>
                <li>[A-Z0-9]{6,8}</li>
             </ul>
@@ -1506,10 +1847,9 @@
             <b>Address</b>: Optional</li>
       </ul>
       <h3>USAddress</h3>
-      <blockquote>Origin and destination require a structured address. Because of
-                variation in policy between jurisdictions this schema leaves each element optional.
-                However for a CVI to be valid in any jurisdiction, this element must contain enough
-                information for authorities to uniquely identify the location. </blockquote>
+      <blockquote>
+                Origin and destination require a structured address. Because of variation in policy between jurisdictions this schema leaves each element optional. However for a CVI to be valid in any jurisdiction, this element must contain enough information for authorities to uniquely identify the location. 
+            </blockquote>
       <h4>
          <i>Child Elements</i>
       </h4>
@@ -1525,15 +1865,19 @@
          <li>
             <b>State</b>: Required<br/>
             <i>StateCodeType</i>
-            <blockquote>State Code includes territories, APO addresses, etc. Does NOT include
-                Canadian provinces or Mexican states.</blockquote>
+            <blockquote>
+                State Code includes territories, APO addresses, etc. Does NOT include Canadian provinces or Mexican states.
+            </blockquote>
             Values:<ul>
                <li>AA
-                        (Military postal system in the Americas)
+                        (
+                        Military postal system in the Americas
+                    )
                     </li>
                <li>AE
-                        (Military postal system in Europe Africa and
-                        Canada)
+                        (
+                        Military postal system in Europe Africa and Canada
+                    )
                     </li>
                <li>AK
                         (Alaska)
@@ -1738,19 +2082,13 @@
             <b>GeoPoint</b>: Optional</li>
       </ul>
       <h3>Statements</h3>
-      <blockquote> Additional statements that may be required by various jurisdictions
-                may be included here. These statements must not take the place of or modify the
-                structured content found elsewhere in the standard.</blockquote>
+      <blockquote> 
+                Additional statements that may be required by various jurisdictions may be included here. These statements must not take the place of or modify the structured content found elsewhere in the standard.
+            </blockquote>
       <h3>Attachment</h3>
-      <blockquote> Attachments can be used for text or binary additional information not
-                specifically carried in one of the other Binary elements. Assumed to be from a file
-                so Filename is required along with a reference to the Binary content. Be aware that
-                receiving applications may ignore unknown or unexpected attachments. The actual
-                binary content of the attachment is carried in the Binary element as are any other
-                Binary fields. DocType is a required string. (put enumeration values in table
-                somehow? Is this list adequate?). Filename is a required string. (Why require a file
-                name? many may never have actually resided in a named file.) Comment is an optional
-                string. (For what purpose?)</blockquote>
+      <blockquote> 
+                Attachments can be used for text or binary additional information not specifically carried in one of the other Binary elements. Assumed to be from a file so Filename is required along with a reference to the Binary content. Be aware that receiving applications may ignore unknown or unexpected attachments. The  Binary fields. DocType is a required string. (put enumeration values in table somehow? Is this list adequate?). Filename is a required string. (Why require a file name? many may never have actually resided in a named file.) Comment is an optional string. (For what purpose?)
+            </blockquote>
       <h4>
          <i>Attributes</i>
       </h4>
@@ -1762,24 +2100,24 @@
             <i/>
             Values:<ul>
                <li>Scanned Paper CVI
-                        (For sending an image of original paper CVI along
-                                    with the extracted data. These may be image PDF or other image
-                                    format. )
+                        (
+                                    For sending an image of original paper CVI along with the extracted data. These may be image PDF or other image format. 
+                                )
                     </li>
                <li>Scanned Test Chart
-                        (For sending scanned test charts along with
-                                    electronic CVI or extracted data. These may be image PDF or
-                                    other image format. )
+                        (
+                                    For sending scanned test charts along with electronic CVI or extracted data. These may be image PDF or other image format. 
+                                )
                     </li>
                <li>PDF CVI
-                        (For sending data form PDF CVI along with extracted
-                                    data. These would be Adobe PDF forms, or XFA forms.
+                        (
+                                    For sending data form PDF CVI along with extracted data. These would be Adobe PDF forms, or XFA forms.
                                 )
                     </li>
                <li>PDF Test Chart
-                        (For sending data form PDF Test Chart along with
-                                    electronic CVI or extracted data. These would be Adobe PDF
-                                    forms, or XFA forms. )
+                        (
+                                    For sending data form PDF Test Chart along with electronic CVI or extracted data. These would be Adobe PDF forms, or XFA forms. 
+                                )
                     </li>
                <li>Other
                         (All other uses.)
@@ -1789,8 +2127,9 @@
          <li>
             <b>Filename</b>: Required<br/>
             <i>nonNullString</i>
-            <blockquote>Require at least one non-whitespace character as least common
-                denominator for required elements.</blockquote>
+            <blockquote>
+                Require at least one non-whitespace character as least common denominator for required elements.
+            </blockquote>
             Pattern(s):<ul>
                <li>.*[^\s].*</li>
             </ul>
@@ -1799,10 +2138,9 @@
             <b>Comment</b>: Optional</li>
       </ul>
       <h3>MiscAttribute</h3>
-      <blockquote>Any additional information needed by specific implementations can be
-                provided as name/value pairs represented as strings. These data must not be
-                essential to proper understanding of the structured content of the standard data but
-                only extend it.</blockquote>
+      <blockquote>
+                Any additional information needed by specific implementations can be provided as name/value pairs represented as strings. These data must not be essential to proper understanding of the structured content of the standard data but only extend it.
+            </blockquote>
       <h4>
          <i>Attributes</i>
       </h4>
@@ -1810,8 +2148,9 @@
          <li>
             <b>Name</b>: Required<br/>
             <i>nonNullString</i>
-            <blockquote>Require at least one non-whitespace character as least common
-                denominator for required elements.</blockquote>
+            <blockquote>
+                Require at least one non-whitespace character as least common denominator for required elements.
+            </blockquote>
             Pattern(s):<ul>
                <li>.*[^\s].*</li>
             </ul>
@@ -1819,16 +2158,18 @@
          <li>
             <b>Value</b>: Required<br/>
             <i>nonNullString</i>
-            <blockquote>Require at least one non-whitespace character as least common
-                denominator for required elements.</blockquote>
+            <blockquote>
+                Require at least one non-whitespace character as least common denominator for required elements.
+            </blockquote>
             Pattern(s):<ul>
                <li>.*[^\s].*</li>
             </ul>
          </li>
       </ul>
       <h3>Binary</h3>
-      <blockquote>All binary content is included as Binary and referenced in specific
-                elements by ID/IDREF.</blockquote>
+      <blockquote>
+                All binary content is included as Binary and referenced in specific elements by ID/IDREF.
+            </blockquote>
       <h4>
          <i>Attributes</i>
       </h4>
@@ -1838,9 +2179,9 @@
          <li>
             <b>MimeType</b>: Optional<br/>
             <i>MimeType</i>
-            <blockquote>For complete information see:
-                https://www.iana.org/assignments/media-types/media-types.xhtml. For common examples
-                see: https://en.wikipedia.org/wiki/Media_type </blockquote>
+            <blockquote>
+                For complete information see: https://www.iana.org/assignments/media-types/media-types.xhtml. For common examples see: https://en.wikipedia.org/wiki/Media_type 
+            </blockquote>
             Pattern(s):<ul>
                <li>.{1,127}/.{1,127}</li>
             </ul>
@@ -1855,10 +2196,9 @@
       </ul>
       <h2>Defined Types:</h2>
       <h3>USAddress</h3>
-      <blockquote>Origin and destination require a structured address. Because of
-                variation in policy between jurisdictions this schema leaves each element optional.
-                However for a CVI to be valid in any jurisdiction, this element must contain enough
-                information for authorities to uniquely identify the location. </blockquote>
+      <blockquote>
+                Origin and destination require a structured address. Because of variation in policy between jurisdictions this schema leaves each element optional. However for a CVI to be valid in any jurisdiction, this element must contain enough information for authorities to uniquely identify the location. 
+            </blockquote>
       <h4>
          <i>Child Elements</i>
       </h4>
@@ -1874,15 +2214,19 @@
          <li>
             <b>State</b>: Required<br/>
             <i>StateCodeType</i>
-            <blockquote>State Code includes territories, APO addresses, etc. Does NOT include
-                Canadian provinces or Mexican states.</blockquote>
+            <blockquote>
+                State Code includes territories, APO addresses, etc. Does NOT include Canadian provinces or Mexican states.
+            </blockquote>
             Values:<ul>
                <li>AA
-                        (Military postal system in the Americas)
+                        (
+                        Military postal system in the Americas
+                    )
                     </li>
                <li>AE
-                        (Military postal system in Europe Africa and
-                        Canada)
+                        (
+                        Military postal system in Europe Africa and Canada
+                    )
                     </li>
                <li>AK
                         (Alaska)
@@ -2087,11 +2431,9 @@
             <b>GeoPoint</b>: Optional</li>
       </ul>
       <h3>InternationalAddress</h3>
-      <blockquote>Consignor, consignee, carrier, etc. may have US or international
-                addresses. Because these are more complicated and not as essential for machine
-                processing constraints such as state and zipcode are removed. "State or Provence"
-                uses element State and "Postal code" uses element ZIP simply to keep the structure
-                constent with common US usage.</blockquote>
+      <blockquote>
+                Consignor, consignee, carrier, etc. may have US or international addresses. Because these are more complicated and not as essential for machine processing constraints such as state and zipcode are removed. "State or Provence" uses element State and "Postal code" uses element ZIP simply to keep the structure constent with common US usage.
+            </blockquote>
       <h4>
          <i>Child Elements</i>
       </h4>
@@ -2116,12 +2458,9 @@
             <b>GeoPoint</b>: Optional</li>
       </ul>
       <h3>PremType</h3>
-      <blockquote> PremType is used for origin and destination, and must be actual
-                physical (animal?) locations. PremId (see PremIdType) is optional only if
-                unavailable. PremName is an optional string. Address is required (see AddressType).
-                ProgramStatus (see ProgramStatusType) is optional, but there is no limit on
-                additional ProgramStatuses. Person (see PersonType) is required (why?), and there is
-                no limit on additional Persons. </blockquote>
+      <blockquote> 
+                PremType is used for origin and destination, and must be actual physical (animal?) locations. PremId (see PremIdType) is optional only if unavailable. PremName is an optional string. Address is required (see AddressType). ProgramStatus (see ProgramStatusType) is optional, but there is no limit on additional ProgramStatuses. Person (see PersonType) is required (why?), and there is no limit on additional Persons. 
+            </blockquote>
       <h4>
          <i>Child Elements</i>
       </h4>
@@ -2129,10 +2468,9 @@
          <li>
             <b>PremId</b>: Optional<br/>
             <i>PremIdType</i>
-            <blockquote> PremIdType does minimal validation of true premises identifiers
-                including both PINs (7 characters and LIDs (6 or 8 characters). Only nationally
-                registered LIDs are appropriate. Implementing applications are highly encouraged to
-                validate against the appropriate checksum logic. </blockquote>
+            <blockquote> 
+                PremIdType does minimal validation of true premises identifiers including both PINs (7 characters and LIDs (6 or 8 characters). Only nationally registered LIDs are appropriate. Implementing applications are highly encouraged to validate against the appropriate checksum logic. 
+            </blockquote>
             Pattern(s):<ul>
                <li>[A-Z0-9]{6,8}</li>
             </ul>
@@ -2152,8 +2490,9 @@
       <i>USAddress</i>
       <br/>
       <h3>StateZoneOrAreaStatus</h3>
-      <blockquote>Statuses are explicitly enumerated for bovine Brucellosis and TB, and
-                left as simple name/value for others. </blockquote>
+      <blockquote>
+                Statuses are explicitly enumerated for bovine Brucellosis and TB, and left as simple name/value for others. 
+            </blockquote>
       <h4>
          <i>Child Elements</i>
       </h4>
@@ -2230,8 +2569,9 @@
          <li>
             <b>Disease</b>: Required<br/>
             <i>nonNullString</i>
-            <blockquote>Require at least one non-whitespace character as least common
-                denominator for required elements.</blockquote>
+            <blockquote>
+                Require at least one non-whitespace character as least common denominator for required elements.
+            </blockquote>
             Pattern(s):<ul>
                <li>.*[^\s].*</li>
             </ul>
@@ -2239,17 +2579,18 @@
          <li>
             <b>Status</b>: Required<br/>
             <i>nonNullString</i>
-            <blockquote>Require at least one non-whitespace character as least common
-                denominator for required elements.</blockquote>
+            <blockquote>
+                Require at least one non-whitespace character as least common denominator for required elements.
+            </blockquote>
             Pattern(s):<ul>
                <li>.*[^\s].*</li>
             </ul>
          </li>
       </ul>
       <h3>HerdOrFlockStatus</h3>
-      <blockquote>Herd or flock status vary enough that enumerating all the variations
-                was impractical. These statuses are represented as a name, value pair with an
-                optional herd or flock ID</blockquote>
+      <blockquote>
+                Herd or flock status vary enough that enumerating all the variations was impractical. These statuses are represented as a name, value pair with an optional herd or flock ID
+            </blockquote>
       <h4>
          <i>Attributes</i>
       </h4>
@@ -2257,8 +2598,9 @@
          <li>
             <b>Disease</b>: Required<br/>
             <i>nonNullString</i>
-            <blockquote>Require at least one non-whitespace character as least common
-                denominator for required elements.</blockquote>
+            <blockquote>
+                Require at least one non-whitespace character as least common denominator for required elements.
+            </blockquote>
             Pattern(s):<ul>
                <li>.*[^\s].*</li>
             </ul>
@@ -2269,11 +2611,9 @@
             <b>Status</b>: Optional</li>
       </ul>
       <h3>Person</h3>
-      <blockquote>NOTE: Person as defined in Veterinarian can only be a
-                            natural person. That is, it cannot be a business, must include first and
-                            last name. If the single string element Name is used instead, it must
-                            include first and last name although that requirement is not schema
-                            enforceable.</blockquote>
+      <blockquote>
+                            NOTE: Person as defined in Veterinarian can only be a natural person. That is, it cannot be a business, must include first and last name. If the single string element Name is used instead, it must include first and last name although that requirement is not schema enforceable.
+                        </blockquote>
       <h4>
          <i>Child Elements</i>
       </h4>
@@ -2288,11 +2628,14 @@
          <li>
             <b>Phone</b>: Optional, may repeat</li>
          <li>
+            <b>InternationalPhone</b>: Optional, may repeat</li>
+         <li>
             <b>Email</b>: Optional, may repeat</li>
       </ul>
       <h3>Phone</h3>
-      <blockquote> The Phone Number specifies type (list enumeration values?) and a
-                ten-digit number, and can include a comment. </blockquote>
+      <blockquote> 
+                The Phone Number specifies type (list enumeration values?) and a ten-digit number, and can include a comment. 
+            </blockquote>
       <h4>
          <i>Attributes</i>
       </h4>
@@ -2307,7 +2650,42 @@
          <li>
             <b>Comment</b>: Optional</li>
          <li>
-            <b>Type</b>: Required<br/>
+            <b>Type</b>: Optional<br/>
+            <i/>
+            Values:<ul>
+               <li>Unknown
+                        (Probably the most common.)
+                    </li>
+               <li>Landline
+                        (If known to be fixed location.)
+                    </li>
+               <li>Cellphone
+                        (If known to be a mobile phone.)
+                    </li>
+               <li>Fax
+                        (Fax line.)
+                    </li>
+            </ul>
+         </li>
+      </ul>
+      <h3>InternationalPhone</h3>
+      <blockquote> The International Phone Number specifies type (list enumeration values?), a
+                phone number including international country code, and can include a comment. </blockquote>
+      <h4>
+         <i>Attributes</i>
+      </h4>
+      <ul>
+         <li>
+            <b>Number</b>: Required<br/>
+            <i/>
+            Pattern(s):<ul>
+               <li>(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$</li>
+            </ul>
+         </li>
+         <li>
+            <b>Comment</b>: Optional</li>
+         <li>
+            <b>Type</b>: Optional<br/>
             <i/>
             Values:<ul>
                <li>Unknown
@@ -2333,18 +2711,16 @@
          <li>
             <b>Address</b>: Required<br/>
             <i>EmailType</i>
-            <blockquote>Optional email address following simplified standard email address
-                pattern.</blockquote>
+            <blockquote>
+                Optional email address following simplified standard email address pattern.
+            </blockquote>
             Pattern(s):<ul>
                <li>[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,24}</li>
             </ul>
          </li>
       </ul>
       <h3>Person</h3>
-      <blockquote> Person is defined as a Name string and an optional Phone Number (see
-                Phone). Because of a lack of industry consensus on hanling names, Name can be
-                provided as either a single string (Name) or individual name components
-                (NameParts).</blockquote>
+      <blockquote> Person is defined as a Name string and an optional Phone Number (see Phone). Because of a lack of industry consensus on hanling names, Name can be provided as either a single string (Name) or individual name components (NameParts).</blockquote>
       <h4>
          <i>Child Elements</i>
       </h4>
@@ -2358,6 +2734,8 @@
          </li>
          <li>
             <b>Phone</b>: Optional, may repeat</li>
+         <li>
+            <b>InternationalPhone</b>: Optional, may repeat</li>
          <li>
             <b>Email</b>: Optional, may repeat</li>
       </ul>
@@ -2365,8 +2743,9 @@
       <i>NameParts</i>
       <br/>
       <h3>Phone</h3>
-      <blockquote> The Phone Number specifies type (list enumeration values?) and a
-                ten-digit number, and can include a comment. </blockquote>
+      <blockquote> 
+                The Phone Number specifies type (list enumeration values?) and a ten-digit number, and can include a comment. 
+            </blockquote>
       <h4>
          <i>Attributes</i>
       </h4>
@@ -2381,7 +2760,42 @@
          <li>
             <b>Comment</b>: Optional</li>
          <li>
-            <b>Type</b>: Required<br/>
+            <b>Type</b>: Optional<br/>
+            <i/>
+            Values:<ul>
+               <li>Unknown
+                        (Probably the most common.)
+                    </li>
+               <li>Landline
+                        (If known to be fixed location.)
+                    </li>
+               <li>Cellphone
+                        (If known to be a mobile phone.)
+                    </li>
+               <li>Fax
+                        (Fax line.)
+                    </li>
+            </ul>
+         </li>
+      </ul>
+      <h3>InternationalPhone</h3>
+      <blockquote> The International Phone Number specifies type (list enumeration values?), a
+                phone number including international country code, and can include a comment. </blockquote>
+      <h4>
+         <i>Attributes</i>
+      </h4>
+      <ul>
+         <li>
+            <b>Number</b>: Required<br/>
+            <i/>
+            Pattern(s):<ul>
+               <li>(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$</li>
+            </ul>
+         </li>
+         <li>
+            <b>Comment</b>: Optional</li>
+         <li>
+            <b>Type</b>: Optional<br/>
             <i/>
             Values:<ul>
                <li>Unknown
@@ -2407,17 +2821,18 @@
          <li>
             <b>Address</b>: Required<br/>
             <i>EmailType</i>
-            <blockquote>Optional email address following simplified standard email address
-                pattern.</blockquote>
+            <blockquote>
+                Optional email address following simplified standard email address pattern.
+            </blockquote>
             Pattern(s):<ul>
                <li>[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,24}</li>
             </ul>
          </li>
       </ul>
       <h3>ContactType</h3>
-      <blockquote> ContactType is used for consignor and consignee that may be actual
-                physical locations or other postal addresses. The Address should be the best contact
-                address.</blockquote>
+      <blockquote> 
+                ContactType is used for consignor and consignee that may be actual physical locations or other postal addresses. The Address should be the best contact address.
+            </blockquote>
       <h4>
          <i>Child Elements</i>
       </h4>
@@ -2431,11 +2846,9 @@
       <i>InternationalAddress</i>
       <br/>
       <h3>Person</h3>
-      <blockquote>NOTE: Person as defined in Veterinarian can only be a
-                            natural person. That is, it cannot be a business, must include first and
-                            last name. If the single string element Name is used instead, it must
-                            include first and last name although that requirement is not schema
-                            enforceable.</blockquote>
+      <blockquote>
+                            NOTE: Person as defined in Veterinarian can only be a natural person. That is, it cannot be a business, must include first and last name. If the single string element Name is used instead, it must include first and last name although that requirement is not schema enforceable.
+                        </blockquote>
       <h4>
          <i>Child Elements</i>
       </h4>
@@ -2450,11 +2863,14 @@
          <li>
             <b>Phone</b>: Optional, may repeat</li>
          <li>
+            <b>InternationalPhone</b>: Optional, may repeat</li>
+         <li>
             <b>Email</b>: Optional, may repeat</li>
       </ul>
       <h3>Phone</h3>
-      <blockquote> The Phone Number specifies type (list enumeration values?) and a
-                ten-digit number, and can include a comment. </blockquote>
+      <blockquote> 
+                The Phone Number specifies type (list enumeration values?) and a ten-digit number, and can include a comment. 
+            </blockquote>
       <h4>
          <i>Attributes</i>
       </h4>
@@ -2469,7 +2885,42 @@
          <li>
             <b>Comment</b>: Optional</li>
          <li>
-            <b>Type</b>: Required<br/>
+            <b>Type</b>: Optional<br/>
+            <i/>
+            Values:<ul>
+               <li>Unknown
+                        (Probably the most common.)
+                    </li>
+               <li>Landline
+                        (If known to be fixed location.)
+                    </li>
+               <li>Cellphone
+                        (If known to be a mobile phone.)
+                    </li>
+               <li>Fax
+                        (Fax line.)
+                    </li>
+            </ul>
+         </li>
+      </ul>
+      <h3>InternationalPhone</h3>
+      <blockquote> The International Phone Number specifies type (list enumeration values?), a
+                phone number including international country code, and can include a comment. </blockquote>
+      <h4>
+         <i>Attributes</i>
+      </h4>
+      <ul>
+         <li>
+            <b>Number</b>: Required<br/>
+            <i/>
+            Pattern(s):<ul>
+               <li>(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$</li>
+            </ul>
+         </li>
+         <li>
+            <b>Comment</b>: Optional</li>
+         <li>
+            <b>Type</b>: Optional<br/>
             <i/>
             Values:<ul>
                <li>Unknown
@@ -2495,18 +2946,16 @@
          <li>
             <b>Address</b>: Required<br/>
             <i>EmailType</i>
-            <blockquote>Optional email address following simplified standard email address
-                pattern.</blockquote>
+            <blockquote>
+                Optional email address following simplified standard email address pattern.
+            </blockquote>
             Pattern(s):<ul>
                <li>[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,24}</li>
             </ul>
          </li>
       </ul>
       <h3>Person</h3>
-      <blockquote> Person is defined as a Name string and an optional Phone Number (see
-                Phone). Because of a lack of industry consensus on hanling names, Name can be
-                provided as either a single string (Name) or individual name components
-                (NameParts).</blockquote>
+      <blockquote> Person is defined as a Name string and an optional Phone Number (see Phone). Because of a lack of industry consensus on hanling names, Name can be provided as either a single string (Name) or individual name components (NameParts).</blockquote>
       <h4>
          <i>Child Elements</i>
       </h4>
@@ -2520,6 +2969,8 @@
          </li>
          <li>
             <b>Phone</b>: Optional, may repeat</li>
+         <li>
+            <b>InternationalPhone</b>: Optional, may repeat</li>
          <li>
             <b>Email</b>: Optional, may repeat</li>
       </ul>
@@ -2527,8 +2978,9 @@
       <i>NameParts</i>
       <br/>
       <h3>Phone</h3>
-      <blockquote> The Phone Number specifies type (list enumeration values?) and a
-                ten-digit number, and can include a comment. </blockquote>
+      <blockquote> 
+                The Phone Number specifies type (list enumeration values?) and a ten-digit number, and can include a comment. 
+            </blockquote>
       <h4>
          <i>Attributes</i>
       </h4>
@@ -2543,7 +2995,42 @@
          <li>
             <b>Comment</b>: Optional</li>
          <li>
-            <b>Type</b>: Required<br/>
+            <b>Type</b>: Optional<br/>
+            <i/>
+            Values:<ul>
+               <li>Unknown
+                        (Probably the most common.)
+                    </li>
+               <li>Landline
+                        (If known to be fixed location.)
+                    </li>
+               <li>Cellphone
+                        (If known to be a mobile phone.)
+                    </li>
+               <li>Fax
+                        (Fax line.)
+                    </li>
+            </ul>
+         </li>
+      </ul>
+      <h3>InternationalPhone</h3>
+      <blockquote> The International Phone Number specifies type (list enumeration values?), a
+                phone number including international country code, and can include a comment. </blockquote>
+      <h4>
+         <i>Attributes</i>
+      </h4>
+      <ul>
+         <li>
+            <b>Number</b>: Required<br/>
+            <i/>
+            Pattern(s):<ul>
+               <li>(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$</li>
+            </ul>
+         </li>
+         <li>
+            <b>Comment</b>: Optional</li>
+         <li>
+            <b>Type</b>: Optional<br/>
             <i/>
             Values:<ul>
                <li>Unknown
@@ -2569,8 +3056,265 @@
          <li>
             <b>Address</b>: Required<br/>
             <i>EmailType</i>
-            <blockquote>Optional email address following simplified standard email address
-                pattern.</blockquote>
+            <blockquote>
+                Optional email address following simplified standard email address pattern.
+            </blockquote>
+            Pattern(s):<ul>
+               <li>[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,24}</li>
+            </ul>
+         </li>
+      </ul>
+      <h3>ApprovalType</h3>
+      <blockquote>
+                Used to confer regulatory official approval of a movement document.
+            </blockquote>
+      <h4>
+         <i>Attributes</i>
+      </h4>
+      <ul>
+         <li>
+            <b>Type</b>: Required<br/>
+            <i>ApprovalListType</i>
+            <blockquote> 
+                This list includes the approval types associated with covered movement documents.
+            </blockquote>
+            Values:<ul>
+               <li>NPIPParticipation
+                        (
+                        Certification of current NPIP participation (used for NPIP 9-3).
+                    )
+                    </li>
+               <li>NPIPClassification
+                        (
+                        Certification correct of NPIP classification of listed products (used for NPIP 9-3).
+                    )
+                    </li>
+            </ul>
+         </li>
+         <li>
+            <b>Date</b>: Required</li>
+      </ul>
+      <h4>
+         <i>Child Elements</i>
+      </h4>
+      <ul>
+         <li>
+            <b>Person</b>: Required, may repeat</li>
+      </ul>
+      <h3>Person</h3>
+      <blockquote>
+                            NOTE: Person as defined in Veterinarian can only be a natural person. That is, it cannot be a business, must include first and last name. If the single string element Name is used instead, it must include first and last name although that requirement is not schema enforceable.
+                        </blockquote>
+      <h4>
+         <i>Child Elements</i>
+      </h4>
+      <ul>
+         <li> Either: <ul>
+               <li>
+                  <b>NameParts</b>: Required</li>
+               <li>
+                  <b>Name</b>: Required</li>
+            </ul>
+         </li>
+         <li>
+            <b>Phone</b>: Optional, may repeat</li>
+         <li>
+            <b>InternationalPhone</b>: Optional, may repeat</li>
+         <li>
+            <b>Email</b>: Optional, may repeat</li>
+      </ul>
+      <h3>Phone</h3>
+      <blockquote> 
+                The Phone Number specifies type (list enumeration values?) and a ten-digit number, and can include a comment. 
+            </blockquote>
+      <h4>
+         <i>Attributes</i>
+      </h4>
+      <ul>
+         <li>
+            <b>Number</b>: Required<br/>
+            <i/>
+            Pattern(s):<ul>
+               <li>\d{10}</li>
+            </ul>
+         </li>
+         <li>
+            <b>Comment</b>: Optional</li>
+         <li>
+            <b>Type</b>: Optional<br/>
+            <i/>
+            Values:<ul>
+               <li>Unknown
+                        (Probably the most common.)
+                    </li>
+               <li>Landline
+                        (If known to be fixed location.)
+                    </li>
+               <li>Cellphone
+                        (If known to be a mobile phone.)
+                    </li>
+               <li>Fax
+                        (Fax line.)
+                    </li>
+            </ul>
+         </li>
+      </ul>
+      <h3>InternationalPhone</h3>
+      <blockquote> The International Phone Number specifies type (list enumeration values?), a
+                phone number including international country code, and can include a comment. </blockquote>
+      <h4>
+         <i>Attributes</i>
+      </h4>
+      <ul>
+         <li>
+            <b>Number</b>: Required<br/>
+            <i/>
+            Pattern(s):<ul>
+               <li>(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$</li>
+            </ul>
+         </li>
+         <li>
+            <b>Comment</b>: Optional</li>
+         <li>
+            <b>Type</b>: Optional<br/>
+            <i/>
+            Values:<ul>
+               <li>Unknown
+                        (Probably the most common.)
+                    </li>
+               <li>Landline
+                        (If known to be fixed location.)
+                    </li>
+               <li>Cellphone
+                        (If known to be a mobile phone.)
+                    </li>
+               <li>Fax
+                        (Fax line.)
+                    </li>
+            </ul>
+         </li>
+      </ul>
+      <h3>Email</h3>
+      <h4>
+         <i>Attributes</i>
+      </h4>
+      <ul>
+         <li>
+            <b>Address</b>: Required<br/>
+            <i>EmailType</i>
+            <blockquote>
+                Optional email address following simplified standard email address pattern.
+            </blockquote>
+            Pattern(s):<ul>
+               <li>[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,24}</li>
+            </ul>
+         </li>
+      </ul>
+      <h3>Person</h3>
+      <blockquote> Person is defined as a Name string and an optional Phone Number (see Phone). Because of a lack of industry consensus on hanling names, Name can be provided as either a single string (Name) or individual name components (NameParts).</blockquote>
+      <h4>
+         <i>Child Elements</i>
+      </h4>
+      <ul>
+         <li> Either: <ul>
+               <li>
+                  <b>NameParts</b>: Required</li>
+               <li>
+                  <b>Name</b>: Required</li>
+            </ul>
+         </li>
+         <li>
+            <b>Phone</b>: Optional, may repeat</li>
+         <li>
+            <b>InternationalPhone</b>: Optional, may repeat</li>
+         <li>
+            <b>Email</b>: Optional, may repeat</li>
+      </ul>
+      <b>See: </b>
+      <i>NameParts</i>
+      <br/>
+      <h3>Phone</h3>
+      <blockquote> 
+                The Phone Number specifies type (list enumeration values?) and a ten-digit number, and can include a comment. 
+            </blockquote>
+      <h4>
+         <i>Attributes</i>
+      </h4>
+      <ul>
+         <li>
+            <b>Number</b>: Required<br/>
+            <i/>
+            Pattern(s):<ul>
+               <li>\d{10}</li>
+            </ul>
+         </li>
+         <li>
+            <b>Comment</b>: Optional</li>
+         <li>
+            <b>Type</b>: Optional<br/>
+            <i/>
+            Values:<ul>
+               <li>Unknown
+                        (Probably the most common.)
+                    </li>
+               <li>Landline
+                        (If known to be fixed location.)
+                    </li>
+               <li>Cellphone
+                        (If known to be a mobile phone.)
+                    </li>
+               <li>Fax
+                        (Fax line.)
+                    </li>
+            </ul>
+         </li>
+      </ul>
+      <h3>InternationalPhone</h3>
+      <blockquote> The International Phone Number specifies type (list enumeration values?), a
+                phone number including international country code, and can include a comment. </blockquote>
+      <h4>
+         <i>Attributes</i>
+      </h4>
+      <ul>
+         <li>
+            <b>Number</b>: Required<br/>
+            <i/>
+            Pattern(s):<ul>
+               <li>(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$</li>
+            </ul>
+         </li>
+         <li>
+            <b>Comment</b>: Optional</li>
+         <li>
+            <b>Type</b>: Optional<br/>
+            <i/>
+            Values:<ul>
+               <li>Unknown
+                        (Probably the most common.)
+                    </li>
+               <li>Landline
+                        (If known to be fixed location.)
+                    </li>
+               <li>Cellphone
+                        (If known to be a mobile phone.)
+                    </li>
+               <li>Fax
+                        (Fax line.)
+                    </li>
+            </ul>
+         </li>
+      </ul>
+      <h3>Email</h3>
+      <h4>
+         <i>Attributes</i>
+      </h4>
+      <ul>
+         <li>
+            <b>Address</b>: Required<br/>
+            <i>EmailType</i>
+            <blockquote>
+                Optional email address following simplified standard email address pattern.
+            </blockquote>
             Pattern(s):<ul>
                <li>[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,24}</li>
             </ul>
