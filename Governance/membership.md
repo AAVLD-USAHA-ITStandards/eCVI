@@ -15,7 +15,7 @@ Carissa Allen                     carissa.allen@state.mn.us                State
 Craig Carter                      Craig.carter@uky.edu                     Academic
 Dee Ellis                         dee.ellis@ag.tamu.edu                    CVI Vendor
 Dave Dice                         dave.dice@state.co.us                    State
-Jill Wagner                       jwagner@globalvetlink.com                CVI Vendor
+Marty Zaluski                     mzaluski@globalvetlink.com               CVI Vendor
 Julie Green                       jmgreen@vt.edu                           Academic
 Justin Smith                      justin.smith@ks.gov                      State
 Michael McGrath                   mmcgrath@tracefirst.com                  DB Vendor
@@ -36,9 +36,10 @@ Russell Iselt                     russell.iselt@tahc.texas.gov             State
 Scott Leibsle                     scott.leibsle@isda.idaho.gov             State/CVI Vendor
 David Hecimovich                  dhecimovich@agr.wa.gov                   State
 Diane Kitchen                     Diane.Kitchen@fdacs.gov                  State
-Maria Cooper                      mcooper1@boah.in.gov                     State
+Brian McCluskey                   bmccluskey@tracefirst.com                DB Vendor
 Michael Russell                   mrussell@globalvetlink.com               CVI Vendor
 Peter Mundschenk                  drpmundschenk@gmail.com                  Other
 Stacey Schwabenlander             Stacey.schwabenlander@usda.gov           Fed
 Kathy Finnerty                    kfinnerty@tracefirst.com                 DB Vendor
 KJ Osenenko                       kosenenko@tracefirst.com                 DB Vendor
+Giovani Trevisan                  trevisan@iastate.edu                     State
