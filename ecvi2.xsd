@@ -1038,7 +1038,7 @@
             <xs:sequence minOccurs="1" maxOccurs="unbounded">
                 <xs:choice>
                     <xs:element ref="AIN"/>
-					<xs:element ref="InternationalAIN"/>
+                    <xs:element ref="InternationalAIN"/>
                     <xs:element ref="MfrRFID"/>
                     <xs:element ref="NUES9"/>
                     <xs:element ref="NUES8"/>
