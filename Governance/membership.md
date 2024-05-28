@@ -40,5 +40,4 @@ Michael Russell                   mrussell@globalvetlink.com               CVI V
 Peter Mundschenk                  drpmundschenk@gmail.com                  Other
 Stacey Schwabenlander             Stacey.schwabenlander@usda.gov           Fed
 Kathy Finnerty                    kfinnerty@tracefirst.com                 DB Vendor
-KJ Osenenko                       kosenenko@tracefirst.com                 DB Vendor
 Giovani Trevisan                  trevisan@iastate.edu                     State
