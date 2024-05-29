@@ -635,7 +635,7 @@
             <xs:attribute name="Number" use="required">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
-                        <xs:pattern value="(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$"/>
+                        <xs:pattern value="(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}"/>
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
@@ -1038,6 +1038,7 @@
             <xs:sequence minOccurs="1" maxOccurs="unbounded">
                 <xs:choice>
                     <xs:element ref="AIN"/>
+                    <xs:element ref="InternationalAIN"/>
                     <xs:element ref="MfrRFID"/>
                     <xs:element ref="NUES9"/>
                     <xs:element ref="NUES8"/>
