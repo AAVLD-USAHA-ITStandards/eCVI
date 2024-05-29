@@ -948,7 +948,7 @@
                         </xs:attribute>
                     </xs:complexType>
                 </xs:element>
-                <xs:choice minOccurs="1" maxOccurs="1">
+                <xs:choice minOccurs="1" maxOccurs="unbounded">
                     <xs:element ref="DiseaseCode"/>
                     <xs:element ref="DiseaseOther"/>
                 </xs:choice>
