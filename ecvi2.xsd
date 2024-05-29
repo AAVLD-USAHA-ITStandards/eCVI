@@ -2,11 +2,11 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
     elementFormDefault="qualified"
     targetNamespace="http://www.usaha.org/xmlns/ecvi2" 
-    version="3.0"
+    version="3.0.1"
     xmlns="http://www.usaha.org/xmlns/ecvi2">
 
     <xs:annotation>
-        <xs:documentation>Version 3.0 </xs:documentation>
+        <xs:documentation>Version 3.0.1 </xs:documentation>
     </xs:annotation>
 
     <xs:annotation>
@@ -73,11 +73,13 @@
             07/05/2023: Add enumerated DiseaseType list, DiseaseCode, and DiseaseOther elements. Changed test and vaccination to require either DiseaseCode or DiseaseOther with optional testtype or vaccinetype strings.
             10/10/2023: Add XMLSchemaVersion attribute to eCVI, Movement, and Sighting elements.
             10/10/2023: Make InternationalPhone Type attribute optional.
+            05/29/2024: Fix RegEx for InternationalPhone
+            05/29/2024: Add InternationaAIN to TagType
         </xs:documentation>
     </xs:annotation>
 
     <xs:annotation>
-        <xs:documentation>Copyright © 2017-23 AAVLD/USAHA it is free for use. Submit suggested changes to the maintainers at https://github.com/AAVLD-USAHA-ITStandards/eCVI</xs:documentation>
+        <xs:documentation>Copyright © 2017-24 AAVLD/USAHA it is free for use. Submit suggested changes to the maintainers at https://github.com/AAVLD-USAHA-ITStandards/eCVI</xs:documentation>
     </xs:annotation>
 
     <!-- BEGIN eCVI Document Elements -->
