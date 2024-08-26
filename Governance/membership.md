@@ -30,7 +30,6 @@ Susan Culp                        sculp@me.com                             Other
 John Conlon                       jconlon@verticon.com                     Other
 Ryan Scholz                       rscholz@oda.state.or.us                  State/CVI Vendor
 Scott Rydberg                     scott@rivercitydata.com                  CVI Vendor
-Russell Iselt                     russell.iselt@tahc.texas.gov             State/CVI Vendor
 Scott Leibsle                     scott.leibsle@isda.idaho.gov             State/CVI Vendor
 David Hecimovich                  dhecimovich@agr.wa.gov                   State
 Diane Kitchen                     Diane.Kitchen@fdacs.gov                  State
