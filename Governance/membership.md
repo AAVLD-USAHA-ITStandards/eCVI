@@ -33,7 +33,7 @@ Scott Rydberg                     scott@rivercitydata.com                  CVI V
 Scott Leibsle                     scott.leibsle@isda.idaho.gov             State/CVI Vendor
 David Hecimovich                  dhecimovich@agr.wa.gov                   State
 Diane Kitchen                     Diane.Kitchen@fdacs.gov                  State
-Brian McCluskey                   bmccluskey@tracefirst.com                DB Vendor
+Brian McCluskey                   ramepi@rams.colostate.edu                Academic
 Michael Russell                   mrussell@globalvetlink.com               CVI Vendor
 Peter Mundschenk                  drpmundschenk@gmail.com                  Other
 Stacey Schwabenlander             Stacey.schwabenlander@usda.gov           Fed
