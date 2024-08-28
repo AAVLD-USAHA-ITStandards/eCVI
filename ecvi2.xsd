@@ -75,6 +75,7 @@
             10/10/2023: Make InternationalPhone Type attribute optional.
             05/29/2024: Fix RegEx for InternationalPhone
             05/29/2024: Add InternationaAIN to TagType
+            08/28/2024: Make State optional in InternationalAddress.
         </xs:documentation>
     </xs:annotation>
 
@@ -879,7 +880,7 @@
             <xs:element name="Line2" type="xs:string" minOccurs="0" maxOccurs="1"/>
             <xs:element name="Town" type="xs:string" minOccurs="0" maxOccurs="1"/>
             <xs:element name="County" type="xs:string" minOccurs="0" maxOccurs="1"/>
-            <xs:element name="State" type="xs:string" minOccurs="1" maxOccurs="1">
+            <xs:element name="State" type="xs:string" minOccurs="0" maxOccurs="1">
                 <xs:annotation>
                      <xs:documentation>
                         US states and territories should use the 2 character USPS abbreviation. Foreign states and territoties should use the full text name.
