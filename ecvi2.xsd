@@ -77,6 +77,7 @@
             05/29/2024: Add InternationaAIN to TagType
             08/28/2024: Make State optional in InternationalAddress.
             08/28/2024: Added OfficialIntRFID Tag type to allow usage of 900-series RFID distributed by USDA for use in foreign-born cattle.
+            08/28/2024: Added optional CountryOfOrigin element to Animal and GroupLot.
         </xs:documentation>
     </xs:annotation>
 
@@ -395,6 +396,7 @@
                 <xs:element ref="AnimalTags" minOccurs="1" maxOccurs="1"/>
                 <xs:element ref="Test" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="Vaccination" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="CountryOfOrigin" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="Statements" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="MiscAttribute" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
@@ -421,6 +423,7 @@
                 <xs:element name="GroupLotID" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="Test" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="Vaccination" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="CountryOfOrigin" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="Statements" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="MiscAttribute" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
@@ -1032,6 +1035,18 @@
         </xs:complexType>
     </xs:element>
 
+    <xs:element name="CountryOfOrigin">
+        <xs:annotation>
+            <xs:documentation>
+                Used to explicitly declare the country of origin of an animal or GroupLot. The attribute ForeignBorn is a required boolean attribute used to declare that the animal or group are born in a country other than the USA. The optional CountryCode is used to declare the country of origin using the ISO numeric code for the country (i.e. the first three digits of an AIN).
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:attribute name="ForeignBorn" type="xs:boolean" use="required"/>
+            <xs:attribute name="CountryCode" type="InternationalAINType" use="optional"/>
+        </xs:complexType>
+    </xs:element>   
+    
     <xs:element name="AnimalTags">
         <xs:annotation>
             <xs:documentation> 
