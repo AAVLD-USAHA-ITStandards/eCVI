@@ -76,6 +76,7 @@
             05/29/2024: Fix RegEx for InternationalPhone
             05/29/2024: Add InternationaAIN to TagType
             08/28/2024: Make State optional in InternationalAddress.
+            08/28/2024: Added OfficialIntRFID Tag type to allow usage of 900-series RFID distributed by USDA for use in foreign-born cattle.
         </xs:documentation>
     </xs:annotation>
 
@@ -1042,6 +1043,7 @@
                 <xs:choice>
                     <xs:element ref="AIN"/>
                     <xs:element ref="InternationalAIN"/>
+                    <xs:element ref="OfficialIntRFID"/>
                     <xs:element ref="MfrRFID"/>
                     <xs:element ref="NUES9"/>
                     <xs:element ref="NUES8"/>
@@ -1075,6 +1077,17 @@
         </xs:annotation>
         <xs:complexType>
             <xs:attribute name="Number" type="InternationalAINType" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="OfficialIntRFID">
+        <xs:annotation>
+            <xs:documentation>
+                900 series but not "999" RFID tags or chips that are provided by USDA as official identification for internationally born livestock that require tagging in the United States.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:attribute name="Number" type="MfrRFIDType" use="required"/>
         </xs:complexType>
     </xs:element>
     
