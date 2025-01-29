@@ -2,11 +2,11 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
     elementFormDefault="qualified"
     targetNamespace="http://www.usaha.org/xmlns/ecvi2" 
-    version="3.0.1"
+    version="3.2"
     xmlns="http://www.usaha.org/xmlns/ecvi2">
 
     <xs:annotation>
-        <xs:documentation>Version 3.0.1 </xs:documentation>
+        <xs:documentation>Version 3.2 </xs:documentation>
     </xs:annotation>
 
     <xs:annotation>
