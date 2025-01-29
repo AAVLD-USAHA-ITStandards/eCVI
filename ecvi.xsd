@@ -1195,7 +1195,7 @@
         </xs:annotation>
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="Photograph" minOccurs="1" maxOccurs="3">
+                <xs:element name="Photograph" minOccurs="1" maxOccurs="unbounded">
                     <!--Should we try to impose image type, etc.?-->
                     <xs:complexType>
                         <xs:attribute name="ImageRef" type="xs:IDREF" use="required"/>
@@ -2020,6 +2020,7 @@
             <xs:enumeration value="Left"/>
             <xs:enumeration value="Front"/>
             <xs:enumeration value="Right"/>
+            <xs:enumeration value="Other"/>
         </xs:restriction>
     </xs:simpleType>
 
