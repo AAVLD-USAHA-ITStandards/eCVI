@@ -78,6 +78,7 @@
             08/28/2024: Make State optional in InternationalAddress.
             08/28/2024: Added OfficialIntRFID Tag type to allow usage of 900-series RFID distributed by USDA for use in foreign-born cattle.
             08/28/2024: Added optional CountryOfOrigin element to Animal and GroupLot.
+            01/29/2025: Renamed file to ecvi.xsd, updated target namespace to ecvi
         </xs:documentation>
     </xs:annotation>
 
