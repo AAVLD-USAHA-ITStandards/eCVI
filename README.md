@@ -26,3 +26,6 @@ This standard is maintained by a sub-committee of the AAVLD/USAHA Joint Committe
 The data standards subcommittee has no compliance or enforcement responsibility.  Approval of data systems including electronic CVIs is a function of each animal health authority.  
 
 In an effort to promote wider adoption of electronic CVIs by simplifying the approval process, the National Assembly of State Animal Health Officials (State Veterinarians) appointed a subcommittee of the Animal Disease Traceability Technology Committee to review eCVIs and recommend approval by all states.  Because this is falls solely under the purview of the State Veterinarians, this subcommittee does not include industry representation.   Technically all this group does is pass on a recommendation to each State Veterinarian that they approve a reviewed product (or not).  ONE OF the criteria used is the data exchange standard XML schema.
+
+## Resources
+An unoffical "Easier" guide to the standard can be found at [eCVIBook](https://drive.google.com/file/d/1GU0L8Dz4DbRKFeXDibz8VPLH3f5chY6Z/view?usp=sharing)
