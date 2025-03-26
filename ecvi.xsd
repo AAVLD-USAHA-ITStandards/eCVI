@@ -279,8 +279,7 @@
                             <xs:enumeration value="Training"/>
                             <xs:enumeration value="Slaughter"/>
                             <xs:enumeration value="Medical Treatment"/>
-                            <xs:enumeration value="Exhibition/Show"/>
-                            <xs:enumeration value="Rodeo"/>
+                            <xs:enumeration value="Exhibition/Show/Rodeo"/>
                             <xs:enumeration value="Breeding"/>
                             <xs:enumeration value="Competition"/>
                             <xs:enumeration value="Feeding to condition"/>
